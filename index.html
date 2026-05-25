@@ -828,6 +828,23 @@
   @media (max-width: 720px) { .blues-board { padding: 20px; box-shadow: 4px 4px 0 var(--ink); } }
   .blues-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-bottom: 20px; }
   @media (max-width: 720px) { .blues-grid { grid-template-columns: 1fr; } }
+
+  /* BLUES LYRIC SWAP */
+  .blues-swap-board { background: var(--paper); border: 1.5px solid var(--ink); border-radius: 4px; padding: 22px 24px; margin-top: 28px; box-shadow: 4px 4px 0 var(--ink); }
+  .blues-place-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 18px; }
+  .blues-place-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.14em; color: var(--ink-soft); margin-right: 6px; }
+  .blues-place-btn { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.06em; padding: 6px 14px; border: 1.5px solid var(--ink); border-radius: 100px; background: var(--paper-deep); color: var(--ink); cursor: pointer; transition: all 0.15s; }
+  .blues-place-btn:hover { background: var(--turmeric); }
+  .blues-place-btn.active { background: var(--ink); color: var(--paper); }
+  .blues-swap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 720px) { .blues-swap-grid { grid-template-columns: 1fr; } }
+  .blues-swap-song { background: var(--paper-deep); border: 1px solid var(--ink); border-radius: 4px; padding: 16px 18px; }
+  .blues-swap-head { margin-bottom: 10px; }
+  .blues-swap-title { font-family: 'Fraunces', serif; font-weight: 700; font-size: 16px; }
+  .blues-swap-artist { font-family: 'DM Mono', monospace; font-size: 10.5px; letter-spacing: 0.08em; color: var(--ink-soft); margin-top: 2px; }
+  .blues-swap-noswap { font-family: 'DM Mono', monospace; font-weight: 400; font-size: 11px; color: var(--ink-soft); font-style: italic; }
+  .blues-swap-lyric { font-family: 'Fraunces', serif; font-size: 15px; line-height: 1.7; color: var(--ink); margin: 6px 0 0; }
+  .blues-place { display: inline-block; padding: 1px 6px; background: var(--turmeric); color: var(--ink); border-radius: 3px; font-weight: 700; transition: background 0.25s; }
   .role-card { border: 1.5px dashed var(--ink); padding: 20px; border-radius: 4px; background: var(--paper); }
   .role-card.bass { border-color: var(--peacock); }
   .role-card.lyrics { border-color: var(--berry); }
@@ -2004,8 +2021,8 @@
     </div>  <!-- /.songs-section -->
 
     <div class="quote">
-      "Play by ear" is one of the most ridiculous things I've heard in my life. You're not playing by ear — you're playing by mind. The swaras give your mind a vocabulary.
-      <span class="quote-attribution">Richmond Park · live</span>
+      That's one of the most ridiculous things I've heard in my life. You're not playing by ear — you're playing by <em>mind</em>. We are all playing by ear.
+      <span class="quote-attribution">Richmond Park · live · on "play by ear"</span>
     </div>
 
     <!-- Swara call-and-response audio reference -->
@@ -2224,8 +2241,8 @@
     </div>
 
     <div class="quote">
-      The melody is the boring part of the song. The harmony is the interesting part. So learn the alto and the tenor — not just the soprano. The difference between this choir and other choirs is we all will learn every part.
-      <span class="quote-attribution">Richmond Park · live</span>
+      The melody is the boring part of the song. The harmony is the interesting part. You should know everyone's parts — then you perform your own. The difference between this choir and other choirs is we all will learn every part.
+      <span class="quote-attribution">Richmond Park · live · while teaching Africa</span>
     </div>
 
     <h3 style="margin-top: 36px;">The Rule</h3>
@@ -2360,6 +2377,78 @@
           <a class="blues-backing-link" href="https://www.youtube.com/results?search_query=12+bar+blues+backing+track+G" target="_blank" rel="noopener">12-bar in G</a>
           <a class="blues-backing-link" href="https://www.youtube.com/results?search_query=12+bar+blues+slow+blues+backing+track" target="_blank" rel="noopener">Slow Blues</a>
         </div>
+
+        <!-- ── LYRIC SWAP — put your hometown into the blues ── -->
+        <div class="blues-swap-board">
+          <p class="eyebrow" style="margin-bottom:10px;">Make it yours — put your place in the lyric</p>
+          <p style="font-family:'Fraunces',serif;font-style:italic;color:var(--ink-soft);font-size:15px;margin-bottom:14px;">
+            Every classic 12-bar has a hometown buried in it. The form is global — just swap the place. Tap a city, sing it.
+          </p>
+
+          <div class="blues-place-row">
+            <span class="blues-place-label">PLACE</span>
+            <button class="blues-place-btn active" data-place="Bengaluru"  onclick="setBluesPlace('Bengaluru')">Bengaluru</button>
+            <button class="blues-place-btn"        data-place="Kerala"     onclick="setBluesPlace('Kerala')">Kerala</button>
+            <button class="blues-place-btn"        data-place="Mysore"     onclick="setBluesPlace('Mysore')">Mysore</button>
+            <button class="blues-place-btn"        data-place="Richmond Park" onclick="setBluesPlace('Richmond Park')">Richmond Park</button>
+          </div>
+
+          <div class="blues-swap-grid">
+            <div class="blues-swap-song">
+              <div class="blues-swap-head">
+                <div class="blues-swap-title">Sweet Home Chicago</div>
+                <div class="blues-swap-artist">Robert Johnson · 1936 · 12-bar in E</div>
+              </div>
+              <p class="blues-swap-lyric">
+                Come on, baby, don't you want to go<br>
+                Back to that same old place,<br>
+                sweet home <span class="blues-place" data-original="Chicago">Bengaluru</span>.
+              </p>
+            </div>
+
+            <div class="blues-swap-song">
+              <div class="blues-swap-head">
+                <div class="blues-swap-title">Kansas City</div>
+                <div class="blues-swap-artist">Wilbert Harrison · 1959 · 12-bar in F</div>
+              </div>
+              <p class="blues-swap-lyric">
+                I'm going to <span class="blues-place" data-original="Kansas City">Bengaluru</span>,<br>
+                <span class="blues-place" data-original="Kansas City">Bengaluru</span> here I come.<br>
+                They got some crazy little women there<br>
+                and I'm gonna get me one.
+              </p>
+            </div>
+
+            <div class="blues-swap-song">
+              <div class="blues-swap-head">
+                <div class="blues-swap-title">Walking to New Orleans</div>
+                <div class="blues-swap-artist">Fats Domino · 1960 · 12-bar in C</div>
+              </div>
+              <p class="blues-swap-lyric">
+                I'm walking to <span class="blues-place" data-original="New Orleans">Bengaluru</span>,<br>
+                I'm walking to <span class="blues-place" data-original="New Orleans">Bengaluru</span>.<br>
+                I'm gonna need two pair of shoes<br>
+                when I get through walking these blues.
+              </p>
+            </div>
+
+            <div class="blues-swap-song">
+              <div class="blues-swap-head">
+                <div class="blues-swap-title">I'm Tore Down <span class="blues-swap-noswap">· no place to swap — pure form</span></div>
+                <div class="blues-swap-artist">Freddie King · 1961 · 12-bar in G</div>
+              </div>
+              <p class="blues-swap-lyric">
+                I'm tore down, almost level with the ground.<br>
+                I'm tore down, almost level with the ground.<br>
+                I feel like this, when my baby can't be found.
+              </p>
+            </div>
+          </div>
+
+          <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-soft);letter-spacing:.06em;margin-top:14px;">
+            Notice the lyric shape — line 1 sung, line 2 repeated, line 3 answers. AAB. Twelve bars. Every blues song you'll ever sing.
+          </p>
+        </div>
       </div>
     </div>
 
@@ -2396,13 +2485,18 @@
     <div style="display:grid;gap:18px;margin-top:28px;">
 
       <div style="background:var(--paper-deep);border-left:4px solid var(--peacock);border-radius:0 6px 6px 0;padding:18px 22px;">
-        <p style="font-size:1.05rem;line-height:1.6;margin-bottom:6px;">"You're not playing by ear — you're playing by <strong>mind</strong>. We are all playing by ear. But the swaras give your mind a language. That's the difference."</p>
-        <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-soft);letter-spacing:.08em;">ON EAR TRAINING VS MIND TRAINING</p>
+        <p style="font-size:1.05rem;line-height:1.6;margin-bottom:6px;">"That's one of the most ridiculous things I've heard in my life. You're not playing by ear — you're playing by <strong>mind</strong>. We are all playing by ear."</p>
+        <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-soft);letter-spacing:.08em;">ON "PLAYING BY EAR"</p>
       </div>
 
       <div style="background:var(--paper-deep);border-left:4px solid var(--terracotta);border-radius:0 6px 6px 0;padding:18px 22px;">
-        <p style="font-size:1.05rem;line-height:1.6;margin-bottom:6px;">"Music is not a hobby to be ashamed of. It is a sport. You have to sweat at it — learn songs, jam, play. Even in front of ten people in a library. That preparation is the joy."</p>
-        <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-soft);letter-spacing:.08em;">ON PRACTICE</p>
+        <p style="font-size:1.05rem;line-height:1.6;margin-bottom:6px;">"Music is a hobby blah blah blah — but if you play badminton, you want to win. That's the joy of playing a sport. Same thing about music. You have to find a way to sweat it out — learn a few songs, jam with people, play concerts in front of an audience."</p>
+        <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-soft);letter-spacing:.08em;">ON MUSIC AS A SPORT</p>
+      </div>
+
+      <div style="background:var(--paper-deep);border-left:4px solid var(--terracotta);border-radius:0 6px 6px 0;padding:18px 22px;">
+        <p style="font-size:1.05rem;line-height:1.6;margin-bottom:6px;">"I have not found a big difference playing in front of ten people or ten thousand. It's not mattered much, because the work you put in is the same."</p>
+        <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-soft);letter-spacing:.08em;">ON SHOWING UP</p>
       </div>
 
       <div style="background:var(--paper-deep);border-left:4px solid var(--sage);border-radius:0 6px 6px 0;padding:18px 22px;">
@@ -2698,8 +2792,8 @@
 </section>
 <section class="outro">
     <h2 class="section-title" style="font-size: clamp(26px, 3.8vw, 36px); margin-bottom: 16px;">Thank you for the workshop.</h2>
-    <p style="max-width: 540px; margin: 0 auto 22px; font-family: 'Fraunces', serif; font-style: italic; font-size: 19px; line-height: 1.4; color: var(--ink-soft);">
-      Music is not a hobby to be ashamed of. It is a sport. You have to sweat at it, learn songs, jam, play — even in front of ten people in a library. That preparation is the joy. See you on the group.
+    <p style="max-width: 620px; margin: 0 auto 22px; font-family: 'Fraunces', serif; font-style: italic; font-size: 19px; line-height: 1.5; color: var(--ink-soft);">
+      You have to find a way to sweat it out — learn a few songs, jam with people, play concerts in front of an audience. I have not found a big difference playing in front of ten people or ten thousand. The work you put in is the same. See you on the group.
     </p>
     <p class="signature">Jason Zac</p>
   </section>
@@ -4043,6 +4137,16 @@
     if (bluesIsPlaying) stopAllPlayback();
   }
 
+  // Swap the place token in every blues lyric card
+  function setBluesPlace(place) {
+    document.querySelectorAll('.blues-place').forEach(el => {
+      el.textContent = place;
+    });
+    document.querySelectorAll('.blues-place-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.place === place);
+    });
+  }
+
   const BLUES12 = ['I','IV','I','I', 'IV','IV','I','I', 'V','IV','I','I'];
   const BLUES_ROOT_IDX = { I:0, IV:3, V:4 }; // index into KEY_DATA freq[]
 
@@ -4250,27 +4354,26 @@
       timeSig: [3, 4],
       pickupBeats: 1,
       baseOct: 4,
+      // Real HBD notation: each "you" is shortened to half, with Hap-py pickup
+      // baked into the same bar so the song flows continuously in 3/4.
       notes: [
-        // Pickup: Hap-py
+        // Bar 0 (pickup, 1 beat): Hap-py
         {d:5,b:.5}, {d:5,b:.5},
-        // Bar 1: birth-day-to | Bar 2: you (held)
+        // Bar 1: birth(d.q) day(8) to(q)
         {d:6,b:1.5}, {d:5,b:.5}, {d:8,b:1},
-        {d:7,b:3},
-        // Pickup
-        {d:5,b:.5}, {d:5,b:.5},
-        // Bar 3: birth-day-to | Bar 4: you
+        // Bar 2: you(h) + Hap-py pickup baked in
+        {d:7,b:2}, {d:5,b:.5}, {d:5,b:.5},
+        // Bar 3: birth(d.q) day(8) to(q)
         {d:6,b:1.5}, {d:5,b:.5}, {d:9,b:1},
-        {d:8,b:3},
-        // Pickup
-        {d:5,b:.5}, {d:5,b:.5},
-        // Bar 5: birth-day-dear (high climax)
+        // Bar 4: you(h) + Hap-py pickup
+        {d:8,b:2}, {d:5,b:.5}, {d:5,b:.5},
+        // Bar 5: birth(d.q, Pa-upper climax) day(8, Ga-upper) dear(q, Sa-upper)
         {d:12,b:1.5}, {d:10,b:.5}, {d:8,b:1},
-        // Bar 6: NAME (Ni-Dha melisma)
-        {d:7,b:1.5}, {d:6,b:1.5},
-        // Pickup: Hap-py (Ma)
-        {d:4,b:.5}, {d:4,b:.5},
-        // Bar 7: birth-day-to | Bar 8: you (resolves to Sa)
+        // Bar 6: NAME melisma Ni→Dha (q,q) + Hap-py pickup low (Ma 8, Ma 8)
+        {d:7,b:1}, {d:6,b:1}, {d:4,b:.5}, {d:4,b:.5},
+        // Bar 7: birth(d.q, Ga) day(8, Sa) to(q, Re)
         {d:3,b:1.5}, {d:1,b:.5}, {d:2,b:1},
+        // Bar 8: you (Sa dotted-half, final)
         {d:1,b:3}
       ]
     },
