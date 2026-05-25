@@ -499,35 +499,53 @@
 
   /* ── CALL & RESPONSE ─────────────────────────────────── */
   .cr-board { background: var(--paper-deep); border: 1.5px solid var(--ink); border-radius: 6px; padding: 28px 26px; margin: 30px 0; box-shadow: 5px 5px 0 var(--ink); }
-  .cr-board-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 10px; }
+  .cr-board-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 6px; }
   .cr-title { font-family: 'Fraunces', serif; font-weight: 700; font-size: clamp(26px, 3.4vw, 34px); margin: 6px 0 0; line-height: 1.1; }
-  .cr-meta-pill { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; padding: 6px 14px; border: 1.5px solid var(--ink); border-radius: 100px; background: var(--paper); color: var(--ink); }
+  .cr-stats { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .cr-stat-pill { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.08em; padding: 6px 14px; border: 1.5px solid var(--ink); border-radius: 100px; background: var(--paper); color: var(--ink); white-space: nowrap; }
+  .cr-stat-key { background: var(--paper-deep); color: var(--ink-soft); border-color: var(--ink-soft); }
   .cr-intro { font-family: 'Fraunces', serif; font-size: 16px; line-height: 1.6; color: var(--ink); margin: 14px 0 22px; max-width: 720px; }
-  .cr-phrases { display: grid; grid-template-columns: 1fr; gap: 16px; }
-  .cr-phrase { background: var(--paper); border: 1.5px solid var(--ink); border-radius: 4px; padding: 18px 20px; box-shadow: 3px 3px 0 var(--ink); transition: background 0.25s; }
-  .cr-phrase.active { background: #f4ead0; }
-  .cr-phrase-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
-  .cr-phrase-num { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); }
-  .cr-phrase-status { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.06em; color: var(--terracotta); font-style: italic; min-height: 16px; }
-  .cr-swara-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: center; margin: 8px 0 14px; padding: 14px 8px; background: var(--paper-deep); border-radius: 4px; }
-  .cr-swara { font-family: 'Fraunces', serif; font-weight: 700; font-size: 28px; padding: 4px 14px; border-radius: 4px; background: transparent; color: var(--ink-soft); transition: all 0.25s ease; min-width: 56px; text-align: center; }
-  .cr-swara.calling { background: var(--turmeric); color: var(--ink); transform: scale(1.08); }
-  .cr-swara.hit { background: #2f6e3e; color: #f4ead0; }
-  .cr-swara.missed { color: #b03a3a; }
-  .cr-controls { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 4px; }
-  .cr-btn { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 9px 18px; border: 1.5px solid var(--ink); border-radius: 100px; background: var(--paper); color: var(--ink); cursor: pointer; transition: all 0.15s; }
+  .cr-stage { background: var(--paper); border: 1.5px solid var(--ink); border-radius: 6px; padding: 30px 20px 22px; box-shadow: 3px 3px 0 var(--ink); text-align: center; margin-bottom: 16px; }
+  .cr-swara-display {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: clamp(64px, 14vw, 130px);
+    line-height: 1;
+    color: var(--ink-soft);
+    margin: 0 0 14px;
+    letter-spacing: -0.02em;
+    transition: color 0.18s ease, transform 0.18s ease, text-shadow 0.18s ease;
+    min-height: 1.05em;
+  }
+  .cr-swara-display.calling { color: var(--terracotta); transform: scale(1.04); }
+  .cr-swara-display.responding { color: var(--peacock); }
+  .cr-swara-display.hit { color: #2f6e3e; text-shadow: 0 0 24px rgba(47,110,62,0.35); transform: scale(1.08); }
+  .cr-swara-display.miss { color: #b03a3a; }
+  .cr-status-line { font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.08em; color: var(--ink-soft); text-transform: uppercase; min-height: 18px; }
+  .cr-tuner-row {
+    display: flex; align-items: center; justify-content: center; gap: 14px;
+    margin: 0 0 18px;
+    padding: 12px 18px;
+    background: var(--paper);
+    border: 1px solid var(--ink-soft);
+    border-radius: 4px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+  .cr-tuner-label { letter-spacing: 0.08em; text-transform: uppercase; }
+  .cr-tuner-note { font-family: 'Fraunces', serif; font-weight: 700; font-size: 22px; color: var(--ink); min-width: 52px; text-align: center; }
+  .cr-tuner-cents { min-width: 64px; text-align: left; font-size: 13px; }
+  .cr-tuner-cents.in-tune { color: #2f6e3e; font-weight: 600; }
+  .cr-tuner-cents.flat,
+  .cr-tuner-cents.sharp { color: #c87a3a; }
+  .cr-controls { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; justify-content: center; }
+  .cr-btn { font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; padding: 11px 26px; border: 1.5px solid var(--ink); border-radius: 100px; background: var(--paper); color: var(--ink); cursor: pointer; transition: all 0.15s; }
   .cr-btn:hover:not([disabled]) { background: var(--ink); color: var(--paper); }
   .cr-btn[disabled] { opacity: 0.45; cursor: not-allowed; }
-  .cr-btn.recording { background: var(--terracotta); color: var(--paper); border-color: var(--terracotta); animation: cr-pulse 1.1s ease-in-out infinite; }
-  @keyframes cr-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(192,73,42,0.55); } 50% { box-shadow: 0 0 0 10px rgba(192,73,42,0); } }
-  .cr-tuner { margin-left: auto; display: flex; align-items: center; gap: 12px; font-family: 'DM Mono', monospace; font-size: 12px; color: var(--ink-soft); }
-  .cr-tuner-note { font-family: 'Fraunces', serif; font-weight: 700; font-size: 20px; color: var(--ink); min-width: 48px; text-align: center; }
-  .cr-tuner-cents { min-width: 60px; text-align: left; }
-  .cr-tuner-cents.in-tune { color: #2f6e3e; font-weight: 600; }
-  .cr-tuner-cents.flat { color: #c87a3a; }
-  .cr-tuner-cents.sharp { color: #c87a3a; }
-  .cr-note { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.06em; color: var(--ink-soft); font-style: italic; margin-top: 20px; }
-  .cr-summary { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.06em; color: var(--ink); margin-top: 10px; padding: 8px 12px; background: var(--paper-deep); border-radius: 4px; text-align: center; }
+  .cr-start-btn.running { background: var(--terracotta); color: var(--paper); border-color: var(--terracotta); animation: cr-pulse 1.2s ease-in-out infinite; }
+  @keyframes cr-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(192,73,42,0.55); } 50% { box-shadow: 0 0 0 12px rgba(192,73,42,0); } }
+  .cr-note { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.06em; color: var(--ink-soft); font-style: italic; margin-top: 18px; text-align: center; }
 
   /* ── SONGS SECTION (key/mode/tempo, VexFlow notation, minor-mode toggle) ── */
   .songs-section {
@@ -2164,15 +2182,30 @@
           <p class="eyebrow">Call &amp; Response · live</p>
           <h3 class="cr-title">Sing it back.</h3>
         </div>
-        <div class="cr-meta">
-          <span class="cr-meta-pill">Sa = D♭ · 80 BPM</span>
+        <div class="cr-stats">
+          <span class="cr-stat-pill" id="cr-score">Score: 0 / 0</span>
+          <span class="cr-stat-pill cr-stat-key">Sa = D♭ · 80 BPM</span>
         </div>
       </div>
-      <p class="cr-intro">Tap <em>Hear It</em>. The phrase plays, then there's one bar of silence — that's your cue to sing it back. Your mic listens; each swara lights up the moment your pitch lands on it. Tolerance is generous — close counts.</p>
+      <p class="cr-intro">Tap <em>Start</em>. The piano sings a swara phrase, you sing it back. Every swara you hit on pitch lights up green and adds to your score. No timing — just match the notes. See how high you can score.</p>
 
-      <div class="cr-phrases" id="cr-phrases"><!-- filled by JS --></div>
+      <div class="cr-stage">
+        <div class="cr-swara-display" id="cr-current">—</div>
+        <div class="cr-status-line" id="cr-status">Tap Start to begin</div>
+      </div>
 
-      <p class="cr-note">Audio of Jason singing these is coming. For now, the piano sings the call so you can rehearse the loop.</p>
+      <div class="cr-tuner-row">
+        <span class="cr-tuner-label">You're singing</span>
+        <span class="cr-tuner-note" id="cr-tuner-note">—</span>
+        <span class="cr-tuner-cents" id="cr-tuner-cents"></span>
+      </div>
+
+      <div class="cr-controls">
+        <button class="cr-btn cr-start-btn" id="cr-start-btn">▶ Start</button>
+        <button class="cr-btn cr-stop-btn" id="cr-stop-btn" disabled>⏹ Stop</button>
+      </div>
+
+      <p class="cr-note">Jason will record a continuous take soon — when it lands, the piano call swaps for his voice. The scoring logic stays the same.</p>
     </section>
 
     <div class="homework-block melody">
@@ -4657,26 +4690,28 @@
       timeSig: [3, 4],
       pickupBeats: 1,
       baseOct: 4,
-      // Real HBD notation: each "you" is shortened to half, with Hap-py pickup
-      // baked into the same bar so the song flows continuously in 3/4.
+      // Simplified rhythm: every syllable a clean quarter inside the verse
+      // bar. The held "you" is a half so the next verse's two-eighth pickup
+      // can sit in the same bar (h + 8 + 8 = 3 beats in 3/4). Only the
+      // final "you" stays a dotted-half — the song's last resolution.
       notes: [
-        // Bar 0 (pickup, 1 beat): Hap-py
+        // Bar 0 pickup: Hap-py
         {d:5,b:.5}, {d:5,b:.5},
-        // Bar 1: birth(d.q) day(8) to(q)
-        {d:6,b:1.5}, {d:5,b:.5}, {d:8,b:1},
-        // Bar 2: you(h) + Hap-py pickup baked in
+        // Bar 1: birth(q) day(q) to(q)
+        {d:6,b:1}, {d:5,b:1}, {d:8,b:1},
+        // Bar 2: you(h) + Hap-py pickup
         {d:7,b:2}, {d:5,b:.5}, {d:5,b:.5},
-        // Bar 3: birth(d.q) day(8) to(q)
-        {d:6,b:1.5}, {d:5,b:.5}, {d:9,b:1},
+        // Bar 3: birth(q) day(q) to(q)
+        {d:6,b:1}, {d:5,b:1}, {d:9,b:1},
         // Bar 4: you(h) + Hap-py pickup
         {d:8,b:2}, {d:5,b:.5}, {d:5,b:.5},
-        // Bar 5: birth(d.q, Pa-upper climax) day(8, Ga-upper) dear(q, Sa-upper)
-        {d:12,b:1.5}, {d:10,b:.5}, {d:8,b:1},
-        // Bar 6: NAME melisma Ni→Dha (q,q) + Hap-py pickup low (Ma 8, Ma 8)
-        {d:7,b:1}, {d:6,b:1}, {d:4,b:.5}, {d:4,b:.5},
-        // Bar 7: birth(d.q, Ga) day(8, Sa) to(q, Re)
-        {d:3,b:1.5}, {d:1,b:.5}, {d:2,b:1},
-        // Bar 8: you (Sa dotted-half, final)
+        // Bar 5: birth(q, Pa-upper) day(q, Ga-upper) dear(q, Sa-upper)
+        {d:12,b:1}, {d:10,b:1}, {d:8,b:1},
+        // Bar 6: NAME(h) + Hap-py pickup (low, Ma)
+        {d:7,b:2}, {d:4,b:.5}, {d:4,b:.5},
+        // Bar 7: birth(q, Ga) day(q, Sa) to(q, Re)
+        {d:3,b:1}, {d:1,b:1}, {d:2,b:1},
+        // Bar 8: you (final Sa, held the whole bar)
         {d:1,b:3}
       ]
     },
@@ -4917,120 +4952,79 @@
     stopAllPlayback();
   }
 
-  // ============ CALL & RESPONSE — piano "call" + mic pitch detection ============
+  // ============ CALL & RESPONSE — single-display game (piano call → mic response) ============
+  // The piano sings each swara of a phrase, one beat each. Then a one-beat silent gap.
+  // Then a response window where the mic listens; each unique swara the user hits within
+  // ±35¢ for 150ms counts toward the score. Designed so Jason's eventual 2-min recording
+  // can swap in: just set CR_AUDIO_URL and the timeline of swaras-by-time.
   const CR_BPM = 80;
-  const CR_KEY = 'C#';   // Sa = C♯ / D♭
+  const CR_KEY = 'C#';
   const CR_SWARA_TO_DEGREE = { 'Sa':0, 'Re':1, 'Ga':2, 'Ma':3, 'Pa':4, 'Dha':5, 'Ni':6, 'Sá':7, 'Sa2':7 };
+  const CR_SWARA_NAMES = ['Sa','Re','Ga','Ma','Pa','Dha','Ni'];
+  // Phrases that build from one swara up to a five-note climb and back.
+  // Total ~25 swaras → max score 25.
   const CR_PHRASES = [
-    { id:'01', label:'Phrase 1 · Sa on its own',        swaras:['Sa','Sa','Sa','Sa'] },
-    { id:'02', label:'Phrase 2 · the third',             swaras:['Sa','Re','Ga','Sa'] },
-    { id:'03', label:'Phrase 3 · five-note climb',       swaras:['Sa','Re','Ga','Ma','Pa'] },
-    { id:'04', label:'Phrase 4 · climb and come back',   swaras:['Sa','Re','Ga','Re','Sa'] },
-    { id:'05', label:'Phrase 5 · skip pattern',          swaras:['Sa','Ga','Pa','Ga','Sa'] }
+    ['Sa','Sa'],
+    ['Sa','Re','Sa'],
+    ['Sa','Re','Ga'],
+    ['Sa','Re','Ga','Re','Sa'],
+    ['Sa','Ga','Pa'],
+    ['Sa','Ga','Pa','Ga','Sa'],
+    ['Sa','Re','Ga','Ma','Pa'],
+    ['Pa','Ma','Ga','Re','Sa'],
   ];
+
+  // Placeholder for Jason's continuous take — swap to a URL when he ships the file:
+  //   const CR_AUDIO_URL = '/audio/jason-call-response.mp3';
+  // (with timeline if needed). Until then the piano sings.
+  const CR_AUDIO_URL = null;
 
   let crAudioCtx = null;
   let crAnalyser = null;
   let crMicStream = null;
-  let crListening = false;
-  let crActivePhraseId = null;
-  let crListenTimeoutId = null;
-  let crCallTimeoutIds = [];
+  let crIsRunning = false;
+  let crScore = 0;
+  let crTotal = 0;
+  let crRunToken = 0;
 
-  function crSwaraFreq(swara) {
-    const kd = KEY_DATA[CR_KEY];
-    const d = CR_SWARA_TO_DEGREE[swara];
-    return kd.freq[d];
+  function crSwaraFreq(swara) { return KEY_DATA[CR_KEY].freq[CR_SWARA_TO_DEGREE[swara]]; }
+
+  function crSetDisplay(swara, cls) {
+    const el = document.getElementById('cr-current');
+    if (!el) return;
+    el.textContent = swara || '—';
+    el.className = 'cr-swara-display' + (cls ? ' ' + cls : '');
   }
-
-  function crBuildUI() {
-    const container = document.getElementById('cr-phrases');
-    if (!container) return;
-    container.innerHTML = CR_PHRASES.map(p => `
-      <div class="cr-phrase" data-pid="${p.id}">
-        <div class="cr-phrase-head">
-          <div class="cr-phrase-num">${p.label}</div>
-          <div class="cr-phrase-status" id="cr-status-${p.id}">Tap "Hear It" to start</div>
-        </div>
-        <div class="cr-swara-row" id="cr-swaras-${p.id}">
-          ${p.swaras.map((s,i) => `<span class="cr-swara" data-i="${i}">${s}</span>`).join('')}
-        </div>
-        <div class="cr-controls">
-          <button class="cr-btn cr-play-btn" data-pid="${p.id}">▶ Hear It</button>
-          <button class="cr-btn cr-sing-btn" data-pid="${p.id}" disabled>🎙 Sing Back</button>
-          <div class="cr-tuner" id="cr-tuner-${p.id}">
-            <span class="cr-tuner-note">—</span>
-            <span class="cr-tuner-cents"></span>
-          </div>
-        </div>
-        <div class="cr-summary" id="cr-summary-${p.id}" style="display:none;"></div>
-      </div>
-    `).join('');
-    container.querySelectorAll('.cr-play-btn').forEach(b => b.addEventListener('click', () => crPlayPhrase(b.dataset.pid, b)));
-    container.querySelectorAll('.cr-sing-btn').forEach(b => b.addEventListener('click', () => crToggleListen(b.dataset.pid, b)));
-  }
-
-  function crSetStatus(pid, text) {
-    const el = document.getElementById('cr-status-' + pid);
+  function crSetStatus(text) {
+    const el = document.getElementById('cr-status');
     if (el) el.textContent = text;
   }
-
-  function crResetPhrase(pid) {
-    document.querySelectorAll(`#cr-swaras-${pid} .cr-swara`).forEach(s => s.classList.remove('calling','hit','missed'));
-    const sum = document.getElementById('cr-summary-' + pid);
-    if (sum) { sum.style.display = 'none'; sum.textContent = ''; }
+  function crUpdateScore() {
+    const el = document.getElementById('cr-score');
+    if (el) el.textContent = `Score: ${crScore} / ${crTotal}`;
   }
-
-  async function crPlayPhrase(pid, btn) {
-    // Stop everything else
-    stopAllPlayback({ keepToken: false });
-    crStopAll();
-
-    const phrase = CR_PHRASES.find(p => p.id === pid);
-    if (!phrase) return;
-    btn.disabled = true;
-    crResetPhrase(pid);
-    document.querySelectorAll('.cr-phrase').forEach(c => c.classList.toggle('active', c.dataset.pid === pid));
-    crActivePhraseId = pid;
-    crSetStatus(pid, 'Listen…');
-
-    const token = await beginPlayback(CR_BPM, 0, 'cr');
-    if (!token) { btn.disabled = false; return; }
-    await ensurePianoReady();
-    if (token !== playbackToken) { btn.disabled = false; return; }
-
-    const beatSec = 60 / CR_BPM;
-    const swaraEls = document.querySelectorAll(`#cr-swaras-${pid} .cr-swara`);
-
-    // CALL: one swara per beat on the Salamander piano
-    phrase.swaras.forEach((sw, i) => {
-      const f = crSwaraFreq(sw);
-      const t = i * beatSec;
-      piano.triggerAttackRelease(f, beatSec * 0.88, '+' + t, 0.85);
-      crCallTimeoutIds.push(setTimeout(() => {
-        swaraEls.forEach((el, idx) => el.classList.toggle('calling', idx === i));
-      }, t * 1000));
-    });
-    // Clear the "calling" highlight after the last note
-    const totalCallSec = phrase.swaras.length * beatSec;
-    crCallTimeoutIds.push(setTimeout(() => {
-      swaraEls.forEach(el => el.classList.remove('calling'));
-    }, totalCallSec * 1000));
-
-    startPreparedTransport(token);
-
-    // ONE BAR OF SILENCE (4 beats at 80 BPM ≈ 3s) then "your turn"
-    const gapSec = 4 * beatSec;
-    crCallTimeoutIds.push(setTimeout(() => crSetStatus(pid, 'Your turn — sing it back ↓'), totalCallSec * 1000));
-    crCallTimeoutIds.push(setTimeout(() => {
-      // Auto-start listening after the silent bar
-      const singBtn = document.querySelector(`.cr-sing-btn[data-pid="${pid}"]`);
-      btn.disabled = false;
-      if (singBtn) {
-        singBtn.disabled = false;
-        crStartListening(pid, singBtn);
+  function crUpdateTunerDisplay(freq) {
+    const noteEl = document.getElementById('cr-tuner-note');
+    const centsEl = document.getElementById('cr-tuner-cents');
+    if (!noteEl || !centsEl) return;
+    if (!freq || freq <= 0) {
+      noteEl.textContent = '—';
+      centsEl.textContent = '';
+      centsEl.className = 'cr-tuner-cents';
+      return;
+    }
+    const kd = KEY_DATA[CR_KEY];
+    let bestSwara = '—', bestCents = 999;
+    for (let oct = -1; oct <= 1; oct++) {
+      for (let d = 0; d < 7; d++) {
+        const tf = kd.freq[d] * Math.pow(2, oct);
+        const cents = 1200 * Math.log2(freq / tf);
+        if (Math.abs(cents) < Math.abs(bestCents)) { bestCents = cents; bestSwara = CR_SWARA_NAMES[d]; }
       }
-    }, (totalCallSec + gapSec) * 1000));
+    }
+    noteEl.textContent = bestSwara;
+    centsEl.textContent = (bestCents > 0 ? '+' : '') + bestCents.toFixed(0) + '¢';
+    centsEl.className = 'cr-tuner-cents ' + (Math.abs(bestCents) < 35 ? 'in-tune' : (bestCents < 0 ? 'flat' : 'sharp'));
   }
 
   // ── Pitch detection (Chris Wilson autocorrelation) ──
@@ -5075,7 +5069,7 @@
           audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: false }
         });
       } catch (e) {
-        alert('Mic permission needed. Enable microphone access and try again.');
+        alert('Mic permission needed for the response check. Allow microphone access and try again.');
         return false;
       }
       const src = crAudioCtx.createMediaStreamSource(crMicStream);
@@ -5086,119 +5080,175 @@
     return true;
   }
 
-  async function crStartListening(pid, btn) {
-    const ok = await crEnsureMic();
-    if (!ok) return;
-    const phrase = CR_PHRASES.find(p => p.id === pid);
-    if (!phrase) return;
-    crListening = true;
-    crActivePhraseId = pid;
-    btn.classList.add('recording');
-    btn.textContent = '⏹ Stop';
-    crSetStatus(pid, 'Listening… sing each swara');
+  function crSleep(ms) { return new Promise(res => setTimeout(res, ms)); }
 
+  // Build the UI (called from renderAllVexFlow). The single-display version
+  // mostly wires the Start/Stop buttons; the markup is already in the page.
+  function crBuildUI() {
+    const startBtn = document.getElementById('cr-start-btn');
+    const stopBtn = document.getElementById('cr-stop-btn');
+    if (startBtn && !startBtn._wired) {
+      startBtn.addEventListener('click', () => crStartRun());
+      startBtn._wired = true;
+    }
+    if (stopBtn && !stopBtn._wired) {
+      stopBtn.addEventListener('click', () => crStop());
+      stopBtn._wired = true;
+    }
+    crUpdateScore();
+  }
+
+  async function crStartRun() {
+    if (crIsRunning) return;
+    stopAllPlayback({ keepToken: false });
+
+    const startBtn = document.getElementById('cr-start-btn');
+    const stopBtn = document.getElementById('cr-stop-btn');
+
+    crSetStatus('Setting up — allow mic access if prompted…');
+    const micOk = await crEnsureMic();
+    if (!micOk) { crSetStatus('Tap Start to begin'); return; }
+    await ensurePianoReady();
+
+    crIsRunning = true;
+    crScore = 0;
+    crTotal = CR_PHRASES.reduce((s, p) => s + new Set(p).size, 0);
+    crUpdateScore();
+    if (startBtn) { startBtn.classList.add('running'); startBtn.disabled = true; }
+    if (stopBtn) stopBtn.disabled = false;
+
+    const myToken = ++crRunToken;
+    const beatSec = 60 / CR_BPM;
+
+    for (let pi = 0; pi < CR_PHRASES.length; pi++) {
+      if (!crIsRunning || myToken !== crRunToken) return;
+      const phrase = CR_PHRASES[pi];
+
+      // ── CALL: piano plays each swara, display updates per beat
+      for (let i = 0; i < phrase.length; i++) {
+        if (!crIsRunning || myToken !== crRunToken) return;
+        const sw = phrase[i];
+        crSetStatus(`Phrase ${pi + 1} / ${CR_PHRASES.length} · listen`);
+        crSetDisplay(sw, 'calling');
+        const f = crSwaraFreq(sw);
+        piano.triggerAttackRelease(f, beatSec * 0.88, Tone.now(), 0.85);
+        await crSleep(beatSec * 1000);
+      }
+
+      // ── ONE-BAR CUE GAP (display dims, the "straw bar")
+      if (!crIsRunning || myToken !== crRunToken) return;
+      crSetDisplay('—', '');
+      crSetStatus('Your turn ↓');
+      await crSleep(beatSec * 1000);
+
+      // ── RESPONSE: open mic window the same length as the call + 1 beat slack
+      if (!crIsRunning || myToken !== crRunToken) return;
+      crSetStatus(`Sing it back · ${phrase.join(' ')}`);
+      const expected = new Set(phrase);
+      const windowMs = (phrase.length + 1) * beatSec * 1000;
+      const hits = await crCollectHits(expected, windowMs, myToken);
+      if (!crIsRunning || myToken !== crRunToken) return;
+      crScore += hits.size;
+      crUpdateScore();
+
+      // Feedback display
+      if (hits.size === expected.size) {
+        crSetDisplay('✓', 'hit');
+        crSetStatus(`Got all ${expected.size} — perfect`);
+      } else if (hits.size > 0) {
+        crSetDisplay(hits.size + '/' + expected.size, 'responding');
+        const missed = [...expected].filter(s => !hits.has(s)).join(' ');
+        crSetStatus(missed ? `Missed: ${missed}` : 'Half hit — try the next');
+      } else {
+        crSetDisplay('—', 'miss');
+        crSetStatus('No swara detected — sing louder next time');
+      }
+      await crSleep(1100);
+    }
+
+    crFinish();
+  }
+
+  // Listens for `windowMs` and returns the set of swaras the user hit on pitch.
+  async function crCollectHits(targets, windowMs, myToken) {
+    const hits = new Set();
+    if (!crAnalyser) return hits;
     const buf = new Float32Array(crAnalyser.fftSize);
     const sampleRate = crAudioCtx.sampleRate;
-    const targets = phrase.swaras.map(s => ({ swara: s, freq: crSwaraFreq(s) }));
-    // De-duplicate hit-tracking by swara name so repeated swaras all light at once.
-    const hitSet = new Set();
-    const tuner = document.getElementById('cr-tuner-' + pid);
-    const tunerNote = tuner.querySelector('.cr-tuner-note');
-    const tunerCents = tuner.querySelector('.cr-tuner-cents');
-    const swaraEls = document.querySelectorAll(`#cr-swaras-${pid} .cr-swara`);
+    const targetFreqs = [...targets].map(sw => ({ sw, freq: crSwaraFreq(sw) }));
 
-    let lastDetectAt = 0;
-    let stableSwara = null;
-    let stableSince = 0;
+    return new Promise(resolve => {
+      const startTime = performance.now();
+      let stableSwara = null, stableSince = 0;
 
-    function tick() {
-      if (!crListening || crActivePhraseId !== pid) return;
-      crAnalyser.getFloatTimeDomainData(buf);
-      const f = autoCorrelate(buf, sampleRate);
-      const now = performance.now();
-      if (f > 0) {
-        // Map frequency → nearest swara across 2 octaves
-        let bestSwara = null, bestCents = 999;
-        targets.forEach(t => {
-          for (let oct = -1; oct <= 1; oct++) {
-            const tf = t.freq * Math.pow(2, oct);
-            const cents = 1200 * Math.log2(f / tf);
-            if (Math.abs(cents) < Math.abs(bestCents)) { bestCents = cents; bestSwara = t.swara; }
+      function tick() {
+        if (!crIsRunning || myToken !== crRunToken) return resolve(hits);
+        const elapsed = performance.now() - startTime;
+        if (elapsed >= windowMs) return resolve(hits);
+
+        crAnalyser.getFloatTimeDomainData(buf);
+        const f = autoCorrelate(buf, sampleRate);
+        crUpdateTunerDisplay(f);
+
+        if (f > 0) {
+          // Find nearest target swara across octaves
+          let bestSwara = null, bestCents = 999;
+          for (const t of targetFreqs) {
+            for (let oct = -1; oct <= 1; oct++) {
+              const tf = t.freq * Math.pow(2, oct);
+              const cents = 1200 * Math.log2(f / tf);
+              if (Math.abs(cents) < Math.abs(bestCents)) { bestCents = cents; bestSwara = t.sw; }
+            }
           }
-        });
-        tunerNote.textContent = bestSwara || '—';
-        const centStr = (bestCents > 0 ? '+' : '') + bestCents.toFixed(0) + '¢';
-        tunerCents.textContent = centStr;
-        tunerCents.className = 'cr-tuner-cents ' + (Math.abs(bestCents) < 35 ? 'in-tune' : (bestCents < 0 ? 'flat' : 'sharp'));
-        // Stability gate: same swara within 35¢ for ≥150ms = a hit
-        if (bestSwara && Math.abs(bestCents) < 35) {
-          if (stableSwara === bestSwara) {
-            if (now - stableSince >= 150 && !hitSet.has(bestSwara)) {
-              hitSet.add(bestSwara);
-              targets.forEach((t, i) => {
-                if (t.swara === bestSwara) {
-                  const el = swaraEls[i];
-                  if (el) el.classList.add('hit');
-                }
-              });
+          if (bestSwara && Math.abs(bestCents) < 35) {
+            if (stableSwara === bestSwara) {
+              if (performance.now() - stableSince >= 150 && !hits.has(bestSwara)) {
+                hits.add(bestSwara);
+                // Briefly flash the hit swara
+                crSetDisplay(bestSwara, 'hit');
+              }
+            } else {
+              stableSwara = bestSwara;
+              stableSince = performance.now();
             }
           } else {
-            stableSwara = bestSwara;
-            stableSince = now;
+            stableSwara = null;
           }
-        } else {
-          stableSwara = null;
         }
-        lastDetectAt = now;
-      } else if (now - lastDetectAt > 500) {
-        tunerNote.textContent = '—';
-        tunerCents.textContent = '';
-        tunerCents.className = 'cr-tuner-cents';
-        stableSwara = null;
+        requestAnimationFrame(tick);
       }
-      requestAnimationFrame(tick);
-    }
-    tick();
-
-    // Auto-stop after 12 seconds (enough for a 4-5 swara phrase at any tempo)
-    crListenTimeoutId = setTimeout(() => crStopListening(pid, btn), 12000);
+      tick();
+    });
   }
 
-  function crStopListening(pid, btn) {
-    crListening = false;
-    if (crListenTimeoutId) { clearTimeout(crListenTimeoutId); crListenTimeoutId = null; }
-    if (btn) { btn.classList.remove('recording'); btn.textContent = '🎙 Sing Back'; }
-    // Summary
-    const phrase = CR_PHRASES.find(p => p.id === pid);
-    if (phrase) {
-      const swaraEls = document.querySelectorAll(`#cr-swaras-${pid} .cr-swara`);
-      const uniqueTargets = Array.from(new Set(phrase.swaras));
-      const hit = uniqueTargets.filter(sw => {
-        return Array.from(swaraEls).some(el => el.textContent === sw && el.classList.contains('hit'));
-      });
-      // Mark unhit swaras as missed (only the ones that never went green)
-      swaraEls.forEach(el => { if (!el.classList.contains('hit')) el.classList.add('missed'); });
-      const sumEl = document.getElementById('cr-summary-' + pid);
-      if (sumEl) {
-        sumEl.style.display = '';
-        sumEl.textContent = `You hit ${hit.length} / ${uniqueTargets.length} swaras — ${hit.length === uniqueTargets.length ? 'clean!' : hit.length >= uniqueTargets.length / 2 ? 'good — try again' : 'keep going, sing slower'}`;
-      }
-      crSetStatus(pid, 'Done — replay to try again');
-    }
-    crActivePhraseId = null;
+  function crFinish() {
+    crIsRunning = false;
+    const pct = crTotal ? Math.round((crScore / crTotal) * 100) : 0;
+    crSetDisplay(crScore + '/' + crTotal, 'hit');
+    let msg = pct >= 90 ? '🎯 nailed it' : pct >= 70 ? 'great — go again' : pct >= 40 ? 'solid — try slower' : 'keep going, sing along';
+    crSetStatus(`Done · ${msg}`);
+    crUpdateTunerDisplay(0);
+    const startBtn = document.getElementById('cr-start-btn');
+    const stopBtn = document.getElementById('cr-stop-btn');
+    if (startBtn) { startBtn.classList.remove('running'); startBtn.disabled = false; }
+    if (stopBtn) stopBtn.disabled = true;
   }
 
-  function crToggleListen(pid, btn) {
-    if (crListening && crActivePhraseId === pid) crStopListening(pid, btn);
-    else crStartListening(pid, btn);
+  function crStop() {
+    if (!crIsRunning) return;
+    crIsRunning = false;
+    crRunToken++;
+    crSetDisplay('—');
+    crSetStatus('Stopped');
+    crUpdateTunerDisplay(0);
+    const startBtn = document.getElementById('cr-start-btn');
+    const stopBtn = document.getElementById('cr-stop-btn');
+    if (startBtn) { startBtn.classList.remove('running'); startBtn.disabled = false; }
+    if (stopBtn) stopBtn.disabled = true;
   }
 
   function crStopAll() {
-    crCallTimeoutIds.forEach(id => clearTimeout(id));
-    crCallTimeoutIds = [];
-    if (crListening) crStopListening(crActivePhraseId, document.querySelector(`.cr-sing-btn[data-pid="${crActivePhraseId}"]`));
-    document.querySelectorAll('.cr-phrase').forEach(c => c.classList.remove('active'));
-    document.querySelectorAll('.cr-swara').forEach(s => s.classList.remove('calling'));
+    if (crIsRunning) crStop();
   }
 
   function stopAllPlayback(options = {}) {
