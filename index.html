@@ -11,7 +11,7 @@
 <link rel="icon" href="/favicon.svg" sizes="any">
 
 <!-- SEO -->
-<meta name="description" content="Study guide from Jason Zachariah's music workshop at Richmond Park Library, 24 May 2026. Rhythm, Melody, Harmony and Blues — for every voice in the room.">
+<meta name="description" content="Transcript-grounded study guide from Jason Zachariah's music workshop at Richmond Park Library, 24 May 2026. Rhythm, melody, harmony, blues and two weeks of listening homework.">
 <meta name="author" content="Jason Zachariah · Nathaniel School of Music">
 
 <!-- Open Graph (WhatsApp · Facebook · LinkedIn · Instagram link preview) -->
@@ -19,7 +19,7 @@
 <meta property="og:url"         content="https://richmond-park.nathanielschool.com/">
 <meta property="og:site_name"   content="Nathaniel School of Music">
 <meta property="og:title"       content="A class full of voices — Richmond Park Workshop">
-<meta property="og:description" content="Rhythm · Melody · Harmony · Blues. Two weeks of homework. No grades. Just keep the music close.">
+<meta property="og:description" content="A normal class, a room full of voices, and two weeks to keep the music alive. Rhythm · Melody · Harmony · Blues.">
 <meta property="og:image"       content="https://richmond-park.nathanielschool.com/og-study.jpg">
 <meta property="og:image:width"  content="1200">
 <meta property="og:image:height" content="630">
@@ -29,7 +29,7 @@
 <!-- Twitter / X Card -->
 <meta name="twitter:card"        content="summary_large_image">
 <meta name="twitter:title"       content="A class full of voices — Richmond Park Workshop">
-<meta name="twitter:description" content="Rhythm · Melody · Harmony · Blues. Study guide from the 24 May workshop at Richmond Park Library.">
+<meta name="twitter:description" content="A transcript-grounded study guide from the 24 May workshop at Richmond Park Library.">
 <meta name="twitter:image"       content="https://richmond-park.nathanielschool.com/og-study.jpg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -148,7 +148,7 @@
     max-width: 680px;
   }
 
-  /* QUOTE BLOCK (replaces "Jason said" aside) */
+  /* QUOTE BLOCK */
   .quote {
     background: rgba(221, 160, 30, 0.10);
     border-left: 4px solid var(--turmeric);
@@ -921,6 +921,52 @@
   .track-link:hover { transform: translateY(-2px); box-shadow: 0 3px 8px rgba(0,0,0,0.18); }
   .track-youtube-inline { margin-top: 12px; max-width: 420px; }
 
+  /* SESSION NOTES */
+  .session-note-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 28px; }
+  @media (max-width: 760px) { .session-note-grid { grid-template-columns: 1fr; } }
+  .session-note-card {
+    background: var(--paper-deep);
+    border: 1.5px solid var(--ink);
+    border-radius: 4px;
+    padding: 18px 18px 16px;
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  .session-note-card.quote-card { border-top: 5px solid var(--peacock); }
+  .session-note-card.study-card { border-top: 5px solid var(--turmeric); }
+  .session-note-kicker {
+    display: inline-flex;
+    margin-bottom: 10px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .session-note-card blockquote {
+    margin: 0;
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(18px, 2vw, 24px);
+    font-weight: 650;
+    line-height: 1.22;
+  }
+  .session-note-card p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  .session-note-card blockquote + p,
+  .session-note-card p + p { margin-top: 10px; }
+  .session-note-tag {
+    margin-top: 14px;
+    padding-top: 10px;
+    border-top: 1px dashed rgba(26,26,46,0.35);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
   /* SEND BACK */
   .send-back { background: var(--ink); color: var(--paper); padding: 44px; border-radius: 4px; margin: 30px 0; position: relative; overflow: hidden; }
   @media (max-width: 720px) { .send-back { padding: 28px; } }
@@ -1163,11 +1209,11 @@
       <a href="photos.html" class="photos-pill"><span class="cam">📷</span> 36 photos</a>
     </div>
 
-    <h1 class="title">A class<br>full of <span class="italic">voices</span>.<br>Now, the <span class="italic">work</span>.</h1>
+    <h1 class="title">A normal class.<br>A room full of <span class="italic">voices</span>.<br>Now, the <span class="italic">work</span>.</h1>
 
     <div class="hero-grid">
       <div>
-        <p class="lead">Three Dimensions of Music — Rhythm, Melody, Harmony — through Konnakol, Swaras, Blues and Choir singing. Two weeks of homework. No grades. Just keep the music close.</p>
+        <p class="lead">Rhythm, melody, harmony and blues — taught through Konnakol, swaras, singing, clapping and a room willing to try. Two weeks of homework. No grades. Just keep the music alive.</p>
       </div>
       <div>
         <p style="font-size: 15px; color: var(--ink-soft); margin-bottom: 4px;">From the workshop at</p>
@@ -1185,6 +1231,7 @@
       <a href="#melody" class="toc-link">02 · Melody</a>
       <a href="#harmony" class="toc-link">03 · Harmony</a>
       <a href="#blues" class="toc-link">04 · Blues</a>
+      <a href="#notes" class="toc-link">Notes</a>
       <a href="#listen" class="toc-link">05 · Listen</a>
       <a href="#send" class="toc-link">06 · Send Back</a>
     </div>
@@ -1200,7 +1247,7 @@
       </div>
     </div>
 
-    <p>I drew this on the board: a 3D graph straight out of your maths class. That, believe it or not, is <em>all of music</em>. Every song you have ever loved lives inside these three lines. Musicians control only these three things over our entire career, ever.</p>
+    <p>I drew this on the board: a 3D graph straight out of maths class. The idea is simple: musicians spend their whole life shaping only three things — <em>when</em> something happens, <em>how high or low</em> it is, and <em>how loud or soft</em> it feels.</p>
 
     <div class="quote">
       Even in a news channel, you'll find time on the X-axis. Time is always on the X-axis.
@@ -1354,7 +1401,7 @@
       </div>
     </div>
 
-    <p>Rhythm is how a musician shakes hands with a room of strangers. If you can get people to clap with you, you've done your job. Everything else — the fancy notes, the chord changes — comes later.</p>
+    <p>Rhythm is how a musician shakes hands with a room of strangers. If people clap with you and keep going when you stop, you have already done one musician's job. The fancy notes and chord changes can come later.</p>
 
     <div class="quote">
       Rhythm is the easiest way to talk to people. This is how we establish our rapport.
@@ -1419,7 +1466,7 @@
     </div>
 
     <div class="quote">
-      Most Indian songs — especially Punjabi, Rajasthani, Gujarati folk — divide the beat by 3. Michael Jackson divides by 2 — listen to <em>Billie Jean</em>, <em>Beat It</em>, to name a few. The whole world is just sorting itself into these little families.
+      Listen slightly differently this week: find the pulse, move your head, and notice whether the beat divides by 2, 3, or 4. That is how listening becomes practice.
       <span class="quote-attribution">Richmond Park · live</span>
     </div>
 
@@ -1653,7 +1700,7 @@
     <div class="homework-block">
       <h4><span class="hw-tag">Compulsory · Rhythm</span></h4>
       <ul class="hw-list">
-        <li><strong>The 10-Song Pulse Hunt.</strong> Take 10 songs you enjoy — you will be hearing them anyway. As you listen: find the pulse, move your head with it, and notice how the beats are dividing. Is it dividing by 2, like Michael Jackson (<em>Billie Jean</em>, <em>Beat It</em>)? Or by 3, like most Indian and Punjabi folk? Send your findings for at least 5 songs — voice note, video, or written, whatever works for you.</li>
+        <li><strong>The 10-Song Pulse Hunt.</strong> Take 10 songs you enjoy — you will be hearing them anyway. As you listen, do a little more than an average listener: find the pulse, move your head, and notice how the beat divides. Is it dividing by 2, like Michael Jackson (<em>Billie Jean</em>, <em>Beat It</em>)? Or by 3, like many Indian folk and film songs? Send your findings for at least 5 songs — voice note, video, or written, whatever works for you.</li>
         <li><strong>Clap — or play — all four ? = 4 patterns.</strong> Go through 2+2, 3+1, 1+1+1+1, and 1+1+2. Say the Konnakol syllables out loud as you go — <em>Tha · Tha-Ka · Tha-Ki-Ta · Tha-Ka-Dhi-Mi</em>. You can clap, or hold your hands together to simulate the piano, the violin, the guitar — whatever you play. Send your homework to the group: by writing, by singing, by recording a video, by playing it on your instrument — by whatever you want.</li>
       </ul>
       <h4 style="margin-top: 22px;"><span class="hw-tag" style="background:var(--turmeric); color:var(--ink);">Extra Credit · Rhythm</span></h4>
@@ -1673,10 +1720,10 @@
       </div>
     </div>
 
-    <p>I held up my hand. Moved it up — you went higher. Moved it down — you went lower. That's the whole secret of melody, drawn in the air. Western kids call it Do-Re-Mi. We call it Sa-Re-Ga-Ma-Pa. Different names — same staircase.</p>
+    <p>I held up my hand. Moved it up — you went higher. Moved it down — you went lower. That's the whole secret of melody, drawn in the air. One tradition says Do-Re-Mi. In class, we used Sa-Re-Ga-Ma-Pa. Different names — same staircase.</p>
 
     <div class="quote">
-      Sa can be anything. It can be E flat, it can be F, it can be A flat, a B. Hindustani classes will start with C sharp as the Sa because it suits both men and women. So let's go with C sharp. Why not.
+      Sa can be anything — E flat, F, A flat, B. In class, we discussed C sharp as a common vocal Sa. In this guide, the default is C major so the piano map is easy to see. Change Sa anytime.
       <span class="quote-attribution">Richmond Park · live</span>
     </div>
 
@@ -2041,12 +2088,12 @@
     <div class="homework-block melody">
       <h4><span class="hw-tag" style="background:var(--peacock);">Compulsory · Melody</span></h4>
       <ul class="hw-list">
-        <li><strong>Sing back over my swara recording.</strong> I'll post the call-and-response audio (the one from the end of class) in the WhatsApp group. Sing back the swara patterns in C♯ on time. Then add <em>one minute of your own free improvisation</em> using only Sa, Re, and Ga. Send the recording.</li>
+        <li><strong>Sing back over my swara recording.</strong> I'll post the call-and-response audio (the one from the end of class) in the WhatsApp group. Sing back the swara patterns on time. Use C major here if you want the piano map to match, or move Sa to a key that suits your voice. Then add <em>one minute of your own free improvisation</em> using only Sa, Re, and Ga. Send the recording.</li>
         <li><strong>Lock Sa-Re-Ga first.</strong> Just those three. Sing them up and down, slow, every day for one week. Record 30 seconds. Solid intervals first — everything else is built on this.</li>
       </ul>
       <h4 style="margin-top: 22px;"><span class="hw-tag" style="background:var(--turmeric); color:var(--ink);">Extra Credit · Melody</span></h4>
       <ul class="hw-list">
-        <li class="starred"><strong>Transpose Sa Re Ga Ma Pa</strong> from C♯ to a Sa that suits your own voice. Record one minute of melodic improvisation over Natalie's accompaniment style.</li>
+        <li class="starred"><strong>Transpose Sa Re Ga Ma Pa</strong> from C major to a Sa that suits your own voice. Record one minute of melodic improvisation over Natalie's accompaniment style.</li>
         <li class="starred"><strong>Translate a song.</strong> Take any nursery rhyme — <em>Twinkle Twinkle, Vande Mataram, Old MacDonald</em> — and write the first line in swaras. Send a photo of your notebook.</li>
       </ul>
     </div>
@@ -2062,7 +2109,7 @@
       </div>
     </div>
 
-    <p>Music is minimum two. One note alone is just an auto-rickshaw horn. The moment two notes meet — tension, resolution, mystery, joy — you have harmony. We did this with Toto's <em>Africa</em>. You sang three parts. You should have heard yourselves.</p>
+    <p>Harmony begins when one note meets another. One note can be useful; two notes can make tension, resolution, mystery, joy. We did this with Toto's <em>Africa</em>. The point was not just to sing the tune — it was to hear how each voice changes the meaning of the others.</p>
 
     <div class="africa-board">
       <p class="eyebrow" style="margin-bottom: 4px;">"I bless the rains down in Africa"</p>
@@ -2241,12 +2288,12 @@
     </div>
 
     <div class="quote">
-      The melody is the boring part of the song. The harmony is the interesting part. You should know everyone's parts — then you perform your own. The difference between this choir and other choirs is we all will learn every part.
+      The melody is simple. The harmony is where the song opens up. You should know everyone's parts — then you perform your own. In this choir, we try to understand every part.
       <span class="quote-attribution">Richmond Park · live · while teaching Africa</span>
     </div>
 
     <h3 style="margin-top: 36px;">The Rule</h3>
-    <p>The building blocks of music are <strong>not notes</strong>. They are <strong>intervals</strong> — the distance between two notes. That distance is what makes you feel something. A car horn is one note. It's not music. It's the second note that turns it into a story.</p>
+    <p>The building blocks of music are <strong>not notes</strong>. They are <strong>intervals</strong> — the distance between two notes. That distance is what makes you feel something. The second note is where the story begins.</p>
 
     <div class="homework-block harmony">
       <h4><span class="hw-tag" style="background:var(--berry);">Compulsory · Harmony</span></h4>
@@ -2271,7 +2318,7 @@
       </div>
     </div>
 
-    <p>Everything you love — Coldplay, Hendrix, Stevie, Adele — comes from the blues. We split the room into bass and lyrics and did <em>Sweet Home Chicago</em>. Twelve bars. The secret is in the snap: <strong>two and four</strong>, not one and three. One and three is military. Two and four is dance.</p>
+    <p>So much of the music we love — Hendrix, Coldplay, soul, rock, R&amp;B — carries the blues somewhere inside it. We split the room into bass and lyrics and did <em>Sweet Home Chicago</em>. Twelve bars. The secret is in the snap: <strong>two and four</strong>, not one and three. One and three is military. Two and four is dance.</p>
 
     <div class="blues-board">
       <p class="eyebrow" style="margin-bottom: 16px;">Sweet Home Chicago — split the room</p>
@@ -2470,58 +2517,78 @@
     </div>
   </section>
 
-  <!-- 06 JASON'S NOTES FROM CLASS -->
+  <!-- INTERLUDE — JASON'S NOTES FROM CLASS -->
   <section class="chapter" id="notes">
     <div class="chapter-header">
-      <div class="chapter-number">06</div>
+      <div class="chapter-number">★</div>
       <div>
-        <p class="eyebrow">From the Session · direct quotes</p>
+        <p class="eyebrow">Interlude · transcript-grounded notes</p>
         <h2 class="section-title">Things Worth <span style="font-style: italic; color: var(--turmeric);">Remembering.</span></h2>
       </div>
     </div>
 
-    <p>These came out of the class itself — not prepared, not rehearsed. Worth keeping.</p>
+    <p>Some of these are cleaned-up lines from the room. Some are study notes drawn from the transcript. The goal is to keep the spirit of the class without pretending every sentence was delivered as a perfect quote.</p>
 
-    <div style="display:grid;gap:18px;margin-top:28px;">
+    <div class="session-note-grid">
 
-      <div style="background:var(--paper-deep);border-left:4px solid var(--peacock);border-radius:0 6px 6px 0;padding:18px 22px;">
-        <p style="font-size:1.05rem;line-height:1.6;margin-bottom:6px;">"That's one of the most ridiculous things I've heard in my life. You're not playing by ear — you're playing by <strong>mind</strong>. We are all playing by ear."</p>
-        <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-soft);letter-spacing:.08em;">ON "PLAYING BY EAR"</p>
+      <div class="session-note-card quote-card">
+        <span class="session-note-kicker">From the room</span>
+        <blockquote>"You're not playing by ear — you're playing by mind."</blockquote>
+        <p>Swaras give your mind a language for what your ear is already hearing.</p>
+        <div class="session-note-tag">Ear training vs mind training</div>
       </div>
 
-      <div style="background:var(--paper-deep);border-left:4px solid var(--terracotta);border-radius:0 6px 6px 0;padding:18px 22px;">
-        <p style="font-size:1.05rem;line-height:1.6;margin-bottom:6px;">"People treat music like a hobby — but if you play badminton, you want to win. That's the joy of playing a sport. Same with music. You have to find a way to sweat it out — learn a few songs, jam with people, play concerts in front of an audience."</p>
-        <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-soft);letter-spacing:.08em;">ON MUSIC AS A SPORT</p>
+      <div class="session-note-card quote-card">
+        <span class="session-note-kicker">From the room</span>
+        <blockquote>"If you play a sport like badminton, you want to win. That's the joy."</blockquote>
+        <p>Music asks for the same kind of ownership: learn songs, jam with people, prepare even for a small room.</p>
+        <div class="session-note-tag">Practice as ownership</div>
       </div>
 
-      <div style="background:var(--paper-deep);border-left:4px solid var(--terracotta);border-radius:0 6px 6px 0;padding:18px 22px;">
-        <p style="font-size:1.05rem;line-height:1.6;margin-bottom:6px;">"I have not found a big difference playing in front of ten people or ten thousand. It's not mattered much, because the work you put in is the same."</p>
-        <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-soft);letter-spacing:.08em;">ON SHOWING UP</p>
+      <div class="session-note-card quote-card">
+        <span class="session-note-kicker">From the room</span>
+        <blockquote>"The work you put in is the same."</blockquote>
+        <p>Ten people or ten thousand, the preparation still matters. Show up to the small room with the same seriousness.</p>
+        <div class="session-note-tag">Showing up</div>
       </div>
 
-      <div style="background:var(--paper-deep);border-left:4px solid var(--sage);border-radius:0 6px 6px 0;padding:18px 22px;">
-        <p style="font-size:1.05rem;line-height:1.6;margin-bottom:6px;">"Jamaica and India will play the same 12 notes. So what's the big deal? Sarai Gama Pa or Do Re Mi — same intervals, different syllables. The rules of music are almost the same through generations."</p>
-        <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-soft);letter-spacing:.08em;">ON THE UNIVERSALITY OF MUSIC</p>
+      <div class="session-note-card quote-card">
+        <span class="session-note-kicker">From the room</span>
+        <blockquote>"Rhythm is the easiest way to talk to people."</blockquote>
+        <p>Before theory, before speed, before fancy notes: can you make the room move with you?</p>
+        <div class="session-note-tag">Rhythm as rapport</div>
       </div>
 
-      <div style="background:var(--paper-deep);border-left:4px solid var(--turmeric);border-radius:0 6px 6px 0;padding:18px 22px;">
-        <p style="font-size:1.05rem;line-height:1.6;margin-bottom:6px;">"The reason genres differ — it's not the notes. It's the <strong>time feel</strong>. You could be on the same tempo and one feel is reggae, one is blues, one is Afro-Cuban. The beat is where the genre lives."</p>
-        <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-soft);letter-spacing:.08em;">ON RHYTHM AND GENRE</p>
+      <div class="session-note-card study-card">
+        <span class="session-note-kicker">Try this</span>
+        <p>A musician listens a little differently. Find the pulse, move your head, and notice how the beat divides. That is not homework for homework's sake — it is how songs start opening up.</p>
+        <div class="session-note-tag">Listening as practice</div>
       </div>
 
-      <div style="background:var(--paper-deep);border-left:4px solid var(--berry);border-radius:0 6px 6px 0;padding:18px 22px;">
-        <p style="font-size:1.05rem;line-height:1.6;margin-bottom:6px;">"Sa can be anything — C♯, F, A♭, whatever. Choose the Sa that suits your voice. A lot of Hindustani classes start with C♯ because it suits both genders. But your Sa is yours."</p>
-        <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-soft);letter-spacing:.08em;">ON CHOOSING YOUR SA</p>
+      <div class="session-note-card quote-card">
+        <span class="session-note-kicker">From the room</span>
+        <blockquote>"Sa can be anything."</blockquote>
+        <p>Choose the Sa that suits your voice. The syllables stay the same; the starting pitch can move.</p>
+        <div class="session-note-tag">Choosing your Sa</div>
       </div>
 
-      <div style="background:var(--paper-deep);border-left:4px solid var(--peacock);border-radius:0 6px 6px 0;padding:18px 22px;">
-        <p style="font-size:1.05rem;line-height:1.6;margin-bottom:6px;">"The rhythm of India and Africa is insanely rich. These cultures didn't have the budget for orchestras — so they put everything into one drum, one string. They had no choice but to go deep. That depth is what we're learning."</p>
-        <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-soft);letter-spacing:.08em;">ON EASTERN PERCUSSION TRADITIONS</p>
+      <div class="session-note-card study-card">
+        <span class="session-note-kicker">Try this</span>
+        <p>Many traditions went deep with fewer materials: one string, one drum, one voice, one flute. The limitation became the language. Listen for how much rhythm and melody can live inside a small setup.</p>
+        <div class="session-note-tag">Depth inside limits</div>
       </div>
 
-      <div style="background:var(--paper-deep);border-left:4px solid var(--sage);border-radius:0 6px 6px 0;padding:18px 22px;">
-        <p style="font-size:1.05rem;line-height:1.6;margin-bottom:6px;">"Start with just three — Sa, Re, Ga. Lock those intervals solid. Once you can hear Sa and instantly know where Re and Ga are without thinking, <em>then</em> you extend. Patience here saves you years."</p>
-        <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-soft);letter-spacing:.08em;">ON BUILDING MELODY FROM THE GROUND UP</p>
+      <div class="session-note-card quote-card">
+        <span class="session-note-kicker">From the room</span>
+        <blockquote>"The building blocks of music are not notes. They are intervals."</blockquote>
+        <p>The distance between two notes is what gives you feeling: pleasant, tense, strange, resolved.</p>
+        <div class="session-note-tag">Intervals create feeling</div>
+      </div>
+
+      <div class="session-note-card study-card">
+        <span class="session-note-kicker">Try this</span>
+        <p>Start with three: Sa, Re, Ga. Lock those intervals until they feel obvious. Once the first three are solid, the rest of the scale has somewhere to attach.</p>
+        <div class="session-note-tag">Build melody from the ground up</div>
       </div>
 
     </div>
@@ -2537,7 +2604,7 @@
       </div>
     </div>
 
-    <p>Every song below came up in our class — either I played it, sang it, or pointed at it as the perfect example of something. This <em>is</em> your two-week homework. Find each one. Listen with your ears <em>and</em> your head: find the pulse, count the beats, spot the harmony.</p>
+    <p>Every song below came up in class — either someone named it, I played it, or it became the example for a musical idea. This is not a playlist to consume passively. Listen with your ears <em>and</em> your head: find the pulse, count the beats, spot the harmony, and notice what the song is teaching you.</p>
 
     <div class="quote">
       The first thing about playing music is you have to enjoy music. You're playing music for people who don't really know music — just like a magician does his act for people who don't know magic.
@@ -2729,11 +2796,11 @@
       </div>
     </div>
 
-    <p>This is the part most students skip. Don't. I'll personally listen to <em>every single submission</em> for two weeks and reply to each one. You don't need to be polished. You need to <em>send</em>.</p>
+    <p>The homework is meant to help you enjoy music by doing it. I'll personally listen to submissions for two weeks and reply on the group. You don't need to be polished. You need to stay with the music and <em>send</em>.</p>
 
     <div class="send-back">
       <p class="eyebrow">How to submit · WhatsApp group · 2-week window</p>
-      <h3 style="font-size: 36px; margin: 12px 0 24px; max-width: 540px;">Any format works. Pick whatever is easiest for you.</h3>
+      <h3 style="font-size: 36px; margin: 12px 0 24px; max-width: 560px;">Any format works: writing, singing, video, notebook photo, piano, guitar, anything.</h3>
 
       <div class="send-options">
         <div class="send-option">
@@ -2755,12 +2822,12 @@
       </div>
 
       <p style="margin-top: 28px; font-family: 'Fraunces', serif; font-style: italic; font-size: 20px; line-height: 1.4;">
-        "Today's class we may not have organised it so well — but the homework goes in a stepwise manner. So please do the homework."
+        "The homework goes in a stepwise manner. Make sure you do the homework."
       </p>
     </div>
 
     <h3 style="margin-top: 36px;">A weekly checklist</h3>
-    <p style="margin-bottom: 22px;">If you want a simple plan, this is it.</p>
+    <p style="margin-bottom: 22px;">If you want a simple plan, follow this. It moves from pulse to swaras to harmony to blues without mixing everything at once.</p>
 
     <div style="background: var(--paper-deep); border: 1.5px solid var(--ink); border-radius: 4px; padding: 30px; box-shadow: 4px 4px 0 var(--ink);">
       <h4 style="margin-bottom: 16px;">Week One — Foundations</h4>
@@ -2793,7 +2860,7 @@
 <section class="outro">
     <h2 class="section-title" style="font-size: clamp(26px, 3.8vw, 36px); margin-bottom: 16px;">Thank you for the workshop.</h2>
     <p style="max-width: 620px; margin: 0 auto 22px; font-family: 'Fraunces', serif; font-style: italic; font-size: 19px; line-height: 1.5; color: var(--ink-soft);">
-      You have to find a way to sweat it out — learn a few songs, jam with people, play concerts in front of an audience. I have not found a big difference playing in front of ten people or ten thousand. The work you put in is the same. See you on the group.
+      Hopefully this is a start: listen better, sing a little, sweat it out with a few songs, and send something back. The work you put in is the same, even in a small room. See you on the group.
     </p>
     <p class="signature">Jason Zac</p>
   </section>
