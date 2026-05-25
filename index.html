@@ -2328,17 +2328,17 @@
         <div class="africa-vol-row">
           <div class="africa-vol-item">
             <span class="africa-vol-name" style="color:#8B2C4D;">Soprano</span>
-            <input type="range" class="africa-vol-slider" id="africa-vol-S" min="0" max="100" value="75"
+            <input type="range" class="africa-vol-slider" id="africa-vol-S" min="0" max="100" value="82"
                    oninput="setAfricaVol('S', +this.value)" aria-label="Soprano volume">
           </div>
           <div class="africa-vol-item">
             <span class="africa-vol-name" style="color:#C0492A;">Alto</span>
-            <input type="range" class="africa-vol-slider" id="africa-vol-A" min="0" max="100" value="75"
+            <input type="range" class="africa-vol-slider" id="africa-vol-A" min="0" max="100" value="70"
                    oninput="setAfricaVol('A', +this.value)" aria-label="Alto volume">
           </div>
           <div class="africa-vol-item">
             <span class="africa-vol-name" style="color:#1F5F7A;">Tenor</span>
-            <input type="range" class="africa-vol-slider" id="africa-vol-T" min="0" max="100" value="75"
+            <input type="range" class="africa-vol-slider" id="africa-vol-T" min="0" max="100" value="46"
                    oninput="setAfricaVol('T', +this.value)" aria-label="Tenor volume">
           </div>
           <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-soft);align-self:center;margin-left:4px;">Volume per voice</span>
@@ -3605,6 +3605,10 @@
   let metroBeat = 0;
   let metroBeatsPerBar = 4;
 
+  function tickTime(ticks) {
+    return Math.round(ticks) + 'i';
+  }
+
   function disposePlaybackNode(node) {
     if (!node) return;
     try { node.stop(); } catch(e) {}
@@ -3661,7 +3665,7 @@
       stopAllPlayback({ keepToken: true });
       return;
     }
-    Tone.Transport.start('+0.02');
+    Tone.Transport.start('+0.08');
   }
 
   async function runPlaybackAction(action) {
@@ -3729,28 +3733,39 @@
     const syls = syllables[pattern];
     const sylDivs = card.querySelectorAll('.syl');
 
-    // Pattern syllables fit in 1 beat. Metronome ticks each beat alongside.
-    const beatSec = 60 / currentBPM;
-    const sylInterval = { 1: '4n', 2: '8n', 3: '8t', 4: '16n' }[pattern] || '4n';
+    // One Tone.Part drives both syllables and the metronome, so the "Tha"
+    // accents are on the exact same transport ticks as the click.
+    const beatTicks = Tone.Time('4n').toTicks();
+    const measureTicks = beatTicks * 4;
+    const events = [];
+    for (let beat = 0; beat < 4; beat++) {
+      for (let sylIdx = 0; sylIdx < syls.length; sylIdx++) {
+        events.push({
+          time: tickTime((beat * beatTicks) + (sylIdx * beatTicks / syls.length)),
+          beat,
+          sylIdx
+        });
+      }
+    }
 
-    let i = 0;
-    activeKonnakolLoop = new Tone.Loop((time) => {
-      // Tabla-like hit. Accent on the "Tha" of each cycle.
-      const note = i === 0 ? 'C3' : 'G2';
-      const vel = i === 0 ? 1.0 : 0.55;
-      tabla.triggerAttackRelease(note, '32n', time, vel);
+    activeKonnakolLoop = new Tone.Part((time, ev) => {
+      if (ev.sylIdx === 0) {
+        const click = ev.beat === 0 ? metroHi : metroLo;
+        click.triggerAttackRelease('32n', time);
+      }
+
+      const isTha = ev.sylIdx === 0;
+      tabla.triggerAttackRelease(isTha ? 'C3' : 'G2', '32n', time, isTha ? 0.72 : 0.46);
 
       Tone.Draw.schedule(() => {
         if (!activeKonnakolCard) return;
         sylDivs.forEach(d => d.classList.remove('active'));
-        sylDivs[i].classList.add('active');
+        sylDivs[ev.sylIdx]?.classList.add('active');
       }, time);
-
-      i = (i + 1) % syls.length;
-    }, sylInterval);
-
+    }, events);
+    activeKonnakolLoop.loop = true;
+    activeKonnakolLoop.loopEnd = tickTime(measureTicks);
     activeKonnakolLoop.start(0);
-    startMetronome(4);
     startPreparedTransport(token);
   }
 
@@ -4241,7 +4256,8 @@
   function setAfricaVol(voice, val) {
     const vol = voice === 'S' ? sopVol : voice === 'A' ? altVol : tenVol;
     if (!vol) return;
-    vol.volume.value = val > 0 ? -30 * (1 - val / 100) : -Infinity;
+    const trim = voice === 'S' ? -3 : voice === 'A' ? -6 : -14;
+    vol.volume.value = val > 0 ? trim - (28 * (1 - val / 100)) : -Infinity;
   }
 
   function stopAfrica() {
@@ -4274,9 +4290,9 @@
 
     // Lazy-init SAT synths + volumes
     if (!sopVol) {
-      sopVol = new Tone.Volume(-3).toDestination();
-      altVol = new Tone.Volume(-3).toDestination();
-      tenVol = new Tone.Volume(-3).toDestination();
+      sopVol = new Tone.Volume(-8).toDestination();
+      altVol = new Tone.Volume(-12).toDestination();
+      tenVol = new Tone.Volume(-22).toDestination();
       sopSynth = new Tone.FMSynth({
         harmonicity: 1.75,
         modulationIndex: 6,
@@ -4293,10 +4309,10 @@
         modulationEnvelope: { attack: 0.02, decay: 0.12, sustain: 0.55, release: 0.30 },
       }).connect(altVol);
       tenSynth = new Tone.MonoSynth({
-        oscillator: { type: 'sawtooth' },
-        filter: { Q: 1.6, type: 'lowpass', rolloff: -24 },
-        envelope: { attack: 0.018, decay: 0.16, sustain: 0.58, release: 0.34 },
-        filterEnvelope: { attack: 0.02, decay: 0.20, sustain: 0.30, release: 0.30, baseFrequency: 180, octaves: 2.2 },
+        oscillator: { type: 'triangle' },
+        filter: { Q: 1.1, type: 'lowpass', rolloff: -24 },
+        envelope: { attack: 0.028, decay: 0.12, sustain: 0.44, release: 0.30 },
+        filterEnvelope: { attack: 0.025, decay: 0.16, sustain: 0.22, release: 0.28, baseFrequency: 140, octaves: 1.35 },
       }).connect(tenVol);
       ['S','A','T'].forEach(v => {
         const el = document.getElementById('africa-vol-' + v);
@@ -4349,22 +4365,22 @@
     ];
 
     sopPart = new Tone.Part((time, ev) => {
-      sopSynth.triggerAttackRelease(ev.freq, ev.dur, time, 0.78);
+      sopSynth.triggerAttackRelease(ev.freq, ev.dur, time, 0.66);
     }, sopEvents);
     sopPart.loop = true; sopPart.loopEnd = loopEnd;
 
     altPart = new Tone.Part((time, ev) => {
-      altSynth.triggerAttackRelease(ev.freq, ev.dur, time, 0.62);
+      altSynth.triggerAttackRelease(ev.freq, ev.dur, time, 0.58);
     }, altEvents);
     altPart.loop = true; altPart.loopEnd = loopEnd;
 
     tenPart = new Tone.Part((time, ev) => {
-      tenSynth.triggerAttackRelease(ev.freq, ev.dur, time, 0.68);
+      tenSynth.triggerAttackRelease(ev.freq, ev.dur, time, 0.36);
     }, tenEvents);
     tenPart.loop = true; tenPart.loopEnd = loopEnd;
 
     africaChordPart = new Tone.Part((time, ev) => {
-      if (pianoLoaded) ev.freqs.forEach(fr => piano.triggerAttackRelease(fr, chordDur, time, 0.62));
+      if (pianoLoaded) ev.freqs.forEach(fr => piano.triggerAttackRelease(fr, chordDur, time, 0.46));
       Tone.Draw.schedule(() => {
         document.querySelectorAll('.africa-chord-chip').forEach((c, i) => c.classList.toggle('active', i === ev.chipIdx));
       }, time);
@@ -4487,9 +4503,19 @@
     const bpm = bluesBPM;
     const token = await beginPlayback(bpm, bluesSwingOn ? 0.5 : 0);
     if (!token) return;
+    const btn = document.getElementById('bar12-play-btn');
+    if (btn) { btn.textContent = 'Loading...'; btn.classList.add('playing'); }
+    try {
+      await ensurePianoReady();
+    } catch(e) {
+      console.warn('Blues piano sampler unavailable; falling back to soft tabla pulse.', e);
+    }
+    if (token !== playbackToken) return;
     const spb = 60 / bpm;
+    const beatTicks = Tone.Time('4n').toTicks();
+    const eighthTicks = Tone.Time('8n').toTicks();
     const totalEighths = 12 * 4 * 2;
-    const loopEnd = totalEighths * (spb / 2);
+    const loopEnd = tickTime(totalEighths * eighthTicks);
     const kd = KEY_DATA[currentBluesKey];
 
     const noteEvents = [];
@@ -4497,23 +4523,23 @@
       const deg = BLUES12[bar];
       const rootIdx = BLUES_ROOT_IDX[deg];
       const rootFreq = kd.freq[rootIdx] / 2;
-      const barStart = bar * 4 * spb;
+      const barStartTicks = bar * 4 * beatTicks;
       if (currentBluesLevel === 1) {
         // BUM-BUM: root on beat 1, fifth on &of2
         const fifthFreq = rootFreq * Math.pow(2, 7/12);
-        noteEvents.push({ time: barStart,             freq: rootFreq,  dur: spb * 0.55 });
-        noteEvents.push({ time: barStart + 1.5 * spb, freq: fifthFreq, dur: spb * 0.45 });
+        noteEvents.push({ time: tickTime(barStartTicks), freq: rootFreq, dur: spb * 0.48, vel: 0.42 });
+        noteEvents.push({ time: tickTime(barStartTicks + 1.5 * beatTicks), freq: fifthFreq, dur: spb * 0.38, vel: 0.34 });
       } else {
         // Level 2: walking bass 1-3-5-6 (one note per beat)
         const walk = [0, 4/12, 7/12, 9/12].map(s => rootFreq * Math.pow(2, s));
         for (let b = 0; b < 4; b++) {
-          noteEvents.push({ time: barStart + b * spb, freq: walk[b], dur: spb * 0.6 });
+          noteEvents.push({ time: tickTime(barStartTicks + b * beatTicks), freq: walk[b], dur: spb * 0.48, vel: b === 0 ? 0.40 : 0.34 });
         }
       }
     }
     bluesPart = new Tone.Part((time, ev) => {
-      if (pianoLoaded)  piano.triggerAttackRelease(ev.freq, ev.dur, time);
-      else if (tabla)   tabla.triggerAttackRelease(ev.freq, ev.dur, time);
+      if (pianoLoaded)  piano.triggerAttackRelease(ev.freq, ev.dur, time, ev.vel);
+      else if (tabla)   tabla.triggerAttackRelease('C2', '32n', time, 0.22);
     }, noteEvents);
     bluesPart.loop = true;
     bluesPart.loopEnd = loopEnd;
@@ -4540,7 +4566,6 @@
     }, '8n');
 
     bluesIsPlaying = true;
-    const btn = document.getElementById('bar12-play-btn');
     if (btn) { btn.textContent = '⏹ Stop'; btn.classList.add('playing'); }
     bluesPart.start(0);
     bluesBeatLoop.start(0);
