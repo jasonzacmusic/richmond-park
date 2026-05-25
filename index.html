@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Richmond Park · The Work — Nathaniel School of Music</title>
 
 <!-- Favicon -->
@@ -756,8 +757,54 @@
   .bum-beat.bum-active { background: var(--terracotta); color: var(--paper); transform: scale(1.12); }
   .blues-links { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 20px; }
   @media (max-width: 600px) { .blues-links { grid-template-columns: 1fr; } }
-  .blues-yt { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 4px; border: 1.5px solid var(--ink); }
-  .blues-yt iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+  .youtube-inline {
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    border: 1.5px solid var(--ink);
+    background: var(--ink);
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    margin-top: 10px;
+  }
+  .youtube-inline iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .youtube-inline-placeholder {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background:
+      linear-gradient(135deg, rgba(26,26,46,0.9), rgba(31,95,122,0.85)),
+      var(--ink);
+    color: var(--paper);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .youtube-inline-placeholder span { font-size: 12px; }
+  .youtube-inline-placeholder small { font-size: 9px; letter-spacing: 0.08em; opacity: 0.75; text-transform: none; }
+  .youtube-inline-fallback {
+    position: absolute;
+    right: 10px;
+    bottom: 8px;
+    z-index: 2;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: rgba(26,26,46,0.72);
+    border: 1px solid rgba(248,241,223,0.55);
+    border-radius: 999px;
+    padding: 4px 8px;
+    text-decoration: none;
+  }
+  .blues-yt { margin-top: 0; }
   .blues-yt-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 6px; }
   .blues-backing-links { margin-top: 18px; display: flex; gap: 12px; flex-wrap: wrap; }
   .blues-backing-link { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; padding: 6px 14px; border: 1.5px solid var(--turmeric); border-radius: 3px; color: var(--ink); text-decoration: none; background: var(--paper); transition: background 0.15s; }
@@ -855,6 +902,7 @@
   .track-link.yt { background: #FF0000; color: white; border-color: #B30000; }
   .track-link.sp { background: #1DB954; color: white; border-color: #167C36; }
   .track-link:hover { transform: translateY(-2px); box-shadow: 0 3px 8px rgba(0,0,0,0.18); }
+  .track-youtube-inline { margin-top: 12px; max-width: 420px; }
 
   /* SEND BACK */
   .send-back { background: var(--ink); color: var(--paper); padding: 44px; border-radius: 4px; margin: 30px 0; position: relative; overflow: hidden; }
@@ -2297,15 +2345,11 @@
         <div class="blues-links">
           <div>
             <div class="blues-yt-label">Sweet Home Chicago — Robert Johnson / Blues Bros</div>
-            <div class="blues-yt">
-              <iframe src="https://www.youtube.com/embed/euJ22UqLD5Y" title="Sweet Home Chicago" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-            </div>
+            <div class="youtube-inline blues-yt" data-youtube-id="euJ22UqLD5Y" data-youtube-title="Sweet Home Chicago" data-youtube-url="https://www.youtube.com/watch?v=euJ22UqLD5Y"></div>
           </div>
           <div>
             <div class="blues-yt-label">I'm Tore Down — Freddie King / Eric Clapton</div>
-            <div class="blues-yt">
-              <iframe src="https://www.youtube.com/embed/n02P-2K9TgQ" title="I'm Tore Down" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-            </div>
+            <div class="youtube-inline blues-yt" data-youtube-id="n02P-2K9TgQ" data-youtube-title="I'm Tore Down" data-youtube-url="https://www.youtube.com/watch?v=n02P-2K9TgQ"></div>
           </div>
         </div>
 
@@ -2741,6 +2785,111 @@
 </div>
 
 <script>
+  // ============ SAFE YOUTUBE EMBEDS ============
+  function parseYoutubeUrl(href) {
+    try {
+      const url = new URL(href, window.location.href);
+      const host = url.hostname.replace(/^www\./, '');
+      if (host === 'youtu.be') return { id: url.pathname.slice(1), list: url.searchParams.get('list'), watchUrl: url.href };
+      if (host !== 'youtube.com' && host !== 'music.youtube.com') return null;
+      if (url.pathname === '/watch') return { id: url.searchParams.get('v'), list: url.searchParams.get('list'), watchUrl: url.href };
+      if (url.pathname === '/playlist') return { id: null, list: url.searchParams.get('list'), watchUrl: url.href };
+      if (url.pathname.startsWith('/embed/')) return { id: url.pathname.split('/')[2], list: url.searchParams.get('list'), watchUrl: url.href };
+    } catch (e) {}
+    return null;
+  }
+
+  function youtubeWatchUrl(info) {
+    if (!info) return 'https://www.youtube.com';
+    if (info.watchUrl && !info.watchUrl.includes('/embed/')) return info.watchUrl;
+    if (info.id) return 'https://www.youtube.com/watch?v=' + encodeURIComponent(info.id);
+    return 'https://www.youtube.com/playlist?list=' + encodeURIComponent(info.list || '');
+  }
+
+  function youtubeEmbedSrc(info, autoplay) {
+    const isPlaylistOnly = !info.id && info.list;
+    const base = isPlaylistOnly
+      ? 'https://www.youtube.com/embed/videoseries'
+      : 'https://www.youtube.com/embed/' + encodeURIComponent(info.id);
+    const params = new URLSearchParams({
+      rel: '0',
+      playsinline: '1',
+      origin: window.location.origin
+    });
+    if (autoplay) params.set('autoplay', '1');
+    if (info.list) params.set('list', info.list);
+    return base + '?' + params.toString();
+  }
+
+  function renderYoutubeInline(container, info, title, autoplay) {
+    if (!container || !info || (!info.id && !info.list)) return;
+    container.innerHTML = '';
+    const iframe = document.createElement('iframe');
+    iframe.title = title || 'YouTube video player';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    iframe.allowFullscreen = true;
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+    iframe.src = youtubeEmbedSrc(info, autoplay);
+    container.appendChild(iframe);
+
+    const fallback = document.createElement('a');
+    fallback.className = 'youtube-inline-fallback';
+    fallback.href = youtubeWatchUrl(info);
+    fallback.target = '_blank';
+    fallback.rel = 'noopener';
+    fallback.textContent = 'Watch on YouTube';
+    container.appendChild(fallback);
+  }
+
+  function prepareYoutubePlaceholder(container, info, title) {
+    if (!container || !info || (!info.id && !info.list)) return;
+    container.innerHTML = '';
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'youtube-inline-placeholder';
+    button.innerHTML = '<span>▶ Play inline</span><small>YouTube opens here with a referrer-safe player</small>';
+    button.addEventListener('click', () => renderYoutubeInline(container, info, title, true));
+    container.appendChild(button);
+
+    const fallback = document.createElement('a');
+    fallback.className = 'youtube-inline-fallback';
+    fallback.href = youtubeWatchUrl(info);
+    fallback.target = '_blank';
+    fallback.rel = 'noopener';
+    fallback.textContent = 'Open YouTube';
+    container.appendChild(fallback);
+  }
+
+  function enhanceYoutubeEmbeds() {
+    document.querySelectorAll('.youtube-inline[data-youtube-id], .youtube-inline[data-youtube-list]').forEach(container => {
+      const info = {
+        id: container.dataset.youtubeId || null,
+        list: container.dataset.youtubeList || null,
+        watchUrl: container.dataset.youtubeUrl || null
+      };
+      prepareYoutubePlaceholder(container, info, container.dataset.youtubeTitle || 'YouTube video');
+    });
+
+    document.querySelectorAll('.track-link.yt').forEach(link => {
+      const info = parseYoutubeUrl(link.href);
+      if (!info) return;
+      link.textContent = info.list && !info.id ? '▶ Play playlist' : '▶ Play inline';
+      link.addEventListener('click', event => {
+        event.preventDefault();
+        const track = link.closest('.track');
+        if (!track) return;
+        let player = track.querySelector('.track-youtube-inline');
+        if (!player) {
+          player = document.createElement('div');
+          player.className = 'youtube-inline track-youtube-inline';
+          track.querySelector('.track-links')?.insertAdjacentElement('afterend', player);
+        }
+        const title = track.querySelector('.track-title')?.textContent?.trim() || 'YouTube video';
+        renderYoutubeInline(player, info, title, true);
+      });
+    });
+  }
+
   // ============ VEXFLOW RENDERING via Factory + EasyScore ============
   function drawRhythmFactory(elementId, easyScoreSpec, widthPx, beatsPerBar, beamGroups) {
     const el = document.getElementById(elementId);
@@ -2936,12 +3085,14 @@
 
   // Try multiple load events
   if (document.readyState === 'complete') {
+    enhanceYoutubeEmbeds();
     renderAllVexFlow();
     buildBar12Grid();
     buildBeatIndicator();
   } else {
     window.addEventListener('load', () => { renderAllVexFlow(); buildBar12Grid(); buildBeatIndicator(); });
     document.addEventListener('DOMContentLoaded', () => {
+      enhanceYoutubeEmbeds();
       setTimeout(() => { renderAllVexFlow(); buildBar12Grid(); buildBeatIndicator(); }, 100);
     });
   }
