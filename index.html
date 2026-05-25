@@ -2557,7 +2557,8 @@
   document.querySelectorAll('[data-ex-indices]').forEach(btn => {
     const card = btn.closest('[id^="ex-"]');
     const indices = btn.dataset.exIndices.split(',').map(Number);
-    btn.addEventListener('click', async () => {
+    btn.addEventListener('click', async (e) => {
+      e.stopPropagation();
       if (exCard === card) stopExercise();
       else await startExercise(indices, card);
     });
