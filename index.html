@@ -1600,7 +1600,7 @@
       <!-- Call-and-response exercise patterns from class -->
       <h3 style="margin-top:36px;font-size:1rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);text-align:center;">Swara · Call-and-Response Exercises <button class="timesig-btn" id="timesig-btn" onclick="cycleTimeSig()" title="Click to change time signature">4/4</button></h3>
       <div class="beat-indicator" id="beat-indicator" style="justify-content:center;"></div>
-      <p style="text-align:center;color:var(--ink-soft);font-style:italic;font-size:.9rem;margin:6px 0 20px;">Melody exercises — Sa Re Ga Ma Pa in C♯. Loop each until it&#8217;s effortless, then sing along.</p>
+      <p style="text-align:center;color:var(--ink-soft);font-style:italic;font-size:.9rem;margin:6px 0 20px;">Melody exercises — Sa Re Ga Ma Pa in C major. Loop each until it&#8217;s effortless, then sing along.</p>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin:0 0 12px;">
 
         <div class="konnakol-card" id="ex-1" style="text-align:left;">
@@ -1648,17 +1648,17 @@
       </div>
 
       <div class="swara-bank">
-        <button class="swara-note-button" data-freq="138.59">Sa<span style="font-size:11px;">↓</span></button>
-        <button class="swara-note-button" data-freq="155.56">Re<span style="font-size:11px;">↓</span></button>
-        <button class="swara-note-button" data-freq="174.61">Ga<span style="font-size:11px;">↓</span></button>
-        <button class="swara-note-button" data-freq="277.18">Sa</button>
-        <button class="swara-note-button" data-freq="311.13">Re</button>
-        <button class="swara-note-button" data-freq="349.23">Ga</button>
-        <button class="swara-note-button" data-freq="369.99">Ma</button>
-        <button class="swara-note-button" data-freq="415.30">Pa</button>
-        <button class="swara-note-button" data-freq="466.16">Dha</button>
-        <button class="swara-note-button" data-freq="523.25">Ni</button>
-        <button class="swara-note-button" data-freq="554.37">Sá</button>
+        <button class="swara-note-button" data-freq="130.81">Sa<span style="font-size:11px;">↓</span></button>
+        <button class="swara-note-button" data-freq="146.83">Re<span style="font-size:11px;">↓</span></button>
+        <button class="swara-note-button" data-freq="164.81">Ga<span style="font-size:11px;">↓</span></button>
+        <button class="swara-note-button" data-freq="261.63">Sa</button>
+        <button class="swara-note-button" data-freq="293.66">Re</button>
+        <button class="swara-note-button" data-freq="329.63">Ga</button>
+        <button class="swara-note-button" data-freq="349.23">Ma</button>
+        <button class="swara-note-button" data-freq="392.00">Pa</button>
+        <button class="swara-note-button" data-freq="440.00">Dha</button>
+        <button class="swara-note-button" data-freq="493.88">Ni</button>
+        <button class="swara-note-button" data-freq="523.25">Sá</button>
       </div>
     </div>
 
@@ -2723,6 +2723,7 @@
   let audioReady = false;
   let audioInitPromise = null;
   let pianoLoaded = false;
+  let pianoReadyPromise = null;
   let currentBPM = 86;
   let playbackToken = 0;
   let activePlaybackTempoGroup = null;
@@ -2754,6 +2755,7 @@
       onload: () => { pianoLoaded = true; }
     }).connect(compressor);
     piano.volume.value = -4;
+    pianoReadyPromise = Tone.loaded().then(() => { pianoLoaded = true; });
 
     // ── Two-component tabla synthesis: resonant body + high-frequency skin slap
     // This gives the characteristic tabla "thud + crack" quality
@@ -2827,6 +2829,16 @@
       audioReady = false;
       throw err;
     }
+  }
+
+  async function ensurePianoReady() {
+    await initAudio();
+    if (pianoLoaded) return;
+    if (!pianoReadyPromise) throw new Error('Salamander piano sampler did not initialize');
+    await Promise.race([
+      pianoReadyPromise,
+      new Promise((_, reject) => setTimeout(() => reject(new Error('Salamander piano samples timed out')), 12000))
+    ]);
   }
 
   // ============ PLAYBACK AUTHORITY / METRONOME ============
@@ -3151,18 +3163,13 @@
 
   // ============ SWARA NOTE BUTTONS (one-shot, Salamander piano) ============
   document.querySelectorAll('.swara-note-button[data-freq]').forEach(btn => {
-    btn.addEventListener('click', async () => {
-      await initAudio();
+    btn.addEventListener('click', () => runPlaybackAction(async () => {
+      await ensurePianoReady();
       const freq = parseFloat(btn.dataset.freq);
-      if (pianoLoaded) {
-        piano.triggerAttackRelease(freq, 0.9);
-      } else {
-        // Fallback if samples haven't loaded yet
-        tabla.triggerAttackRelease(freq, '8n');
-      }
+      piano.triggerAttackRelease(freq, 0.9);
       btn.classList.add('playing');
       setTimeout(() => btn.classList.remove('playing'), 600);
-    });
+    }));
   });
 
   // ============ AROH / AVROH FULL RUN LOOPS (piano) ============
@@ -3187,16 +3194,14 @@
   async function startRun(freqs, button) {
     const token = await beginPlayback(currentBPM, 0, 'global');
     if (!token) return;
+    await ensurePianoReady();
+    if (token !== playbackToken) return;
     runButton = button;
     button.dataset.label = button.textContent;
     button.textContent = '■ STOP loop';
     let i = 0;
     runLoop = new Tone.Loop((time) => {
-      if (pianoLoaded) {
-        piano.triggerAttackRelease(freqs[i], 0.7, time);
-      } else {
-        tabla.triggerAttackRelease(freqs[i], '16n', time);
-      }
+      piano.triggerAttackRelease(freqs[i], 0.7, time);
       i = (i + 1) % freqs.length;
     }, '8n');
     runLoop.start(0);
@@ -3220,9 +3225,7 @@
       if (typeof KEY_DATA === 'undefined') return;
       updateSwaraKey(keySel.value);
     });
-    // Init label
-    const kl = document.getElementById('swara-key-label');
-    if (kl && typeof KEY_DATA !== 'undefined') kl.textContent = 'Sa = ' + KEY_DATA['C'].label;
+    if (typeof KEY_DATA !== 'undefined') updateSwaraKey(currentKey);
   }
 
   // ── Exercise loops (6 cards) ────────────────────────────────────────────────
@@ -3276,6 +3279,8 @@
     const beatsPerBar = {'4/4':4, '3/4':3, '7/8':7}[currentTimeSig] || 4;
     const token = await beginPlayback(currentBPM, 0, 'global');
     if (!token) return;
+    await ensurePianoReady();
+    if (token !== playbackToken) return;
     exCard = card;
     card.classList.add('playing');
     card.querySelector('.play-hint').textContent = '■ Stop';
@@ -3284,8 +3289,7 @@
     exBeatIdx = 0;
     exLoop = new Tone.Loop((time) => {
       const f = freqs[indices[step % indices.length]];
-      if (pianoLoaded) piano.triggerAttackRelease(f, beatDur * 0.82, time);
-      else tabla.triggerAttackRelease(f, '16n', time);
+      piano.triggerAttackRelease(f, beatDur * 0.82, time);
       // Metronome: accent on beat 1 of bar, softer on others
       const pos = exBeatIdx % beatsPerBar;
       if (pos === 0) {
