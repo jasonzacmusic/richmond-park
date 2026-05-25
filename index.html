@@ -1887,7 +1887,7 @@
         <p class="eyebrow" style="margin-bottom:14px;">4/4 · "I bless the rains down in Africa" · transposable to all keys</p>
 
         <div class="africa-stave-row">
-          <div class="africa-stave-label" style="color:#8B2C4D;">Soprano</div>
+          <div class="africa-stave-label" style="color:#8B2C4D;">You · Soprano</div>
           <div class="africa-stave-el africa-stave-4bar" id="africa-stave-S"></div>
         </div>
         <div class="africa-stave-row">
@@ -1902,9 +1902,9 @@
         <!-- SAT Volume Controls -->
         <div class="africa-vol-row">
           <div class="africa-vol-item">
-            <span class="africa-vol-name" style="color:#8B2C4D;">Soprano</span>
+            <span class="africa-vol-name" style="color:#8B2C4D;">You</span>
             <input type="range" class="africa-vol-slider" id="africa-vol-S" min="0" max="100" value="75"
-                   oninput="setAfricaVol('S', +this.value)" aria-label="Soprano volume">
+                   oninput="setAfricaVol('S', +this.value)" aria-label="You volume">
           </div>
           <div class="africa-vol-item">
             <span class="africa-vol-name" style="color:#C0492A;">Alto</span>
@@ -1924,7 +1924,7 @@
           <span class="africa-chord-chip" id="achip-1">D</span>
           <span class="africa-chord-chip" id="achip-2">A</span>
           <span class="africa-chord-chip" id="achip-3">E</span>
-          <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-soft);align-self:center;margin-left:6px;">vi – IV – I – V · 4 beats each</span>
+          <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-soft);align-self:center;margin-left:6px;">vi – IV – I – V · 2 beats each</span>
         </div>
 
         <div class="africa-controls">
@@ -3336,31 +3336,28 @@
 
   function buildAfrica4BarEasyScores(key) {
     const asc = buildAfricaAscScale(key);
-    const vfn = n => toVFNote(n, key);
-    const deg  = i => vfn(asc[i]);
-    const degD = i => vfn(africaOctDown(asc[i]));
-    const qr = 'B4/qr';
+    // asc[i] = scale degree i in 5th octave: 0=Sa,1=Re,2=Ga,3=Ma,4=Pa,5=Dha,6=Ni
+    const vfn  = n => toVFNote(n, key);
+    const deg  = i => vfn(asc[i]);                 // 5th octave
+    const degD = i => vfn(africaOctDown(asc[i]));  // 4th octave
+
+    // Jason's exact notes (key of A):
+    // You/Soprano: A A A A | A A A G#(8) G#(8)   → Sa×7, Ni↓×2 (8th)
+    // Alto:        F# F# F# F# | F# F# F# E(8) E(8) → Dha↓×7, Pa↓×2 (8th)
+    // Tenor:       C# C# C# D | D D C# B(8) B(8)   → Ga↓×3,Ma↓×3,Ga↓, Re↓×2 (8th)
+    // 2 bars of 4/4: bar1 = F#m(b1-2) + D(b3-4), bar2 = A(b5-6) + E(b7-8)
     return {
-      // Soprano: melody "I bless | the rains down | in A- | -fri-ca"
       S: [
-        `${deg(2)}/q, ${deg(2)}/q, ${qr}, ${qr}`,
-        `${deg(3)}/q, ${deg(3)}/q, ${deg(2)}/q, ${qr}`,
-        `${deg(1)}/q, ${deg(1)}/q, ${qr}, ${qr}`,
-        `${deg(0)}/q, ${qr}, ${deg(0)}/q, ${deg(0)}/q`,
+        `${deg(0)}/q, ${deg(0)}/q, ${deg(0)}/q, ${deg(0)}/q`,
+        `${deg(0)}/q, ${deg(0)}/q, ${deg(0)}/q, ${degD(6)}/8, ${degD(6)}/8`,
       ],
-      // Alto: chord 3rd, whole note per bar
       A: [
-        `${deg(0)}/w`,    // F#m → A (minor 3rd)
-        `${degD(5)}/w`,   // D   → F#4 (major 3rd)
-        `${deg(2)}/w`,    // A   → C#5 (major 3rd)
-        `${degD(6)}/w`,   // E   → G#4 (major 3rd)
+        `${degD(5)}/q, ${degD(5)}/q, ${degD(5)}/q, ${degD(5)}/q`,
+        `${degD(5)}/q, ${degD(5)}/q, ${degD(5)}/q, ${degD(4)}/8, ${degD(4)}/8`,
       ],
-      // Tenor: chord root, whole note per bar
       T: [
-        `${degD(5)}/w`,   // F#m → F#4
-        `${degD(3)}/w`,   // D   → D4
-        `${deg(0)}/w`,    // A   → A4
-        `${degD(4)}/w`,   // E   → E4
+        `${degD(2)}/q, ${degD(2)}/q, ${degD(2)}/q, ${degD(3)}/q`,
+        `${degD(3)}/q, ${degD(3)}/q, ${degD(2)}/q, ${degD(1)}/8, ${degD(1)}/8`,
       ],
     };
   }
@@ -3369,7 +3366,7 @@
     const container = document.getElementById(containerId);
     if (!container) return;
     container.innerHTML = '';
-    const barWidths = [190, 140, 130, 140];
+    const barWidths = [300, 250];
     barSpecs.forEach((spec, i) => {
       const elId = containerId + '-b' + i;
       const el = document.createElement('div');
@@ -3473,73 +3470,89 @@
     }
 
     const kd = KEY_DATA[currentAfricaKey];
-    const f  = kd.freq; // [Sa, Re, Ga, Ma, Pa, Dha, Ni, Sa2] ascending
+    const f  = kd.freq; // [Sa,Re,Ga,Ma,Pa,Dha,Ni,Sa2] — 5th octave for this key's root
     const spb = 60 / bpm;
-    const loopEnd = 16 * spb; // 4 bars × 4 beats
+    const loopEnd = 8 * spb; // 2 bars × 4 beats = 8 beats
 
-    // Soprano melody: "I bless the rains down in Africa"
-    // Solfege: Ga Ga | Ma Ma Ga | Re Re | Sa Sa Sa
+    const qDur = 0.90 * spb;  // quarter note sustain
+    const eDur = 0.42 * spb;  // eighth note sustain
+
+    // ── You / Soprano: A A A A | A A A G#(8) G#(8)
+    // Sa×7, then Ni one octave down (8th notes)
     const sopEvents = [
-      {b:0,  freq:f[2]}, // "I"
-      {b:1,  freq:f[2]}, // "bless"
-      {b:4,  freq:f[3]}, // "the"
-      {b:5,  freq:f[3]}, // "rains"
-      {b:6,  freq:f[2]}, // "down"
-      {b:8,  freq:f[1]}, // "in"
-      {b:9,  freq:f[1]}, // "A-"
-      {b:12, freq:f[0]}, // "-fri"
-      {b:14, freq:f[0]}, // "-ca"
-      {b:15, freq:f[0]}, // echo
-    ].map(e => ({ time: e.b * spb, freq: e.freq, dur: 0.78 * spb }));
+      { b:0,   freq:f[0],   dur:qDur }, // I
+      { b:1,   freq:f[0],   dur:qDur }, // bless
+      { b:2,   freq:f[0],   dur:qDur }, // the
+      { b:3,   freq:f[0],   dur:qDur }, // rains
+      { b:4,   freq:f[0],   dur:qDur }, // down
+      { b:5,   freq:f[0],   dur:qDur }, // in
+      { b:6,   freq:f[0],   dur:qDur }, // Af
+      { b:6.5, freq:f[6]/2, dur:eDur }, // ri  (G#4 = Ni↓)
+      { b:7,   freq:f[6]/2, dur:eDur }, // ca
+    ].map(e => ({ time: e.b * spb, freq: e.freq, dur: e.dur }));
 
-    // Alto: chord 3rd, held for whole bar (3.85 beats to not bleed into next bar)
+    // ── Alto: F#4×7 | E4(8) E4(8)
+    // Dha↓×7, Pa↓×2 (8th)
     const altEvents = [
-      {b:0,  freq: f[0]    }, // F#m → A (m3)
-      {b:4,  freq: f[5]/2  }, // D   → F#4 (M3)
-      {b:8,  freq: f[2]    }, // A   → C#5 (M3)
-      {b:12, freq: f[6]/2  }, // E   → G#4 (M3)
-    ].map(e => ({ time: e.b * spb, freq: e.freq, dur: 3.85 * spb }));
+      { b:0,   freq:f[5]/2, dur:qDur }, // I
+      { b:1,   freq:f[5]/2, dur:qDur }, // bless
+      { b:2,   freq:f[5]/2, dur:qDur }, // the
+      { b:3,   freq:f[5]/2, dur:qDur }, // rains
+      { b:4,   freq:f[5]/2, dur:qDur }, // down
+      { b:5,   freq:f[5]/2, dur:qDur }, // in
+      { b:6,   freq:f[5]/2, dur:qDur }, // Af
+      { b:6.5, freq:f[4]/2, dur:eDur }, // ri  (E4)
+      { b:7,   freq:f[4]/2, dur:eDur }, // ca
+    ].map(e => ({ time: e.b * spb, freq: e.freq, dur: e.dur }));
 
-    // Tenor: chord root, one octave below f[], held whole bar
+    // ── Tenor: C#4 C#4 C#4 D4 | D4 D4 C#4 B3(8) B3(8)
+    // Ga↓ Ga↓ Ga↓ Ma↓ | Ma↓ Ma↓ Ga↓ Re↓(8) Re↓(8)
     const tenEvents = [
-      {b:0,  freq: f[5]/2  }, // F#m → F#4
-      {b:4,  freq: f[3]/2  }, // D   → D4
-      {b:8,  freq: f[0]/2  }, // A   → A3
-      {b:12, freq: f[4]/2  }, // E   → E4
-    ].map(e => ({ time: e.b * spb, freq: e.freq, dur: 3.85 * spb }));
+      { b:0,   freq:f[2]/2, dur:qDur }, // I      (C#4)
+      { b:1,   freq:f[2]/2, dur:qDur }, // bless
+      { b:2,   freq:f[2]/2, dur:qDur }, // the
+      { b:3,   freq:f[3]/2, dur:qDur }, // rains  (D4)
+      { b:4,   freq:f[3]/2, dur:qDur }, // down
+      { b:5,   freq:f[3]/2, dur:qDur }, // in
+      { b:6,   freq:f[2]/2, dur:qDur }, // Af     (C#4)
+      { b:6.5, freq:f[1]/2, dur:eDur }, // ri     (B3)
+      { b:7,   freq:f[1]/2, dur:eDur }, // ca
+    ].map(e => ({ time: e.b * spb, freq: e.freq, dur: e.dur }));
 
-    // Piano chords: 4 hits per bar (stacked 3-note block chords)
+    // ── Piano chords: one block chord every 2 beats
+    // F#m beat 0 | D beat 2 | A beat 4 | E beat 6
+    const chordDur = 1.88 * spb;
     const chordSets = [
-      [f[5]/2, f[0],   f[2]  ], // F#m: F#4 A4 C#5
-      [f[3]/2, f[5]/2, f[0]  ], // D:   D4  F#4 A4
-      [f[0]/2, f[2]/2, f[4]/2], // A:   A3  C#4 E4
-      [f[4]/2, f[6]/2, f[1]  ], // E:   E4  G#4 B4
+      [f[5]/4, f[0]/2, f[2]/2, f[5]/2], // F#m: F#3 A3 C#4 F#4
+      [f[3]/4, f[5]/4, f[0]/2, f[3]/2], // D:   D3  F#3 A3  D4
+      [f[0]/2, f[2]/2, f[4]/2, f[0]  ], // A:   A3  C#4 E4  A4
+      [f[4]/4, f[6]/4, f[1]/2, f[4]/2], // E:   E3  G#3 B3  E4
     ];
-    const chordEvents = [];
-    for (let bar = 0; bar < 4; bar++) {
-      for (let beat = 0; beat < 4; beat++) {
-        chordEvents.push({ time: (bar * 4 + beat) * spb, freqs: chordSets[bar], chipIdx: bar });
-      }
-    }
+    const chordEvents = [
+      { time: 0 * spb, freqs: chordSets[0], chipIdx: 0 },
+      { time: 2 * spb, freqs: chordSets[1], chipIdx: 1 },
+      { time: 4 * spb, freqs: chordSets[2], chipIdx: 2 },
+      { time: 6 * spb, freqs: chordSets[3], chipIdx: 3 },
+    ];
 
     sopPart = new Tone.Part((time, ev) => {
-      sopSynth.triggerAttackRelease(ev.freq, ev.dur, time, 0.75);
+      sopSynth.triggerAttackRelease(ev.freq, ev.dur, time, 0.78);
     }, sopEvents);
     sopPart.loop = true; sopPart.loopEnd = loopEnd;
 
     altPart = new Tone.Part((time, ev) => {
-      altSynth.triggerAttackRelease(ev.freq, ev.dur, time, 0.60);
+      altSynth.triggerAttackRelease(ev.freq, ev.dur, time, 0.62);
     }, altEvents);
     altPart.loop = true; altPart.loopEnd = loopEnd;
 
     tenPart = new Tone.Part((time, ev) => {
-      tenSynth.triggerAttackRelease(ev.freq, ev.dur, time, 0.65);
+      tenSynth.triggerAttackRelease(ev.freq, ev.dur, time, 0.68);
     }, tenEvents);
     tenPart.loop = true; tenPart.loopEnd = loopEnd;
 
     africaChordPart = new Tone.Part((time, ev) => {
-      if (pianoLoaded) ev.freqs.forEach(freq => piano.triggerAttackRelease(freq, spb * 0.28, time, 0.42));
-      else if (tabla)  tabla.triggerAttackRelease(ev.freqs[0], spb * 0.28, time, 0.42);
+      if (pianoLoaded) ev.freqs.forEach(fr => piano.triggerAttackRelease(fr, chordDur, time, 0.40));
+      else if (tabla)  tabla.triggerAttackRelease(ev.freqs[0], chordDur, time, 0.42);
       Tone.Draw.schedule(() => {
         document.querySelectorAll('.africa-chord-chip').forEach((c, i) => c.classList.toggle('active', i === ev.chipIdx));
       }, time);
