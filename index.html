@@ -479,6 +479,46 @@
   .hw-list li::before { content: ''; position: absolute; left: 0; top: 15px; width: 18px; height: 18px; border: 1.5px solid var(--ink); border-radius: 4px; background: var(--paper); }
   .hw-list li.starred::before { content: '★'; border: none; background: transparent; color: var(--turmeric); font-size: 22px; line-height: 1; top: 11px; }
 
+  /* AFRICA NOTATION */
+  .africa-notation { margin-top: 28px; }
+  .africa-stave-row { margin-bottom: 4px; }
+  .africa-stave-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 2px; }
+  .africa-stave-el { width: 100%; overflow-x: auto; }
+  .africa-chord-row { display: flex; gap: 8px; margin: 14px 0 10px; flex-wrap: wrap; }
+  .africa-chord-chip { font-family: 'DM Mono', monospace; font-size: 13px; padding: 5px 14px; border: 1.5px solid var(--ink); border-radius: 3px; background: var(--paper); transition: background 0.15s, color 0.15s; }
+  .africa-chord-chip.active { background: var(--peacock); color: var(--paper); border-color: var(--peacock); }
+  .africa-controls { display: flex; align-items: center; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
+  .africa-key-select { font-family: 'DM Mono', monospace; font-size: 12px; padding: 5px 10px; border: 1.5px solid var(--ink); border-radius: 3px; background: var(--paper); cursor: pointer; }
+  .africa-play-btn { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 7px 18px; border: 1.5px solid var(--ink); border-radius: 3px; background: var(--ink); color: var(--paper); cursor: pointer; transition: background 0.15s; }
+  .africa-play-btn:hover { background: var(--peacock); border-color: var(--peacock); }
+  .africa-play-btn.playing { background: var(--terracotta); border-color: var(--terracotta); }
+
+  /* BLUES 12-BAR */
+  .bar12-section { margin-top: 28px; border-top: 1.5px solid var(--ink); padding-top: 24px; }
+  .bar12-controls { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .bar12-key-select { font-family: 'DM Mono', monospace; font-size: 12px; padding: 5px 10px; border: 1.5px solid var(--ink); border-radius: 3px; background: var(--paper); cursor: pointer; }
+  .bar12-play-btn { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 7px 18px; border: 1.5px solid var(--ink); border-radius: 3px; background: var(--ink); color: var(--paper); cursor: pointer; transition: background 0.15s; }
+  .bar12-play-btn:hover { background: var(--turmeric); color: var(--ink); border-color: var(--turmeric); }
+  .bar12-play-btn.playing { background: var(--terracotta); border-color: var(--terracotta); color: var(--paper); }
+  .bar12-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 18px; }
+  .bar12-cell { border: 1.5px solid var(--ink); border-radius: 4px; padding: 10px 8px; background: var(--paper); text-align: center; transition: background 0.1s, transform 0.07s; }
+  .bar12-cell.active { background: var(--turmeric); transform: scale(1.05); }
+  .bar12-cell .bar-num { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.1em; color: var(--ink-soft); margin-bottom: 4px; }
+  .bar12-cell .bar-chord { font-family: 'Fraunces', serif; font-weight: 700; font-size: 20px; line-height: 1; }
+  .bar12-cell .bar-degrees { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--peacock); margin-top: 4px; }
+  .bum-display { display: flex; gap: 6px; margin: 10px 0 18px; }
+  .bum-beat { flex: 1; text-align: center; padding: 8px 4px; border: 1.5px solid var(--ink); border-radius: 3px; font-family: 'Fraunces', serif; font-weight: 700; font-size: 16px; background: var(--paper); transition: background 0.08s, transform 0.06s; }
+  .bum-beat.bum { background: var(--peacock); color: var(--paper); }
+  .bum-beat.bum-active { background: var(--terracotta); color: var(--paper); transform: scale(1.12); }
+  .blues-links { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 20px; }
+  @media (max-width: 600px) { .blues-links { grid-template-columns: 1fr; } }
+  .blues-yt { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 4px; border: 1.5px solid var(--ink); }
+  .blues-yt iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+  .blues-yt-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 6px; }
+  .blues-backing-links { margin-top: 18px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .blues-backing-link { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; padding: 6px 14px; border: 1.5px solid var(--turmeric); border-radius: 3px; color: var(--ink); text-decoration: none; background: var(--paper); transition: background 0.15s; }
+  .blues-backing-link:hover { background: var(--turmeric); }
+
   /* BLUES */
   .blues-board { background: var(--paper-deep); border: 1.5px solid var(--ink); border-radius: 4px; padding: 30px; margin: 30px 0; box-shadow: 6px 6px 0 var(--ink); }
   @media (max-width: 720px) { .blues-board { padding: 20px; box-shadow: 4px 4px 0 var(--ink); } }
@@ -1479,6 +1519,50 @@
         <div class="voice-chip"><span class="voice-swatch" style="background:#C0492A;"></span> Alto · the magic harmony</div>
         <div class="voice-chip"><span class="voice-swatch" style="background:#1F5F7A;"></span> Tenor · drops an octave</div>
       </div>
+
+      <!-- AFRICA NOTATION -->
+      <div class="africa-notation">
+        <p class="eyebrow" style="margin-bottom:14px;">Proper notation — transposable to all keys</p>
+
+        <div class="africa-stave-row">
+          <div class="africa-stave-label" style="color:#8B2C4D;">Soprano</div>
+          <div class="africa-stave-el" id="africa-stave-S"></div>
+        </div>
+        <div class="africa-stave-row">
+          <div class="africa-stave-label" style="color:#C0492A;">Alto</div>
+          <div class="africa-stave-el" id="africa-stave-A"></div>
+        </div>
+        <div class="africa-stave-row">
+          <div class="africa-stave-label" style="color:#1F5F7A;">Tenor</div>
+          <div class="africa-stave-el" id="africa-stave-T"></div>
+        </div>
+
+        <div class="africa-chord-row">
+          <span class="africa-chord-chip" id="achip-0">F♯m</span>
+          <span class="africa-chord-chip" id="achip-1">D</span>
+          <span class="africa-chord-chip" id="achip-2">A</span>
+          <span class="africa-chord-chip" id="achip-3">E</span>
+          <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-soft);align-self:center;margin-left:6px;">vi – IV – I – V</span>
+        </div>
+
+        <div class="africa-controls">
+          <select class="africa-key-select" id="africa-key-select" onchange="changeAfricaKey(this.value)">
+            <option value="A" selected>Key of A</option>
+            <option value="Bb">Key of B♭</option>
+            <option value="B">Key of B</option>
+            <option value="C">Key of C</option>
+            <option value="C#">Key of C♯</option>
+            <option value="D">Key of D</option>
+            <option value="Eb">Key of E♭</option>
+            <option value="E">Key of E</option>
+            <option value="F">Key of F</option>
+            <option value="F#">Key of F♯</option>
+            <option value="G">Key of G</option>
+            <option value="Ab">Key of A♭</option>
+          </select>
+          <button class="africa-play-btn" id="africa-play-btn" onclick="toggleAfricaPlay()">▶ Play with chords</button>
+        </div>
+      </div>
     </div>
 
     <div class="quote">
@@ -1548,6 +1632,68 @@
       <p style="margin-top: 12px; text-align: center; font-family: 'Fraunces', serif; font-style: italic; color: var(--ink-soft); font-size: 15px;">
         Snap your fingers only on the 2 and the 4. That's the whole groove.
       </p>
+
+      <!-- 12-BAR BLUES -->
+      <div class="bar12-section">
+        <p class="eyebrow" style="margin-bottom:14px;">The 12-bar structure — animated, transposable</p>
+
+        <div class="bar12-controls">
+          <select class="bar12-key-select" id="bar12-key-select" onchange="changeBluesKey(this.value)">
+            <option value="C" selected>Key of C</option>
+            <option value="C#">Key of C♯</option>
+            <option value="D">Key of D</option>
+            <option value="Eb">Key of E♭</option>
+            <option value="E">Key of E</option>
+            <option value="F">Key of F</option>
+            <option value="F#">Key of F♯</option>
+            <option value="G">Key of G</option>
+            <option value="Ab">Key of A♭</option>
+            <option value="A">Key of A</option>
+            <option value="Bb">Key of B♭</option>
+            <option value="B">Key of B</option>
+          </select>
+          <button class="bar12-play-btn" id="bar12-play-btn" onclick="toggleBluesPlay()">▶ Play 12-bar loop</button>
+        </div>
+
+        <div class="bar12-grid" id="bar12-grid"><!-- filled by JS --></div>
+
+        <p class="eyebrow" style="margin-bottom:8px;">BUM-BUM — beat 1 and the &amp; of beat 2</p>
+        <div class="bum-display" id="bum-display">
+          <div class="bum-beat bum" id="bum-1">1 BUM</div>
+          <div class="bum-beat" id="bum-2">2</div>
+          <div class="bum-beat bum" id="bum-and">2&amp;</div>
+          <div class="bum-beat" id="bum-3">3</div>
+          <div class="bum-beat" id="bum-4">4</div>
+        </div>
+
+        <p style="font-family:'Fraunces',serif;font-style:italic;color:var(--ink-soft);font-size:14px;margin-bottom:18px;">
+          The root hits on beat 1 and jumps to the 5th on the &amp; of 2. That two-note hop is what gives blues its bounce.
+        </p>
+
+        <p class="eyebrow" style="margin-bottom:12px;">Listen — the classics</p>
+        <div class="blues-links">
+          <div>
+            <div class="blues-yt-label">Sweet Home Chicago — Robert Johnson / Blues Bros</div>
+            <div class="blues-yt">
+              <iframe src="https://www.youtube.com/embed/euJ22UqLD5Y" title="Sweet Home Chicago" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            </div>
+          </div>
+          <div>
+            <div class="blues-yt-label">I'm Tore Down — Freddie King / Eric Clapton</div>
+            <div class="blues-yt">
+              <iframe src="https://www.youtube.com/embed/n02P-2K9TgQ" title="I'm Tore Down" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            </div>
+          </div>
+        </div>
+
+        <div class="blues-backing-links">
+          <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-soft);letter-spacing:.08em;align-self:center;">Backing tracks:</span>
+          <a class="blues-backing-link" href="https://www.youtube.com/results?search_query=12+bar+blues+backing+track+C" target="_blank" rel="noopener">12-bar in C</a>
+          <a class="blues-backing-link" href="https://www.youtube.com/results?search_query=12+bar+blues+backing+track+A" target="_blank" rel="noopener">12-bar in A</a>
+          <a class="blues-backing-link" href="https://www.youtube.com/results?search_query=12+bar+blues+backing+track+G" target="_blank" rel="noopener">12-bar in G</a>
+          <a class="blues-backing-link" href="https://www.youtube.com/results?search_query=12+bar+blues+slow+blues+backing+track" target="_blank" rel="noopener">Slow Blues</a>
+        </div>
+      </div>
     </div>
 
     <div class="quote">
@@ -2095,15 +2241,17 @@
     drawRhythmFactory('rhythm-2-1-1', 'B4/h, B4/q, B4/q',            240);
 
     renderSwaraScores();
+    renderAfricaScores();
   }
 
   // Try multiple load events
   if (document.readyState === 'complete') {
     renderAllVexFlow();
+    buildBar12Grid();
   } else {
-    window.addEventListener('load', renderAllVexFlow);
+    window.addEventListener('load', () => { renderAllVexFlow(); buildBar12Grid(); });
     document.addEventListener('DOMContentLoaded', () => {
-      setTimeout(renderAllVexFlow, 100);
+      setTimeout(() => { renderAllVexFlow(); buildBar12Grid(); }, 100);
     });
   }
 
@@ -2546,12 +2694,273 @@
     Tone.Transport.start();
   }
 
+  // ============ AFRICA 3-VOICE NOTATION ============
+  let currentAfricaKey = 'A';
+  let africaIsPlaying = false;
+  let africaPart = null, africaChordPart = null;
+
+  const AFRICA_PATS = {
+    S: [[0,1],[0,1],[0,1],[0,2],[0,1],[0,1],[0,2],[1,1],[1,1]],
+    A: [[2,1],[2,1],[2,1],[2,1],[2,1],[2,1],[2,1],[3,2],[3,1],[3,1]],
+    T: [[5,1],[5,1],[5,1],[4,2],[4,1],[4,1],[5,2],[6,1],[6,1]],
+  };
+
+  function buildAfricaScale(key) {
+    const raw = KEY_DATA[key].descNotes.split(',').map(n => n.replace('/q','').trim());
+    return raw.map(n => {
+      const m = n.match(/^([A-Gb#]+)(\d)$/);
+      return m ? (m[1] + (parseInt(m[2]) - 1)) : n;
+    });
+  }
+
+  function buildAfricaEasyScore(voice, scale) {
+    return AFRICA_PATS[voice].map(([i, d]) => scale[i] + '/' + (d === 2 ? 'h' : 'q')).join(', ');
+  }
+
+  const AFRICA_CHORD_NAMES = {
+    'A':{'vi':'F♯m','IV':'D','I':'A','V':'E'},    'Bb':{'vi':'Gm','IV':'E♭','I':'B♭','V':'F'},
+    'B':{'vi':'G♯m','IV':'E','I':'B','V':'F♯'},   'C':{'vi':'Am','IV':'F','I':'C','V':'G'},
+    'C#':{'vi':'A♯m','IV':'F♯','I':'C♯','V':'G♯'},'D':{'vi':'Bm','IV':'G','I':'D','V':'A'},
+    'Eb':{'vi':'Cm','IV':'A♭','I':'E♭','V':'B♭'},'E':{'vi':'C♯m','IV':'A','I':'E','V':'B'},
+    'F':{'vi':'Dm','IV':'B♭','I':'F','V':'C'},     'F#':{'vi':'D♯m','IV':'B','I':'F♯','V':'C♯'},
+    'G':{'vi':'Em','IV':'C','I':'G','V':'D'},       'Ab':{'vi':'Fm','IV':'D♭','I':'A♭','V':'E♭'},
+  };
+
+  function drawAfricaStave(elementId, easyScoreSpec, keySig, stemDir) {
+    const el = document.getElementById(elementId);
+    if (!el) return;
+    el.innerHTML = '';
+    const w = Math.max(Math.min(el.offsetWidth || 680, 700), 360);
+    try {
+      const VF = Vex.Flow;
+      const factory = new VF.Factory({ renderer: { elementId, width: w, height: 110 } });
+      const score = factory.EasyScore();
+      const system = factory.System({ x: 0, y: 6, width: w - 6 });
+      const notes = score.notes(easyScoreSpec, { stem: stemDir });
+      const voice = score.voice(notes, { time: '11/4' }).setStrict(false);
+      const stave = system.addStave({ voices: [voice] }).addClef('treble');
+      if (keySig && keySig !== 'C') stave.addKeySignature(keySig);
+      factory.draw();
+    } catch(e) {
+      console.error('Africa stave', elementId, e);
+      el.innerHTML = '<span style="font-family:monospace;font-size:11px;color:#999;">' + easyScoreSpec + '</span>';
+    }
+  }
+
+  function renderAfricaScores() {
+    if (typeof Vex === 'undefined' || !Vex.Flow || !Vex.Flow.Factory) return;
+    const scale = buildAfricaScale(currentAfricaKey);
+    const sig = KEY_DATA[currentAfricaKey].sig;
+    drawAfricaStave('africa-stave-S', buildAfricaEasyScore('S', scale), sig, 'up');
+    drawAfricaStave('africa-stave-A', buildAfricaEasyScore('A', scale), sig, 'up');
+    drawAfricaStave('africa-stave-T', buildAfricaEasyScore('T', scale), sig, 'down');
+    const chords = AFRICA_CHORD_NAMES[currentAfricaKey] || {};
+    ['vi','IV','I','V'].forEach((deg, i) => {
+      const chip = document.getElementById('achip-' + i);
+      if (chip) chip.textContent = chords[deg] || deg;
+    });
+  }
+
+  function changeAfricaKey(key) {
+    currentAfricaKey = key;
+    renderAfricaScores();
+    if (africaIsPlaying) stopAfrica();
+  }
+
+  function stopAfrica() {
+    if (africaPart)      { try { africaPart.stop(); africaPart.dispose(); } catch(e){} africaPart = null; }
+    if (africaChordPart) { try { africaChordPart.stop(); africaChordPart.dispose(); } catch(e){} africaChordPart = null; }
+    africaIsPlaying = false;
+    const btn = document.getElementById('africa-play-btn');
+    if (btn) { btn.textContent = '▶ Play with chords'; btn.classList.remove('playing'); }
+    document.querySelectorAll('.africa-chord-chip').forEach(c => c.classList.remove('active'));
+  }
+
+  async function toggleAfricaPlay() {
+    if (africaIsPlaying) { stopAfrica(); return; }
+    stopAllPlayback();
+    await initAudio();
+
+    const bpm = currentBPM || 86;
+    const spb = 60 / bpm;
+    const loopEnd = 11 * spb;
+    const scale = buildAfricaScale(currentAfricaKey);
+    const kd = KEY_DATA[currentAfricaKey];
+
+    // Build melody events for all 3 voices
+    const noteEvents = [];
+    for (const [voice, pat] of Object.entries(AFRICA_PATS)) {
+      let t = 0;
+      for (const [idx, dur] of pat) {
+        noteEvents.push({ time: t * spb, note: scale[idx], dur: dur * spb * 0.82 });
+        t += dur;
+      }
+    }
+
+    // Chord events: vi(0-3b), IV(3-6b), I(6-8b), V(8-11b)
+    const chordBeats = [0, 3, 6, 8];
+    const chordDurs  = [3, 3, 2, 3];
+    const freqIdxs   = [5, 3, 0, 4]; // vi=Dha, IV=Ma, I=Sa, V=Pa
+    const chordEvents = chordBeats.map((tb, i) => ({
+      time: tb * spb,
+      freq: kd.freq[freqIdxs[i]] / 2,
+      dur: chordDurs[i] * spb * 0.85,
+      chipIdx: i,
+    }));
+
+    Tone.Transport.bpm.value = bpm;
+
+    africaPart = new Tone.Part((time, ev) => {
+      if (pianoLoaded)     piano.triggerAttackRelease(ev.note, ev.dur, time);
+      else if (tabla)      tabla.triggerAttackRelease(Tone.Frequency(ev.note).toFrequency(), ev.dur, time);
+    }, noteEvents);
+    africaPart.loop = true;
+    africaPart.loopEnd = loopEnd;
+
+    africaChordPart = new Tone.Part((time, ev) => {
+      if (pianoLoaded)     piano.triggerAttackRelease(ev.freq, ev.dur, time);
+      else if (tabla)      tabla.triggerAttackRelease(ev.freq, ev.dur, time);
+      Tone.Draw.schedule(() => {
+        document.querySelectorAll('.africa-chord-chip').forEach((c, i) => c.classList.toggle('active', i === ev.chipIdx));
+      }, time);
+    }, chordEvents);
+    africaChordPart.loop = true;
+    africaChordPart.loopEnd = loopEnd;
+
+    africaIsPlaying = true;
+    const btn = document.getElementById('africa-play-btn');
+    if (btn) { btn.textContent = '⏹ Stop'; btn.classList.add('playing'); }
+    africaPart.start(0);
+    africaChordPart.start(0);
+    Tone.Transport.start();
+  }
+
+  // ============ 12-BAR BLUES ============
+  let currentBluesKey = 'C';
+  let bluesIsPlaying = false;
+  let bluesPart = null, bluesBeatLoop = null;
+  let bluesEighthIdx = 0;
+
+  const BLUES12 = ['I','IV','I','I', 'IV','IV','I','I', 'V','IV','I','I'];
+  const BLUES_ROOT_IDX = { I:0, IV:3, V:4 }; // index into KEY_DATA freq[]
+
+  const BLUES_CHORD_NAMES = {
+    'C': {I:'C7',IV:'F7',V:'G7'}, 'C#':{I:'C♯7',IV:'F♯7',V:'G♯7'},
+    'D': {I:'D7',IV:'G7',V:'A7'}, 'Eb':{I:'E♭7',IV:'A♭7',V:'B♭7'},
+    'E': {I:'E7',IV:'A7',V:'B7'}, 'F': {I:'F7',IV:'B♭7',V:'C7'},
+    'F#':{I:'F♯7',IV:'B7',V:'C♯7'},'G':{I:'G7',IV:'C7',V:'D7'},
+    'Ab':{I:'A♭7',IV:'D♭7',V:'E♭7'},'A':{I:'A7',IV:'D7',V:'E7'},
+    'Bb':{I:'B♭7',IV:'E♭7',V:'F7'}, 'B':{I:'B7',IV:'E7',V:'F♯7'},
+  };
+
+  // 1-3-5-6 scale degree numbers for each chord function
+  const BLUES_DEGREES_DISPLAY = { I:'1 · 3 · 5 · 6', IV:'1 · 3 · 5 · 6', V:'1 · 3 · 5 · 6' };
+
+  function buildBar12Grid() {
+    const grid = document.getElementById('bar12-grid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    const chordMap = BLUES_CHORD_NAMES[currentBluesKey] || {I:currentBluesKey+'7',IV:'IV7',V:'V7'};
+    // Build note names for 1-3-5-6
+    const scaleNotes = KEY_DATA[currentBluesKey].ascNotes.split(',').map(n =>
+      n.replace('/q','').trim().replace(/\d/,'')
+    );
+    const degreeOffsets = { I:[0,2,4,5], IV:[3,5,0,1], V:[4,6,1,2] };
+    for (let i = 0; i < 12; i++) {
+      const deg = BLUES12[i];
+      const offs = degreeOffsets[deg];
+      const notes = offs.map((o,n) => (n+1) + ':' + (scaleNotes[o % 7] || '?'));
+      const cell = document.createElement('div');
+      cell.className = 'bar12-cell';
+      cell.id = 'bar12-' + i;
+      cell.innerHTML = '<div class="bar-num">Bar ' + (i+1) + '</div>' +
+        '<div class="bar-chord">' + (chordMap[deg] || deg) + '</div>' +
+        '<div class="bar-degrees">' + notes.join(' · ') + '</div>';
+      grid.appendChild(cell);
+    }
+  }
+
+  function changeBluesKey(key) {
+    currentBluesKey = key;
+    buildBar12Grid();
+    if (bluesIsPlaying) stopBlues();
+  }
+
+  function stopBlues() {
+    if (bluesPart)     { try { bluesPart.stop(); bluesPart.dispose(); } catch(e){} bluesPart = null; }
+    if (bluesBeatLoop) { try { bluesBeatLoop.stop(); bluesBeatLoop.dispose(); } catch(e){} bluesBeatLoop = null; }
+    bluesIsPlaying = false;
+    bluesEighthIdx = 0;
+    const btn = document.getElementById('bar12-play-btn');
+    if (btn) { btn.textContent = '▶ Play 12-bar loop'; btn.classList.remove('playing'); }
+    document.querySelectorAll('.bar12-cell').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.bum-beat').forEach(b => b.classList.remove('bum-active'));
+  }
+
+  async function toggleBluesPlay() {
+    if (bluesIsPlaying) { stopBlues(); return; }
+    stopAllPlayback();
+    await initAudio();
+
+    const bpm = currentBPM || 86;
+    const spb = 60 / bpm;
+    const totalEighths = 12 * 4 * 2; // 12 bars × 4 beats × 2 eighths
+    const loopEnd = totalEighths * (spb / 2);
+
+    const kd = KEY_DATA[currentBluesKey];
+
+    // BUM-BUM note events: beat 1 (root) and &-of-2 (fifth)
+    const noteEvents = [];
+    for (let bar = 0; bar < 12; bar++) {
+      const deg = BLUES12[bar];
+      const rootIdx = BLUES_ROOT_IDX[deg];
+      const rootFreq = kd.freq[rootIdx] / 2;
+      const fifthFreq = rootFreq * Math.pow(2, 7/12); // ET perfect fifth
+      const barStart = bar * 4 * spb;
+      noteEvents.push({ time: barStart,              freq: rootFreq, dur: spb * 0.55 });
+      noteEvents.push({ time: barStart + 1.5 * spb,  freq: fifthFreq, dur: spb * 0.45 });
+    }
+
+    Tone.Transport.bpm.value = bpm;
+
+    bluesPart = new Tone.Part((time, ev) => {
+      if (pianoLoaded)  piano.triggerAttackRelease(ev.freq, ev.dur, time);
+      else if (tabla)   tabla.triggerAttackRelease(ev.freq, ev.dur, time);
+    }, noteEvents);
+    bluesPart.loop = true;
+    bluesPart.loopEnd = loopEnd;
+
+    bluesEighthIdx = 0;
+    bluesBeatLoop = new Tone.Loop((time) => {
+      const ei = bluesEighthIdx % totalEighths;
+      const bar = Math.floor(ei / 8);
+      const eighthInBar = ei % 8; // 0=1, 1=&1, 2=2, 3=&2, 4=3, 5=&3, 6=4, 7=&4
+      bluesEighthIdx++;
+      Tone.Draw.schedule(() => {
+        document.querySelectorAll('.bar12-cell').forEach((c, i) => c.classList.toggle('active', i === bar));
+        document.querySelectorAll('.bum-beat').forEach(b => b.classList.remove('bum-active'));
+        const bumMap = { 0:'bum-1', 2:'bum-2', 3:'bum-and', 4:'bum-3', 6:'bum-4' };
+        const bid = bumMap[eighthInBar];
+        if (bid) document.getElementById(bid)?.classList.add('bum-active');
+      }, time);
+    }, '8n');
+
+    bluesIsPlaying = true;
+    const btn = document.getElementById('bar12-play-btn');
+    if (btn) { btn.textContent = '⏹ Stop'; btn.classList.add('playing'); }
+    bluesPart.start(0);
+    bluesBeatLoop.start(0);
+    Tone.Transport.start();
+  }
+
   function stopAllPlayback() {
     stopKonnakol();
     stopRhythm();
     stopSnap();
     stopRun();
     stopExercise();
+    stopAfrica();
+    stopBlues();
   }
 
   document.querySelectorAll('[data-ex-indices]').forEach(btn => {
