@@ -1905,7 +1905,7 @@
         </div>
 
         <div class="africa-stave-row">
-          <div class="africa-stave-label" style="color:#8B2C4D;">You · Soprano</div>
+          <div class="africa-stave-label" style="color:#8B2C4D;">Soprano</div>
           <div class="africa-stave-el africa-stave-4bar" id="africa-stave-S"></div>
         </div>
         <div class="africa-stave-row">
@@ -1920,9 +1920,9 @@
         <!-- SAT Volume Controls -->
         <div class="africa-vol-row">
           <div class="africa-vol-item">
-            <span class="africa-vol-name" style="color:#8B2C4D;">You</span>
+            <span class="africa-vol-name" style="color:#8B2C4D;">Soprano</span>
             <input type="range" class="africa-vol-slider" id="africa-vol-S" min="0" max="100" value="75"
-                   oninput="setAfricaVol('S', +this.value)" aria-label="You volume">
+                   oninput="setAfricaVol('S', +this.value)" aria-label="Soprano volume">
           </div>
           <div class="africa-vol-item">
             <span class="africa-vol-name" style="color:#C0492A;">Alto</span>
@@ -3548,17 +3548,26 @@
       sopVol = new Tone.Volume(-3).toDestination();
       altVol = new Tone.Volume(-3).toDestination();
       tenVol = new Tone.Volume(-3).toDestination();
-      sopSynth = new Tone.Synth({
-        oscillator: { type: 'triangle8' },
-        envelope: { attack: 0.05, decay: 0.08, sustain: 0.85, release: 0.35 },
-      }).connect(sopVol);
-      altSynth = new Tone.Synth({
+      sopSynth = new Tone.FMSynth({
+        harmonicity: 1.75,
+        modulationIndex: 6,
         oscillator: { type: 'sine' },
-        envelope: { attack: 0.08, decay: 0.08, sustain: 0.90, release: 0.45 },
-      }).connect(altVol);
-      tenSynth = new Tone.Synth({
+        envelope: { attack: 0.006, decay: 0.16, sustain: 0.48, release: 0.30 },
+        modulation: { type: 'triangle' },
+        modulationEnvelope: { attack: 0.004, decay: 0.14, sustain: 0.08, release: 0.18 },
+      }).connect(sopVol);
+      altSynth = new Tone.AMSynth({
+        harmonicity: 1.35,
         oscillator: { type: 'triangle' },
-        envelope: { attack: 0.10, decay: 0.10, sustain: 0.88, release: 0.50 },
+        envelope: { attack: 0.035, decay: 0.12, sustain: 0.72, release: 0.38 },
+        modulation: { type: 'sine' },
+        modulationEnvelope: { attack: 0.02, decay: 0.12, sustain: 0.55, release: 0.30 },
+      }).connect(altVol);
+      tenSynth = new Tone.MonoSynth({
+        oscillator: { type: 'sawtooth' },
+        filter: { Q: 1.6, type: 'lowpass', rolloff: -24 },
+        envelope: { attack: 0.018, decay: 0.16, sustain: 0.58, release: 0.34 },
+        filterEnvelope: { attack: 0.02, decay: 0.20, sustain: 0.30, release: 0.30, baseFrequency: 180, octaves: 2.2 },
       }).connect(tenVol);
       ['S','A','T'].forEach(v => {
         const el = document.getElementById('africa-vol-' + v);
