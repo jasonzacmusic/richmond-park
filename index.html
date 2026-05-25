@@ -1563,8 +1563,8 @@
       <div style="display:flex;align-items:center;gap:12px;margin:0 0 20px;flex-wrap:wrap;">
         <label style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);">Sa =</label>
         <select id="swara-key-select" style="font-family:'Fraunces',serif;font-size:15px;padding:6px 12px;border:1.5px solid var(--ink);border-radius:4px;background:var(--paper-deep);color:var(--ink);cursor:pointer;">
-          <option value="C">C</option>
-          <option value="C#" selected>C♯ — Hindustani standard</option>
+          <option value="C" selected>C — C major default</option>
+          <option value="C#">C♯ — Hindustani standard</option>
           <option value="D">D</option>
           <option value="Eb">E♭</option>
           <option value="E">E</option>
@@ -1576,7 +1576,7 @@
           <option value="Bb">B♭</option>
           <option value="B">B</option>
         </select>
-        <span id="swara-key-label" style="font-family:'DM Mono',monospace;font-size:12px;color:var(--peacock);letter-spacing:.04em;">Sa = C♯4 · 277 Hz</span>
+        <span id="swara-key-label" style="font-family:'DM Mono',monospace;font-size:12px;color:var(--peacock);letter-spacing:.04em;">Sa = C4  · 262 Hz</span>
         <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-soft);font-style:italic;">choose the Sa that fits your voice</span>
       </div>
 
@@ -2613,7 +2613,7 @@
     'Bb': { sig:'Bb', freq:[466.16,523.25,587.33,622.25,698.46,783.99,880.00,932.33], ascNotes:'Bb4/q,C5,D5,Eb5,F5,G5,A5,Bb5',   descNotes:'Bb5/q,A5,G5,F5,Eb5,D5,C5,Bb4',   label:'B♭4 · 466 Hz' },
     'B':  { sig:'B',  freq:[493.88,554.37,622.25,659.25,739.99,830.61,932.33,987.77], ascNotes:'B4/q,C#5,D#5,E5,F#5,G#5,A#5,B5', descNotes:'B5/q,A#5,G#5,F#5,E5,D#5,C#5,B4',  label:'B4  · 494 Hz' },
   };
-  let currentKey = 'C#'; // Hindustani default as Jason teaches
+  let currentKey = 'C'; // C major default for this study guide
 
   function renderSwaraScores() {
     if (typeof Vex === 'undefined' || !Vex.Flow || !Vex.Flow.Factory) return;
@@ -3166,8 +3166,8 @@
   });
 
   // ============ AROH / AVROH FULL RUN LOOPS (piano) ============
-  let arohFreqs   = [277.18, 311.13, 349.23, 369.99, 415.30, 466.16, 523.25, 554.37];  // C# default
-  let avrohFreqs  = [554.37, 523.25, 466.16, 415.30, 369.99, 349.23, 311.13, 277.18];
+  let arohFreqs   = [261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25];  // C major default
+  let avrohFreqs  = [523.25, 493.88, 440.00, 392.00, 349.23, 329.63, 293.66, 261.63];
   let exerciseFreqCache = [...arohFreqs]; // mutable; updated by updateSwaraKey
   let runLoop = null;
   let runButton = null;
@@ -3222,7 +3222,7 @@
     });
     // Init label
     const kl = document.getElementById('swara-key-label');
-    if (kl && typeof KEY_DATA !== 'undefined') kl.textContent = 'Sa = ' + KEY_DATA['C#'].label;
+    if (kl && typeof KEY_DATA !== 'undefined') kl.textContent = 'Sa = ' + KEY_DATA['C'].label;
   }
 
   // ── Exercise loops (6 cards) ────────────────────────────────────────────────
