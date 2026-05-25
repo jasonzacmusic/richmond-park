@@ -492,6 +492,168 @@
   .swara-score-card { background: var(--paper); border: 1.5px solid var(--ink); border-radius: 3px; padding: 14px 16px; margin-top: 18px; overflow-x: auto; }
   .swara-score-card .label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 6px; }
 
+  /* ── SONGS SECTION (key/mode/tempo, VexFlow notation, minor-mode toggle) ── */
+  .songs-section {
+    transition: background 0.6s ease, color 0.6s ease, box-shadow 0.6s ease;
+    padding: 4px;
+    border-radius: 6px;
+  }
+  .song-controls {
+    background: var(--paper-deep);
+    border: 1.5px solid var(--ink);
+    border-radius: 4px;
+    padding: 14px 18px;
+    margin: 20px 0 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+    align-items: center;
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  .song-control-group { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .song-control-group > label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  #song-key-select {
+    font-family: 'Fraunces', serif;
+    font-size: 15px;
+    padding: 5px 12px;
+    border: 1.5px solid var(--ink);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .song-key-readout { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--peacock); letter-spacing: 0.04em; }
+  .song-mode-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border: 1.5px solid var(--ink);
+    border-radius: 100px;
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .song-mode-btn.active { background: var(--ink); color: var(--paper); }
+  .song-tempo-slider { width: 140px; cursor: pointer; accent-color: var(--terracotta); }
+  .song-tempo-readout { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--ink-soft); letter-spacing: 0.04em; }
+  .minor-mode-banner {
+    display: none;
+    background: #2a1428;
+    color: #f0d6e0;
+    border: 1px solid #6a4a6a;
+    border-radius: 4px;
+    padding: 10px 14px;
+    margin: 0 0 14px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+  }
+  .songs-section.minor-mode .minor-mode-banner { display: block; }
+  .song-card {
+    background: var(--paper-deep);
+    border: 1.5px solid var(--ink);
+    border-radius: 4px;
+    padding: 20px;
+    box-shadow: 3px 3px 0 var(--ink);
+    transition: background 0.6s ease, border-color 0.6s ease, color 0.6s ease, box-shadow 0.6s ease;
+  }
+  .hbd-card { padding: 24px; box-shadow: 4px 4px 0 var(--ink); }
+  .song-card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+  .song-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 4px;
+  }
+  .song-title { font-family: 'Fraunces', serif; font-weight: 700; font-size: 18px; margin: 0; }
+  .song-play-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border: 1.5px solid var(--ink);
+    border-radius: 100px;
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s;
+  }
+  .song-swaras { font-size: 16px; font-weight: 700; font-family: 'Fraunces', serif; line-height: 1.7; margin: 6px 0; }
+  .song-swaras-aside { font-size: 12px; font-weight: 400; font-style: italic; color: var(--ink-soft); }
+  .song-note { font-size: 12px; font-family: 'DM Mono', monospace; color: var(--ink-soft); margin-top: 6px; }
+  .song-score {
+    margin-top: 14px;
+    background: var(--paper);
+    border: 1px solid var(--ink-soft);
+    border-radius: 3px;
+    padding: 6px 4px;
+    overflow-x: auto;
+  }
+  .song-grid { display: grid; grid-template-columns: 1fr; gap: 18px; margin: 0 0 30px; }
+  .hbd-verse-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 600px) { .hbd-verse-grid { grid-template-columns: 1fr; } }
+  .hbd-verse-grid p:first-child { font-style: italic; color: var(--ink-soft); font-size: 13px; margin-bottom: 4px; }
+  .hbd-verse-grid .verse-swaras { font-size: 20px; font-weight: 700; letter-spacing: 0.04em; font-family: 'Fraunces', serif; }
+  .hbd-footnote { font-size: 12px; font-family: 'DM Mono', monospace; color: var(--ink-soft); margin-top: 10px; letter-spacing: 0.04em; }
+
+  /* MINOR MODE — the whole section flips to a darker, moodier palette */
+  .songs-section.minor-mode {
+    --paper:      #2a1f2e;
+    --paper-deep: #3b2a3f;
+    --ink:        #f3dde8;
+    --ink-soft:   #b89ab8;
+    --terracotta: #d18a8a;
+    --peacock:    #b89ed6;
+    --turmeric:   #c4a86a;
+    --berry:      #9a4e7a;
+    background: linear-gradient(135deg, #2a1f2e 0%, #1c1422 100%);
+    color: #f3dde8;
+    padding: 28px 26px;
+    margin: 30px -26px;
+    box-shadow: inset 0 0 60px rgba(0,0,0,0.45);
+  }
+  .songs-section.minor-mode .song-card,
+  .songs-section.minor-mode .song-controls { box-shadow: 3px 3px 0 #100815; }
+  .songs-section.minor-mode .song-score {
+    background: #1f1828;
+    border-color: #5a4a6a;
+  }
+  /* Invert VexFlow SVGs in minor mode so notation reads on dark bg */
+  .songs-section.minor-mode .song-score svg,
+  .songs-section.minor-mode .song-score svg * {
+    color: #f3dde8;
+  }
+  .songs-section.minor-mode .song-score svg path[fill="black"],
+  .songs-section.minor-mode .song-score svg path:not([fill]) { fill: #f3dde8 !important; }
+  .songs-section.minor-mode .song-score svg path[stroke="black"],
+  .songs-section.minor-mode .song-score svg path:not([stroke]) { stroke: #f3dde8 !important; }
+  .songs-section.minor-mode .song-score svg line { stroke: #f3dde8 !important; }
+  .songs-section.minor-mode .song-score svg text { fill: #f3dde8 !important; }
+  .songs-section.minor-mode .song-score svg rect[fill="black"] { fill: #f3dde8 !important; }
+  /* fallback: filter inverts any remaining black ink */
+  .songs-section.minor-mode .song-score { filter: none; }
+  .songs-section.minor-mode .song-score svg { filter: invert(0.92) hue-rotate(180deg); }
+
   /* AFRICA */
   .africa-board { background: var(--paper-deep); border: 1.5px solid var(--ink); border-radius: 4px; padding: 30px; margin: 30px 0; box-shadow: 6px 6px 0 var(--ink); }
   @media (max-width: 720px) { .africa-board { padding: 20px; box-shadow: 4px 4px 0 var(--ink); } }
@@ -1669,86 +1831,129 @@
       </div>
     </div>
 
-    <h3 style="margin-top: 50px;">Happy Birthday, in swaras</h3>
-    <p>A song you already know, in our language. Notice — it doesn't start on <em>Sa</em>. Sneaky.</p>
+    <div class="songs-section">
 
-    <div style="background: var(--paper-deep); border: 1.5px solid var(--ink); border-radius: 4px; padding: 24px; margin: 20px 0; box-shadow: 4px 4px 0 var(--ink); font-family: 'Fraunces', serif; position:relative;">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
-        <span style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);">Starts on Pa · the 5th · sneaky ↘</span>
-        <button class="song-play-btn" id="song-hbd" onclick="runPlaybackAction(() => toggleSong('hbd',this))" style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:6px 16px;border:1.5px solid var(--ink);border-radius:100px;background:var(--paper);color:var(--ink);cursor:pointer;transition:background .15s;">▶ Play</button>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-        <div><p style="font-style:italic;color:var(--ink-soft);font-size:13px;margin-bottom:4px;">"Happy Birthday to You"</p>
-        <p style="font-size:20px;font-weight:700;letter-spacing:.04em;">Pa &middot; Pa &middot; Dha &middot; Pa &middot; S&aacute; &middot; Ni</p></div>
-        <div><p style="font-style:italic;color:var(--ink-soft);font-size:13px;margin-bottom:4px;">"Happy Birthday to You"</p>
-        <p style="font-size:20px;font-weight:700;letter-spacing:.04em;">Pa &middot; Pa &middot; Dha &middot; Pa &middot; R&eacute; &middot; S&aacute;</p></div>
-        <div><p style="font-style:italic;color:var(--ink-soft);font-size:13px;margin-bottom:4px;">"Happy Birthday dear ___"</p>
-        <p style="font-size:20px;font-weight:700;letter-spacing:.04em;">Pa &middot; Pa &middot; P&aacute; &middot; G&aacute; &middot; S&aacute; &middot; Ni &middot; Dha</p></div>
-        <div><p style="font-style:italic;color:var(--ink-soft);font-size:13px;margin-bottom:4px;">"Happy Birthday to You"</p>
-        <p style="font-size:20px;font-weight:700;letter-spacing:.04em;">Ma &middot; Ma &middot; Ga &middot; Sa &middot; Re &middot; Sa</p></div>
-      </div>
-      <p style="font-size:12px;font-family:'DM Mono',monospace;color:var(--ink-soft);margin-top:10px;letter-spacing:.04em;">Á = upper octave (one Sa above)</p>
-    </div>
+      <h3 style="margin-top: 50px;">Happy Birthday, in swaras</h3>
+      <p>A song you already know, in our language. Notice — it doesn't start on <em>Sa</em>. Sneaky.</p>
 
-    <!-- SONGS IN SWARAS -->
-    <h3 style="margin-top:44px;">More songs you already know — now in swaras</h3>
-    <p style="color:var(--ink-soft);font-style:italic;margin-bottom:20px;">Every song you've ever sung has a swara name. Tap ▶ to hear it in C♯, then hum along.</p>
-
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin:0 0 30px;">
-
-      <!-- Twinkle Twinkle -->
-      <div style="background:var(--paper-deep);border:1.5px solid var(--ink);border-radius:4px;padding:20px;box-shadow:3px 3px 0 var(--ink);">
-        <div style="display:flex;justify-content:space-between;align-items:start;gap:8px;margin-bottom:10px;">
-          <div>
-            <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:3px;">Starts on Sa · the root</div>
-            <div style="font-family:'Fraunces',serif;font-weight:700;font-size:17px;">Twinkle Twinkle</div>
-          </div>
-          <button class="song-play-btn" id="song-twinkle" onclick="runPlaybackAction(() => toggleSong('twinkle',this))" style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 13px;border:1.5px solid var(--ink);border-radius:100px;background:var(--paper);color:var(--ink);cursor:pointer;white-space:nowrap;">▶ Play</button>
+      <!-- Section controls: key · mode · tempo · metronome -->
+      <div class="song-controls">
+        <div class="song-control-group">
+          <label>Key</label>
+          <select id="song-key-select" onchange="setSongKey(this.value)">
+            <option value="C" selected>C</option>
+            <option value="C#">C♯</option>
+            <option value="D">D</option>
+            <option value="Eb">E♭</option>
+            <option value="E">E</option>
+            <option value="F">F</option>
+            <option value="F#">F♯</option>
+            <option value="G">G</option>
+            <option value="Ab">A♭</option>
+            <option value="A">A</option>
+            <option value="Bb">B♭</option>
+            <option value="B">B</option>
+          </select>
+          <span id="song-key-label" class="song-key-readout">Sa = C4  · 262 Hz</span>
         </div>
-        <p style="font-size:16px;font-weight:700;font-family:'Fraunces',serif;line-height:1.7;">Sa Sa Pa Pa Dha Dha Pa<br>Ma Ma Ga Ga Re Re Sa</p>
-        <p style="font-size:12px;font-family:'DM Mono',monospace;color:var(--ink-soft);margin-top:6px;">The whole scale, hiding in a nursery rhyme.</p>
-      </div>
-
-      <!-- Ode to Joy -->
-      <div style="background:var(--paper-deep);border:1.5px solid var(--ink);border-radius:4px;padding:20px;box-shadow:3px 3px 0 var(--ink);">
-        <div style="display:flex;justify-content:space-between;align-items:start;gap:8px;margin-bottom:10px;">
-          <div>
-            <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:3px;">Starts on Ga · the third</div>
-            <div style="font-family:'Fraunces',serif;font-weight:700;font-size:17px;">Ode to Joy</div>
-          </div>
-          <button class="song-play-btn" id="song-ode" onclick="runPlaybackAction(() => toggleSong('ode',this))" style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 13px;border:1.5px solid var(--ink);border-radius:100px;background:var(--paper);color:var(--ink);cursor:pointer;white-space:nowrap;">▶ Play</button>
+        <div class="song-control-group">
+          <label>Mode</label>
+          <button class="song-mode-btn active" data-mode="major" onclick="setSongMode('major')">Major</button>
+          <button class="song-mode-btn" data-mode="minor" onclick="setSongMode('minor')">Harmonic Minor</button>
         </div>
-        <p style="font-size:16px;font-weight:700;font-family:'Fraunces',serif;line-height:1.7;">Ga Ga Ma Pa Pa Ma Ga Re<br>Sa Sa Re Ga Ga Re Re</p>
-        <p style="font-size:12px;font-family:'DM Mono',monospace;color:var(--ink-soft);margin-top:6px;">Beethoven. Four notes. Two hundred years. Still works.</p>
-      </div>
-
-      <!-- Somewhere Over the Rainbow -->
-      <div style="background:var(--paper-deep);border:1.5px solid var(--ink);border-radius:4px;padding:20px;box-shadow:3px 3px 0 var(--ink);">
-        <div style="display:flex;justify-content:space-between;align-items:start;gap:8px;margin-bottom:10px;">
-          <div>
-            <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:3px;">The octave leap · Sa → Sá</div>
-            <div style="font-family:'Fraunces',serif;font-weight:700;font-size:17px;">Over the Rainbow</div>
-          </div>
-          <button class="song-play-btn" id="song-rainbow" onclick="runPlaybackAction(() => toggleSong('rainbow',this))" style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 13px;border:1.5px solid var(--ink);border-radius:100px;background:var(--paper);color:var(--ink);cursor:pointer;white-space:nowrap;">▶ Play</button>
+        <div class="song-control-group">
+          <label>Tempo</label>
+          <input type="range" class="song-tempo-slider" id="song-tempo-slider" min="50" max="160" value="76" oninput="setSongTempo(+this.value)">
+          <span class="song-tempo-readout"><span id="song-tempo-val">76</span> BPM · plays with metronome</span>
         </div>
-        <p style="font-size:16px;font-weight:700;font-family:'Fraunces',serif;line-height:1.7;">Sa &nbsp;→&nbsp; S&aacute; &nbsp;<span style="font-size:12px;font-weight:400;font-style:italic;">(the leap)</span><br>Ni Pa Dha Pa Ma Ga</p>
-        <p style="font-size:12px;font-family:'DM Mono',monospace;color:var(--ink-soft);margin-top:6px;">The first two notes are a full octave. That's Judy Garland's secret.</p>
       </div>
 
-      <!-- Joy to the World -->
-      <div style="background:var(--paper-deep);border:1.5px solid var(--ink);border-radius:4px;padding:20px;box-shadow:3px 3px 0 var(--ink);">
-        <div style="display:flex;justify-content:space-between;align-items:start;gap:8px;margin-bottom:10px;">
-          <div>
-            <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--terracotta);margin-bottom:3px;">⋆ Surprise · the full avroh</div>
-            <div style="font-family:'Fraunces',serif;font-weight:700;font-size:17px;">Joy to the World</div>
-          </div>
-          <button class="song-play-btn" id="song-joy" onclick="runPlaybackAction(() => toggleSong('joy',this))" style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 13px;border:1.5px solid var(--ink);border-radius:100px;background:var(--paper);color:var(--ink);cursor:pointer;white-space:nowrap;">▶ Play</button>
+      <p class="minor-mode-banner">⚠ Harmonic minor mode — same melodies, lowered 3rd and 6th, raised leading tone. Should sound darker and stranger. On purpose.</p>
+
+      <div class="song-card hbd-card">
+        <div class="song-card-head">
+          <span class="song-tag">Starts on Pa · the 5th · sneaky ↘</span>
+          <button class="song-play-btn" id="song-hbd" onclick="runPlaybackAction(() => toggleSong('hbd',this))">▶ Play</button>
         </div>
-        <p style="font-size:16px;font-weight:700;font-family:'Fraunces',serif;line-height:1.7;">S&aacute; Ni Dha Pa Ma Ga Re Sa</p>
-        <p style="font-size:12px;font-family:'DM Mono',monospace;color:var(--ink-soft);margin-top:6px;">That opening line IS the descending swara scale. You've been singing it your whole life.</p>
+        <div class="hbd-verse-grid">
+          <div><p>"Happy Birthday to You"</p>
+          <p class="verse-swaras">Pa &middot; Pa &middot; Dha &middot; Pa &middot; S&aacute; &middot; Ni</p></div>
+          <div><p>"Happy Birthday to You"</p>
+          <p class="verse-swaras">Pa &middot; Pa &middot; Dha &middot; Pa &middot; R&eacute; &middot; S&aacute;</p></div>
+          <div><p>"Happy Birthday dear ___"</p>
+          <p class="verse-swaras">Pa &middot; Pa &middot; P&aacute; &middot; G&aacute; &middot; S&aacute; &middot; Ni &middot; Dha</p></div>
+          <div><p>"Happy Birthday to You"</p>
+          <p class="verse-swaras">Ma &middot; Ma &middot; Ga &middot; Sa &middot; Re &middot; Sa</p></div>
+        </div>
+        <p class="hbd-footnote">3/4 time · 2-eighth pickup · Á = upper octave</p>
+        <div class="song-score" id="score-hbd"></div>
       </div>
 
-    </div>
+      <!-- SONGS IN SWARAS -->
+      <h3 style="margin-top:44px;">More songs you already know — now in swaras</h3>
+      <p style="color:var(--ink-soft);font-style:italic;margin-bottom:20px;">Every song you've ever sung has a swara name. Tap ▶ to hear it, then hum along.</p>
+
+      <div class="song-grid">
+
+        <!-- Twinkle Twinkle (4/4, no pickup) -->
+        <div class="song-card">
+          <div class="song-card-head">
+            <div>
+              <div class="song-tag">Starts on Sa · the root · 4/4</div>
+              <h4 class="song-title">Twinkle Twinkle</h4>
+            </div>
+            <button class="song-play-btn" id="song-twinkle" onclick="runPlaybackAction(() => toggleSong('twinkle',this))">▶ Play</button>
+          </div>
+          <p class="song-swaras">Sa Sa Pa Pa Dha Dha Pa<br>Ma Ma Ga Ga Re Re Sa</p>
+          <p class="song-note">The whole scale, hiding in a nursery rhyme.</p>
+          <div class="song-score" id="score-twinkle"></div>
+        </div>
+
+        <!-- Ode to Joy (4/4, with dotted-quarter+eighth ending) -->
+        <div class="song-card">
+          <div class="song-card-head">
+            <div>
+              <div class="song-tag">Starts on Ga · the third · 4/4</div>
+              <h4 class="song-title">Ode to Joy</h4>
+            </div>
+            <button class="song-play-btn" id="song-ode" onclick="runPlaybackAction(() => toggleSong('ode',this))">▶ Play</button>
+          </div>
+          <p class="song-swaras">Ga Ga Ma Pa · Pa Ma Ga Re<br>Sa Sa Re Ga · Ga. Re Re~ &nbsp; <span class="song-swaras-aside">(repeat resolves to Sa)</span></p>
+          <p class="song-note">Beethoven. Four notes. Two hundred years. Still works.</p>
+          <div class="song-score" id="score-ode"></div>
+        </div>
+
+        <!-- Over the Rainbow (4/4 — the iconic octave leap) -->
+        <div class="song-card">
+          <div class="song-card-head">
+            <div>
+              <div class="song-tag">The octave leap · Sa → Sá · 4/4</div>
+              <h4 class="song-title">Over the Rainbow</h4>
+            </div>
+            <button class="song-play-btn" id="song-rainbow" onclick="runPlaybackAction(() => toggleSong('rainbow',this))">▶ Play</button>
+          </div>
+          <p class="song-swaras">Sa &nbsp;→&nbsp; S&aacute; &nbsp;<span class="song-swaras-aside">(the leap)</span><br>Ni Dha Dha &middot; Ma S&aacute; Ma &middot; Ga Ma</p>
+          <p class="song-note">The first two notes are a full octave. That's Judy Garland's secret.</p>
+          <div class="song-score" id="score-rainbow"></div>
+        </div>
+
+        <!-- Joy to the World (4/4 — descending scale Sá → Sa) -->
+        <div class="song-card">
+          <div class="song-card-head">
+            <div>
+              <div class="song-tag" style="color:var(--terracotta);">⋆ Surprise · the full avroh · 4/4</div>
+              <h4 class="song-title">Joy to the World</h4>
+            </div>
+            <button class="song-play-btn" id="song-joy" onclick="runPlaybackAction(() => toggleSong('joy',this))">▶ Play</button>
+          </div>
+          <p class="song-swaras">S&aacute; Ni Dha &middot; Pa Ma Ga Re &middot; Sa~</p>
+          <p class="song-note">That opening line IS the descending swara scale. You've been singing it your whole life.</p>
+          <div class="song-score" id="score-joy"></div>
+        </div>
+
+      </div>
+
+    </div>  <!-- /.songs-section -->
 
     <div class="quote">
       "Play by ear" is one of the most ridiculous things I've heard in my life. You're not playing by ear — you're playing by mind. The swaras give your mind a vocabulary.
@@ -2726,6 +2931,7 @@
 
     renderSwaraScores();
     renderAfricaScores();
+    renderAllSongScores();
   }
 
   // Try multiple load events
@@ -3824,62 +4030,264 @@
     }
   }
 
-  // ============ SONG PLAYBACK (5 songs) ============
-  const SONG_FREQS = {
-    'Sa':  277.18, 'Re':  311.13, 'Ga':  349.23, 'Ma':  369.99,
-    'Pa':  415.30, 'Dha': 466.16, 'Ni':  523.25,
-    'Sa2': 554.37, 'Re2': 622.26, 'Ga2': 698.46, 'Pa2': 830.61,
-    'R':   0       // rest
+  // ============ MELODY ENGINE — Major + Harmonic Minor, transposable ============
+  let songKey  = 'C';        // current root for melody section
+  let songMode = 'major';    // 'major' or 'minor' (harmonic minor)
+  let songBPM  = 76;
+
+  // Lower a VexFlow note string by a half step (e.g. "E4" → "Eb4", "F#4" → "F4")
+  function lowerHalfStep(noteStr) {
+    const m = noteStr.match(/^([A-G])(##|bb|#|b|)(-?\d+)$/);
+    if (!m) return noteStr;
+    const letter = m[1], acc = m[2], oct = m[3];
+    if (acc === '')   return letter + 'b'  + oct;
+    if (acc === 'b')  return letter + 'bb' + oct;
+    if (acc === '#')  return letter         + oct;
+    if (acc === '##') return letter + '#'  + oct;
+    return noteStr;
+  }
+
+  // Get the VexFlow note name for a scale degree in the given key + mode
+  function melodyNoteName(key, degree, mode, baseOct) {
+    const kd = KEY_DATA[key];
+    const notesArr = kd.ascNotes.replace('/q','').split(',').map(s => s.trim());
+    let d = degree, octShift = 0;
+    while (d > 7) { d -= 7; octShift += 1; }
+    while (d < 1) { d += 7; octShift -= 1; }
+    let noteStr = notesArr[d - 1];
+    const m = noteStr.match(/^([A-G][b#]*)(-?\d+)$/);
+    if (m) noteStr = m[1] + (parseInt(m[2]) + (baseOct - 4) + octShift);
+    if (mode === 'minor' && (d === 3 || d === 6)) noteStr = lowerHalfStep(noteStr);
+    return noteStr;
+  }
+
+  // Frequency for a scale degree in the given key + mode
+  function melodyFreq(key, degree, mode, baseOct) {
+    const kd = KEY_DATA[key];
+    let d = degree, octShift = 0;
+    while (d > 7) { d -= 7; octShift += 1; }
+    while (d < 1) { d += 7; octShift -= 1; }
+    let freq = kd.freq[d - 1] * Math.pow(2, octShift + (baseOct - 4));
+    if (mode === 'minor' && (d === 3 || d === 6)) freq *= Math.pow(2, -1/12);
+    return freq;
+  }
+
+  // VexFlow duration suffix from beat count
+  function vfDur(beats) {
+    if (beats === 4)    return 'w';
+    if (beats === 3)    return 'h.';
+    if (beats === 2)    return 'h';
+    if (beats === 1.5)  return 'q.';
+    if (beats === 1)    return 'q';
+    if (beats === 0.75) return '8.';
+    if (beats === 0.5)  return '8';
+    if (beats === 0.25) return '16';
+    return 'q';
+  }
+
+  // Major-key root → parallel-minor key signature (for harmonic minor display)
+  const PARALLEL_MINOR_SIG = {
+    'C':'Eb','C#':'E','D':'F','Eb':'Gb','E':'G','F':'Ab',
+    'F#':'A','G':'Bb','Ab':'B','A':'C','Bb':'Db','B':'D'
   };
 
-  // Each entry: ['NoteName', durationInBeats]
-  // BPM is 80; 1 beat = 0.75s at 80 BPM
-  const SONG_MELODIES = {
-    hbd: [
-      ['Pa', .75], ['Pa', .25], ['Dha', 1], ['Pa', 1],  ['Sa2', 1.5], ['Ni', .5],
-      ['Pa', .75], ['Pa', .25], ['Dha', 1], ['Pa', 1],  ['Re2', 2.5],
-      ['Pa', .75], ['Pa', .25], ['Pa2', 1], ['Ga2', 1], ['Sa2', 1], ['Ni', .5], ['Dha', .5],
-      ['Ma', .75], ['Ma', .25], ['Ga', 1],  ['Sa', 1],  ['Re', 2]
-    ],
-    twinkle: [
-      ['Sa', 1], ['Sa', 1], ['Pa', 1], ['Pa', 1], ['Dha', 1], ['Dha', 1], ['Pa', 2],
-      ['Ma', 1], ['Ma', 1], ['Ga', 1], ['Ga', 1], ['Re', 1],  ['Re', 1],  ['Sa', 2],
-      ['Pa', 1], ['Pa', 1], ['Ma', 1], ['Ma', 1], ['Ga', 1],  ['Ga', 1],  ['Re', 2],
-      ['Pa', 1], ['Pa', 1], ['Ma', 1], ['Ma', 1], ['Ga', 1],  ['Ga', 1],  ['Re', 2]
-    ],
-    ode: [
-      ['Ga', 1], ['Ga', 1], ['Ma', 1], ['Pa', 1], ['Pa', 1], ['Ma', 1], ['Ga', 1], ['Re', 1],
-      ['Sa', 1], ['Sa', 1], ['Re', 1], ['Ga', 1.5], ['Re', .5], ['Re', 2],
-      ['Ga', 1], ['Ga', 1], ['Ma', 1], ['Pa', 1], ['Pa', 1], ['Ma', 1], ['Ga', 1], ['Re', 1],
-      ['Sa', 1], ['Sa', 1], ['Re', 1], ['Ga', 1.5], ['Re', .5], ['Re', 2]
-    ],
-    rainbow: [
-      ['Sa', 1.5], ['Sa2', 2.5],
-      ['Ni', 1], ['Pa', 1], ['Dha', .5], ['Pa', .5], ['Ma', 1.5], ['Ga', .5], ['Ma', 2],
-      ['Re', 1.5], ['Re', 2.5],
-      ['Ga', 1], ['Sa', 1], ['Re', .5], ['Sa', .5], ['Dha', 2]
-    ],
-    joy: [
-      ['Sa2', 1], ['Ni', 1],  ['Dha', 1], ['Pa', 1],
-      ['Ma',  1], ['Ga', .5], ['Ma', .5], ['Pa', 2],
-      ['Ma',  1], ['Ga', 1],  ['Re', 1],  ['Sa', 1],
-      ['Re',  1], ['Ma', .5], ['Ga', .5], ['Re', 2]
-    ]
+  // Songs: each note is {d: scale degree 1-12+, b: beats}
+  // Scale degree 1 = Sa, 2 = Re, ..., 7 = Ni, 8 = Sa upper octave, etc.
+  const SONGS = {
+    hbd: {
+      name: 'Happy Birthday',
+      timeSig: [3, 4],
+      pickupBeats: 1,
+      baseOct: 4,
+      notes: [
+        // Pickup: Hap-py
+        {d:5,b:.5}, {d:5,b:.5},
+        // Bar 1: birth-day-to | Bar 2: you (held)
+        {d:6,b:1.5}, {d:5,b:.5}, {d:8,b:1},
+        {d:7,b:3},
+        // Pickup
+        {d:5,b:.5}, {d:5,b:.5},
+        // Bar 3: birth-day-to | Bar 4: you
+        {d:6,b:1.5}, {d:5,b:.5}, {d:9,b:1},
+        {d:8,b:3},
+        // Pickup
+        {d:5,b:.5}, {d:5,b:.5},
+        // Bar 5: birth-day-dear (high climax)
+        {d:12,b:1.5}, {d:10,b:.5}, {d:8,b:1},
+        // Bar 6: NAME (Ni-Dha melisma)
+        {d:7,b:1.5}, {d:6,b:1.5},
+        // Pickup: Hap-py (Ma)
+        {d:4,b:.5}, {d:4,b:.5},
+        // Bar 7: birth-day-to | Bar 8: you (resolves to Sa)
+        {d:3,b:1.5}, {d:1,b:.5}, {d:2,b:1},
+        {d:1,b:3}
+      ]
+    },
+    twinkle: {
+      name: 'Twinkle Twinkle',
+      timeSig: [4, 4],
+      pickupBeats: 0,
+      baseOct: 4,
+      notes: [
+        // Twinkle twinkle little STAR
+        {d:1,b:1},{d:1,b:1},{d:5,b:1},{d:5,b:1},
+        {d:6,b:1},{d:6,b:1},{d:5,b:2},
+        // How I wonder what you ARE
+        {d:4,b:1},{d:4,b:1},{d:3,b:1},{d:3,b:1},
+        {d:2,b:1},{d:2,b:1},{d:1,b:2},
+        // Up above the world so HIGH
+        {d:5,b:1},{d:5,b:1},{d:4,b:1},{d:4,b:1},
+        {d:3,b:1},{d:3,b:1},{d:2,b:2},
+        // Like a diamond in the SKY
+        {d:5,b:1},{d:5,b:1},{d:4,b:1},{d:4,b:1},
+        {d:3,b:1},{d:3,b:1},{d:2,b:2}
+      ]
+    },
+    ode: {
+      name: 'Ode to Joy',
+      timeSig: [4, 4],
+      pickupBeats: 0,
+      baseOct: 4,
+      notes: [
+        // First half (ends on Re — unresolved)
+        {d:3,b:1},{d:3,b:1},{d:4,b:1},{d:5,b:1},
+        {d:5,b:1},{d:4,b:1},{d:3,b:1},{d:2,b:1},
+        {d:1,b:1},{d:1,b:1},{d:2,b:1},{d:3,b:1},
+        {d:3,b:1.5},{d:2,b:.5},{d:2,b:2},
+        // Second half (resolves on Sa)
+        {d:3,b:1},{d:3,b:1},{d:4,b:1},{d:5,b:1},
+        {d:5,b:1},{d:4,b:1},{d:3,b:1},{d:2,b:1},
+        {d:1,b:1},{d:1,b:1},{d:2,b:1},{d:3,b:1},
+        {d:2,b:1.5},{d:1,b:.5},{d:1,b:2}
+      ]
+    },
+    rainbow: {
+      name: 'Over the Rainbow',
+      timeSig: [4, 4],
+      pickupBeats: 0,
+      baseOct: 4,
+      notes: [
+        // Some-where (the iconic octave leap)
+        {d:1,b:2}, {d:8,b:2},
+        // o-ver the rain
+        {d:7,b:1}, {d:6,b:1}, {d:6,b:2},
+        // bow way up
+        {d:4,b:2}, {d:8,b:1}, {d:4,b:1},
+        // high (sustained)
+        {d:3,b:2}, {d:4,b:2}
+      ]
+    },
+    joy: {
+      name: 'Joy to the World',
+      timeSig: [4, 4],
+      pickupBeats: 0,
+      baseOct: 4,
+      notes: [
+        // Joy! to the (full descending scale Sa2 → Sa)
+        {d:8,b:2}, {d:7,b:1}, {d:6,b:1},
+        // world! The Lord is
+        {d:5,b:1.5}, {d:4,b:.5}, {d:3,b:1}, {d:2,b:1},
+        // come (whole note resolution)
+        {d:1,b:4}
+      ]
+    }
   };
 
+  function splitSongIntoBars(song) {
+    const beatsPerBar = song.timeSig[0];
+    const bars = [];
+    let curr = [], acc = 0;
+    let target = song.pickupBeats > 0 ? song.pickupBeats : beatsPerBar;
+    song.notes.forEach(n => {
+      curr.push(n);
+      acc += n.b;
+      if (Math.abs(acc - target) < 0.001) {
+        bars.push(curr);
+        curr = []; acc = 0;
+        target = beatsPerBar;
+      }
+    });
+    if (curr.length) bars.push(curr);
+    return bars;
+  }
+
+  function buildSongBarSpec(song, key, mode, barNotes) {
+    const parts = [];
+    const beamGroups = [];
+    let group = [];
+    barNotes.forEach((n, i) => {
+      const name = melodyNoteName(key, n.d, mode, song.baseOct);
+      parts.push(name + '/' + vfDur(n.b));
+      if (n.b === 0.5 || n.b === 0.25) {
+        group.push(i);
+      } else {
+        if (group.length > 1) beamGroups.push([...group]);
+        group = [];
+      }
+    });
+    if (group.length > 1) beamGroups.push([...group]);
+    return { spec: parts.join(','), beamGroups };
+  }
+
+  function renderSongScore(songId) {
+    const container = document.getElementById('score-' + songId);
+    if (!container || typeof Vex === 'undefined' || !Vex.Flow || !Vex.Flow.Factory) return;
+    container.innerHTML = '';
+    const song = SONGS[songId];
+    if (!song) return;
+    const bars = splitSongIntoBars(song);
+    const timeSigStr = song.timeSig[0] + '/' + song.timeSig[1];
+    const keySig = songMode === 'minor' ? PARALLEL_MINOR_SIG[songKey] : KEY_DATA[songKey].sig;
+
+    container.style.cssText = 'display:flex;flex-wrap:wrap;align-items:flex-start;gap:0;margin-top:14px;overflow-x:auto;padding:6px 0;';
+
+    bars.forEach((barNotes, bi) => {
+      const totalBeats = barNotes.reduce((s,n) => s + n.b, 0);
+      // Bar width: ~55px per beat, +75 for clef/keysig on bar 0
+      const barWidth = Math.max(110, Math.round(totalBeats * 55) + (bi === 0 ? 90 : 18));
+      const elId = 'score-' + songId + '-b' + bi;
+      const el = document.createElement('div');
+      el.id = elId;
+      el.style.flexShrink = '0';
+      container.appendChild(el);
+      try {
+        const VF = Vex.Flow;
+        const factory = new VF.Factory({ renderer: { elementId: elId, width: barWidth, height: 110 } });
+        const score   = factory.EasyScore();
+        const system  = factory.System({ x: 0, y: 8, width: barWidth - 4 });
+        const built   = buildSongBarSpec(song, songKey, songMode, barNotes);
+        const notes   = score.notes(built.spec, { stem: 'up' });
+        built.beamGroups.forEach(g => {
+          const gn = g.map(i => notes[i]).filter(Boolean);
+          if (gn.length > 1) score.beam(gn);
+        });
+        const voice = score.voice(notes, { time: timeSigStr }).setStrict(false);
+        const stave = system.addStave({ voices: [voice] });
+        if (bi === 0) {
+          stave.addClef('treble');
+          if (keySig && keySig !== 'C') stave.addKeySignature(keySig);
+          stave.addTimeSignature(timeSigStr);
+        }
+        factory.draw();
+      } catch (e) {
+        console.error('Song VF render', songId, bi, e);
+        el.innerHTML = '<span style="font:11px monospace;color:#999;">' + (e.message || 'render error') + '</span>';
+      }
+    });
+  }
+
+  function renderAllSongScores() {
+    Object.keys(SONGS).forEach(id => renderSongScore(id));
+  }
+
+  // ============ SONG PLAYBACK (Salamander piano + metronome) ============
   let activeSongPart = null;
   let activeSongBtn  = null;
   let songStopTimer = null;
 
   function stopSong() {
-    if (songStopTimer) {
-      clearTimeout(songStopTimer);
-      songStopTimer = null;
-    }
-    if (activeSongPart) {
-      try { activeSongPart.stop(); activeSongPart.dispose(); } catch(e){}
-      activeSongPart = null;
-    }
+    if (songStopTimer) { clearTimeout(songStopTimer); songStopTimer = null; }
+    if (activeSongPart) { try { activeSongPart.stop(); activeSongPart.dispose(); } catch(e){} activeSongPart = null; }
     if (activeSongBtn) {
       activeSongBtn.textContent = '▶ Play';
       activeSongBtn.style.background = '';
@@ -3890,35 +4298,28 @@
 
   async function toggleSong(songId, btn) {
     if (activeSongBtn === btn) { stopAllPlayback(); return; }
-
-    const melody = SONG_MELODIES[songId];
-    if (!melody) return;
-
-    const songBPM = 76;
+    const song = SONGS[songId];
+    if (!song) return;
     const token = await beginPlayback(songBPM);
     if (!token) return;
     const beatSec = 60 / songBPM;
 
-    // Build timed events
     const events = [];
     let t = 0;
-    melody.forEach(([note, dur]) => {
-      const freq = SONG_FREQS[note];
-      if (freq > 0) {
-        events.push({ time: t, freq, dur: dur * beatSec * 0.88 });
+    song.notes.forEach(n => {
+      if (n.d > 0) {
+        const freq = melodyFreq(songKey, n.d, songMode, song.baseOct);
+        events.push({ time: t, freq, dur: n.b * beatSec * 0.92 });
       }
-      t += dur * beatSec;
+      t += n.b * beatSec;
     });
 
     activeSongPart = new Tone.Part((time, ev) => {
-      if (pianoLoaded) piano.triggerAttackRelease(ev.freq, ev.dur, time, 0.75);
-      else if (tabla)  tabla.triggerAttackRelease(ev.freq, ev.dur, time, 0.75);
+      if (pianoLoaded) piano.triggerAttackRelease(ev.freq, ev.dur, time, 0.82);
     }, events);
     activeSongPart.loop = false;
-
-    // Auto-stop when melody ends
-    const totalSec = t + 1;
     activeSongPart.start(0);
+    startMetronome(song.timeSig[0]);
     startPreparedTransport(token);
 
     activeSongBtn = btn;
@@ -3926,9 +4327,35 @@
     btn.style.background = 'var(--ink)';
     btn.style.color = 'var(--paper)';
 
+    const totalSec = t + 0.4;
     songStopTimer = setTimeout(() => {
       if (token === playbackToken && activeSongBtn === btn) stopAllPlayback();
-    }, totalSec * 1000 + 200);
+    }, totalSec * 1000 + 100);
+  }
+
+  // ============ SONG SECTION CONTROLS ============
+  function setSongKey(key) {
+    songKey = key;
+    const lbl = document.getElementById('song-key-label');
+    if (lbl && KEY_DATA[key]) lbl.textContent = 'Sa = ' + KEY_DATA[key].label;
+    renderAllSongScores();
+    stopAllPlayback();
+  }
+  function setSongMode(mode) {
+    songMode = mode;
+    const section = document.querySelector('.songs-section');
+    if (section) section.classList.toggle('minor-mode', mode === 'minor');
+    document.querySelectorAll('.song-mode-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.mode === mode);
+    });
+    renderAllSongScores();
+    stopAllPlayback();
+  }
+  function setSongTempo(bpm) {
+    songBPM = bpm;
+    const lbl = document.getElementById('song-tempo-val');
+    if (lbl) lbl.textContent = bpm;
+    stopAllPlayback();
   }
 
   function stopAllPlayback(options = {}) {
