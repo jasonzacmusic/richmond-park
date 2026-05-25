@@ -2380,9 +2380,9 @@
 
         <!-- ── LYRIC SWAP — put your hometown into the blues ── -->
         <div class="blues-swap-board">
-          <p class="eyebrow" style="margin-bottom:10px;">Make it yours — put your place in the lyric</p>
+          <p class="eyebrow" style="margin-bottom:10px;">Make it yours — sing your own place</p>
           <p style="font-family:'Fraunces',serif;font-style:italic;color:var(--ink-soft);font-size:15px;margin-bottom:14px;">
-            Every classic 12-bar has a hometown buried in it. The form is global — just swap the place. Tap a city, sing it.
+            Every classic blues has a place name in it. The form travels — the city doesn't have to. Pick yours.
           </p>
 
           <div class="blues-place-row">
@@ -2446,7 +2446,7 @@
           </div>
 
           <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-soft);letter-spacing:.06em;margin-top:14px;">
-            Notice the lyric shape — line 1 sung, line 2 repeated, line 3 answers. AAB. Twelve bars. Every blues song you'll ever sing.
+            Notice the shape — line 1 sets it up, line 2 repeats it, line 3 answers. AAB. Twelve bars. Every blues song uses this skeleton.
           </p>
         </div>
       </div>
@@ -2490,7 +2490,7 @@
       </div>
 
       <div style="background:var(--paper-deep);border-left:4px solid var(--terracotta);border-radius:0 6px 6px 0;padding:18px 22px;">
-        <p style="font-size:1.05rem;line-height:1.6;margin-bottom:6px;">"Music is a hobby blah blah blah — but if you play badminton, you want to win. That's the joy of playing a sport. Same thing about music. You have to find a way to sweat it out — learn a few songs, jam with people, play concerts in front of an audience."</p>
+        <p style="font-size:1.05rem;line-height:1.6;margin-bottom:6px;">"People treat music like a hobby — but if you play badminton, you want to win. That's the joy of playing a sport. Same with music. You have to find a way to sweat it out — learn a few songs, jam with people, play concerts in front of an audience."</p>
         <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-soft);letter-spacing:.08em;">ON MUSIC AS A SPORT</p>
       </div>
 
@@ -4515,7 +4515,9 @@
           const gn = g.map(i => notes[i]).filter(Boolean);
           if (gn.length > 1) score.beam(gn);
         });
-        const voice = score.voice(notes, { time: timeSigStr }).setStrict(false);
+        // Loose mode (no time option) so partial-bar pickups and boundary cases
+        // don't trip VexFlow's strict tick check during addTickable.
+        const voice = score.voice(notes).setStrict(false);
         const stave = system.addStave({ voices: [voice] });
         if (bi === 0) {
           stave.addClef('treble');
