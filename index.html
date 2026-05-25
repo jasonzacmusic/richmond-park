@@ -553,6 +553,9 @@
   .africa-stave-row { margin-bottom: 4px; }
   .africa-stave-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 2px; }
   .africa-stave-el { width: 100%; overflow-x: auto; }
+  .africa-lyric-strip { display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin:0 0 12px; font-family:'Fraunces',serif; font-style:italic; font-size:18px; line-height:1.2; color:var(--ink-soft); }
+  .africa-lyric-token { padding:2px 4px; border-radius:3px; transition:background .12s,color .12s; }
+  .africa-lyric-token.active { background:var(--turmeric); color:var(--ink); }
   .africa-chord-row { display: flex; gap: 8px; margin: 14px 0 10px; flex-wrap: wrap; }
   .africa-chord-chip { font-family: 'DM Mono', monospace; font-size: 13px; padding: 5px 14px; border: 1.5px solid var(--ink); border-radius: 3px; background: var(--paper); transition: background 0.15s, color 0.15s; }
   .africa-chord-chip.active { background: var(--peacock); color: var(--paper); border-color: var(--peacock); }
@@ -561,6 +564,10 @@
   .africa-play-btn { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 7px 18px; border: 1.5px solid var(--ink); border-radius: 3px; background: var(--ink); color: var(--paper); cursor: pointer; transition: background 0.15s; }
   .africa-play-btn:hover { background: var(--peacock); border-color: var(--peacock); }
   .africa-play-btn.playing { background: var(--terracotta); border-color: var(--terracotta); }
+  .africa-tempo-control { display:flex; align-items:center; gap:6px; font-family:'DM Mono',monospace; font-size:11px; color:var(--ink-soft); }
+  .africa-tempo-btn { width:30px; height:30px; border:1.5px solid var(--ink); border-radius:3px; background:var(--paper); color:var(--ink); font-family:'DM Mono',monospace; font-size:16px; line-height:1; cursor:pointer; }
+  .africa-tempo-btn:hover { background:var(--turmeric); }
+  .africa-tempo-value { min-width:54px; text-align:center; color:var(--ink); }
   .africa-vol-row { display:flex; gap:28px; margin:16px 0 6px; flex-wrap:wrap; align-items:flex-end; }
   .africa-vol-item { display:flex; flex-direction:column; align-items:center; gap:5px; }
   .africa-vol-name { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; }
@@ -1885,6 +1892,17 @@
       <!-- AFRICA NOTATION -->
       <div class="africa-notation">
         <p class="eyebrow" style="margin-bottom:14px;">4/4 · "I bless the rains down in Africa" · transposable to all keys</p>
+        <div class="africa-lyric-strip" aria-label="Africa lyrics">
+          <span class="africa-lyric-token" data-africa-lyric="I">I</span>
+          <span class="africa-lyric-token" data-africa-lyric="bless">bless</span>
+          <span class="africa-lyric-token" data-africa-lyric="the">the</span>
+          <span class="africa-lyric-token" data-africa-lyric="rains">rains</span>
+          <span class="africa-lyric-token" data-africa-lyric="down">down</span>
+          <span class="africa-lyric-token" data-africa-lyric="in">in</span>
+          <span class="africa-lyric-token" data-africa-lyric="Af">Af</span>
+          <span class="africa-lyric-token" data-africa-lyric="ri">ri</span>
+          <span class="africa-lyric-token" data-africa-lyric="ca">ca</span>
+        </div>
 
         <div class="africa-stave-row">
           <div class="africa-stave-label" style="color:#8B2C4D;">You · Soprano</div>
@@ -1942,6 +1960,11 @@
             <option value="G">Key of G</option>
             <option value="Ab">Key of A♭</option>
           </select>
+          <div class="africa-tempo-control" aria-label="Africa tempo">
+            <button class="africa-tempo-btn" type="button" onclick="adjustAfricaBPM(-4)" aria-label="Slower">−</button>
+            <span class="africa-tempo-value"><span id="africa-bpm-display">86</span> BPM</span>
+            <button class="africa-tempo-btn" type="button" onclick="adjustAfricaBPM(4)" aria-label="Faster">+</button>
+          </div>
           <button class="africa-play-btn" id="africa-play-btn" onclick="runPlaybackAction(toggleAfricaPlay)">▶ Play</button>
         </div>
       </div>
@@ -3311,8 +3334,11 @@
 
   // ============ AFRICA 3-VOICE NOTATION ============
   let currentAfricaKey = 'A';
+  let africaBPM = 86;
   let africaIsPlaying = false;
+  let africaIsStarting = false;
   let africaChordPart = null;
+  let africaLyricPart = null;
   let sopPart = null, altPart = null, tenPart = null;
   let sopVol = null, altVol = null, tenVol = null;
   let sopSynth = null, altSynth = null, tenSynth = null;
@@ -3339,64 +3365,112 @@
     return n.replace(/(\d+)$/, m => '' + (parseInt(m) - 1));
   }
 
-  function buildAfrica4BarEasyScores(key) {
+  function buildAfricaRhythmScores(key) {
     const asc = buildAfricaAscScale(key);
     // asc[i] = scale degree i in 5th octave: 0=Sa,1=Re,2=Ga,3=Ma,4=Pa,5=Dha,6=Ni
     const vfn  = n => toVFNote(n, key);
     const deg  = i => vfn(asc[i]);                 // 5th octave
     const degD = i => vfn(africaOctDown(asc[i]));  // 4th octave
 
-    // Jason's exact notes (key of A):
-    // You/Soprano: A A A A | A A A G#(8) G#(8)   → Sa×7, Ni↓×2 (8th)
-    // Alto:        F# F# F# F# | F# F# F# E(8) E(8) → Dha↓×7, Pa↓×2 (8th)
-    // Tenor:       C# C# C# D | D D C# B(8) B(8)   → Ga↓×3,Ma↓×3,Ga↓, Re↓×2 (8th)
-    // 2 bars of 4/4: bar1 = F#m(b1-2) + D(b3-4), bar2 = A(b5-6) + E(b7-8)
+    // Pitch plan stays as Jason's harmony, rhythm follows the handwritten sketch:
+    // bar 1 = r8 I8 | bless8 the16 rains16 | r4 | down8 in16 Af16~
+    // bar 2 = Af-quarter | r8 | ri16 ca16~ | ca-minim
+    const makeBars = seq => [
+      {
+        spec: `B4/8/r, ${seq[0]}/8, ${seq[1]}/8, ${seq[2]}/16, ${seq[3]}/16, B4/q/r, ${seq[4]}/8, ${seq[5]}/16, ${seq[6]}/16`,
+        beams: [[2, 3, 4], [6, 7, 8]],
+        ties: [],
+      },
+      {
+        spec: `${seq[6]}/q, B4/8/r, ${seq[7]}/16, ${seq[8]}/16, ${seq[8]}/h`,
+        beams: [[2, 3]],
+        ties: [[3, 4]],
+        crossTieFromPrevious: [8, 0],
+      },
+    ];
+
     return {
-      S: [
-        `${deg(0)}/q, ${deg(0)}/q, ${deg(0)}/q, ${deg(0)}/q`,
-        `${deg(0)}/q, ${deg(0)}/q, ${deg(0)}/q, ${degD(6)}/8, ${degD(6)}/8`,
-      ],
-      A: [
-        `${degD(5)}/q, ${degD(5)}/q, ${degD(5)}/q, ${degD(5)}/q`,
-        `${degD(5)}/q, ${degD(5)}/q, ${degD(5)}/q, ${degD(4)}/8, ${degD(4)}/8`,
-      ],
-      T: [
-        `${degD(2)}/q, ${degD(2)}/q, ${degD(2)}/q, ${degD(3)}/q`,
-        `${degD(3)}/q, ${degD(3)}/q, ${degD(2)}/q, ${degD(1)}/8, ${degD(1)}/8`,
-      ],
+      S: makeBars([deg(0), deg(0), deg(0), deg(0), deg(0), deg(0), deg(0), degD(6), degD(6)]),
+      A: makeBars([degD(5), degD(5), degD(5), degD(5), degD(5), degD(5), degD(5), degD(4), degD(4)]),
+      T: makeBars([degD(2), degD(2), degD(2), degD(3), degD(3), degD(3), degD(2), degD(1), degD(1)]),
     };
   }
 
-  function drawAfrica4Bar(containerId, barSpecs, keySig, stemDir) {
+  function drawAfricaRhythmBars(containerId, barSpecs, keySig, stemDir) {
     const container = document.getElementById(containerId);
     if (!container) return;
     container.innerHTML = '';
-    const barWidths = [300, 250];
-    barSpecs.forEach((spec, i) => {
-      const elId = containerId + '-b' + i;
-      const el = document.createElement('div');
-      el.id = elId;
-      el.style.flexShrink = '0';
-      container.appendChild(el);
-      const w = barWidths[i];
-      try {
-        const VF = Vex.Flow;
-        const factory = new VF.Factory({ renderer: { elementId: elId, width: w, height: 95 } });
-        const score = factory.EasyScore();
-        const system = factory.System({ x: 0, y: 8, width: w - 4 });
-        const voice = score.voice(score.notes(spec, { stem: stemDir }), { time: '4/4' }).setStrict(false);
-        const stave = system.addStave({ voices: [voice] });
+    const barWidths = [370, 330];
+    const totalWidth = barWidths.reduce((sum, w) => sum + w, 0);
+    const elId = containerId + '-score';
+    const el = document.createElement('div');
+    el.id = elId;
+    el.style.flexShrink = '0';
+    container.appendChild(el);
+    try {
+      const VF = Vex.Flow;
+      const factory = new VF.Factory({ renderer: { elementId: elId, width: totalWidth, height: 118 } });
+      const score = factory.EasyScore();
+      const ctx = factory.getContext();
+      const notesByBar = [];
+      const staves = [];
+      let x = 0;
+      barSpecs.forEach((bar, i) => {
+        const notes = score.notes(bar.spec, { stem: stemDir });
+        const voice = score.voice(notes, { time: '4/4' }).setStrict(false);
+        const stave = new VF.Stave(x, 8, barWidths[i]);
         if (i === 0) {
           stave.addClef('treble');
           if (keySig && keySig !== 'C') stave.addKeySignature(keySig);
           stave.addTimeSignature('4/4');
         }
-        factory.draw();
-      } catch(e) {
-        console.error('Africa 4bar', containerId, i, e);
-        el.innerHTML = '<span style="font:11px monospace;color:#999;">' + spec + '</span>';
+        if (i === barSpecs.length - 1 && VF.Barline && typeof stave.setEndBarType === 'function') {
+          stave.setEndBarType(VF.Barline.type.DOUBLE);
+        }
+        stave.setContext(ctx).draw();
+        new VF.Formatter().joinVoices([voice]).format([voice], barWidths[i] - (i === 0 ? 120 : 40));
+        voice.draw(ctx, stave);
+        if (bar.beams && bar.beams.length) {
+          bar.beams.forEach(group => {
+            const grp = group.map(idx => notes[idx]).filter(Boolean);
+            if (grp.length > 1) new VF.Beam(grp).setContext(ctx).draw();
+          });
+        }
+        notesByBar.push(notes);
+        staves.push(stave);
+        x += barWidths[i];
+      });
+      barSpecs.forEach((bar, i) => {
+        const notes = notesByBar[i];
+        if (bar.ties && bar.ties.length) {
+          bar.ties.forEach(([firstIdx, lastIdx]) => {
+            if (notes[firstIdx] && notes[lastIdx]) {
+              new VF.StaveTie({
+                first_note: notes[firstIdx],
+                last_note: notes[lastIdx],
+                first_indices: [0],
+                last_indices: [0]
+              }).setContext(ctx).draw();
+            }
+          });
+        }
+        if (bar.crossTieFromPrevious && i > 0) {
+          const [prevIdx, currentIdx] = bar.crossTieFromPrevious;
+          const prevNotes = notesByBar[i - 1];
+          if (prevNotes && prevNotes[prevIdx] && notes[currentIdx]) {
+            new VF.StaveTie({
+              first_note: prevNotes[prevIdx],
+              last_note: notes[currentIdx],
+              first_indices: [0],
+              last_indices: [0]
+            }).setContext(ctx).draw();
+          }
+        }
+      });
+    } catch(e) {
+      console.error('Africa rhythm', containerId, e);
+      el.innerHTML = '<span style="font:11px monospace;color:#999;">' + barSpecs.map(bar => bar.spec).join(' | ') + '</span>';
       }
-    });
   }
 
   const AFRICA_CHORD_NAMES = {
@@ -3411,10 +3485,10 @@
   function renderAfricaScores() {
     if (typeof Vex === 'undefined' || !Vex.Flow || !Vex.Flow.Factory) return;
     const sig = KEY_DATA[currentAfricaKey].sig;
-    const specs = buildAfrica4BarEasyScores(currentAfricaKey);
-    drawAfrica4Bar('africa-stave-S', specs.S, sig, 'up');
-    drawAfrica4Bar('africa-stave-A', specs.A, sig, 'up');
-    drawAfrica4Bar('africa-stave-T', specs.T, sig, 'up');
+    const specs = buildAfricaRhythmScores(currentAfricaKey);
+    drawAfricaRhythmBars('africa-stave-S', specs.S, sig, 'up');
+    drawAfricaRhythmBars('africa-stave-A', specs.A, sig, 'up');
+    drawAfricaRhythmBars('africa-stave-T', specs.T, sig, 'up');
     const chords = AFRICA_CHORD_NAMES[currentAfricaKey] || {};
     ['vi','IV','I','V'].forEach((deg, i) => {
       const chip = document.getElementById('achip-' + i);
@@ -3428,6 +3502,13 @@
     if (africaIsPlaying) stopAllPlayback();
   }
 
+  function adjustAfricaBPM(delta) {
+    africaBPM = Math.max(56, Math.min(132, africaBPM + delta));
+    const el = document.getElementById('africa-bpm-display');
+    if (el) el.textContent = africaBPM;
+    if (africaIsPlaying) stopAllPlayback();
+  }
+
   function setAfricaVol(voice, val) {
     const vol = voice === 'S' ? sopVol : voice === 'A' ? altVol : tenVol;
     if (!vol) return;
@@ -3435,21 +3516,32 @@
   }
 
   function stopAfrica() {
-    [sopPart, altPart, tenPart, africaChordPart].forEach(p => {
+    [sopPart, altPart, tenPart, africaChordPart, africaLyricPart].forEach(p => {
       if (p) { try { p.stop(); p.dispose(); } catch(e){} }
     });
-    sopPart = altPart = tenPart = africaChordPart = null;
+    sopPart = altPart = tenPart = africaChordPart = africaLyricPart = null;
+    africaIsStarting = false;
     africaIsPlaying = false;
     const btn = document.getElementById('africa-play-btn');
     if (btn) { btn.textContent = '▶ Play'; btn.classList.remove('playing'); }
     document.querySelectorAll('.africa-chord-chip').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.africa-lyric-token').forEach(t => t.classList.remove('active'));
   }
 
   async function toggleAfricaPlay() {
-    if (africaIsPlaying) { stopAllPlayback(); return; }
-    const bpm = currentBPM || 86;
+    if (africaIsPlaying || africaIsStarting) { stopAllPlayback(); return; }
+    africaIsStarting = true;
+    const startBtn = document.getElementById('africa-play-btn');
+    if (startBtn) { startBtn.textContent = 'Loading...'; startBtn.classList.add('playing'); }
+    const bpm = africaBPM || 86;
     const token = await beginPlayback(bpm);
-    if (!token) return;
+    if (!token) { africaIsStarting = false; return; }
+    try {
+      await ensurePianoReady();
+    } catch(e) {
+      console.warn('Africa piano sampler unavailable; SAT voices will still play.', e);
+    }
+    if (token !== playbackToken) { africaIsStarting = false; return; }
 
     // Lazy-init SAT synths + volumes
     if (!sopVol) {
@@ -3479,54 +3571,32 @@
     const spb = 60 / bpm;
     const loopEnd = 8 * spb; // 2 bars × 4 beats = 8 beats
 
-    const qDur = 0.90 * spb;  // quarter note sustain
-    const eDur = 0.42 * spb;  // eighth note sustain
+    const rhythm = [
+      { b:0.5,  d:0.5,  lyric:'I' },
+      { b:1.0,  d:0.5,  lyric:'bless' },
+      { b:1.5,  d:0.25, lyric:'the' },
+      { b:1.75, d:0.25, lyric:'rains' },
+      { b:3.0,  d:0.5,  lyric:'down' },
+      { b:3.5,  d:0.25, lyric:'in' },
+      { b:3.75, d:1.25, lyric:'Af' },
+      { b:5.5,  d:0.25, lyric:'ri' },
+      { b:5.75, d:2.25, lyric:'ca' },
+    ];
+    const makeVoiceEvents = freqs => rhythm.map((r, i) => ({
+      time: r.b * spb,
+      freq: freqs[i],
+      dur: Math.max(0.06, r.d * spb * 0.94)
+    }));
 
-    // ── You / Soprano: A A A A | A A A G#(8) G#(8)
-    // Sa×7, then Ni one octave down (8th notes)
-    const sopEvents = [
-      { b:0,   freq:f[0],   dur:qDur }, // I
-      { b:1,   freq:f[0],   dur:qDur }, // bless
-      { b:2,   freq:f[0],   dur:qDur }, // the
-      { b:3,   freq:f[0],   dur:qDur }, // rains
-      { b:4,   freq:f[0],   dur:qDur }, // down
-      { b:5,   freq:f[0],   dur:qDur }, // in
-      { b:6,   freq:f[0],   dur:qDur }, // Af
-      { b:6.5, freq:f[6]/2, dur:eDur }, // ri  (G#4 = Ni↓)
-      { b:7,   freq:f[6]/2, dur:eDur }, // ca
-    ].map(e => ({ time: e.b * spb, freq: e.freq, dur: e.dur }));
-
-    // ── Alto: F#4×7 | E4(8) E4(8)
-    // Dha↓×7, Pa↓×2 (8th)
-    const altEvents = [
-      { b:0,   freq:f[5]/2, dur:qDur }, // I
-      { b:1,   freq:f[5]/2, dur:qDur }, // bless
-      { b:2,   freq:f[5]/2, dur:qDur }, // the
-      { b:3,   freq:f[5]/2, dur:qDur }, // rains
-      { b:4,   freq:f[5]/2, dur:qDur }, // down
-      { b:5,   freq:f[5]/2, dur:qDur }, // in
-      { b:6,   freq:f[5]/2, dur:qDur }, // Af
-      { b:6.5, freq:f[4]/2, dur:eDur }, // ri  (E4)
-      { b:7,   freq:f[4]/2, dur:eDur }, // ca
-    ].map(e => ({ time: e.b * spb, freq: e.freq, dur: e.dur }));
-
-    // ── Tenor: C#4 C#4 C#4 D4 | D4 D4 C#4 B3(8) B3(8)
-    // Ga↓ Ga↓ Ga↓ Ma↓ | Ma↓ Ma↓ Ga↓ Re↓(8) Re↓(8)
-    const tenEvents = [
-      { b:0,   freq:f[2]/2, dur:qDur }, // I      (C#4)
-      { b:1,   freq:f[2]/2, dur:qDur }, // bless
-      { b:2,   freq:f[2]/2, dur:qDur }, // the
-      { b:3,   freq:f[3]/2, dur:qDur }, // rains  (D4)
-      { b:4,   freq:f[3]/2, dur:qDur }, // down
-      { b:5,   freq:f[3]/2, dur:qDur }, // in
-      { b:6,   freq:f[2]/2, dur:qDur }, // Af     (C#4)
-      { b:6.5, freq:f[1]/2, dur:eDur }, // ri     (B3)
-      { b:7,   freq:f[1]/2, dur:eDur }, // ca
-    ].map(e => ({ time: e.b * spb, freq: e.freq, dur: e.dur }));
+    // ── The same rhythmic grid is used by notation and audio.
+    const sopEvents = makeVoiceEvents([f[0], f[0], f[0], f[0], f[0], f[0], f[0], f[6]/2, f[6]/2]);
+    const altEvents = makeVoiceEvents([f[5]/2, f[5]/2, f[5]/2, f[5]/2, f[5]/2, f[5]/2, f[5]/2, f[4]/2, f[4]/2]);
+    const tenEvents = makeVoiceEvents([f[2]/2, f[2]/2, f[2]/2, f[3]/2, f[3]/2, f[3]/2, f[2]/2, f[1]/2, f[1]/2]);
+    const lyricEvents = rhythm.map(r => ({ time: r.b * spb, lyric: r.lyric }));
 
     // ── Piano chords: one block chord every 2 beats
     // F#m beat 0 | D beat 2 | A beat 4 | E beat 6
-    const chordDur = 1.88 * spb;
+    const chordDur = 0.58 * spb;
     const chordSets = [
       [f[5]/4, f[0]/2, f[2]/2, f[5]/2], // F#m: F#3 A3 C#4 F#4
       [f[3]/4, f[5]/4, f[0]/2, f[3]/2], // D:   D3  F#3 A3  D4
@@ -3556,17 +3626,26 @@
     tenPart.loop = true; tenPart.loopEnd = loopEnd;
 
     africaChordPart = new Tone.Part((time, ev) => {
-      if (pianoLoaded) ev.freqs.forEach(fr => piano.triggerAttackRelease(fr, chordDur, time, 0.40));
-      else if (tabla)  tabla.triggerAttackRelease(ev.freqs[0], chordDur, time, 0.42);
+      if (pianoLoaded) ev.freqs.forEach(fr => piano.triggerAttackRelease(fr, chordDur, time, 0.62));
       Tone.Draw.schedule(() => {
         document.querySelectorAll('.africa-chord-chip').forEach((c, i) => c.classList.toggle('active', i === ev.chipIdx));
       }, time);
     }, chordEvents);
     africaChordPart.loop = true; africaChordPart.loopEnd = loopEnd;
 
-    sopPart.start(0); altPart.start(0); tenPart.start(0); africaChordPart.start(0);
+    africaLyricPart = new Tone.Part((time, ev) => {
+      Tone.Draw.schedule(() => {
+        document.querySelectorAll('.africa-lyric-token').forEach(t => {
+          t.classList.toggle('active', t.dataset.africaLyric === ev.lyric);
+        });
+      }, time);
+    }, lyricEvents);
+    africaLyricPart.loop = true; africaLyricPart.loopEnd = loopEnd;
+
+    sopPart.start(0); altPart.start(0); tenPart.start(0); africaChordPart.start(0); africaLyricPart.start(0);
     startPreparedTransport(token);
 
+    africaIsStarting = false;
     africaIsPlaying = true;
     const btn = document.getElementById('africa-play-btn');
     if (btn) { btn.textContent = '⏹ Stop'; btn.classList.add('playing'); }
