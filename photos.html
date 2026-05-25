@@ -53,6 +53,13 @@ body{background:var(--bg);color:var(--text);font-family:'Georgia',serif;overflow
   color:var(--accent);
   opacity:.85;
 }
+.hero .hero-kicker{
+  margin-top:10px;
+  font-size:1.05rem;
+  font-style:italic;
+  color:rgba(255,255,255,.55);
+  letter-spacing:.04em;
+}
 .hero .subtitle{
   margin-top:14px;
   color:var(--muted);
@@ -60,65 +67,7 @@ body{background:var(--bg);color:var(--text);font-family:'Georgia',serif;overflow
   font-style:italic;
 }
 
-/* ── PHOTOGRAPHER CARD ────────────────────────────── */
-.photo-credit{
-  max-width:560px;
-  margin:0 auto 48px;
-  padding:0 20px;
-  text-align:center;
-}
-.credit-card{
-  background:var(--surface);
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:20px;
-  padding:28px 28px 24px;
-  display:flex;
-  align-items:center;
-  gap:20px;
-  text-align:left;
-  position:relative;
-  overflow:hidden;
-}
-.credit-card::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(79,142,247,.06) 0%,transparent 60%);
-  pointer-events:none;
-}
-.credit-avatar{
-  width:68px;height:68px;border-radius:50%;
-  background:linear-gradient(135deg,#6c63ff,#e040fb,#ff6b35);
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;font-size:1.6rem;
-  border:2px solid rgba(255,255,255,.15);
-}
-.credit-info h3{font-size:1.05rem;font-weight:600;color:#fff;margin-bottom:4px}
-.credit-info .handle{color:var(--accent2);font-size:.88rem;font-family:monospace;margin-bottom:8px}
-.credit-info p{color:var(--muted);font-size:.83rem;line-height:1.5}
-.credit-follow{
-  display:inline-block;
-  margin-top:12px;
-  padding:7px 18px;
-  background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);
-  border-radius:20px;
-  color:#fff;
-  font-size:.78rem;
-  font-weight:600;
-  text-decoration:none;
-  letter-spacing:.04em;
-  transition:opacity .2s;
-}
-.credit-follow:hover{opacity:.85}
-.credit-follow-prominent{
-  display:block;
-  margin-top:16px;
-  padding:13px 28px;
-  font-size:.92rem;
-  font-weight:700;
-  letter-spacing:.06em;
-  text-align:center;
-  border-radius:28px;
-  box-shadow:0 4px 20px rgba(131,58,180,.35);
-}
+
 .credit-follow-prominent{
   display:block;
   margin-top:16px;
@@ -200,28 +149,11 @@ body{background:var(--bg);color:var(--text);font-family:'Georgia',serif;overflow
   display:block;
   border-radius:8px;
   transition:filter .3s;
-  filter:contrast(1.07) saturate(0.86) sepia(0.07) brightness(0.96);
+  filter:contrast(1.12) saturate(1.18) brightness(0.91) sepia(0.12);
 }
-.photo-item:hover img{filter:contrast(1.07) saturate(0.86) sepia(0.07) brightness(1.05)}
+.photo-item:hover img{filter:contrast(1.15) saturate(1.22) brightness(1.0) sepia(0.1)}
 
-/* hover caption */
-.photo-caption-overlay{
-  position:absolute;
-  bottom:0;left:0;right:0;
-  padding:28px 12px 10px;
-  background:linear-gradient(to top,rgba(0,0,0,.82) 0%,rgba(0,0,0,0) 100%);
-  color:#fff;
-  font-size:.72rem;
-  font-style:italic;
-  line-height:1.4;
-  opacity:0;
-  transform:translateY(4px);
-  transition:opacity .28s,transform .28s;
-  pointer-events:none;
-  border-radius:0 0 8px 8px;
-  letter-spacing:.01em;
-}
-.photo-item:hover .photo-caption-overlay{opacity:1;transform:translateY(0)}
+
 .photo-num{
   position:absolute;bottom:8px;left:8px;
   background:rgba(0,0,0,.65);
@@ -347,6 +279,55 @@ body{background:var(--bg);color:var(--text);font-family:'Georgia',serif;overflow
   transition:border-color .2s,color .2s;
 }
 .back-btn:hover{border-color:var(--accent2);color:var(--accent2)}
+
+/* ── PHOTOGRAPHER SPOTLIGHT ───────────────────────────── */
+.photographer-spotlight{
+  max-width:860px;
+  margin:48px auto 56px;
+  padding:0 20px;
+}
+.photographer-inner{
+  background:linear-gradient(135deg,#12151e 0%,#1a1d2a 100%);
+  border:1px solid rgba(232,201,126,.18);
+  border-radius:24px;
+  padding:40px 44px;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:28px;
+  position:relative;
+  overflow:hidden;
+}
+.photographer-inner::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 80% at 0% 50%,rgba(232,201,126,.06) 0%,transparent 60%);
+  pointer-events:none;
+}
+.photographer-eye{font-size:2.6rem;line-height:1;flex-shrink:0}
+.photographer-label{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.photographer-name{font-size:clamp(1.4rem,3vw,2rem);font-weight:700;color:#fff;letter-spacing:.01em;margin-bottom:10px}
+.photographer-caption{color:var(--muted);font-size:.9rem;font-style:italic;line-height:1.55;max-width:380px}
+.photographer-cta{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:rgba(232,201,126,.12);
+  border:1px solid rgba(232,201,126,.3);
+  border-radius:18px;
+  padding:18px 28px;
+  text-decoration:none;
+  transition:background .2s,border-color .2s,transform .2s;
+  flex-shrink:0;
+  text-align:center;
+  gap:6px;
+}
+.photographer-cta:hover{background:rgba(232,201,126,.2);border-color:rgba(232,201,126,.6);transform:translateY(-2px)}
+.photographer-cta span:first-child{font-size:1rem;font-weight:700;color:#fff;letter-spacing:.04em}
+.photographer-cta-handle{font-size:.82rem;color:var(--accent);font-family:monospace;letter-spacing:.06em}
+@media(max-width:700px){
+  .photographer-inner{grid-template-columns:1fr;text-align:center;padding:28px 24px}
+  .photographer-eye{margin:0 auto}
+  .photographer-caption{max-width:100%}
+  .photographer-cta{width:100%}
+}
 </style>
 </head>
 <body>
@@ -354,25 +335,26 @@ body{background:var(--bg);color:var(--text);font-family:'Georgia',serif;overflow
 <!-- HERO -->
 <section class="hero">
   <img class="hero-logo" src="data:image/png;base64,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" alt="Nathaniel School of Music">
-  <h1>When <span>Music Fills a Room</span></h1>
+  <h1>A class <span>full of voices.</span></h1>
+  <p class="hero-kicker">Now, the work.</p>
   <div class="date-badge">Richmond Park · 24th May 2026</div>
-  <p class="subtitle">Bangalore's first open-air music class &nbsp;·&nbsp; Langford Town</p>
+  <p class="subtitle">Bangalore's first music class in a park &nbsp;·&nbsp; Langford Town</p>
   <a class="back-btn" href="/">&#8592; Study Guide</a>
 </section>
 
 <!-- PHOTOGRAPHER CREDIT -->
-<div class="photo-credit" style="margin-top:40px">
-  <div class="credit-card">
-    <div class="credit-avatar">📷</div>
-    <div class="credit-info">
-      <h3>Jonathan Zachariah</h3>
-      <div class="handle">@theblackshoelace</div>
-      <p>All photographs from today's workshop — courtesy Jonathan Zachariah. His eye captured every moment: the music, the park, the people.</p>
-      <div class="credit-links">
-        <a class="credit-follow" href="https://www.instagram.com/theblackshoelace/" target="_blank">Follow on Instagram</a>
-        <a class="credit-link" href="https://www.instagram.com/theblackshoelace/" target="_blank">See his work ↗</a>
-      </div>
+<div class="photographer-spotlight">
+  <div class="photographer-inner">
+    <div class="photographer-eye">📷</div>
+    <div class="photographer-text">
+      <p class="photographer-label">Every frame in this gallery was made by</p>
+      <h2 class="photographer-name">Jonathan Zachariah</h2>
+      <p class="photographer-caption">He walked into a room full of strangers and brought home thirty-six photographs worth keeping.</p>
     </div>
+    <a href="https://www.instagram.com/theblackshoelace/" target="_blank" rel="noopener" class="photographer-cta">
+      <span>See his work</span>
+      <span class="photographer-cta-handle">@theblackshoelace →</span>
+    </a>
   </div>
 </div>
 
@@ -383,42 +365,42 @@ body{background:var(--bg);color:var(--text);font-family:'Georgia',serif;overflow
 
 <!-- MASONRY GALLERY -->
 <div class="masonry" id="gallery">
-  <div class="photo-item" data-index="0" data-caption="Jason opens the session at the Roland RD-88 — whiteboard notation already begun, guitar resting behind"><img src="photos/photo-01.jpg" alt="Workshop photo 1" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">1/36</span></div>
-  <div class="photo-item" data-index="1" data-caption="A student in a Mercedes F1 cap, hands clasped on notepad, intent on every word"><img src="photos/photo-02.jpg" alt="Workshop photo 2" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">2/36</span></div>
-  <div class="photo-item" data-index="2" data-caption="Jason at the whiteboard addresses the full group — the whole class gathered around"><img src="photos/photo-03.jpg" alt="Workshop photo 3" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">3/36</span></div>
-  <div class="photo-item" data-index="3" data-caption="Two guests seated outdoors in natural light — the Richmond Park afternoon before the session moved inside"><img src="photos/photo-04.jpg" alt="Workshop photo 4" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">4/36</span></div>
-  <div class="photo-item" data-index="4" data-caption="A student in elephant-print shirt capturing careful notes; guitar case on the floor beside him"><img src="photos/photo-05.jpg" alt="Workshop photo 5" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">5/36</span></div>
-  <div class="photo-item" data-index="5" data-caption="Two young girls listening with hands clasped — the youngest attendees in the room"><img src="photos/photo-06.jpg" alt="Workshop photo 6" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">6/36</span></div>
-  <div class="photo-item" data-index="6" data-caption="A family brings their child — three generations sharing the same bench for the same lesson"><img src="photos/photo-07.jpg" alt="Workshop photo 7" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">7/36</span></div>
-  <div class="photo-item" data-index="7" data-caption="A young girl with hands pressed together, mid-response — singing back a swara pattern"><img src="photos/photo-08.jpg" alt="Workshop photo 8" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">8/36</span></div>
-  <div class="photo-item" data-index="8" data-caption="Natalie at the Roland RD-88 awaiting her cue, eyes lifted toward Jason"><img src="photos/photo-09.jpg" alt="Workshop photo 9" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">9/36</span></div>
-  <div class="photo-item" data-index="9" data-caption="Teenage accompanist in orange — one hand on the keys, one eye on the teacher"><img src="photos/photo-10.jpg" alt="Workshop photo 10" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">10/36</span></div>
-  <div class="photo-item" data-index="10" data-caption="Jason raises a hand mid-phrase, explaining how melody moves through harmony"><img src="photos/photo-11.jpg" alt="Workshop photo 11" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">11/36</span></div>
-  <div class="photo-item" data-index="11" data-caption="Wide-angle: the full circle of participants, park gate and trees visible beyond"><img src="photos/photo-12.jpg" alt="Workshop photo 12" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">12/36</span></div>
-  <div class="photo-item" data-index="12" data-caption="Multi-generational audience, a woman in denim smiling — the warmth of a Saturday afternoon"><img src="photos/photo-13.jpg" alt="Workshop photo 13" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">13/36</span></div>
-  <div class="photo-item" data-index="13" data-caption="Jason on his feet, both hands in motion — most likely the opening welcome or a key concept"><img src="photos/photo-14.jpg" alt="Workshop photo 14" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">14/36</span></div>
-  <div class="photo-item" data-index="14" data-caption="The note-taker in elephant shirt writing carefully; the full audience visible behind him"><img src="photos/photo-15.jpg" alt="Workshop photo 15" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">15/36</span></div>
-  <div class="photo-item" data-index="15" data-caption="Jason raises one hand in a conductor's gesture, eyes on the group — guiding the rhythm"><img src="photos/photo-16.jpg" alt="Workshop photo 16" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">16/36</span></div>
-  <div class="photo-item" data-index="16" data-caption="A participant raises two fingers — possibly during the 2 = Tha-Ka moment"><img src="photos/photo-17.jpg" alt="Workshop photo 17" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">17/36</span></div>
-  <div class="photo-item" data-index="17" data-caption="Jason holds guitar low, arm raised — leading the group through a call-and-response"><img src="photos/photo-18.jpg" alt="Workshop photo 18" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">18/36</span></div>
-  <div class="photo-item" data-index="18" data-caption="Natalie two-handed on the keyboard in golden light — the accompaniment in full swing"><img src="photos/photo-19.jpg" alt="Workshop photo 19" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">19/36</span></div>
-  <div class="photo-item" data-index="19" data-caption="Jason in profile at the park's colourful tree mural — a quieter moment between concepts"><img src="photos/photo-20.jpg" alt="Workshop photo 20" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">20/36</span></div>
-  <div class="photo-item" data-index="20" data-caption="Full rows of listeners, a Furtados guitar bag and 'Because You Love Music' brand visible"><img src="photos/photo-21.jpg" alt="Workshop photo 21" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">21/36</span></div>
-  <div class="photo-item" data-index="21" data-caption="Jason makes a V-sign at the keyboard — teaching how beats group into 2s and 3s"><img src="photos/photo-22.jpg" alt="Workshop photo 22" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">22/36</span></div>
-  <div class="photo-item" data-index="22" data-caption="Jason plays and sings together, mouth open — demonstrating Sa Re Ga Ma Pa in real time"><img src="photos/photo-23.jpg" alt="Workshop photo 23" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">23/36</span></div>
-  <div class="photo-item" data-index="23" data-caption="A packed room from the back — every seat filled, multi-generational, fully attentive"><img src="photos/photo-24.jpg" alt="Workshop photo 24" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">24/36</span></div>
-  <div class="photo-item" data-index="24" data-caption="Three generations in one frame: grandmother, grandson in Mercedes cap, mother watching together"><img src="photos/photo-25.jpg" alt="Workshop photo 25" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">25/36</span></div>
-  <div class="photo-item" data-index="25" data-caption="A wide view of the full room — every chair occupied, bookshelf library behind them"><img src="photos/photo-26.jpg" alt="Workshop photo 26" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">26/36</span></div>
-  <div class="photo-item" data-index="26" data-caption="A warm candid smile from the audience — someone caught in a moment of genuine delight"><img src="photos/photo-27.jpg" alt="Workshop photo 27" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">27/36</span></div>
-  <div class="photo-item" data-index="27" data-caption="The whole group on their feet for the stand-up singing exercise — evening energy rising"><img src="photos/photo-28.jpg" alt="Workshop photo 28" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">28/36</span></div>
-  <div class="photo-item" data-index="28" data-caption="Jason leads on guitar while the circle stands and sings — everyone joining in"><img src="photos/photo-29.jpg" alt="Workshop photo 29" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">29/36</span></div>
-  <div class="photo-item" data-index="29" data-caption="After-class conversation: two women smiling, still processing the lesson"><img src="photos/photo-30.jpg" alt="Workshop photo 30" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">30/36</span></div>
-  <div class="photo-item" data-index="30" data-caption="Jason leans over the keyboard, marker in hand, mid-demonstration — three students watching closely"><img src="photos/photo-31.jpg" alt="Workshop photo 31" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">31/36</span></div>
-  <div class="photo-item" data-index="31" data-caption="Wide audience view — teenagers and adults leaning forward, fully absorbed"><img src="photos/photo-32.jpg" alt="Workshop photo 32" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">32/36</span></div>
-  <div class="photo-item" data-index="32" data-caption="Outdoors: two girls in summer dresses, one holding a toy ukulele — the youngest musicians present"><img src="photos/photo-33.jpg" alt="Workshop photo 33" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">33/36</span></div>
-  <div class="photo-item" data-index="33" data-caption="Jason draws zigzag pitch lines on the whiteboard — the melody-movement diagram"><img src="photos/photo-34.jpg" alt="Workshop photo 34" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">34/36</span></div>
-  <div class="photo-item" data-index="34" data-caption="Whiteboard reads: Beat, Bars, Cycle, Movement, Rhythm — Jason's framework for all of music"><img src="photos/photo-35.jpg" alt="Workshop photo 35" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">35/36</span></div>
-  <div class="photo-item" data-index="35" data-caption="Jason looks up from the Roland RD-88 with a quiet smile — a portrait at the instrument"><img src="photos/photo-36.jpg" alt="Workshop photo 36" loading="lazy"><span class="photo-caption-overlay"></span><span class="photo-num">36/36</span></div>
+  <div class="photo-item" data-index="0"><img src="photos/photo-01.jpg" alt="Workshop photo 1" loading="lazy"><span class="photo-num">1/36</span></div>
+  <div class="photo-item" data-index="1"><img src="photos/photo-02.jpg" alt="Workshop photo 2" loading="lazy"><span class="photo-num">2/36</span></div>
+  <div class="photo-item" data-index="2"><img src="photos/photo-03.jpg" alt="Workshop photo 3" loading="lazy"><span class="photo-num">3/36</span></div>
+  <div class="photo-item" data-index="3"><img src="photos/photo-04.jpg" alt="Workshop photo 4" loading="lazy"><span class="photo-num">4/36</span></div>
+  <div class="photo-item" data-index="4"><img src="photos/photo-05.jpg" alt="Workshop photo 5" loading="lazy"><span class="photo-num">5/36</span></div>
+  <div class="photo-item" data-index="5"><img src="photos/photo-06.jpg" alt="Workshop photo 6" loading="lazy"><span class="photo-num">6/36</span></div>
+  <div class="photo-item" data-index="6"><img src="photos/photo-07.jpg" alt="Workshop photo 7" loading="lazy"><span class="photo-num">7/36</span></div>
+  <div class="photo-item" data-index="7"><img src="photos/photo-08.jpg" alt="Workshop photo 8" loading="lazy"><span class="photo-num">8/36</span></div>
+  <div class="photo-item" data-index="8"><img src="photos/photo-09.jpg" alt="Workshop photo 9" loading="lazy"><span class="photo-num">9/36</span></div>
+  <div class="photo-item" data-index="9"><img src="photos/photo-10.jpg" alt="Workshop photo 10" loading="lazy"><span class="photo-num">10/36</span></div>
+  <div class="photo-item" data-index="10"><img src="photos/photo-11.jpg" alt="Workshop photo 11" loading="lazy"><span class="photo-num">11/36</span></div>
+  <div class="photo-item" data-index="11"><img src="photos/photo-12.jpg" alt="Workshop photo 12" loading="lazy"><span class="photo-num">12/36</span></div>
+  <div class="photo-item" data-index="12"><img src="photos/photo-13.jpg" alt="Workshop photo 13" loading="lazy"><span class="photo-num">13/36</span></div>
+  <div class="photo-item" data-index="13"><img src="photos/photo-14.jpg" alt="Workshop photo 14" loading="lazy"><span class="photo-num">14/36</span></div>
+  <div class="photo-item" data-index="14"><img src="photos/photo-15.jpg" alt="Workshop photo 15" loading="lazy"><span class="photo-num">15/36</span></div>
+  <div class="photo-item" data-index="15"><img src="photos/photo-16.jpg" alt="Workshop photo 16" loading="lazy"><span class="photo-num">16/36</span></div>
+  <div class="photo-item" data-index="16"><img src="photos/photo-17.jpg" alt="Workshop photo 17" loading="lazy"><span class="photo-num">17/36</span></div>
+  <div class="photo-item" data-index="17"><img src="photos/photo-18.jpg" alt="Workshop photo 18" loading="lazy"><span class="photo-num">18/36</span></div>
+  <div class="photo-item" data-index="18"><img src="photos/photo-19.jpg" alt="Workshop photo 19" loading="lazy"><span class="photo-num">19/36</span></div>
+  <div class="photo-item" data-index="19"><img src="photos/photo-20.jpg" alt="Workshop photo 20" loading="lazy"><span class="photo-num">20/36</span></div>
+  <div class="photo-item" data-index="20"><img src="photos/photo-21.jpg" alt="Workshop photo 21" loading="lazy"><span class="photo-num">21/36</span></div>
+  <div class="photo-item" data-index="21"><img src="photos/photo-22.jpg" alt="Workshop photo 22" loading="lazy"><span class="photo-num">22/36</span></div>
+  <div class="photo-item" data-index="22"><img src="photos/photo-23.jpg" alt="Workshop photo 23" loading="lazy"><span class="photo-num">23/36</span></div>
+  <div class="photo-item" data-index="23"><img src="photos/photo-24.jpg" alt="Workshop photo 24" loading="lazy"><span class="photo-num">24/36</span></div>
+  <div class="photo-item" data-index="24"><img src="photos/photo-25.jpg" alt="Workshop photo 25" loading="lazy"><span class="photo-num">25/36</span></div>
+  <div class="photo-item" data-index="25"><img src="photos/photo-26.jpg" alt="Workshop photo 26" loading="lazy"><span class="photo-num">26/36</span></div>
+  <div class="photo-item" data-index="26"><img src="photos/photo-27.jpg" alt="Workshop photo 27" loading="lazy"><span class="photo-num">27/36</span></div>
+  <div class="photo-item" data-index="27"><img src="photos/photo-28.jpg" alt="Workshop photo 28" loading="lazy"><span class="photo-num">28/36</span></div>
+  <div class="photo-item" data-index="28"><img src="photos/photo-29.jpg" alt="Workshop photo 29" loading="lazy"><span class="photo-num">29/36</span></div>
+  <div class="photo-item" data-index="29"><img src="photos/photo-30.jpg" alt="Workshop photo 30" loading="lazy"><span class="photo-num">30/36</span></div>
+  <div class="photo-item" data-index="30"><img src="photos/photo-31.jpg" alt="Workshop photo 31" loading="lazy"><span class="photo-num">31/36</span></div>
+  <div class="photo-item" data-index="31"><img src="photos/photo-32.jpg" alt="Workshop photo 32" loading="lazy"><span class="photo-num">32/36</span></div>
+  <div class="photo-item" data-index="32"><img src="photos/photo-33.jpg" alt="Workshop photo 33" loading="lazy"><span class="photo-num">33/36</span></div>
+  <div class="photo-item" data-index="33"><img src="photos/photo-34.jpg" alt="Workshop photo 34" loading="lazy"><span class="photo-num">34/36</span></div>
+  <div class="photo-item" data-index="34"><img src="photos/photo-35.jpg" alt="Workshop photo 35" loading="lazy"><span class="photo-num">35/36</span></div>
+  <div class="photo-item" data-index="35"><img src="photos/photo-36.jpg" alt="Workshop photo 36" loading="lazy"><span class="photo-num">36/36</span></div>
 </div>
 
 <!-- LIGHTBOX -->
@@ -469,7 +451,7 @@ items.forEach((el,i)=>{
 const io = new IntersectionObserver((entries)=>{
   entries.forEach((e,idx)=>{
     if(e.isIntersecting){
-      setTimeout(()=>{e.target.classList.add('visible');const ov=e.target.querySelector('.photo-caption-overlay');if(ov&&e.target.dataset.caption)ov.textContent=e.target.dataset.caption;}, (e.target.dataset.delay||0)*1);
+      setTimeout(()=>{e.target.classList.add('visible');}, (e.target.dataset.delay||0)*1);
       io.unobserve(e.target);
     }
   });
