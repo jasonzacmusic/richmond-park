@@ -3413,11 +3413,17 @@
       const score = factory.EasyScore();
       const ctx = factory.getContext();
       const notesByBar = [];
-      const staves = [];
       let x = 0;
       barSpecs.forEach((bar, i) => {
         const notes = score.notes(bar.spec, { stem: stemDir });
         const voice = score.voice(notes, { time: '4/4' }).setStrict(false);
+        const beams = [];
+        if (bar.beams && bar.beams.length) {
+          bar.beams.forEach(group => {
+            const grp = group.map(idx => notes[idx]).filter(Boolean);
+            if (grp.length > 1) beams.push(new VF.Beam(grp));
+          });
+        }
         const stave = new VF.Stave(x, 8, barWidths[i]);
         if (i === 0) {
           stave.addClef('treble');
@@ -3430,14 +3436,8 @@
         stave.setContext(ctx).draw();
         new VF.Formatter().joinVoices([voice]).format([voice], barWidths[i] - (i === 0 ? 120 : 40));
         voice.draw(ctx, stave);
-        if (bar.beams && bar.beams.length) {
-          bar.beams.forEach(group => {
-            const grp = group.map(idx => notes[idx]).filter(Boolean);
-            if (grp.length > 1) new VF.Beam(grp).setContext(ctx).draw();
-          });
-        }
+        beams.forEach(beam => beam.setContext(ctx).draw());
         notesByBar.push(notes);
-        staves.push(stave);
         x += barWidths[i];
       });
       barSpecs.forEach((bar, i) => {
