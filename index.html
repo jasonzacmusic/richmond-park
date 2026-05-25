@@ -3842,7 +3842,7 @@
 
     return {
       S: makeBars([deg(0), deg(0), deg(0), deg(0), deg(0), deg(0), deg(0), degD(6), degD(6)]),
-      A: makeBars([degD(5), degD(5), degD(5), degD(5), degD(5), degD(5), degD(5), degD(4), degD(4)]),
+      A: makeBars([degD(5), degD(5), degD(5), degD(5), degD(5), degD(5), degD(4), degD(4), degD(4)]),
       T: makeBars([degD(2), degD(2), degD(2), degD(3), degD(3), degD(3), degD(2), degD(1), degD(1)]),
     };
   }
@@ -4050,7 +4050,7 @@
 
     // ── The same rhythmic grid is used by notation and audio.
     const sopEvents = makeVoiceEvents([f[0], f[0], f[0], f[0], f[0], f[0], f[0], f[6]/2, f[6]/2]);
-    const altEvents = makeVoiceEvents([f[5]/2, f[5]/2, f[5]/2, f[5]/2, f[5]/2, f[5]/2, f[5]/2, f[4]/2, f[4]/2]);
+    const altEvents = makeVoiceEvents([f[5]/2, f[5]/2, f[5]/2, f[5]/2, f[5]/2, f[5]/2, f[4]/2, f[4]/2, f[4]/2]);
     const tenEvents = makeVoiceEvents([f[2]/2, f[2]/2, f[2]/2, f[3]/2, f[3]/2, f[3]/2, f[2]/2, f[1]/2, f[1]/2]);
     const lyricEvents = rhythm.map(r => ({ time: r.b * spb, lyric: r.lyric }));
 
