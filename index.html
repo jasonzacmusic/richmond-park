@@ -1668,7 +1668,7 @@
     <div style="background: var(--paper-deep); border: 1.5px solid var(--ink); border-radius: 4px; padding: 24px; margin: 20px 0; box-shadow: 4px 4px 0 var(--ink); font-family: 'Fraunces', serif; position:relative;">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
         <span style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);">Starts on Pa · the 5th · sneaky ↘</span>
-        <button class="song-play-btn" id="song-hbd" onclick="toggleSong('hbd',this)" style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:6px 16px;border:1.5px solid var(--ink);border-radius:100px;background:var(--paper);color:var(--ink);cursor:pointer;transition:background .15s;">▶ Play</button>
+        <button class="song-play-btn" id="song-hbd" onclick="runPlaybackAction(() => toggleSong('hbd',this))" style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:6px 16px;border:1.5px solid var(--ink);border-radius:100px;background:var(--paper);color:var(--ink);cursor:pointer;transition:background .15s;">▶ Play</button>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
         <div><p style="font-style:italic;color:var(--ink-soft);font-size:13px;margin-bottom:4px;">"Happy Birthday to You"</p>
@@ -1696,7 +1696,7 @@
             <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:3px;">Starts on Sa · the root</div>
             <div style="font-family:'Fraunces',serif;font-weight:700;font-size:17px;">Twinkle Twinkle</div>
           </div>
-          <button class="song-play-btn" id="song-twinkle" onclick="toggleSong('twinkle',this)" style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 13px;border:1.5px solid var(--ink);border-radius:100px;background:var(--paper);color:var(--ink);cursor:pointer;white-space:nowrap;">▶ Play</button>
+          <button class="song-play-btn" id="song-twinkle" onclick="runPlaybackAction(() => toggleSong('twinkle',this))" style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 13px;border:1.5px solid var(--ink);border-radius:100px;background:var(--paper);color:var(--ink);cursor:pointer;white-space:nowrap;">▶ Play</button>
         </div>
         <p style="font-size:16px;font-weight:700;font-family:'Fraunces',serif;line-height:1.7;">Sa Sa Pa Pa Dha Dha Pa<br>Ma Ma Ga Ga Re Re Sa</p>
         <p style="font-size:12px;font-family:'DM Mono',monospace;color:var(--ink-soft);margin-top:6px;">The whole scale, hiding in a nursery rhyme.</p>
@@ -1709,7 +1709,7 @@
             <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:3px;">Starts on Ga · the third</div>
             <div style="font-family:'Fraunces',serif;font-weight:700;font-size:17px;">Ode to Joy</div>
           </div>
-          <button class="song-play-btn" id="song-ode" onclick="toggleSong('ode',this)" style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 13px;border:1.5px solid var(--ink);border-radius:100px;background:var(--paper);color:var(--ink);cursor:pointer;white-space:nowrap;">▶ Play</button>
+          <button class="song-play-btn" id="song-ode" onclick="runPlaybackAction(() => toggleSong('ode',this))" style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 13px;border:1.5px solid var(--ink);border-radius:100px;background:var(--paper);color:var(--ink);cursor:pointer;white-space:nowrap;">▶ Play</button>
         </div>
         <p style="font-size:16px;font-weight:700;font-family:'Fraunces',serif;line-height:1.7;">Ga Ga Ma Pa Pa Ma Ga Re<br>Sa Sa Re Ga Ga Re Re</p>
         <p style="font-size:12px;font-family:'DM Mono',monospace;color:var(--ink-soft);margin-top:6px;">Beethoven. Four notes. Two hundred years. Still works.</p>
@@ -1722,7 +1722,7 @@
             <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:3px;">The octave leap · Sa → Sá</div>
             <div style="font-family:'Fraunces',serif;font-weight:700;font-size:17px;">Over the Rainbow</div>
           </div>
-          <button class="song-play-btn" id="song-rainbow" onclick="toggleSong('rainbow',this)" style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 13px;border:1.5px solid var(--ink);border-radius:100px;background:var(--paper);color:var(--ink);cursor:pointer;white-space:nowrap;">▶ Play</button>
+          <button class="song-play-btn" id="song-rainbow" onclick="runPlaybackAction(() => toggleSong('rainbow',this))" style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 13px;border:1.5px solid var(--ink);border-radius:100px;background:var(--paper);color:var(--ink);cursor:pointer;white-space:nowrap;">▶ Play</button>
         </div>
         <p style="font-size:16px;font-weight:700;font-family:'Fraunces',serif;line-height:1.7;">Sa &nbsp;→&nbsp; S&aacute; &nbsp;<span style="font-size:12px;font-weight:400;font-style:italic;">(the leap)</span><br>Ni Pa Dha Pa Ma Ga</p>
         <p style="font-size:12px;font-family:'DM Mono',monospace;color:var(--ink-soft);margin-top:6px;">The first two notes are a full octave. That's Judy Garland's secret.</p>
@@ -1735,7 +1735,7 @@
             <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--terracotta);margin-bottom:3px;">⋆ Surprise · the full avroh</div>
             <div style="font-family:'Fraunces',serif;font-weight:700;font-size:17px;">Joy to the World</div>
           </div>
-          <button class="song-play-btn" id="song-joy" onclick="toggleSong('joy',this)" style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 13px;border:1.5px solid var(--ink);border-radius:100px;background:var(--paper);color:var(--ink);cursor:pointer;white-space:nowrap;">▶ Play</button>
+          <button class="song-play-btn" id="song-joy" onclick="runPlaybackAction(() => toggleSong('joy',this))" style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 13px;border:1.5px solid var(--ink);border-radius:100px;background:var(--paper);color:var(--ink);cursor:pointer;white-space:nowrap;">▶ Play</button>
         </div>
         <p style="font-size:16px;font-weight:700;font-family:'Fraunces',serif;line-height:1.7;">S&aacute; Ni Dha Pa Ma Ga Re Sa</p>
         <p style="font-size:12px;font-family:'DM Mono',monospace;color:var(--ink-soft);margin-top:6px;">That opening line IS the descending swara scale. You've been singing it your whole life.</p>
@@ -1942,7 +1942,7 @@
             <option value="G">Key of G</option>
             <option value="Ab">Key of A♭</option>
           </select>
-          <button class="africa-play-btn" id="africa-play-btn" onclick="toggleAfricaPlay()">▶ Play</button>
+          <button class="africa-play-btn" id="africa-play-btn" onclick="runPlaybackAction(toggleAfricaPlay)">▶ Play</button>
         </div>
       </div>
     </div>
@@ -2020,8 +2020,8 @@
         <p class="eyebrow" style="margin-bottom:14px;">The 12-bar structure — animated, transposable</p>
 
         <div class="blues-level-btns">
-          <button class="blues-lvl-btn active" id="blues-lvl-1" onclick="setBluesLevel(1)">Level 1 · BUM-BUM</button>
-          <button class="blues-lvl-btn" id="blues-lvl-2" onclick="setBluesLevel(2)">Level 2 · 1·3·5·6 Walk</button>
+          <button class="blues-lvl-btn active" id="blues-lvl-1" onclick="runPlaybackAction(() => setBluesLevel(1))">Level 1 · BUM-BUM</button>
+          <button class="blues-lvl-btn" id="blues-lvl-2" onclick="runPlaybackAction(() => setBluesLevel(2))">Level 2 · 1·3·5·6 Walk</button>
         </div>
         <div class="blues-level-explain" id="blues-level-explain">
           Root on beat 1. Fifth on the &amp;-of-2. That two-note hop is the floor.
@@ -2047,7 +2047,7 @@
             <option value="Bb">Key of B♭</option>
             <option value="B">Key of B</option>
           </select>
-          <button class="bar12-play-btn" id="bar12-play-btn" onclick="toggleBluesPlay()">▶ Play 12-bar loop</button>
+          <button class="bar12-play-btn" id="bar12-play-btn" onclick="runPlaybackAction(toggleBluesPlay)">▶ Play 12-bar loop</button>
         </div>
 
         <div class="bar12-grid" id="bar12-grid"><!-- filled by JS --></div>
@@ -2721,12 +2721,21 @@
   // Salamander Piano sampler + tabla + metronome — real instrument sounds, not dry synths.
   let piano, tabla, metroHi, metroLo, snapSynth;
   let audioReady = false;
+  let audioInitPromise = null;
   let pianoLoaded = false;
   let currentBPM = 86;
+  let playbackToken = 0;
+  let activePlaybackTempoGroup = null;
 
   async function initAudio() {
     if (audioReady) return;
-    await Tone.start();
+    if (audioInitPromise) return audioInitPromise;
+
+    audioInitPromise = (async () => {
+      await Promise.race([
+        Tone.start(),
+        new Promise((_, reject) => setTimeout(() => reject(new Error('Audio startup timed out')), 8000))
+      ]);
 
     // Master warmth bus
     const reverb = new Tone.Reverb({ decay: 1.4, wet: 0.18 }).toDestination();
@@ -2809,34 +2818,88 @@
 
     Tone.Transport.bpm.value = currentBPM;
     audioReady = true;
+    })();
+
+    try {
+      await audioInitPromise;
+    } catch (err) {
+      audioInitPromise = null;
+      audioReady = false;
+      throw err;
+    }
   }
 
-  // ============ METRONOME (shared, reference-counted) ============
+  // ============ PLAYBACK AUTHORITY / METRONOME ============
+  // One transport, one active start token. Rapid taps can only stop or replace playback.
   let metroLoop = null;
   let metroBeat = 0;
-  let metroRefs = 0;
+  let metroBeatsPerBar = 4;
 
-  function startMetronome() {
-    metroRefs++;
-    if (metroLoop) return;
+  function disposePlaybackNode(node) {
+    if (!node) return;
+    try { node.stop(); } catch(e) {}
+    try { node.dispose(); } catch(e) {}
+  }
+
+  function resetMetronome() {
+    disposePlaybackNode(metroLoop);
+    metroLoop = null;
     metroBeat = 0;
+  }
+
+  function startMetronome(beatsPerBar = 4) {
+    resetMetronome();
+    metroBeatsPerBar = Math.max(1, beatsPerBar || 4);
     metroLoop = new Tone.Loop((time) => {
       if (metroBeat === 0) {
         metroHi.triggerAttackRelease('32n', time);
       } else {
         metroLo.triggerAttackRelease('32n', time);
       }
-      metroBeat = (metroBeat + 1) % 4;
+      metroBeat = (metroBeat + 1) % metroBeatsPerBar;
     }, '4n');
     metroLoop.start(0);
   }
 
-  function stopMetronome() {
-    metroRefs = Math.max(0, metroRefs - 1);
-    if (metroRefs === 0 && metroLoop) {
-      metroLoop.stop();
-      metroLoop.dispose();
-      metroLoop = null;
+  function hardStopTransport() {
+    try {
+      Tone.Transport.stop();
+      Tone.Transport.cancel(0);
+      Tone.Transport.position = 0;
+    } catch(e) {}
+  }
+
+  function prepareTransport(bpm, swing = 0) {
+    hardStopTransport();
+    Tone.Transport.bpm.value = bpm;
+    Tone.Transport.swing = swing;
+    Tone.Transport.swingSubdivision = '8n';
+  }
+
+  async function beginPlayback(bpm = currentBPM, swing = 0, tempoGroup = 'fixed') {
+    const token = ++playbackToken;
+    stopAllPlayback({ keepToken: true });
+    await initAudio();
+    if (token !== playbackToken) return null;
+    prepareTransport(bpm, swing);
+    activePlaybackTempoGroup = tempoGroup;
+    return token;
+  }
+
+  function startPreparedTransport(token) {
+    if (token !== playbackToken) {
+      stopAllPlayback({ keepToken: true });
+      return;
+    }
+    Tone.Transport.start('+0.02');
+  }
+
+  async function runPlaybackAction(action) {
+    try {
+      await action();
+    } catch (err) {
+      console.error('Playback failed', err);
+      stopAllPlayback();
     }
   }
 
@@ -2850,7 +2913,15 @@
     tempoSlider.addEventListener('input', () => {
       currentBPM = parseInt(tempoSlider.value);
       bpmDisplay.textContent = currentBPM;
-      if (audioReady) Tone.Transport.bpm.value = currentBPM;
+      if (audioReady) {
+        if (activePlaybackTempoGroup === 'global') {
+          Tone.Transport.bpm.value = currentBPM;
+        } else if (activePlaybackTempoGroup) {
+          stopAllPlayback();
+        } else {
+          Tone.Transport.bpm.value = currentBPM;
+        }
+      }
     });
   }
 
@@ -2870,7 +2941,6 @@
       activeKonnakolLoop.stop();
       activeKonnakolLoop.dispose();
       activeKonnakolLoop = null;
-      stopMetronome();
     }
     if (activeKonnakolCard) {
       activeKonnakolCard.classList.remove('playing');
@@ -2880,8 +2950,8 @@
   }
 
   async function startKonnakol(card) {
-    await initAudio();
-    stopAllPlayback();
+    const token = await beginPlayback(currentBPM, 0, 'global');
+    if (!token) return;
     activeKonnakolCard = card;
     card.classList.add('playing');
 
@@ -2891,7 +2961,7 @@
 
     // Pattern syllables fit in 1 beat. Metronome ticks each beat alongside.
     const beatSec = 60 / currentBPM;
-    const sylSec = beatSec / pattern;
+    const sylInterval = { 1: '4n', 2: '8n', 3: '8t', 4: '16n' }[pattern] || '4n';
 
     let i = 0;
     activeKonnakolLoop = new Tone.Loop((time) => {
@@ -2907,21 +2977,21 @@
       }, time);
 
       i = (i + 1) % syls.length;
-    }, sylSec);
+    }, sylInterval);
 
     activeKonnakolLoop.start(0);
-    startMetronome();
-    Tone.Transport.start();
+    startMetronome(4);
+    startPreparedTransport(token);
   }
 
   document.querySelectorAll('.konnakol-card').forEach(card => {
-    card.addEventListener('click', async () => {
+    card.addEventListener('click', () => runPlaybackAction(async () => {
       if (card.classList.contains('playing')) {
-        stopKonnakol();
+        stopAllPlayback();
       } else {
         await startKonnakol(card);
       }
-    });
+    }));
   });
 
   // ============ RHYTHM ROW LOOPING ============
@@ -2966,7 +3036,6 @@
       activeRhythmLoop.stop();
       activeRhythmLoop.dispose();
       activeRhythmLoop = null;
-      stopMetronome();
     }
     if (activeRhythmCell) {
       activeRhythmCell.classList.remove('playing');
@@ -2977,18 +3046,18 @@
   function switchRGTab(tab) {
     document.querySelectorAll('.rg-tab').forEach(b => b.classList.toggle('active', b.dataset.rgtab === tab));
     document.querySelectorAll('.rg-pane').forEach(p => p.style.display = p.id === 'rgpane-' + tab ? '' : 'none');
-    stopRhythm();
+    stopAllPlayback();
   }
 
   async function startRhythm(cell) {
-    await initAudio();
-    stopAllPlayback();
-    activeRhythmCell = cell;
-    cell.classList.add('playing');
-
     const key = cell.dataset.rhythm;
     const patDef = rhythmPatterns[key];
     if (!patDef) return;
+
+    const token = await beginPlayback(currentBPM, 0, 'global');
+    if (!token) return;
+    activeRhythmCell = cell;
+    cell.classList.add('playing');
 
     const notes     = patDef.notes;
     const totalBeats = patDef.beats;
@@ -3020,21 +3089,21 @@
         }, time);
       }
       curTick = (curTick + 1) % totalTicks;
-    }, beatSec * tickStep);
+    }, '64n');
 
     activeRhythmLoop.start(0);
-    startMetronome();
-    Tone.Transport.start();
+    startMetronome(totalBeats);
+    startPreparedTransport(token);
   }
 
   document.querySelectorAll('.notation-cell').forEach(cell => {
-    cell.addEventListener('click', async () => {
+    cell.addEventListener('click', () => runPlaybackAction(async () => {
       if (cell.classList.contains('playing')) {
-        stopRhythm();
+        stopAllPlayback();
       } else {
         await startRhythm(cell);
       }
-    });
+    }));
   });
 
   // ============ SNAP TRACK LOOPING ============
@@ -3042,8 +3111,8 @@
   const snapTrack = document.getElementById('snap-track');
 
   async function startSnap() {
-    await initAudio();
-    stopAllPlayback();
+    const token = await beginPlayback(currentBPM, 0, 'global');
+    if (!token) return;
     snapTrack.classList.add('playing');
     const beats = snapTrack.querySelectorAll('.snap-beat');
     let i = 0;
@@ -3062,9 +3131,9 @@
         beats[i].classList.add('active');
       }, time);
       i = (i + 1) % 4;
-    }, beatSec);
+    }, '4n');
     snapLoop.start(0);
-    Tone.Transport.start();
+    startPreparedTransport(token);
   }
 
   function stopSnap() {
@@ -3074,10 +3143,10 @@
   }
 
   if (snapTrack) {
-    snapTrack.addEventListener('click', async () => {
-      if (snapTrack.classList.contains('playing')) stopSnap();
+    snapTrack.addEventListener('click', () => runPlaybackAction(async () => {
+      if (snapTrack.classList.contains('playing')) stopAllPlayback();
       else await startSnap();
-    });
+    }));
   }
 
   // ============ SWARA NOTE BUTTONS (one-shot, Salamander piano) ============
@@ -3108,7 +3177,6 @@
       runLoop.stop();
       runLoop.dispose();
       runLoop = null;
-      stopMetronome();
     }
     if (runButton) {
       runButton.textContent = runButton.dataset.label;
@@ -3117,8 +3185,8 @@
   }
 
   async function startRun(freqs, button) {
-    await initAudio();
-    stopAllPlayback();
+    const token = await beginPlayback(currentBPM, 0, 'global');
+    if (!token) return;
     runButton = button;
     button.dataset.label = button.textContent;
     button.textContent = '■ STOP loop';
@@ -3130,19 +3198,19 @@
         tabla.triggerAttackRelease(freqs[i], '16n', time);
       }
       i = (i + 1) % freqs.length;
-    }, (60 / currentBPM) * 0.5);
+    }, '8n');
     runLoop.start(0);
-    startMetronome();
-    Tone.Transport.start();
+    startMetronome(4);
+    startPreparedTransport(token);
   }
 
   document.getElementById('play-aroh').addEventListener('click', function() {
-    if (runButton === this) stopRun();
-    else startRun(arohFreqs, this);
+    if (runButton === this) stopAllPlayback();
+    else runPlaybackAction(() => startRun(arohFreqs, this));
   });
   document.getElementById('play-avroh').addEventListener('click', function() {
-    if (runButton === this) stopRun();
-    else startRun(avrohFreqs, this);
+    if (runButton === this) stopAllPlayback();
+    else runPlaybackAction(() => startRun(avrohFreqs, this));
   });
 
   // ── Key selector ────────────────────────────────────────────────────────────
@@ -3174,7 +3242,7 @@
     if (exCard) {
       const card = exCard;
       const indices = card.querySelector('[data-ex-indices]').dataset.exIndices.split(',').map(Number);
-      startExercise(indices, card);
+      runPlaybackAction(() => startExercise(indices, card));
     }
   }
 
@@ -3196,22 +3264,22 @@
   function stopExercise() {
     if (exLoop) { exLoop.stop(); exLoop.dispose(); exLoop = null; }
     if (exBeatLoop) { exBeatLoop.stop(); exBeatLoop.dispose(); exBeatLoop = null; }
-    stopMetronome();
+    exBeatIdx = 0;
     document.querySelectorAll('.beat-dot').forEach(d => d.classList.remove('active'));
     if (exCard) { exCard.querySelector('.play-hint').textContent = '▶ Loop'; exCard.classList.remove('playing'); exCard = null; }
   }
 
   async function startExercise(indices, card) {
-    await initAudio();
-    stopAllPlayback();
-    exCard = card;
-    card.classList.add('playing');
-    card.querySelector('.play-hint').textContent = '■ Stop';
-    const freqs = exerciseFreqCache.length ? exerciseFreqCache : arohFreqs;
     // Time sig parameters
     const is7_8 = currentTimeSig === '7/8';
     const beatDur = is7_8 ? (60 / currentBPM) / 2 : (60 / currentBPM);
     const beatsPerBar = {'4/4':4, '3/4':3, '7/8':7}[currentTimeSig] || 4;
+    const token = await beginPlayback(currentBPM, 0, 'global');
+    if (!token) return;
+    exCard = card;
+    card.classList.add('playing');
+    card.querySelector('.play-hint').textContent = '■ Stop';
+    const freqs = exerciseFreqCache.length ? exerciseFreqCache : arohFreqs;
     let step = 0;
     exBeatIdx = 0;
     exLoop = new Tone.Loop((time) => {
@@ -3231,9 +3299,9 @@
       }, time);
       step++;
       exBeatIdx++;
-    }, beatDur);
+    }, is7_8 ? '8n' : '4n');
     exLoop.start(0);
-    Tone.Transport.start();
+    startPreparedTransport(token);
   }
 
   // ============ AFRICA 3-VOICE NOTATION ============
@@ -3355,7 +3423,7 @@
   function changeAfricaKey(key) {
     currentAfricaKey = key;
     renderAfricaScores();
-    if (africaIsPlaying) stopAfrica();
+    if (africaIsPlaying) stopAllPlayback();
   }
 
   function setAfricaVol(voice, val) {
@@ -3376,9 +3444,10 @@
   }
 
   async function toggleAfricaPlay() {
-    if (africaIsPlaying) { stopAfrica(); return; }
-    stopAllPlayback();
-    await initAudio();
+    if (africaIsPlaying) { stopAllPlayback(); return; }
+    const bpm = currentBPM || 86;
+    const token = await beginPlayback(bpm);
+    if (!token) return;
 
     // Lazy-init SAT synths + volumes
     if (!sopVol) {
@@ -3405,7 +3474,6 @@
 
     const kd = KEY_DATA[currentAfricaKey];
     const f  = kd.freq; // [Sa, Re, Ga, Ma, Pa, Dha, Ni, Sa2] ascending
-    const bpm = currentBPM || 86;
     const spb = 60 / bpm;
     const loopEnd = 16 * spb; // 4 bars × 4 beats
 
@@ -3454,8 +3522,6 @@
       }
     }
 
-    Tone.Transport.bpm.value = bpm;
-
     sopPart = new Tone.Part((time, ev) => {
       sopSynth.triggerAttackRelease(ev.freq, ev.dur, time, 0.75);
     }, sopEvents);
@@ -3481,7 +3547,7 @@
     africaChordPart.loop = true; africaChordPart.loopEnd = loopEnd;
 
     sopPart.start(0); altPart.start(0); tenPart.start(0); africaChordPart.start(0);
-    Tone.Transport.stop(); Tone.Transport.position = 0; Tone.Transport.start();
+    startPreparedTransport(token);
 
     africaIsPlaying = true;
     const btn = document.getElementById('africa-play-btn');
@@ -3497,20 +3563,21 @@
   let currentBluesLevel = 1;
   let bluesBPM = 130;
 
-  function setBluesLevel(n) {
+  async function setBluesLevel(n) {
+    const wasPlaying = bluesIsPlaying;
     currentBluesLevel = n;
     document.getElementById('blues-lvl-1').classList.toggle('active', n === 1);
     document.getElementById('blues-lvl-2').classList.toggle('active', n === 2);
     document.getElementById('blues-level-explain').innerHTML = n === 1
       ? 'Root on beat 1. Fifth on the &amp;-of-2. That two-note hop is the floor.'
       : 'Walking bass: each bar = 1 · 3 · 5 · 6. Root, major third, fifth, major sixth — going up.';
-    if (bluesIsPlaying) { stopBlues(); setTimeout(() => toggleBluesPlay(), 60); }
+    if (wasPlaying) await toggleBluesPlay(true);
   }
 
   function adjustBluesBPM(delta) {
     bluesBPM = Math.max(60, Math.min(200, bluesBPM + delta));
     document.getElementById('blues-bpm-display').textContent = bluesBPM;
-    if (bluesIsPlaying) { stopBlues(); }
+    if (bluesIsPlaying) stopAllPlayback();
   }
 
   const BLUES12 = ['I','IV','I','I', 'IV','IV','I','I', 'V','IV','I','I'];
@@ -3555,7 +3622,7 @@
   function changeBluesKey(key) {
     currentBluesKey = key;
     buildBar12Grid();
-    if (bluesIsPlaying) stopBlues();
+    if (bluesIsPlaying) stopAllPlayback();
   }
 
   function stopBlues() {
@@ -3569,12 +3636,12 @@
     document.querySelectorAll('.bum-beat').forEach(b => b.classList.remove('bum-active'));
   }
 
-  async function toggleBluesPlay() {
-    if (bluesIsPlaying) { stopBlues(); return; }
-    stopAllPlayback();
-    await initAudio();
+  async function toggleBluesPlay(forceStart = false) {
+    if (bluesIsPlaying && !forceStart) { stopAllPlayback(); return; }
 
     const bpm = bluesBPM;
+    const token = await beginPlayback(bpm, bluesSwingOn ? 0.5 : 0);
+    if (!token) return;
     const spb = 60 / bpm;
     const totalEighths = 12 * 4 * 2;
     const loopEnd = totalEighths * (spb / 2);
@@ -3599,9 +3666,6 @@
         }
       }
     }
-
-    Tone.Transport.bpm.value = bpm;
-
     bluesPart = new Tone.Part((time, ev) => {
       if (pianoLoaded)  piano.triggerAttackRelease(ev.freq, ev.dur, time);
       else if (tabla)   tabla.triggerAttackRelease(ev.freq, ev.dur, time);
@@ -3635,9 +3699,7 @@
     if (btn) { btn.textContent = '⏹ Stop'; btn.classList.add('playing'); }
     bluesPart.start(0);
     bluesBeatLoop.start(0);
-    Tone.Transport.stop();
-    Tone.Transport.position = 0;
-    Tone.Transport.start();
+    startPreparedTransport(token);
   }
 
   // ============ BLUES SWING TOGGLE ============
@@ -3645,8 +3707,10 @@
 
   function toggleBluesSwing() {
     bluesSwingOn = !bluesSwingOn;
-    Tone.Transport.swing = bluesSwingOn ? 0.5 : 0;
-    Tone.Transport.swingSubdivision = '8n';
+    if (audioReady) {
+      Tone.Transport.swing = bluesSwingOn ? 0.5 : 0;
+      Tone.Transport.swingSubdivision = '8n';
+    }
     const btn = document.getElementById('blues-swing-btn');
     if (btn) {
       btn.style.background = bluesSwingOn ? 'var(--ink)' : '';
@@ -3699,8 +3763,13 @@
 
   let activeSongPart = null;
   let activeSongBtn  = null;
+  let songStopTimer = null;
 
   function stopSong() {
+    if (songStopTimer) {
+      clearTimeout(songStopTimer);
+      songStopTimer = null;
+    }
     if (activeSongPart) {
       try { activeSongPart.stop(); activeSongPart.dispose(); } catch(e){}
       activeSongPart = null;
@@ -3714,16 +3783,15 @@
   }
 
   async function toggleSong(songId, btn) {
-    if (activeSongBtn === btn) { stopSong(); return; }
-    stopAllPlayback();
-    await initAudio();
+    if (activeSongBtn === btn) { stopAllPlayback(); return; }
 
     const melody = SONG_MELODIES[songId];
     if (!melody) return;
 
     const songBPM = 76;
+    const token = await beginPlayback(songBPM);
+    if (!token) return;
     const beatSec = 60 / songBPM;
-    Tone.Transport.bpm.value = songBPM;
 
     // Build timed events
     const events = [];
@@ -3745,19 +3813,20 @@
     // Auto-stop when melody ends
     const totalSec = t + 1;
     activeSongPart.start(0);
-    Tone.Transport.start();
+    startPreparedTransport(token);
 
     activeSongBtn = btn;
     btn.textContent = '⏹ Stop';
     btn.style.background = 'var(--ink)';
     btn.style.color = 'var(--paper)';
 
-    setTimeout(() => {
-      if (activeSongBtn === btn) stopSong();
+    songStopTimer = setTimeout(() => {
+      if (token === playbackToken && activeSongBtn === btn) stopAllPlayback();
     }, totalSec * 1000 + 200);
   }
 
-  function stopAllPlayback() {
+  function stopAllPlayback(options = {}) {
+    if (!options.keepToken) playbackToken++;
     stopKonnakol();
     stopRhythm();
     stopSnap();
@@ -3766,16 +3835,19 @@
     stopAfrica();
     stopBlues();
     stopSong();
+    resetMetronome();
+    hardStopTransport();
+    activePlaybackTempoGroup = null;
   }
 
   document.querySelectorAll('[data-ex-indices]').forEach(btn => {
     const card = btn.closest('[id^="ex-"]');
     const indices = btn.dataset.exIndices.split(',').map(Number);
-    btn.addEventListener('click', async (e) => {
+    btn.addEventListener('click', (e) => runPlaybackAction(async () => {
       e.stopPropagation();
-      if (exCard === card) stopExercise();
+      if (exCard === card) stopAllPlayback();
       else await startExercise(indices, card);
-    });
+    }));
   });
 </script>
 
