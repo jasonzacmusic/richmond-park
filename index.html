@@ -15,11 +15,11 @@
 
 <!-- Open Graph (WhatsApp · Facebook · LinkedIn · Instagram link preview) -->
 <meta property="og:type"        content="website">
-<meta property="og:url"         content="https://richmond-park-six.vercel.app/">
+<meta property="og:url"         content="https://richmond-park.nathanielschool.com/">
 <meta property="og:site_name"   content="Nathaniel School of Music">
 <meta property="og:title"       content="A class full of voices — Richmond Park Workshop">
 <meta property="og:description" content="Rhythm · Melody · Harmony · Blues. Two weeks of homework. No grades. Just keep the music close.">
-<meta property="og:image"       content="https://richmond-park-six.vercel.app/og-study.jpg">
+<meta property="og:image"       content="https://richmond-park.nathanielschool.com/og-study.jpg">
 <meta property="og:image:width"  content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt"   content="Music workshop circle at Richmond Park Library with Jason Zachariah at the keyboard">
@@ -29,7 +29,7 @@
 <meta name="twitter:card"        content="summary_large_image">
 <meta name="twitter:title"       content="A class full of voices — Richmond Park Workshop">
 <meta name="twitter:description" content="Rhythm · Melody · Harmony · Blues. Study guide from the 24 May workshop at Richmond Park Library.">
-<meta name="twitter:image"       content="https://richmond-park-six.vercel.app/og-study.jpg">
+<meta name="twitter:image"       content="https://richmond-park.nathanielschool.com/og-study.jpg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -190,6 +190,9 @@
   .hero-meta { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 32px; flex-wrap: wrap; gap: 16px; }
   .badge { display: inline-flex; align-items: center; gap: 10px; padding: 8px 14px; border: 1.5px solid var(--ink); border-radius: 100px; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; }
   .badge .dot { width: 8px; height: 8px; background: var(--terracotta); border-radius: 50%; animation: pulse-dot 1.6s ease-in-out infinite; }
+  .photos-pill { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border: 1.5px solid var(--terracotta); border-radius: 100px; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; color: var(--terracotta); text-decoration: none; transition: background 0.18s, color 0.18s; }
+  .photos-pill:hover { background: var(--terracotta); color: var(--paper); }
+  .photos-pill .cam { font-size: 14px; }
   @keyframes pulse-dot {
     0%, 100% { transform: scale(1); opacity: 1; }
     50% { transform: scale(1.4); opacity: 0.65; }
@@ -400,13 +403,18 @@
   .notation-cell.flash .note-flash { opacity: 0.4; }
   .notation-cell .play-mini {
     position: absolute;
-    bottom: 4px;
-    right: 6px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    text-align: right;
+    padding: 3px 8px;
     font-family: 'DM Mono', monospace;
     font-size: 9px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--ink-soft);
+    background: linear-gradient(transparent, var(--paper) 60%);
+    z-index: 2;
   }
   .notation-cell .play-mini::before { content: '▶ '; color: var(--terracotta); }
   .notation-cell.playing .play-mini::before { content: '■ '; }
@@ -421,6 +429,40 @@
   }
   .song-tag::before { content: '↳ '; color: var(--terracotta); font-style: normal; }
   @media (max-width: 720px) { .song-tag { text-align: left; } }
+
+  /* ── RHYTHM PANEL TABS ──────────────────────────── */
+  .rg-tabs { display:flex; gap:6px; margin:18px 0 10px; flex-wrap:wrap; }
+  .rg-tab {
+    padding:6px 18px; border-radius:20px;
+    border:1.5px solid var(--ink); background:var(--paper);
+    font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.1em;
+    text-transform:uppercase; cursor:pointer; transition:background .15s, color .15s;
+    color:var(--ink);
+  }
+  .rg-tab:hover { background:var(--ink-soft); color:var(--paper); }
+  .rg-tab.active { background:var(--ink); color:var(--paper); }
+
+  .rg-pane { animation: rg-fadein .2s ease; }
+  @keyframes rg-fadein { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:none} }
+
+  .rests-quote-bar {
+    background:var(--paper-deep); border:1.5px solid var(--ink); border-radius:8px;
+    padding:14px 20px; margin:0 0 16px;
+    display:flex; flex-direction:column; gap:4px;
+  }
+  .rests-quote-text { font-family:'Fraunces',serif; font-style:italic; font-size:17px; color:var(--ink); }
+  .rests-quote-attr { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.1em; color:var(--ink-soft); }
+
+  .tie-example-row { display:flex; align-items:center; gap:14px; margin:10px 0 6px; flex-wrap:wrap; }
+  .tie-mini { background:var(--paper); border:1px solid rgba(26,26,46,.15); border-radius:3px; overflow:hidden; }
+  .tie-eq { font-family:'DM Mono',monospace; font-size:16px; font-weight:600; color:var(--ink); }
+  .tie-card {
+    background:var(--paper-deep); border:1.5px dashed var(--ink-soft);
+    border-radius:8px; padding:18px 20px; margin-bottom:12px;
+  }
+  .tie-card h4 { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:8px; }
+  .tie-card p  { font-family:'Fraunces',serif; font-size:15px; line-height:1.6; color:var(--ink); }
+  .tie-card .tie-example { font-size:22px; letter-spacing:4px; margin:8px 0; }
 
   /* SWARA */
   .swara-visual { background: var(--paper-deep); border: 1.5px solid var(--ink); border-radius: 4px; padding: 30px; margin: 30px 0; box-shadow: 6px 6px 0 var(--ink); overflow-x: auto; }
@@ -519,6 +561,12 @@
   .africa-play-btn { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 7px 18px; border: 1.5px solid var(--ink); border-radius: 3px; background: var(--ink); color: var(--paper); cursor: pointer; transition: background 0.15s; }
   .africa-play-btn:hover { background: var(--peacock); border-color: var(--peacock); }
   .africa-play-btn.playing { background: var(--terracotta); border-color: var(--terracotta); }
+  .africa-vol-row { display:flex; gap:28px; margin:16px 0 6px; flex-wrap:wrap; align-items:flex-end; }
+  .africa-vol-item { display:flex; flex-direction:column; align-items:center; gap:5px; }
+  .africa-vol-name { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; }
+  .africa-vol-slider { -webkit-appearance:none; width:90px; height:4px; border-radius:2px; background:var(--ink-soft); outline:none; cursor:pointer; }
+  .africa-vol-slider::-webkit-slider-thumb { -webkit-appearance:none; width:14px; height:14px; border-radius:50%; background:var(--ink); cursor:pointer; }
+  .africa-stave-4bar { display:flex; gap:0; overflow-x:auto; flex-wrap:nowrap; }
 
   /* BLUES 12-BAR */
   .bar12-section { margin-top: 28px; border-top: 1.5px solid var(--ink); padding-top: 24px; }
@@ -545,6 +593,19 @@
   .blues-backing-links { margin-top: 18px; display: flex; gap: 12px; flex-wrap: wrap; }
   .blues-backing-link { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; padding: 6px 14px; border: 1.5px solid var(--turmeric); border-radius: 3px; color: var(--ink); text-decoration: none; background: var(--paper); transition: background 0.15s; }
   .blues-backing-link:hover { background: var(--turmeric); }
+  .blues-level-btns { display:flex; gap:8px; margin-bottom:12px; flex-wrap:wrap; }
+  .blues-lvl-btn { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; padding:6px 14px; border:1.5px solid var(--ink); border-radius:3px; background:var(--paper); cursor:pointer; transition:background .15s; }
+  .blues-lvl-btn.active { background:var(--peacock); color:var(--paper); border-color:var(--peacock); }
+  .blues-lvl-btn:hover:not(.active) { background:var(--turmeric); }
+  .blues-level-explain { font-family:'Fraunces',serif; font-style:italic; color:var(--ink-soft); font-size:14px; margin-bottom:14px; }
+  .blues-bpm-row { display:flex; align-items:center; gap:10px; margin-bottom:10px; font-family:'DM Mono',monospace; font-size:12px; }
+  .blues-bpm-btn { border:1px solid var(--ink); border-radius:3px; background:var(--paper); cursor:pointer; padding:2px 8px; font-size:13px; }
+  .timesig-btn { font-family:'DM Mono',monospace; font-size:13px; font-weight:700; letter-spacing:.1em; border:2px solid var(--peacock); border-radius:4px; background:var(--paper); color:var(--peacock); cursor:pointer; padding:3px 10px; margin-left:12px; transition:background .15s; }
+  .timesig-btn:hover { background:var(--peacock); color:var(--paper); }
+  .beat-indicator { display:flex; gap:5px; margin:8px 0 14px; }
+  .beat-dot { width:18px; height:18px; border-radius:50%; border:1.5px solid var(--ink); background:var(--paper); transition:background .1s, transform .07s; }
+  .beat-dot.active { background:var(--peacock); border-color:var(--peacock); transform:scale(1.25); }
+  .beat-dot.accent { border-width:2.5px; border-color:var(--terracotta); }
 
   /* BLUES */
   .blues-board { background: var(--paper-deep); border: 1.5px solid var(--ink); border-radius: 4px; padding: 30px; margin: 30px 0; box-shadow: 6px 6px 0 var(--ink); }
@@ -865,6 +926,7 @@
     <div class="hero-meta">
       <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAlgAAADDCAYAAABeWG91AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpGNzdGMTE3NDA3MjA2ODExODIyQUMwRjM0QzFBMkU3MyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo1NkY0RDAwODQyQjMxMUUyOTk4Q0RGNzFENDA0RjBDQyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo1NkY0RDAwNzQyQjMxMUUyOTk4Q0RGNzFENDA0RjBDQyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChNYWNpbnRvc2gpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6Rjc3RjExNzQwNzIwNjgxMTgyMkFDMEYzNEMxQTJFNzMiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6Rjc3RjExNzQwNzIwNjgxMTgyMkFDMEYzNEMxQTJFNzMiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5c3erLAAB6OUlEQVR42uy9B5xdRdk/vtnesj09m7KBBJJQTChJREASMIiiqKivPxXrYoX3FXzBhv6tgIhdXmLDgkqxF1oAUUgEk0AwCYZsNpvNZjfb+969d+/d/X+fmznr5DDnzMwp995N5vl8zj3lnjNnzrTnO9955plpExMTWUaMGDFixIgRI0aCk2yTBEaMGDFixIgRIwZgGTFixIgRI0aMGIBlxIgRI0aMGDFiAJYRI0aMGDFixIgRA7CMGDFixIgRI0YMwDJixIgRI0aMGDEAy4gRI0aMGDFixIgBWEaMGDFixIgRIwZgGTFixIgRI0aMGIBlxIgRI0aMGDFixAAsI0aMGDFixIgRA7CMGDFixIgRI0YMwDJixIgRI0aMGDEAy4gRI0aMGDFixIgBWEaMGDFixIgRI5kquSo3TZs2zfG/GTNmmFQMQNzSWHSP6Jjf24/D3OzvcYpLWVnZXBzX4XAR9ouwX4BtFo5rsK/GVoUtH+el2OfYPr+f7QcmJiZ6sT+CrQtbG87bsG/A9iKO9w8MDMSwT94s2tuP+c3pOm3j4+OO/6mG5RQnS/hjP+XHng9erqmWTXucRd/jdk0lHWTp4jXdjBgxcuJKZ2dnIOE4tT+5JokzQ0QZpAO6ggBX2dlHCU3a+wFYAFLYTTsVl1+O/enYTsMx7SudlLrC95Zz+1oKz0Ehj1dUVDTj/HkcP4P9Nuz/2d/f36MCsGijeFiAihdKFxVgRc9ZYYjy2em/oMqF6H8VcOUGsuzX+Xjx91rfZ/9WnW/WAXBGjBgxkrHEiUpjZRis9LNZYTJWboDK7T/rfeXl5QSozsD2Kly6APs1BKacFLiMQfGifGUMCbYGbI/j9BHsHyXAJQNaXpgsGctlf59fJkvGXKkAKj8slg57pcLiOaWBAVlGjBiZagyWAVhTBGS5KUVdcGUHTTLGSvR/WVlZEfavxn+vxasvwfEcJ1ZLh7VSAVoyZaswLEgnO7D7PbbfAGzt9guydIcPgwBZOkPGusBKBvKd2Dm3PHADWSpA2YArI0aMGIBlJDBw5aT8nECVdc0JNKmAK6dny8vLyT7qNfj/zbTHVuIWBy/2P0EwWCoK3na+F9t92H4BsPWCDjPlBrRUQJeM2QmirMjArs4QoWojo2L7pspqGZBlxIgRA7CMhMJaBclYWccqwMo6B7A6Ffv3YXsnGaSr2GM5xdkPc+WFybIraZFit2yt2LWt2DZhu7evr29EFWw5ASsdZkuVtVEtJ16BVtAMVhggywAsI0aMGIBlJG3gSgSsnECWHVwBVOFS9utx/D/YzrMbwstYK6+MlZchQpkC1mVT2DYIcPRTXP4GgFaDLqDyArKcQKEug6UCqtwAsC6TpTNDUMbeGRbLiBEjBmAZgJUWcCUDWKqgyuk+AKsinL+XAas6FSN3L6yIn2FBHXClovRtDJZ9I/k1tlsBtP6pArRkIIs/Fr3XjcnyC7BU2SzdPPJic6Vi9G8AlhEjRk5YgFVTU2NyyQOIkilJN0WpY1sl21vHBKxwfDW2G3A+W+S6gd+7MVe6oCqI4cEgmCwXkGUBo8ex/0x/f/9TXsCVbGjRKU5O3+vVsF3HFkuWP25preJ7TMZqqbJZBnQZMWJEV7q6ugzAOtHBlRvA0mGpRPcCWOXimIDVp+3ASoW5UmFCggZXOgBLpqRVHZDaQNEfsf9kX1/fLhFYUgVZTkOHqqBCZxKBV4BVUlJSgN3p2M7Atoht5Ai2nMWJHMAeITcY2P8D+2dGRkZibqDVKY3dQK9bPhqAZcSIEQOwjLiCDxnr4AVcue0Bri7F8e04PkXFXUOQ9lZBDBHqgCwVRkTGqFhDiQwYkfwUx58A0GrTGTK03+MG6qQV2KUsqQwV2u8pLi4mn2bn4PDV2F+C/VnYcu3vcWGuyNP+b3D4reHh4WdV2EE3EOa2N6DKiBEjBmAZCRRciYYD3YCUYDhwCfbfwbbRLUz7+0n46zJw5XYcpKgqXJXhLDeA5cA8DeD8M9h/D0ArrgKydFgsFVssXfsq0T0lJSXkef8qnL8N+1oZA+lm58Yd34/tYyMjI4d0nLrqMFkGYBkxYsQALCNSY3bZsKCKAbvTMe0rKiqIibgO55/FVuQUlhOwyxTmSkWpqjojlTElbsDABo524vwDAFn/UGGv3OyydA3eVf1fCUAVZfYVOP8I9he63euWzhImsBff+I5IJPJnv+s2GoBlxIiRqQSwsk0Sp05Uh3nsCk5m3M5vLuDqZTjehu1mFXBlZ7RUFK7MT1JQaejGUDn9rxJvXS/5NnbwDBw/hXS+pby8vEBn6FZ37UcvwJe/p7i4OBfbu3BpF87vt8CVCFipDMNKQBgtmfSHoqKi/xcGQ2nAlREjRjKWVDEMVnoYrKDsrWTHUPjZ2H8c55/Hlu/maNSL8vayfl0qQKvKPapDTyoG8DZGahexNn19fc/x/6u6cfBri+WUR8y+6g04/DL2S4Nw06Bix8a2cWyvHhkZecgwWEaMGDEMlpGUAq8QwNV8HD/GWKt8HaZERXH7YZu8MldOwMPtXlm8VIbFRPeIrrE0Xon9M0j/69lC2Fq+yHQW3FZZkoiBq9W49hQO7ydwpQI2vbKKDulObc3Pi4qKZqs2ULq2dEaMGDGSSZJrkiC97JUfcOUGsKDYN2D/S2w1bm4avLhgcFPkfm2vVBgaHeeborBFBtv28K3vFrlGEIUj8GeVh/+/im0dgNa7+/r6+t1sveh5yhN+ZqHTt6kavDNgVYFrN2OrP/q3tq+rUcTnIN7Zjj3NloySYb8VPJ6j4eYZ2BZiW4BrBS5ZQ3T37dje5rcuGWBlxIiRjNf7focIq6urTSpqggsdY3YZayUAVtOw/wS2L9BaNzLmROYp3glMpWpoUNffVVDhu7lyUB0u5I4bsH8jQNbzuo5InYbMRHEXgKsrsLsD12epgmXE4YVEIrEtGo1uGx4efqGtre0QzsdV0jIvLy9n/vz5ZxYVFa3F8etwaYFD+qwYHR3dozJU6ARIgy4H6RQDFo0YSY90d3eHWocNwMowcKUzJGgHWRUVFcQo/ATnb3Jz3RCEvZUMZKVSCQWpoGTL7FhslRMQsIMkDjxFsP9/vb29v9VdWod/lwrIAsCpZsDqSv66Q34l8K6nYrHYQ11dXU90iteOoA8ewRZjG700wf7LZlsetkJsRXROVNmiRYvWlZSUXI/D5XyaALD9EADrfV6WzjkeAZYBW0aMGIBlAJZHwCVzx+A2NKjCWjHmahb2f8B2jsryOGGuJ6gLtvwYqrv972fhaCdFrrO0jgA8YTf+8b6+vttVXDY4OSF1ijddKy4uJuegP8a3z5Wkxf5oNPqrjo6OP/f09NhbmSFsg9ii2OLLli0bV0kj63jfvn1kepBPzQPKXMmSJUvemZ+f/3H8n8u+oQdgbhbiGtfxf5VJC0CrLh9kxIgRA7AMwEoRuJIBK7ep/C7g6tScnJwHyA7GyTYrKM/sTuUh1Z7Z3f7zGxeZwbVs5pvbmoNs/z3srwHQSugOFToBjaKiImKQvoLtOre8SSQSfx0eHv5RU1PTMxP/CYD2vQxUxZYuXTohelbH6Nza79+/n8DWzIULF14OQPVtC2SNjo6+HPstQQMsw0wZMWIkUwCWMXJPUc/WDVzx1z2Aq5cBXD2M6zWie2Xe2VWN2UXflgo3DF7BkJ+4iUAF7xfKCWBajJNlrM4DJ7rG7T+E/YyKioq3A2TFdJkxuwBckXH5PdjWOMR7AsDqAbzrjpaWlhe5R2nYj+YpR3lQpQM23QAPHdfV1RFL1XrgwIG7cFybn5//Sfb3JMDyW9+mAniRecI3YsTI8ScGYKWwUXWyg5EZtTuBKyjoddg/gK3MbWmcVPq3CmPoRGcKv18g7AbUZMDNAlai63aQhfvIPqoQefgmAln2+9xmE/Kgori4eD2O78Vhlcj1BIDV4/39/d86dOjQHi6IHmx9J598ctxLeup6yadt0aJFo+3t7Z+fN28efffJiN88xImM4hN+mampOKswFU55M6UTFHR7YOT4IyCO1/JlAFZIhcfNt5Lb7EENcHUh9n8hr+xBGrQ7gSwVds6PIlS9rlpp3MCQTnxF4VnHomsq4ItjtV6L0z9VVla+HiBrxA6u7EwYv5WUlNDw/vXYbs6y+bNj9zQMDQ19pbGx8UnuLzJgHzjppJMSXhsg1aFaESNXU1MTxXd9C9/1baRVGWt/Err56+Q+I1UNbNCdCL/sViaDqHTG2wC447PcTKXvMwArDRmuOlzotJWXl5+L/e+ZDyJXx5MqCkHXb1QYzJQKkJK9B8q7OR6Pv0BKOzc39/ScnJz5YTfaMp9UTn60uLy+GLvfIU9fYzFZTsyZtQe4KsTxD7M4f1LcPZFYLPbthoaGu8bGxhIcY9VrASsvYNVLPoqOEcef4viryKs+nOboLOo8FRpYv2xaJoArnTANiDFixACstIIqEVPkxDA52VBxzNWZ2D9sDQuK2CvRcKNbXPx6bvfbo9cZchKdA1A82tra+r2tW7fusq4VFBTkXH755Xfk5+df4Fe5iIbeRMBUBIysYT8Rm8UNG16M/d3I27eS4bt9iNA6pz3A1Swc/xb/rbXHE+Dy7+3t7Tdha2WXhrG1A1jFg2AE/QJlZtw+kJeX97/Dw8MN9GmqC1oHDWRS3XPW+a6p1JPPZDAWxmxmw+BkbvwyMf8MwEphwXFbYkXEQNmBVnl5eR32ZNBe5gSW3N7jBgREwIFnTty+08vsPxWfRjImgzyKd3Z23vjYY489yl2OELCIRqMTY2Njz+fm5l4QxBCmW1zd0seenqL0Y/s3Yf9/yOP6/v7+CVE+lJaWnorjB7EtsIU5DOBy8wsvvHAfmxlITFUrgFVEJ43DBMb8cWNj43ewW5J11L+WJ/cLU9HmKtMBRrrikyl5qdKeGWCVuXFKpZmAAVgZUIB0AJXM2WhFRUU1M2if4cZcyYza+Th4Za2CcoOgolCdhgrHx8cbASjqd+3adYhdpvm2fRdffHFyGKy6ujqXDb8pGavLzkVAiQdQKnZZIjaLv479+4hxwjOf5u+lY4Cr83H+e5xW8P/hHc+2tbVd19raepgFR8OBPSeffPK42zCrXwDj1WaOzufNmzdx+PDhFiIfva6BOBV7v2HOJAwqPbyEk4oJJ6nMv+PdNulESot0xz83kwr2VM4wmZGzDGi5GaWXlZUVMpurpaqgSRY3mYG2m+NOP8NKMnClArQSicTe7du3v6upqYnABA1/HdqwYcOY7f4bsJ2iaoSuyja4xV93ORv70COL46fKy8v39PX1/cK6d/r06Vfiv5/jPJ/7lonR0dE7du/e/R1ma0Vby9KlS6NOcXKLs0p91gVdbnk5Z86cUQ2mMu0NcdBxCCM8HWUSpOJJF3Ng7L+yUpLGBnAaBivjAJiTsbmMtXLYaNmTlzsxV27gzB4XnVmDqWALZMf2RhTgaj8HrsiPU+v69evHeVapqqpqKQ5vCkPx2NkqNybLDtbsYdsZLW5o+IcVFRUNAFnPAFx/AM9/F/dlc/f34L+Pv/DCC9YMQVp8ueOUU04ZF/nKcvNIrwJw/AAwHfssL4A36DKqsth4EMrfi92il29MJegS2SpmEvNlAFn6WJ0TzT2DAVgpakR0ZwgKZgySU8p38SBKFK5qT0QGDrwotyDYK5Vr2HoBKt7PwBUt59J20UUXTQju+ya2fF3Wzsv3qYBCVVaQS2tiLP+AvL8T5zfx/wFg7W5ubv5wS0tLGwvi8PLly4dVFon26hnd61JGuoBL571hNdhB2Qn5secJ4tvCHOJXDdcryJwq7jXSDUx0fcVlMmAK0kYxk5z6GoAVUCa6+b0SsUiK4God9t/QBWVO7JVKPMNmrXTBFfdfvLW19Zo9e/YcZsxV2ytf+coJO+Ctqqq6ENc26jgI9dMgyFwxiDzBixoUO4sYi8UeA6jew+cReWN//vnnPzE4OEjG6zQkemjlypVxEQumMsSpCg79ACEZc6Vyf6pYmCAAnWrcU2UzFDbrlco0C5PBmIrDYJkwO1RleNhPWEHkfzrz1gAsH5moYiitAnAcwFUV9vdgy5P5uZLFz82fVZCslQ5zoQOuaA9QcdvWrVufYcCi9YILLqCVk19i04Ttc255ZL/mh2lQYel0bZ0oPqOjoz/661//eiu+L7p+/fpNuFY/MjLyzaeffvoOXKMHac3A9tNOO21cNvzHXxMtw+MljkGAL6+e41U7BF5AQhC2RKp1J4geexDAyq/yCSrNggSdU9Gz/1QDbOlgSNNVngzASnNhVB0q1FyEmRTrfLd1BXWZK5U4h1E5nMCVKjBJJBK7nnjiiZ9mHV2U+BDA1bhIOVZVVZ2L8wvcnHSqAGU/DbnbzEIVoBCJRL7/2GOP3cZOewC2vgJQ1QFw+TN2jbyx951xxhkTTnZeMjspp6FDJ8AbBFMQBpjwu4STqiPdIJgbt+HhTGCxgmQPvA5rpdoGLIxymgksVNBlLZ0zVMP85lTktQFYATQkNs/crrZSKgxWeXn5+7B/o8qyNjrMlZsSDgr1e2F1JPtEc3Pzp2OxWHKW3Pnnnx93ege2jwYBnPx8r9vQmwxoDg8PfwPg6g522rpx40ZyKvogAFbJrFmz/tDe3r571apVI7wTUlWDdtFi0U5MViaAK13ntrodHlUg5GabqPOtQTI96bzXL3sUpvF7qtM4nUAsCKCaCaArTKCaqokxBmClicFycqXgtiAzwNVCnH/DzUO7CJy5KR5ZXFPZs9ABV7RFIpG7nn32WVr+ZvAVr3hFxEnZVVVVVeC/N7qxVZlQZkQ+uRi4+hrA1SYLXL361a8mp6J/xvEMun/lypUfr62tfbMdNDvtdVgsUfrLwHIm1j0vIEuHffGi3FJhqO+XoUpnXQmL2fPDTvoNNxXtTyrzTKez42UGbFALn+vaXk0JButEGOtWGVpyczSq+r81NIjTEh1Ap+rTym1IK6zG0s0fk2w/Pj7e9swzz3w76+jQYIcENLwVu0JRujjZywXx3TLXAypsFsDVNx999FELXLVcdtlla2g5HByXWfcAZF9ZVlZ2RX9//29lcXGze3KbYRiUh/cg6pmuc1g6Liws3I/DW6LR6CYvvVy3eqOiXGVgIYi0C4qdCBJwqfp6SyWjFZYdTiqHW9MJEryWnyDBvl/20TBYxxno8rJws21o8Coo0kvsfrBkBu4qQ4mpZq5UK4gbAOvt7f0aNpox13beeeclJIzMe2TsVaqZLbdG3oor2Vxt3rz5e+zyode+9rUX4/q9OC6wh4P9dysqKh5FmgzweWx9l/2aah7pDBOGqbDc8kfG2LHvr8PhnUVFRTRRYJOf8s7HBcCtEud34rAS22oc076RbZbU4Tq9vxfbdmz32eOQatcSfhVhJrApfupskPVdhZkJ0n+ZapuSqvbMzyQSr8/56QSr5L2xwcoQcSvMKo2bCthiswZvD7JRShVzpcLkuLFYov/j8fjOp5566k84Jc/kw6IlZqzvqKysnI9nztbxcxVU4+t1oWraj4yMfP+hhx6yDNpbLr/8cgJX9+M4T/Q8wPacRCJxMw4/5JSXOvZfstmEQcwiFCkGkVJyWwtTt/HG3hFkqbJa/HWEQ6DpzdZ/AFxXEpDDtsH2zNX8O9NlF+KHnQraOFwVQAcBTmRDRH7au7CZK91n/fjHCmPmaFislV9XH+nwpWcAVgrQvQcG6/NQoFWKMwxdvbOnm7lSYUxkYODIkSNfYS4J2tatWzchqVgbp1qZiUQiP+HAVevrXve6y/Atd1vgSpSX9K0oG/XkgLS/v3+nCEjbGS37PapLAOkYvOs2gKIOi+5SRk4dF+66MshSkZaWlmmMwcohhmrhwoX35+bmvp+L/84DBw48gENaRYCWbyJXGgNz5syJphJA+QVSQc6o9dtBDYKxCGJmYSboFL9EQNBxCQpkBWG64XWGuGGwphjI8urzqqys7DTsPyDrfbmxALJlWsJiroJgr+znY2Njf9mxY8ezpKDWrl0bc3LtwKXHq53Sh4ESV2/1qWKwrONoNHr/ww8//BUOXL0O/5EbimwRELXlHSn472B7hS6g8bOEjh/WSlUhyFxq6HZuCGQVFxf3joyM3KfT6xcNw8yfP59Oetj1zpycnOf459EZIB9tRdgOzp07N+q1EQ/DMWiq7IacWAO/71f1KyZTsFPRW7tO+oQ9XJmqYUJd+zm39V1TCUQNwEoD2FLZAAC+jn2OCltFQoDBS0803T04mQE4O48fOHDga+xyp2w2XFVVVS72G4JaAscPuJL17OkY4OqhRx555CaLnXv961+fBFf4L1vFiJqVl/N4g3eerXI6lwFM3aFOv+njcehPCKTc6goNF5aUlDRGIpHtOgyMrBwBYL1o+85+Yq3mzZsX9cLKOaVJYWHhDdjRkOTFbKhS+fmioqJHso7aiRHA3O72vJ86g/esxo7iuQHpXJUJbXBYE1t08kM3zwsKCh7BOeXTjTpgwq2tD4PBU3EXFDaYZ+WOhuhpqP7NbvU7nZ7dDcAKuOehi/KhKF+J3Xqdgihia2QKNCzvxrp+r2RMFhqXn7344ostBK7WrFmTUPDHtBzfNt1txpfd43sqvl10bWxs7MnHH3/8OubTqx3gihqIY5grjUbilvLy8j/09vYmVPNZZp8V1vCgahlWudcDs0XDeo+gMb5YBWS5vV+BFRj0Uuec3kvG9fjvZnZaT3mumcxWx6OeKSSl9wYxixDvqmMTA5LxUPj2XtxP+XML8mmzBDjeyyYarGb5K2uDKLzNaFtu8dMOUH5g5yc/ZOWA8msDvq8Scb3aK2vHxfdKlvdWWjnpBEr3RrzzzU6gkuJl5aOkLlqTPG7k6xsrE6u59Nugao8ns6+yv8e6zpWTDU7vWbJkiXV/svzR1tTUdKMBWBkGsnws6PwVJ+/ubmHJeveZwFLJlLtAwQ/s3r2bZtTRhX43Rc9941kqU/rTwV7xkkgknn3yySc/Mjw8TEv9dF1xxRVrsL8H4WTbh8VEPVMqG5ahPysDJ+P8Xdj/0Im1EjFoqh7fM70jI/rPZbYtAZVHSkpKLh4ZGdkeBPhz6EglvM7yEt1H9nbc6QdbWlpupaFKlTBJmaVqdiH/zc3NzXULFy4kZU3M2cU2YFLv8I6roSQ38WXdrWzyQADfeTNjz0TPbOKBSgDG3cfkx+HDh29lQ8eBCDcyUU9gGGlytZ84R6PR+xh7SXlAM1yJ0azjQS2OJzseTu9COAQkk2CyuLj4TgYuRWXmatSvTU51E3mx3SoTCKeSsU9Xqq7T6lTuDh06VItd64IFCxL881Y5sZc/gVy9f//+TWG0XcYPlmbvwGkhZ1lYIiBWVlZ2GY7P1fFxJesdp8ruStbb8GJ7NTQ09L0jR44M4FLbOeecM64ymw0gY1WqAaWubRLA1f4dO3Z8gLmc6H3961+/gvm5ypOxRyIfVVw5+kx5eflP+vr64vb/LNbOjx2VbHjWr2J2GsIUAU4ZWHCb/KECspxssJzqk8xORPV/SaeNVwgL0dt+WywWu1uRSV/NlYUt2A7R5vRsXl7eW3Bcaw8P77vNBRDU4t6V2K/gnpvUKQcPHiTEUE3HNTU192KrF7x74IUXXvhr1rGTA3oB0uJu5Q1AjoYiyR5x0ymnnPJB/F9mT4eBgYEH0Z4s5ZiVIQCiSEAAK5kfAB93B+FzS6BX6gFCtECWqJ4AfORjV05Ez6JFi36DfL6eWzz+YQCLQZb2tI8ifXpEcUM4RH+WVldXT+ajrZ6J8rEH+XgMw44yQXmWHEaeMWPGndiutJdFlNPd6IjeZs/7nJycMmy1KG/lubm5NLGplso24WwLXNnDssoJxRtbvYCVHkAa2ONNZWTIMFgZ1JOWNfai/1BQPqM6U1BUCVWGTdLhpV2VveJBBCrKgW3btv2cFfJhFQXPvm25rJFJJ3OF+9v37NnzXjRQfdQIve51r1uE+P0J14vcwIVKzw3lZ+HY2NjbcXgXX15kswvdgEMYizcHPS3cbcFzyYza5HChHWSpLAquyGBp+ylyYseKiopIGdTZAM0H8N/diox60icXQMZ7W1tbd8vSGCBlnQWweGloaPi+7FkoyVoor2/agFYWlCtRrp1MsT6G+7IEHYFdlu4FAIiqAgeEbQEBCn873v1KexkEuKLvPlJbWzvgt9475Qe2u4PoyDqU6XqUVXLncrWsLDmVV3x7zMoDgKuHEd/ruc7pIdbeHsR9Cbf4AcBEGPB4VFTH+HxE3jjOnEUe03s66dqBAwcemzlzpohd70d7ucUtPtOnT980d+7cu5xmW3Px7mFA6zGU0SwBmJuMd9ZRl0CZxWCd6GBLZbFl+5I4JOXl5edZ7JWb2wWV2YmyRj/VIrPlETEyXV1dX0RDMsbYqwkn8Cb4pqVewFXQC/w62F4NNDY2vnffvn1tOB0BuKpGGfgLkZduRuiqa0myMvXJioqKn/T29k44AXTV96QKlAY1q43/RhpysA2L7iaFL6gfBLLuheI6C73kXhXWWAV8iRy/+um44dqV9mvovZ8HJbksHo/vVQhzNZTHpzlw1csUyJgDGzXqEudDLq/K6+zsHMSz19bU1Gx2UawTLkA5vnjx4qiMUXRh0hIuAGc4oBmSVwrem8wPdHL2BtHmOrTlkyDLi20c/wzKz4TgfV129kcVCAp0XdwJJIvijjyfcCEMBi1gaE92+pTBwcGcRCLxs9zc3Muzjg51us6mxDdOuAz1x8MAVwZgeWjcVQCN22LP1jVUzv9VZa7cCne6wFSQ7FUsFntk27ZtTxIIAbiKyN5jfSuARSl28zKRuaJK29bW9sGdO3fuo8r7mte8Blme/RCOa0Q9XjcGS9RwWPeh0TwZDfxljBVzBP0qTFmmrTOoWb5X89+KHvC70CunHq4IZBETsbm0tHSDBbJUlZW1J0NsGsKRtQs64NL6D+HS8J7QMBcK5cNQLNcopOPmvXv30gSKmYwdSkg6iuNO8YQidBtWo/8GDhw40A6A9bzu93PK1HN75navNUTlh2G18kME+lD/PgzAe02QZd+BydrO26npgiuXtB+TOWSVsbWcXhr0s0i7vf1EuYu7hZWfn78DdaHWrd4pmt8MhtWeZWcZERZOJ99LOpXDCXCVlZUR6/IaFebHKU4ieya3NeZStZHtD78XHVsbuxZtampK+oS68MILCwCa6kRhiN6BbbHbfX7iL7sm+7+7u/uGf/zjH9uoobj00ktHoBgfxPV5qvFwYvpEjQf216eqToQdVlDvGIAAPF1HLKJDmKuyjg4XVvpRfm7DlTrg0W5/4wSUodCvgmKplr1rZGSEjJJpGPqwE7iSdYx08gLKcBxA4yKvz+uko5e01unICqTeqbOMen1VQUFBtYcwldOAXSefbvWqz8riIRtm9/stQY0auAkA5yOjo6Nf9NqGpIKUMAArQFZLNqOP+5/o3mle2SsfvYKUsleye+galOAdDQ0Nh4mqhuK4HtdaRMyXQ4M9P9VMncr/+Kbbn3jiCVrmZ2LdunVdhYWFf0CenKrKiIqAuRuTCaV7QWlp6XKZzZ9bOU0nGxo0s2wJgPvDyAuaSTQgSlcaRiPDd6RdpWx43+F5186U071uYRDgI2Nqy3CYjzvbyrKzs9+maLs5RENvOky5H+U6NjbWbbEBspUnZGU7iE21LLuFwecHtgG28e94SX4E/R3cRj7d6nXSVifP/aSTn/LvJ+8OHjzYRVhLpXx5fYcBWGlo6FVnDgq8thdgf5UuENFhr1LBUHm5136eSCT2PfPMM2REO75+/XpyO1D1yCOPxLdt25at+L5aWQ9cNovRKd42lk05LdCjuvfhhx9O+v856aSTWmfOnPkrXF/j9m5R/DwA1w8FBZIycWawFwatrq5u4sCBA5v7+/vfYQdZnKx2YrJ0lE48Hj/kByjyNjdcmPfQZldYANQfx3dJIycZ2guLQTqi+u1BvdNNwasqc5ewhflhm6x0TH74ZbGorLoApSTI8tLRHhkZ2awKrlXD9rKGosy1ik6YbBhxOKhOmQFYaWzgRY29hwL2xiw2dVkWvs4ivekeGnQaHnQCL2TFfuTIkU8BkFAFaUW63IZLZABeumrVqnG3NQu5zdOQW1gbcyT6OXpXQUHB4RUrVnwX1y9VyUs3kKXi0BRK97+wKwyj4QjbxYfsm1VAtFM6AWQlmpub/zw0NPQRp7CYS4OXgCyd70aZ9jxTzaZwJpVnX1/fPVCKfxLcX3vqqaduzMQ8JsPldIH3ID2VcwrfNT8YwBLmhwaII6ZsNZdGu9Au3uTyXVogyykeTmVW1YFyprQlsjKXTjEAy1sjKB0icOkJvFNn5qCOW4Z0ONdUWTxYdA8akJ8///zzO6n3sWHDhtdhfx4ACtks5aiso8dkfrp6J/b4oLH69zPPPHMNvivppX3jxo3k/PAqHcZAZcjJqSzQQuFFRUWXyyZeqA4TprpOBREOH96sWbMmfTotWbIk0djY+Avkzadc0iM5XDh9+vRK1fwQ1NOEyhCRUxlgSrPOmgXZ0dFxqKWl5TGcPysoB2/3aVeU8t68bJJOUEOCMkZL9l4+P8jdhSw/2PHbdYZeBfGs5K81NDTcHY1Gb3IpT3eWlpbWqwzTOcXDYl1VTAtUhsxVmaqgy4VKu+pnGDKtACtdbElYm6yX7aWR4hyL0oye9brpqXs9HUOD9v/tcbMZurf961//+jrds3bt2giu3Y5rg1u3biWfJSMabNS8TBgmxfmRPXv21Hd2dhJV3Xv55Ze/Edc/o1veZEvZyCQnJ+cdXpSnl+nfQdQx3YWlZeHYlgmp5Z8hkLV3795bR0ZGbhKxvkxW4zxpk+WxFz7us8My6dU6FovdY43s4L77BHn9tvz8/JMVbRUzekQgyDKly5pInp10zaCSHwUFBScHyNQM7tu371aLyXII7xgmy+M7x3WedTNhUWkzvP7nNe/T3akwDFYI7JYLg/AGHObK/FplInsVRMNlVYiurq4buru7CYy0oYH4PPazcX3H2NjY9CzOT4/MSzykNgMUw3BzczMttdCO06HXvva1Z2UdXQIisAqv0hslycvL25BIJCpVbSwUl5lJSVkLI8zGxsZj2jeArPiLL754ayQSucmlviaHCy2QpcMq6nyLPQy8bzVb7y3pP62jo+MBUrI0Ow/X/0+URzQsrMoSZGqbGZRRuBsT4sUGiw3ZKeXHpDLNzv4vP3lhv7euri5KIItnsgThJ5ksN9ZI8q6ESplWyTevo0A67RK/UR0lVyuqdTAdDJbxg+WgQHWnXiuuBXil6D43p486S+KkGki5sQguiznfvWPHjqdxOXrRRRedimsfZL6wyJNu4swzz3RcIsfuwwnb3DQDynGAxY/t3Lnz3/Q9l1122WzsaYHR3CDeo8Ji2fKgEA3O60ZGRu7y0Fv3/b/O97ktVu5UL9wWh3UoMzRZYpwPFyArSkzWsmXLyDv35x2+KQmystg6l07lPUj/YQijnlvC5AFyM4HDpBdq8tUFhf8bHL7BVh+uA4j8IhTxuN+6rFIOQwJatcuXL/9obm7usI9g6rx+twsAmWSGRPlRXFz8G9Zh9pUfongAqK3jQRZ1CpYuXUqs7OcdHicmi+K1SZZXMr9QXphHL0v5SN5Vju89v6CgoN/h/0qW52SGQe5INuvqq6DbNAOwQmauZMi7vLycmIULVUGaTo84HQ42VYZ37MpvfHz84HPPPfdVOl6xYkUX4v1ni0Vl9gCDqo16RUUFrbFVkc5ZIkNDQ1/dunXrX6kNvuSSS8iRKBnAlgZRrmSe3UWLOjOD2yt27dr1E6TvhI5XdxXQnokLRHtp4O0gy+H7VgOs3ok8vtqpgyPrLasqdeYK4EquXNFwFE3+iHH33yMAWGXI5w9GIpHvqr4/KAeeQbWbBLAArj6j814Z2HZaBkqlA225ZsjihgcHBwePyQ9232R+cHWwbOXKlR9EB+e7bu/WRo8cyOLLq+0dxGRR2dlkf5cOWaAbRz/lyane0AoMAJP3K3b6DkByeaekqmU/bOfUWVlmiDAlYIT9d4lTejuBCifbI9F/6XTJYI+Pw3PjHR0dN/b399PU8SOzZ8/+FK6tsO4dHR1txvWI6uxISLXKLMug7fM4Ju7Xjz/++I/o2rnnntubn5//W1yf48dOQNXhqJvtFpTVhTU1NYVBNYqqQNpPXZHZPuraYamUIQtkkU2Wy2xV8qB9p2rdFHUqZJ0OJvU4r2T/kSE1LW/TZc2OYv7i7sVhnyC4/1IIPxDbJr+2MG7tme57dOPgVo4E5a6esSTC/GAslq/8UNAdlSKQRcPbLmmTtMnyYiflZoPsVr517Kqc8sApT1TKFPKhALs8VVIg1XaKhsHSQN9uztTsrJWgp3aplxkfqWJjglCWbkoTiux7O3fu3EEgav369SsYvTt5L3peNEQ4pkFFz0jXdyYSiW1btmz5bBLlVVe3zpgx41c4PMMvoHFjk2SMCLc2YdmCBQvOi0ajj4jKr4zFymTWStbjdPrfiQ0kkCVjBrLYWnDEZAnSppF0n5dFs+3vsA7GxsYsY+phwXf8wO61H/n9coD7tbFYbGuYeaY7fKRa5tHB2rJ79+53+4nbypUrf8wPqwXAwEzmB2fcrpwfBQUFa1H/As8P1eFCnslSzY8gGM+ghMrErl27hGVi0aJF63Jycsrw/fXEdEGvtGYxO7JMFMNgaTQoujYJtvtepepUUmemYFjMjcyXlU5Y8Xh8xz/+8Y/vUVxXrVpFtgw/xvVs/p729nZaEDmh4d9rplNPNIz0sb4Z4Orw888//xH0nAgMtq9Zs+aLuH5ZUPnjVj5UZ+qgAbrUi4L0q2D9hqnjF0snLZ3Cor0KM0AKl4YLBWE3ynr3slmUAG80FFVnnR85coQUemTx4sUipXGHKB+Q3x+Q+c7zkjc6rLkqC+WlHQ2qXKncS/mBa5M2XWiXHPMD4OMOURiUHzKWTDar1uk+q7zyfrJEIMtisnRnLavknxvLrMIUytp4N2lqatqyf//+Bzs7O69leoNMS8ZVmNtUtWuGwfLJYqnM7rN5b1+G/WyZLxGVXkMqehQ6DZKs0tIMnAMHDlyHnjk1UC1VVVXfwLVltmAH0eMa1eyJ1KSKGeHuS84YPHz4MC0Q3H/ZZZe9Dftrg84rrxMbrHKVm5v78t27d+eceuqpCRFzpcqQZaLNlaxMOil7NwN6S2ktW7asrKCg4HqHd9QzZuBqv22IE1sCEL+7srJy5dy5c2chD5c56RjqyNtYk3fm5eVRHetKBQhRvUeFbWTP9QLAdHpNQ3z/SIAKc3KygZUfc+bM8ZwfQQ+rU9z8MFmU1lls+NFL++Tne+ztrKQMOpYJsrnq6OhomjlzpmUEP54OA/aUAKyp0AD7pIsdG2mN9Hm5pIFxVaapnEmoaysgYwr6+vpuamxsJBq3f/369Zeh0Xq/vWeRSCQ66Nppp502LlKWorTAVqMLUHymyXh3d/f1AC77cDx66aWXnonr3w4zDj68up9RXV1Nxvb9fhvEMOq+vZEVGfWrGvk7pTUNlerEkdbs27t376cBSsno+i0O30rDhY1QWrd4BSX8NyAsGl7cwMV5BZTij72kLeL8ISj0z+uCp1QzlE5KVmf2thcmRqWeUn5gt4GLi1J+iMof5UcsFvu8KoBVWdSdv0bllUDWySefLARZ7L6XzC7EfnvWf9xPKDGK9nh4Gd0RPSu6psJmLVq0KM4AcD07H/faXoWNX8wQoaZS0F2hnF17uVt4mWJfFbRCjUajP3/mmWfIf0z8wgsvLMJ+k0O4tH5ZXDO6s/x8k6oSsq6jkfra008//RixbK961atK2SyiHL/MlV9fOQ5hFMydO3eNqoflqSYqw3K0fIkMpNoVGymtF1544d203py9E8C962anZUp06wnuuyGoeop8fB+thxfmRAS/jj9VFLpf43sPecCf3uBFCbvlh04b5AS2nL6byivvjNQh3Dtl5dUvO6wajorRu857RkZG7rX0hhcAOyUYrONJZL0oFSNbh3ukDJaol6Jj6JwKgOVW4eyVA0rq+X/+858303FdXV1HTk7Ow/ivQjT2nkgkyL9MTJWhYelQIwMiumnl1LtGT/R3TzzxxA/oeM2aNYNQ3n/Bf+Ve3qvie0bFv5jMzoGGCZEHD+kAS1HcvbAhXuuZG4vllsbsfDXZydl6xdlOvquc8h294QhAVv0pp5xCTOBbHOJ/Z3FxsTSf3MRyBcCVsdv279//fZX0W7p06fV5eXnvt12m9fA+RC4bggIJquyEEzPpVsf82mO5+UtTjTv/DO+agfnluw3gRSk/li1bJsyP5cuXf8hy2aAKOrlVP8pU0gTlNQmyTjrppGOYLAHISg4XqrY3TvXV3s7Yr+kwfaLwPLQ9LaplSDZEaRisFAMtv0uX0H3Tp08vxv5kp/C9GkZ76VX6dcngdI/9OgBTH5TFtWhcyBC8DT2tL+P6WpewyS4gqpMukBqVHrZuOlmLUVvfBJCy65lnnkn2EKuqqlorKiruxvWlXt4VZJ450enWHgBrJYBCjqqyTWcvT2XIQebA1oHhyPFS/hcuXDjw73//u55m9DksVJ4EWTS8Z/0HYHNIJX6W0PAGuWawrnd0dNyjml69vb33OHzHW8N0TRJUPZMtq+XVNYxbuG4dYsslB56v5CbdBJofqt9ofUd5eflK1TRGeY02NDQkXY6I0sHuwkHVlYnK5BL+XV7aWlH4dF01rAULFsR03i9KG8NgZYjIlgVwGI5Zji3b6zBRKlz6B1zIxnt6eq5ramoiu6sBsrvC/qOuD4yP92bpDxHO8DJlXzNdutFwfWRwcDCK045zzjnnS1nMfkGW97r/O/X0VB2C2u/Lyck5BZfzcJ6w9xqdwk9Vr06nl6nKYKgMPbg5oLSHg4Z74MUXX6wnGxeRTZZdOjs7D6nUKe56Pef24x6UMZpdewjvjSgk04uoM79F3K+wfct55LKBdxHgdWhHd7hNhbUV5YPX8ubGTOqwrtxz9da9NETMPLcr5QfCmMwPG6t2HrlsGB0d3eql3Dc3N0/D+ydk30HPEchqbGy8ta6uLslkOa1dmHXUyN0Kf4tuORGNuuj4QZOx+LI4uI0uqZbNVLZxBmAFMLThVtGxneE2DOJGX6eiIHhd5NOJ3UMv6us7dux4EqdjF154IbFMP5D1ktCgJQGWU0UTLatiuWkIMb3i6MVec+DAAXIfMfiqV72KhnOuUaG+g8pLGYvj1hPLzs4+CT3WUlwfVZ22n6qlclSGeWRDhfZzPm2cFLhIibnV6dra2oF9+/bV0/CLCsjKss1mckov3hUAvXd4eNhiS0at3rsCSP8VwrhCcA+5bNjqtX6HYQgsKr/2to8f3vXbhum4qbBcZfCuGZgn/WR+aHx7Mj8EgIRcNmx1m93q8g3EwMZV6xHAWBJkLV68OAvAzml2YaVO3rvdK4q/blkRlXeZCyO7TqDJCahDjX6Ych1Bu0Cdo80tLS3Sd5ohQg1WQZXhsp2vVGWkUm1w7GcFdZGMjY39eevWrUm7hXPPPXcoJyfnt6RPZM+hB08AK6GZFtVhpg0a2S8999xz23AYu/jii2mI97thM1cBM6p5s2fPXubErGZap8WrEpUZr8s8vtsVsX2bP3/+QENDw0uGC0XgFveOK/aoefZqS1tbG3kKP4LnJ2RpYG0on7TmZZNAob8TYLDGqzd3N2Di1bhdFKbqEJQXv1seFH49Z94wmR9QpBMqHRorP7KOumwQ5odbPNnxap00cfp+xDmKTmHS8F0lDXF/3E9ee/Gwr/IdKp1B7r6bi4uLN8jqjEMbutJDs0VsZ53KjcZNg4Li0Z1CbKNOF9szOxM8Z/sFV/ZGgHzG7Nix41PYT1RWVraWlpbS0jEnySoiA2aTAEvFyLKiomKayMhdZ109N4nFYr9+6qmnfkGvfsUrXkFr+pEyy0sVcyVjCVXSlCQ/P/8U5MdTfinyoJ30qTDATsOiTnsBO1LrVp5UFpG2ZN68eQP79++vX7JkiaPhu1N+2QWK4BjXDChrD7LDYQ+9/+8j7l8SuOk4xkWAIugTHldVVdXi/EVZGCpDzCIGC1LutUxy/qoc65ssXFl+yL6HLzsAZ8n8sN/H54euQbeq6wReANSjTU1Nty5cuNCNyXJkkHTKik58RXG1M5fs+VrVMsEmJ2xAOF/1yMCXQV9V9Pb2KvlhAyCl8rI6Ho8PM4Jq3DBYPhkqr9PaGbuw2O1ZL2xCALZFgSpWslWCAvrIwMAA2St0rlq16otZDrZKDoCGZhFOaHx/jdeyK/t2NJI0+/FzdAyF2llUVHRflsAlRCqYK90w7PcDYC3au3dvdiYzWLr54zJsWmlT4LVOPWovbIwFssg+R4f5Edx7AxeHgebmZhqO6p07d27CA3vzKwfzgutQbpeo9OC5eK4WxR1lqFZnrT+nDfFZ7dAZWCF6XrWsWOyPqOxUV1fXyuKWxVwzWE6RDx48mMwP5HdCZTKI7fxXovJl5YdO+gGU1eqkgX1D/KP4lluHhobeTd+lm4dOgu+oc0jHWp24WuDWIe9r6+rq3qn4/TdT3W9oaNh/+PDhXNXyx78XHfbPK4IrAnPEVNKKC00qOsjYYAUMzgTKa7Hs3lT6Jgp6WBAy2t7e/kFm1D64fv36N2W5eDcXycjISJ+sJ2CT6iDSSGAz10VG7cPDwzGctgNgfRP7s1NRdoJiLflePBrp2fZelgorlC5WVZVpcjBqXs1/F7Z1VVVVtF5ls4gFdUt7p+sAQQONjY31ZOMiYrJkvXjWyNdbcUCvexf7a0ClDtrjRXYnCPNH2dnZ77E9R1P8b8X2Ro06XSlisvDOsra2tuzZs2eP65QBga1bpVO5Ki8vp+H+Ti/tDwujUvRfQUFBrQQsJPODY1Mm80MV6PN5QvkB0EALwAvzA4dvdOm0VtpYrxV+2wWU12hra+svZ82a1T99+vS7iK3RYaMcpM7hfynrJKizTmHR99+GtDyXOUbdLriFQDXZztGeRkAqsPXLyrcojqg/b0VbT0vZbSfbKocO3AaO6aT3TcfWYQBWgIpQlwkoKysj+nu6V+Yq6BmEQfowsk57eno+/q9//WsnEVEAV6chrt/VbBxpmnOfDoOVpbBMjodZhPGOjo5r0Otrpwb2kksuoR7UVV6YJZ3Fnb2AGNV7GcCiOh5PJ1AKKq9EwIrOoUiTjZ/9+9BAfwFp8N+RSKRX5ftVwO6cOXNo6af6RYsWvQRkuSkrKHOK4722OFD7EEeYUS8z9Vh8H8L19wjuewPeSY59b0AHptctXNx3g9MQIdK2Hor6l4lEotNPW2MBGVEeVFRUfC4Wi73VS8fEHncbwHoLQNMfEXa3/T9ms3Ov7dlkfhAw8Qr27PnBPZvMD2Iw7fmBuBD7eqVN6V+6cOHCs/lFvL102KhsASD/EYfvKC0t/RmpJT8mA275iPj+z9jY2CedZv0JJqnUO7Vp7PhKe7o4hEv6J5dYYFn5c/mu5FBjFjfy4tRhwrkFxKVLuxmA5dIjkc04crqHuzbTqfedakWnWYmU/kOP7avbtm17mDp/F154ISH6+8hWScfwmNb3Gx0dJX9Z4zKngNz/c5wqpVcwSkbtO3fupJ5SbMOGDcsR1u1ewI1q3jrd53UBZIdrM/g6LvOc7Nfrvde6JqojbmwTHefn55MT29U4ph5sJVt4uYW+17LBIgNjKNh3QtFuxzEptVtQ1ja7ATYVkDx79uyBpqamerJx4UGWPV0KCwtJOdSznjoNh1AcdyBORazDVrt48WJaHYCWX9oEIHifTjqy4Zr1CO+vOF1iDYtyQs4v3494JFkAhH81/2zW0Wn7k3FDOEcEIG5dXl5eB7ZGFv9GpOHVivGzvn81U2D07aM2IFGL7S2II6WjlTc3Iq7bncIFIKE8p/yvQ3iTcbeVkXJsG5E/XYgHhdXL2IkN/HO4J5kf7FtpaGoyPwCE7lMpyxzYo3DX49pL8oOlazI/rPhwjFAdi9/j2ApYuqxE3Lfg3l7G4tyHNNnkpe1GeY0fOXLkz/hvEmRxrJ00PFE+AnCP2jqItYjvJ2jj8xFpuJ2vTwzY3sDyrBLXD+B4sapHd9F3ojzSZKq4/Tm8i69/FvNU6RaewkLzAwC992cpuhUyAMsHi6XATFVnQryDAle8RKPRX27ZsuWHdLx27doYKtajIgpaBjBoWI7Oly8nTKMczxlBpg96Xb/bunVr0qj9vPPOI6P2X4rqRhjMld/yKAF7VdjlOT2T6pUC/DBZdgCG8ncjH+/u7m7KL9HMHlqGaXDGjBkTqmyVSjrMmjWL7HXqyZUDyv5GUVgMME0q6fb2dorjAlvZGkRYbV7SC8qLQM/VUJ75WbYFh+3fj3dMCJ69mIsbgQwnO5pBCmfmzJkTqp0H0fd3dHRUubDPRyhNVcJmSnsy7vh+t7hT+9LLff8tsvwAIGlTaRdFQ7a4dnVbW5s0P/COYwLEN1Bg8wmn8aw6toOIe8JvO4H3JQhkxePxy6dPn/5lAqCq7b6gHLvl4yG8K+KUfkgjAl+brbRDWlWpjEgoyKD9GxhAvo9L46DeZdUJA7D8NvKyiiWazcQdV4sYllTOIAwSXHGz/h4GIPkCHZ966qn96Cn8hRoq2dR50TX0Ymh4MOG2lpgAFMxSAQwqaYz3792+fftnk5RHbW07etIP2n1spYK5UmGLZP6w7NfwLmIV82Te34NipoIAVE5MlojZ6u3tLWUKaTpry6hh5xmSQurA09bZ2TnIFFZvTU1NXAbmVIAwAMfAoUOHrsfhbU7pB1BByracxaWIxZFvnAuhsGpZvPsRZkwnDfFsNgu7l3vHMQQGbbiP3jlMcebils06gXzcRgWvoV7/dNxv/R9FGg6oxA/pbn2/lUeDgt5/IYvjbI7Z6UFcE055g7jQOqBVkrjnMoVaw76f3juErdQtP6CIlfJDVIbwrFJ+4D4+Haz74tz3Z7E0W4K4x1kcBxCfqFcdQOmJdHuyp6fnHZbulzFYgnIsy8dafFsWn492gMiALZUp+pYclgdFPpsT4cL2eBdf/yzQ6hf3UBj9BmCF0JMWKQGR41B2XC1TalONuUIP6BnIxwCyEmhke+bMmUOzqlaJwIAK0GJe3GOajg5nyZgXFcCD/webm5s/Ojg4SI1px9KlS79IS/qIlGsqwJUMZKk4HLU9X2YBLBWwZn+nLm3vp4w6DRe6Aa2KioohXCOF2ekGiJzyUqeeO1KpM2YMAESQlqoUpQ3+j2XZDLiDrLNQmvTuAS+AHXEbd4qb7blOnXLApxvaCOv7O3XZXLd3IO4JPNupkEYidjCiWk50y7ssPzTzudNP+XBKN5TXJqabclXD48pxp4zJk8UZaRR3q7NBePfn3uVa/wAcQ9XBBmBpVnpNSZsbjDDAFcDQC7t27aIFZcfINuCMM864A89e5DOeROGPaT42yy9ITnZ5+vtv2L9//0Hq1a5fv/7VWZIlffyUlTS5Rij2U8fTOWSo6nXdjfFSZaHd8krm94kpnyHGjKS0E6WTP0EqLb/P+V1w18vMWz+TG3RGHMIGDEHoNTuw9uvPzov/Ka9pPtXEOBp1qDR2Vsqt5+0yRFhmG7JxVRxBKbeQwFXzv//97/d2dXURNdy3du3az+HZNzkN66mwV9bC0FkCA0W3vKEhQvtyKPyMS5VvGh0dvXPHjh1kNxa/4IILyPP198MCFrrh+WGwBOmeq5IfMuYxjHovMzCXzUaSDSUGCe507snUmZqZ0r77XSdU9/mgJmVM9bRX1T1B5INfdtgALCMqLEW2x+cyjbk6vH///ne0tbXRdOehiy666H+w/1AQ6cWGCHUZrJl+Gl+Auq3btm0jH1dZL3vZy/pzcnIeZGxPKOxVOqW8vLwiU+OmoyhVZ/Wq5o2MeZAxW2ErARXmLKz363rx9lI/VBmuVCjgIACQHzYnE4F2EAykH6//xwvIMgBLsUGXNd4qLJUOSxN2T0SjorUfPHjw3c3NzWS5GLnwwguvwrUbncJSme7K7wF2aIgw4RSOKF2wny9LMxc3CO379u27jmzI8vLyWisqKn6Kayfrsk1B36fDYInYK6dreP80HfbKLT5h2GHJyrJbY+4GrHSBgF//WJnORKXjPZr+o6asYg2ijme6Lkx1PTAMlpG09u7dVmIPEFz1Ali9o7GxkeyURgGursA7vxzkd8bj8Zcs9OwmAERkf1Xg9XWdnZ3XMCau97zzziMW7oqwmKtMYLgAJMf2798/ra6ubuJ4qwdONlm6+aHLZoWRr7p1OFXLZQWt8IKyUdL9fhVGMKi0TAVgVJ3pKrvP74iHl/Q73syKDMAKgLlyumY/trEFY6IFnkUMRaoKqg64am1tfSczAo8CXL0G+2/qshwyJisWiyUBlpPjTBl7pdObHBkZ+cqePXueo+85//zzT8N9XwmrtxqkDZ0qgyVK3+Hh4YiMvfIyWyqVykKFPVZp8IPIt1QY/qeDTQvDtCBIg++wvj9oW8JUxy2oSQ5eQW5Q+Xm8gq/coAtXOgt6BspwpoFHHXD1IoRIEICry3SWwNGpmKOjo8Qm6QS8wBN1FY//Zdu2bT+nd61du5Y8Jf8qy2YjF6QD0EzIx+OJrQqqRx6kbZaO/VgYeR8Ui5Pq5/wauKdK4asyNqpsUqrKSiYOI/th0KZyexfYLEKvhSuT10bz4w+LsQITApsYbZ9NfmfdaIKr9paWlqv2799PSxiMXXDBBeS+4DsqK7G7sVlO1wYGBnqyJMvk2K7NV3UsyuXDwT179nyars2bN689Ly/vYVzT9gafKrcFXpbLYT7F7MxW0nUADQ9aDgVVZhC6+dZKB3ujyoQEZRytans5VQyWp0LYUwWcuAHwdEw6SMf7zLDgFGKwpjpFKAE/XVOFtbLAFdlcHThw4CADVxfg274TIsAYHRwcjITMYMXa29uv7evrIzaxc8mSJZ/H/lzdcjyV7K64/BzOOg5EZzHoIPJG5k9rKsweTUFbEboCngrpHETnN53AxK+ZSabkUabihoyzwdIZYw8jUXXtBuysFV/pyImmi5dtYSUNssJqNpjAVs3vbWpqasZpFNjqMuy/rbqciupMQhtT0v6fR5RnWNaJbN+cwN/w8PCXGxoaXsBh5Lzzznsl7rnWS5kI2+7KLY11Zmby18fHx4kdjDsxU6o2WDozDsPqqAVhaK4LClRmLaa7o6ibbqlWwH5AUyYqzaDtysJgwMIMJ6hyHrYPuXS6OclogJVOcCUCParDhCJjd2ydKgArjJ6SznugiPcdOHDgvYcPHybAQwbgV+D5r+uE7QVgMQAwftJJJ03IgByXriepflc8Hv/zc889Rws3j59zzjk08/CHYZWbINm9oIYImY+xhOrzTgAsFXVPt1ecioZdx/4qFcNDYRiNpxrIBOVHy+87ggo71bM5wwbAqcq/MCZVZCJoDwRgBW20qMJipXMZDw3w0+4HKKVidiGU8PP79u2rb29vJ2UcAbh6O/ZfTkW64d20XIPu4qUnKYZ9YO/evbzdFXltr9Atvyrpn+4hAicwhGvkJX8sU9kA2TeH7Q7Br7f2VAyPqHTyppLCyRTwFkSaZsLwmC4jk2owHdaEhqlSxkOzwdIxTM0kJ22ioSdVMGgfJuzv7x+mBWlxXOpleCXs5XISicSWPXv2fITZJw2/4hWv+IjdiajOe3QN3QGCaAbhmGwIykoHpOU87Iud0obLs2hHR8c1SP8RXO5cuHDhF3D9bFG6ytYTSxfV7JaubkN7Ngar1Z6+focHjye2IwjWKlXgOox3hckiBGm0nirmzsuszKlkj5cOoKHbWUoXs3VcMFhOFcVt1k7Q6/SFUdEl9lON2E53qoxhMFoqaTM2NvbHnTt3foIWbi4oKBg+55xzPoPLV6cyTQEAaCnzWNDs1fDw8BcOHDhALiZG1q5d+0rsrxWl21QzVnYbshMBLQDoFhzGs04ACdLAPVPKRdjx0GlHvTppDevbg9IBXuObiW2HbOQnXSsSpLNjkG5glpvuimD/X3aeyY27yJko9g3YThexOXS/HVzKFpsOYpHZaDT6w+3bt38VAGdi+vTpw2ecccY3aOHmoJkWGYMFkEcMi3ShZ+7/ZTID93g8/sd//etf9xFBtnr16sIsm91VEI4kwy6Tfhd7trZYLNZiMVi8fZYTE+bmvHSq9BiDYCt0OkMq4Ybh6TtVPrD8KvVMV4JegXkqvPsH9T3HizuRoJyqHncMlupSF27nur6jUlFYFNmkfSKWLujV5BXTYpy8me/YseOndDJ37tyRurq6u3C4IYhesG6eWABL43WnS9KlqaGh4Sb2ba52V16VVqobUj+G5pFI5JAofcOcDTiVAFeQeenHji9Vtlxh5nkq2LZUldlUtgNhzUpUXc/zeKvTmSaBM1g604bDsDEKcikGEUPiVlgdFNc+2aws3V6zx++M9Pf3X7dr1y4CHVmnnHJKorq6+vcIZ1WQBVtnqRyAvTYVBouT05xcMuDaWGdn5/8MDAyQ3VVHbW3tMXZXQbBQ6XA06pS2CixWrKOj41CWgpsGPnw3e69MbciCmBGm6vNKVh9T4TAzEwyHj2flOdVsq47nvA9iiZ8pbeSuA7JUZ+W4rfU31XrI2D+v4+NK1T2EZlygazs+0NDQsJvOV61aVQT5HQ4XpTF9Jrq6ughgjQfBYEUikVubmpr2EG47++yzL8L+Wj9lON3MlV8h1xvxeDyhkr5OQ4LHSyMcNlMVdNkIs6xlMpuRjqWHMom5ChJAZxqT5XVYPOyJXlOCwfJq5O5mYyQDWaladNWL7ylb4X6esQi5Xuyq/PaooGj3HDx48OrW1lYyKE+ce+65tbm5ub/BcWWalWJ7LBaLqwKsiooKWuRZONyXSCQe3717988oWIDHwuzs7B/y+WDfH++9UGZztZfSdsGCBePWMjmi50+EIUKv9Uel45jOMlVYWDiZedFodJoX5RW2YgoifQoKCo75Tr9AIYiygLSn9rM+66h5hWVisRnbfaOjo5vS1UmTmdv4BTxBpalOHmaap4GUAywvCSxbx08FTIVhm6UCgHQMHPv7+6MAB7twz5mi53XXOtSReDz+EIDHDUNDQ7QcTXTdunXnIQwCHwUZwLCQx3haJ29cMb/OdLje0dzc/AlixGbMmHEE4PGRLIndle6wdiqVqM7Qt9sQ39jYGHmvH54KjVAmgyxZuYDyr8TeUrSruY5LI9tI6W4GMNieKtbFr3f3sIdAw2R7glhyR3Z/UVER5fO91HzZ/qIysFnlfQiD7n2Ee9/mSCRysU48EQaVuzu5754MwwloedFhQRj0A5BaaUZyCw9CVfPwhDRy92qDFUSCpXrGhEphdZgF+Sy2M4lJyM7OtgONMJbJmUAB/tZzzz13B80UxDuH16xZQ5XxJj/+bHSWybErfIEX9/0E+jSGp9YK0nV8YGDg+u7ubnKS2rNo0aJP4tq5fD74BdzpcgnidCyyvRJdR0P7HE5HVOyv3K65xel4Alle6h7A1Q3Y3exQX+rYRoqUymdVmMCjr69vKTpyL6YD5KRS0GFdWl5e/mKaFSsPrp5NJBJ3ozPbnZOTswLt2vbe3t6CyspKmQPl1bY03QDAVId626gRjw0ioiPoZb0C0k83cGlGdWZTGIxUptlk5aa6ArpNs3dy0SAqDGEOdbjFTwdscMu7PInt3WGwawIZQiN0/Z49ex6nk5qamqGTTz75a3j2rUGAi6CWyUGDdACnERUno+zaOfY4jY2N/V9DQ8PTBNRWrVr1Mly/Qdd3mluepMPuz6vbC9syOaOtra27eQDrx9D9eGK8dByHutU39MiJOajn/n8WefAklWls2bhei47NWhwvQDi/BQDKAQBKHM/gJ90iY22CEMYa1bH3/OvIkSN8u7qF7bO9hI3y8y7qBKvcW1xcTEzplbZyfU5PT88MgLvOMNown+nZyx0PQkcVAChH/bS7OhggXW1XoAyWqhNM2dCgSoKk01+WB4efj/G+r7ykkcq7UUEb29vbP9zU1JTsBS1fvjyOQvxbqnhBVaSg0hngqAm7UZW8hmKiButcPg741mf37t37HTpfsWLFGJQZuZ6YJvuO400ZiUASetQ7mYH72InqhiFMhQJwtYEDV30oy5+FYntQdG9VVdU6lNV+HC7MOjpkGFr8dNiLsHv5YU4sUPFlF3QcuXs3WMfI9x9YgAEbratKdS4vS+I82bJb5tr4LThehzbsDShHn6uurlaxS63n8mo3nl+BwzIZ0AxjPU3FyQE3IvwCbLOi0SixV/NwrVHVKaqT0X6m+8wMdBZhaWkphUeesy/BthLb7KyjRsxU+MjmZgsS4KHh4eEWN+bKCxUY9tCgKk0qGq8GWm8CSGjGfwtEw4Q6oM1JoFAf3Ldv3ydpeR46Peuss+bl5ubei3Bn+2WtdNJelcEaGhoiZRNTcTKKbTkOp3N5MICe48fQwCXwja0FBQXJ75QxoUGnQ5jsiijtRMyVaEO6bKN6N3/+/IR9AWhVRmuqzyz02lFSrOv1XL27nQNXg2yzmKo8/EduUYqwdRnIGk49CbujbGsXVlvHaMOIsRqsrKxs45tixaDquA7RFrRj6wgkzZo16xTU3z0KAOZK1ql+EP+XcdenY+vMtDwbHR3t7evru4ZhgiQ+9avjVTHAlF+LEMCKGpAP4fi/sZ/vgozfQ6e4/7e49nFSsiLmSsX4PV0KUNfYnYvrY9i/S8ZKObF5LixWPBKJ3LJz586fsvORc889dyP+/x7rTaWl1ykp6MMASC2cIpLJMY5QAdA/3d7eTk5KB04//XRSdpcG2fPKBJbLq30h3TMyMvJ3SpsTccag3/xXzPtJFqO7u/seplRb0ImyMxc0XDgAxULt7ISXGclu8fYa/6BYrnTlkx/v8QGwW3XW/wANA1QEvLwf+zoOpO/OyzvaVANofQjnH3ELo7i4mJ5dzQAWgbONXHxz3dLJ62StIEgA1vmw4tivGh8nu23VjnQ6mS3fAAtgiWam/RiHJ8kUFsugadi/AbtL8OxbAbL+rNPgqBreBkF36joVlLAwD9AYu8VeWcbtOm4uBOEeQQ/52oaGBjJoziovLx885ZRTPovDq8NkbNzSW8XIHT22f08cvZBQcTKK/y6y4ofG59f79u17iNqlM844oxbXblahj1W/MZ2V0av9FTdxgLa+w4cP7yQcqstcqbBXUxmkqTgTVen8QCpt9x0WgKtJwX9xN0XnBUQbu6tg1lL0ksa262N+w+3q6tpSW1vbR0UF/10O0H6NZJhwkkHt7+9/APeut86rqqpoqPDFVNQfXUE9oMwaCKrt1bUPnnIAq66u7qPYfR0Jk+PWs3IwGi/Fpd8CZJ0PkPUPXUejU8nxKIvnA1lHx+bzZZVPxVUEgMbjBw8e/AQqJxkPTpx22mnZ6Nn8Acdnpbri6IIwACxyIZAgH00KlZL8h13ATg/hm79IB4sWLeoDWH3IztI59XZ1Z7tmAmOl8owdfCFt/84cX416Cd+wXkr1pNFiIGpqat6CuvgFP3WrqKjIMljewBgSaxiKXDtYrh7ui0QivbLw0QZsQJ5ZbiMqWRi0Nucm63lZnDgfT6vZRnHqZWFZcWlUSSv2bdpheQFOMhcNKnEZHR1tFORP0qWCPd3mzZu3lz8fGRmZ5oWJY0LvfxNNjpg9e/bLx8bG/u4SzpXse3cj7QbQDk6OBOTk5JRbZgH8e/ANE/Z4Oulp/l6EP82l3NZZ6cmGTiv5MotnN9nuPyZct/wi9ydWncB9yTrB7k+Gj2Mrv3r9dqozEmAtXrz4k9h9ScWZo2j4iwkpxx+WlJScBpA17ge9BqUUnHqwurMJ7dLX1zcIsPAYCv9GkQ2WqFA49KLiKFS37dq16y7GAkXPPvvs03DfT3Fa6UVpBOHETcYw8teZjcGQTKGzb1+Ha2RjkEBvjYaVaSmcdqTlt3H9JNniz2GnRdjslRsTKNqi0SjNHh2bO3duwgt75ZSHxwPYUl3+RmHZqvusGatQaNfn5ub+BXVyuyxfRWGyWWk3Z4kd/1pA4EoGklwF4OpOnt2whVGPd50lAmm2+NB0+hsEbUll1n+cat6M+27B/ha38KywBN/mGlaQTiWtPANo9BSXEMufBRismYfkE+tNdAD98F/YCQEWdOWVDBhSZ+oBdvmf2C6y7unu7s6pqqpKBJWGDnmbLLf4lkqnMot7tiMdtf2/Ia+SYdvLIGufHetEJs4q9ASwAK7ej4/9kn2IyyMrsBwfezGefciJvUqlEtS1k9D8ZprRt9EJpMmMawHODvX29v53Y2PjLlbZBlesWEF2b/+bDsrXa8VFpUsuaaMYpysYY/fd5ubmZ+nx008//XLs3yErdzrsVToZrQAbgkh7e/vjWdyUaNkamGEybMex3ILy8gHsy5mB8TYok01MMTeqlik7IEIa70Ad/xMU525sxQBuK6BsafLG9La2Nqov0yorKydE4c+ePft67N7P2LVfIxyy/zoLz7+a3VLHlPhZLkpzMj6snf0RwtmFuBzB+UkAk8sRnuWWgMDKBnzDxSIwQmExB6zWt70kLOyPCQvPJMPy6wjY3n7y32XFBZvrd1lxYeFvx/0bAaLnQPn/2AoH5+/m34u2eSny50XFuFbadNlm6wBxeQ1A0kerq6tFIGnSHnV4eJgmVwxmHesCIfkatziI4unkDYD8q9G9fP0nljSLOTil4PDfXWifn8K+GGl5OrZlCOO0w4cP78KzwnD5OPBhW3nFdZR3YPsT2amx8Ffg+mwcT0caJetEaWnphAgbZMIolzbAArg6ExH/jqwS6BgiouIRGn1IBY0qLrAcGIOlw3QpfOdvUXm+S+nuZIPl1JtGAbsfwOpLg4ODVKgmAKwKUBj/yBC9J2AV1BpPmrMII62trVSxYirKn9nr/WPfvn3/R6fLly8vJgN+GRU8BYeQldPTyf6Kho3R6FL5GBH4xtKyvTqeZxD6sL1KHtOwBMDPa/Py8v6UxabG07AcAQrUSepV07DXfW5DIMQAsGfo2d5oNHotFMbTttu3cMfk5mGfU7ygeAhcbYJS+3jWf2Zq3V1VVXUf3mWBgtVQjlePjIzc6cA2WSCkD/G/Ckrw39wtSSaioqLiXoRxF/vu1QyQ3MjHRxRWT0+PclhBMuoUFyudrbgANGh9F9ILSdFLs0Hr5s2bl8UxRVv8MtXsvBf1thMd5h04XkXDhHPnzn0bysTPbOzVpO8rGh7s7++nxdz7+HtQDmq9svMas/BusA4E5fZplu6UjguRbvsBpBIq72SsWL2VJrFY7FqUG2md0GGwUt2WaTlEW7RoEd3/A2RWvpVpdgbLDhj4a04bQMfJXV1dufZnVHoxun640snqDAwM0PTZB1QrH9t3A1R9cOfOnZ9i4CqyevXq81AY/5H1H1uNjGKtJCCTPB9ThZNOZ0ajdzbiW4XG52ry61ReXt4BxUaNTqlX26pMZ69kQ4X2xpkHRWjsqGx58n9lGCo9QcP/JMrl5TRN3vYXKUBS1vux1YvaNLIFwvHk5Azk28c4JUWMBClOa6kdOj6CrYvYK6f2juIBcHUdA1fEXtEs20OI5x9Q3b7P5fNlAiatzooPbQAh7+HAFb37IIvLQYCTRwE43sW13zfge5ZY8SG7HP7bcO97OHD1krDwrndxaXNDYWHhEt2JP0732+NC38WBK+F38SDC+i4miSyxH7NG2yYV5iRU1Pbcx13fKHiUylby2bGxsXssjHOMQs/OLtNNJ9n/gusbrOus3MZZeZsss4zJjbiBK/77WZrcbF2jOsGBK8c6YbFXmSq6DNbbLaUuAlJeG3I8S24eilhCOnqYVgUlYTFYMq/zKnFAQ/hj3PtaNzssK3w0jI+0tLTchIJGfsSyamtrx2bOnHk7Dt/EMw067gbC8Hivw2ChYaAZjwny0aQwg/Aq/HdNY2Mj9dJiCxcupJ7T2fZnVNexzERWS8eezc3+CuWqBwqWhgd7Zs+ePRGE7dXxDrpktlduLFZZWdkEOkxPDg0NfRhK5Py8vLyNOTk5l3KMFg3J3QnFQUrxzcSCcK+ut+xLkG/3MCaElFSzNeOQkzgDTI5tInMZQEOUc0nxID78TK0IDRni3vezZ860L+XCjOKt9uke/L+bvfegzfs8XYsCjPwBQOhX1rAanv8wdh/jvs1yBnxMWDZlmwwL//+hoKDgV9wQ3Yfx/McC6hAcExfE2/N3saHZuL2M4HpcwEjJ2uPVIh2C43tx7SsMKNEwYX5VVVWMe3YD11mnztSgfbYhCy/H6sDq2lEqsj5UlpMzaWtqajZ2dXV9j08Hq8wS7afB5tVb4JGVm8k6gboWtz2TDF+1M5rOtkyLwUIm/6+IMRAxWPbNjZlCghIaLXADB6liGfy8R7Hw0rBCt0TRdaF3fO3zzz//EQauYmeeeeaKGTNmbM1ihpBTVdiitwOyNEeFpfJQsGvXLvLvlbdy5cpTeGpaN68y0eeVFwrbqREHcP1NLBajKeNDqoDNsFf+BA0/KekmAgkdHR03Yb8e+UDrfR6yKcV7beVtUlEizywGrJmUlNfyyIBMlw1cJQXg6yHr3VDcNIRUYrtltdU2I/5WfJKASNSWs+s/5trzc/H+bD4s27cddGIyrLC4S+cC6GQHlEWrOa/rk3FxWrKIrtvjwn1XKAwwORm1jgHCiZ151ipec+fOfauVb/zSOMRW4l7K5x6ORePLV7ZXParI8E/ODgQ4/ua8efOuY7657Hk7ofouHG/g2rLJOlFeXh6fym2EckFetGgRLbeyQpXJUP2f9b6fZ6g74xCoF6XnxhSg8RjD997ldA8apd82Nzdftm/fvmQhmzVrFoGrz6EA/oaWGbDb1Ti9zy0eOoyG0+bFQzi2RGdnJzUgI/bwBWlaRjO1SBksXLhwCN//E5xn6zA7ftIg3Zs9fUXn/IYe7f3UNs2ePXvMKR2c0kqVvZqqaenGLLgtcu3GkFvHAFnj2EjRNQLIvIje/N1HjhzZQMNy3LvJaPpq7rnJoX30n0jBHiHmyuuEBO6ZfkUbuxLbfxusY8amUXxcZ6FGIpGHuZnO62iUhw+LxAqLB1dOYXGKNhmWU7nT1AWT32WlMxS265CVKC4yW0UdFyiycIjF4o7Xcd97JbeOqwXKLDvWXi6sWlFZlq09KmmL7ZduwbWnuHMa2qMh8Xv5YXEdvcrbEnN5Fdepi7qjXxkFsBDJ13oBIyofNzw8TEMbUVVgE+YQhiqF6nUZE/b/twhs2BRmM5Tke1544YUbAcKSQ2IrV648DQqTFoq+KpUKKCiQZr8GpfPc0NAQLeUTlYWPnmMnNlJc06ZPn/5NWmZIBhBUDcIzAYCJAKrsmhOoRbo+3d7eTotnd4YxNBjUTMRMGBJUNeTVbdhpGAMKgVgFyoeDHR0dX4Ai5G2f3salb6UtLiN+gazFwCi2a0WSpBrxkLxFDu8bkYFcQX0uUnlGJa1E36WZrkVuIMlDeMnhY1vchvhhQus/mgEKsJFvgXR2nZYJI/urrqqqqpd8IGMoPTPhKs/ScHdbW9tGlO/baNky7vsIBN6JzgTNql2ts8C8NTxoLzde66MKhkhFm6YMsIDmz3Oh9zwP7UFpPApFSpT6qO6wTpDDiAF4VZdmtHW9v7+/Gd/9B2vULBaLfWv//v2vOXjwYLJXMH/+/KzTTjvtVlSW+/HMvDCo6VQPlbGZkPR9SQ/uKs+0trZOW7FiBblpeItKnE8E79ai/EaD90ORMlNs2MwwYYB5A5A1gS2K7RDq+Le4snk+6n2Bw9BUPJPyQWAHJpOBLLEfr0DD8tv2eRhuSsYlSH9KDmBi8tgaJmTMYO2sWbOsRe6Tw4NoQ61JUsMudTrPTxwV29FhdCJuRRt9Ng2L2yZ70NDsIyUlJau9lsGpPjRoSa5GwThF1QBUg3WKDQwM3MrTnSooMwxbEpVlLETPOBlWi8K0VahvoLJU9fX1faGrq8uy2Rg99dRTXwVgdSv+rxC9Kyzwo9ub0elRcI0HUb8Dc+fOnVDJK4ArGtf/tlt6y7z3ZuL6VLKelqZx+76Wlpa/4e++mTNnjuuwik7M3/EOumRLXamuKCGr81A8u6w15iyiC//TTGLyeZS0OamqqlqXSCRe9PodOq5iXOqpdnzIeJ8rN7u4spQMi+JFYaF8viiLH5sIcExYfkdFmGwm5ocBvWPi4tTOFxUVveS7VN+paOB+TN6hjOwW1Hsydn8Zu+dSpM9s6z82PBi3TVKwx6HAz0LIKs9SRwK7TnQahjo7O+/G8T1I4xVIvy/QotVsEseNFjBUKI+TZZDPKy/Msu73ZgqDNTsIhoQvaNFo9HM9PT1NOOx2WnvJzegukxgsWWPGn0+fPv18vOfraMh+wsDV+JIlSyoBrn6J4012cKVbSIIw/g6BFRpEb4ds7QZVbkYDQuD/53h/qVO+e3XRkalORb00DKhDP2ZotVfl3Ya1Sl2+8oa/zPDdYmYmvVvT7EOdd4QEgr3EZ9IomRlqx+1h5efnb1SMp1NYoX6XQwd+Mi60kLI9LjKTCpW8UzBxuZezb3sZzi+2yhDADDFFXcdQScPDm0U2WDaZNIQn4OtSZrVYJ4ChCDbL1cUTQ0ND13J/vwnXckIsgxkv2V4rtxdDUpsx99fQ8/41leMsF8/TurYiqVB8uo4grePS0tLF2MgB4ROovKtyc3OvJQPQZcuWXYtC9RSurQvAkNyXnVRY70HP62/M/1VU8b2fwW1rVJaJkaX7VDNo56+52WDhvOXw4cM01Dw8Y8aMMT8ORXUVxvECilRAi6pBreC8nnvHFp7l4RToWwoLC8/xaiMpYzgV6/3krLDs7Oy3FBUVnSNhrwiETBozj46OPsh1nDZxDM3ktzkJrfPHp1MkEkmG5WcCDv9dnD1TMi5u5QD/b+BdVoji4pcRsU8qsMhO/h0ATLTWnjVMuNGyv0LzaQ3DjbqkT61DGm23jgnAuMT7Bi91iA2L9wwODv7VFp9yxbI8WScorwoKCs7xMvnEjZVLR5uWnYZ2bRy97s80NzdblfqQZOVwZSZCl5kQuZIIivXgM7OkpKQGwOqbOKTFQd/E9ZB6ampqvot7P4ItR9aoB0l7pprFQZ4/RjiL1siTvR89rJfj/0+7MZZe4z8V2SsnUADF9t0xiNWj1Z0RlImrz2cqI8Wfo/F/hNZLY4siv0ToOrcOX1JGRkbI4D3Cjmk45HGuTD7EQIsngOhXyO4HbdHXufAecjJSZoBo0u0EGTpDqRI7N2SFhf+/bvu21aK4s0WU7+XYq9uGhoYmw/JTTxhASsaFA7PJ73ICelZc2Ew9YVxkdcvLJCInFou7dzFrQ8n+ihijmOTTCwXhbraB6FcJ0uBOZqjuOtvQKQ1J5syZcz2n3wgQ1qjko6hOsDzRyv9Ma790bLC68dHVTuvmKX50HIX++paWlgc4cBXVRag6yFWnoropXxUnhPY9GhbyOP4xnNPyFaXEQJCDUZzvQ2W5ta2t7W/z5s1biftepfpeJ9BgT68ggYTuOL3gmNwzPJF1dN0q13dVVlaSncrdFvhXdR7qZjeTqUNIqgytiHlAWWo8fPjw76k3O2PGjKgqQ+nWwGeK3UKY4uZE2P6/qM4DPK1mdj3J9dhwTophO+6zWPjVjKGo5EDITUxZ909SFmNjb8nJyXmc7FVopAXbI1Aom5ki3M7eR2HRMGMd2s2LndoGlVnVCg6QaW3ZS7j4WOsrbmfDS3Xsu67knrkH9dqaKTk5MxhA6Uto54Rh4R6tsPx0TJiPxcm4MNOLbcgz6Xd1dXUpxUWnbojyCcBil0O4BLC+wl1qZo5SexXa4yL7teHh4U3QM5/A4SJ26UG2rBOlQyUDVnUsj4aQZheI4kurEOCc0pDWvLSe72XpuJpnAGOx2D0qBIH1n71O4Bp1ZDYz+6ztlosTFs86dDAv1tVTGQuwIE3YqmXK38XwMo7C9FEohcfY+cGamppokAmgq1TDYjMYsPoIDq+3pVk3Ct332tvbf8mGy7KQHn876aSTaJ2r9Tpx8wOiUs3ioMF6Gr1cGkIYVrj9O9gWqsxS9cJYZjJLogLAuKEUmiRBZahd1qMOshNyIjJZtnJTyRSKBaA2MAUtmvTTB6Xx2d7eXmtoZ8hKT7QDnagXV6Ct+BaU2Ub2nAXcRAxLpWhRZR0fTE4G8Wxpku6BgYE1aJNvZ+sakjj5NOolFxQAIdbs1UPkD4xjq7XCIp9hfFjTp08fD6ruIJ1pqbE16Mgrx6W7u1srLipxEpSh5P1IqwEnVhF5/iyzwSKQbjF9EYf3TJbJ0tLSWtzzkokK+La3IQ0eJB+D7NKVWccaoW/He99QUFDwUbz3AodPscpnHfNTKPq+PsT3duaNvUsVAKGudAI0JesEt1SQY51APCuRfr2Z3H7oAKwd9oWFRbMIHRIygcbBAlcTDFzF/DboTjPIdNmpoJQzKkQSWOHddmA1jML9YxS4H6EAWSCDfLK0k+0MGtr/RsGnJWRy3HqodrYmLMYqaEEj9zDL9zEJe0WV/R264CrT3TXoACkVZgnl5Z+HDh0i79wjFntlB2AyoGWAlDdB/d2cl5e3lPxaoc6uo6n0AEjLWY+byh7ZzjSjvj/T09NzP/foQbuyHh4ebsD2HoCTNQjzUoSzAs+TWxZaxJb8adEQ13PYnqe1WvF82CzqMN7zWSjoewoLCzciPmQMvZyxUDsQtwMoe7sBnv7IAYMjiH9E0A69JCz8NxkW7k2GBfBzTFj4xogOW674zcMATZ8tKSm5B0p5Mi7YknGhtFaNixsbpdFRWm1rpxIO4dyJeL0ziaqO2oNF2OoBovC3W0AEZamW9d+PEXzbVoCYlyMdrkIaXMqYIvK5+Bie/2tHR8fvSI0hv6JO3wAAdh8A0NkIvx5hnIowVrKyT+X1ANkX456nGGNLMqBTHvFsA61fibRfk5+fT0tPJesE7l3IwifW8TlyTt7X15eLuGR0+zVNJWJUEBYsWPBW7H/ptgyOkyBTb2tqavo+U7JNAFdjosZfxVmkTPmEkkgSf1wAVjTOfC3OP4p9OZc25HriblTcH6AhtZA8fXsbelSjfNqhQG2iHpYsfZ3WgNQBGX7syVQaPdvxOID1eQCXDXPnzu10yq+qqipSLDTLsEoHRKku3pwu0KU7vC1zp0DpiYblDe3t7S+wuhTTcaaqU4+OR9ClUg5k5QcKgDqmCxQ7qDQLrQX1W9ihRNswjTEPNQph7eMXt6U44fml1jne4epeQfVe3Eczd+cqfFebGwjxGxZf/qCwJ+OONPDk1gJhaMXFqfwHFJc5lA0KeTF5H2MKHdMbwLeOK5MNIvYN4eUwAO9UdmmkgZauK8xiBvP2+CGM/Kz/DDW6peNhPBvVLYO6dQIga8Jr+4UOU6jtvI4NFq2hN8oSXsiyOCwu3Ize9o/s4Epn9p1XcOXk78Zr4tnDQW9oKa5di/9pRfhiLi2IlbqPDFsBrFqtXgoruCO0RpM97ugR3IgewRX2QuWVsQqS1VItvKK8oanOAFfdVP+d8gvpQUD/xxa4ktlTuQ0FZ5LtlR9w5QSMaKiAgat+C1x5sbk6UdclVGG2neyxrGto0MncgXrseaw9LGBKMJdTUqRYhqGAo27pygBTDxQu2WdZi94Xsn2Etbm0j/HgKiBmxylOiM5QA/uuUu7brO9KxoviI3tnkGH5LaMlJSVDxBpmQlw40CQLoyfrP64iZCY1g1n/GbomG9Zxe7sJUJMAgDnAylgFi0ecMVmT5RV55viNuCeG//dz5dVKR6u80sNRO8BTLa8s/XuQV9I6UVRUNKFTD1LdvikzWCQLFiz4Po7f58SsiBTd2NjYN5ubm79H6BsKISJTKLqsVaoSzPo+gCocTnslDv8H22XTuA8nR6EAFPdHIpEfogG2gNUEA1ZDFRUVE3YWit+jYL07Nzf3R24LZbuxV2GxWH4AFnoIn2xoaCB3HPvmzJkz4QCwrkF8vqkSTy9Dg+lgr4IAV3bAhLLV1draeikaHqLd91dXVydUmCunOnUiAizd8hE0Q6pyXxh5MJVWOTiRh6tPhNUovOS7Fx2kEk40Gs0MBouxLF/Ozs6+CoUgT+bawHoh81QbgTKI6Kzjl0ngigEr6hlche0DeO8yG8tCyxb8HKDqZwAUnRywaidgZRmAymb6NTU13bV48eJ35uTkXOiFmQrLFsvH+m1j7e3tZH/VO3v2bGGvsKqqiuwyblWxpXPz0D4VmCun8itbB9I6BnD/HANXRwhcefULZsCVnLESpYlTmXRLOydv8WHE9XgELWHF228HM6x4+HmXrCweD/nudSgwXWmiBbAOHz58YP78+V9FRn7SKdICVoFo9G6/CZQOKSwsJJqVwM67so76r7IvknoYoPNuAKt7Y7GY5WiPwFQHASuLInVy42D/D0pzIh6PvxsglmyRposqjmg41mV4NqU9IjsAwrc8yWYPDogAEMAVUfXkkqFAh4UK094s1b0wGfiyjlHOHmppaXkEp2TLM2gHZLp+dgy48pa3usP1qsBLNw+85lcmMySpLINToTN2ooDosEFSOtMlV/cB9KL/v6KiIvIrcpZKIwGwQDMmvu/Wg1b11q7KXqkAPwlbdQp2byXbqiybywAW/jaAh18ODQ09MD4+bk3XSDDGarikpGRCZT08UeMMsNZEADYvL+8la/CpNO6qoErnPp3/+GsAnX9kTF7MIY8/j92ZMnbA3nNXrTCpZrV00kqFveWHBjs7Oz9ngXoA0wnyqSYCWLrMlQFWznnkhdFSbXMyaR3ME43F8gIyU8limboZXEc13aJlg2VJdXV1LUDW33F9oczLNsIfhKJdPjo62iLrresog6ATEaDqJMZSvRXbGYJCT0Ocf8S3/GJ4ePgF7nqUMVajBKxkrIvb3jru6emZtmjRoj/m5ORc5mSLpRJmEAyPl8LMrk00NzefMzg42DR79uwu+z0ACeRnhTz3TlONl67tSyp762GAK+sY5e29ra2tT+K0C+nW4wVYnahG7WErYy9lLJ0K1TBYx1f5O1FAVVjgKqNssCzp7u4+VF5e/rrS0tJfoQCc4uRNm8n0vLy8X+Xm5m6Esh1SBU5+gJVKjxKAiqarnoXtcmyvzzrq70UUxrOJROI3kUjkL2NjY/yyCWQL01NcXBxz6t16cerIVqGfwPvei7C3Z2dnz7MzWCrDEipDiKpheUnr8fHxNuQ3pdGAYGhwJvPWPs0pj1SYgkyZTegHXLkBKzZJ5McMXFE565W5cbAfq9SpE1nJ6XYwVGxm/HZaDIgJ9hvCAilBpGUml5XjBXSlM01zvT7Y39//fCwWe0NlZeWtAAGvkdz+cmxP0yy5oaGhZ/w07iqK06nQAlQtwY6YE/ISS57TqxyCOAyAQIDqd+T4jLtOw4DExgwB/CRUMlG2nI6TXRbe3Y70fSfi/CCzY3sJIFKx7dIBdgErLmtq8THORaurq3Pwvl/hcJ4fhuB4YK7cwA8bGtwJcPU1drmF3Hu4ASi3dxpwFUzZV3WREkR5zIShseMBBGZyuQ7SButEAlVTAVwl89DLECH/F7Y5M2bMeFt+fj6tc1Qlob/p53c4vgP7RwG2xnXYKh02pbCwsCTrqH0P2YCRR+JXZLk7meuAQns4Ho//eXh4+FkWV56tIpf8Sb8bXtLLy3Bhb2/vtHnz5n0CafslN9cNsvB1KqyXmSgO9050dnauAfieBNQAVxT4ndje70cZhDFsEza4koEpAZPVBXkDOjJk19cKcDWkMhyoy1yZYRn/ZehEnlpvxIClqQy8YrFYqHHzC7AskFVRUFCwuKKi4gO5ublvz3rpbDtRQ0/uDGhW1BYc72Qu8NsAbiZUlQFAFL17FrZFbMXxZdhWsI2OsyWftg+g6gmAqkfw3p02UEXOzMjeZQSgatxLoqv4cHKzxWIgK2fBggW/yMnJeTMtFC26x80GK1XLyDgAiqfxvsu7u7s7qqqqaP0rWmfwHX6UVSaAK91hU5XhcNtxAp2Pd7a3t28jcA9wdcTragcnorf2dLI+RpFmlrINMz9SMURo8nki1GcyHmBZ62Mx9/nzaNmY0tLStwJo0dI6c1UdUrJj+tpm6r1nHfVaS9PRaaiJ/EyVWq/E8Yyso2v9kdfzfI0E7ce9/wSo+jsS9m+jo6Ot9vTOOupSIoLviHvNNBVjbFWARYL4ToeS3QyAdY6uwbtqfEKsCLTmIk0KWMbloae4HK/gigdJbIHaT7e0tNzHyuNBclAb5HJSBlQZpWjEyIkKwKYUwAKYmryHrSFEQ3OzcJ4LxbAqPz//1Wxl7loVoCW7ptkTP0QLpQKg7IjH49sjkcheWsvNdg8tvtzPQFUiyAz0M1QouLaorKzsUYCsuikIslKi0NLdWw0CXKGc3tHc3PyNrKNs6gHUobgXxsrND5YBWAZoGTFyIgOrKQOwSkpKXnLP0NAQnRQxhqmQAbH5AFvn5uTkrGSreJ+MrVhFESmc00y1g9g3AEztxbYPCbcbW68gynEGqGhG4FhhYeF4KgqEymLFMqCFtFuFdCSj9xlui0GrgqxMps8zzQbGh7sKKQCyjhOJxB8Brj7O6KqD5eXlUdkzhrk6voFY2HmWSSDRlE8D6FNdDqYMwHJ6BmArl4GtiiybbRYNJ+bl5S3Mzs4mxquaNsaAlSBe2bYPIJuoEezJ4LwLyqiTHDCOjY0dwjbgEv0IA1MRBqgSYRUGHSNyNxDkBJL6+/unzZgxYz3S/H6clgcBssKsuF4qSibavPgZFtQAV4+1trZeg7JMsy4PA1wNG3BlxIiRTAFxXmfHZnLbk/EAq7i4WPmZ4eFhAk3kcqCAsVcEpnICSqs4A1G0Uc+fFFUCgGoiqMQKsuDqziq0ZGBgIBsg63Kk+89wvdTLjMJUgiyV9PT67rDBVRjDgiKQBHD19JEjR96Pyk7lthPgqld3CNCLI1EDugxjYMTI8SiqbdvR/mwGA6yioiJfjdHIyMg0BrKy2cYf2wMd57YEf+4FSKVa2QQBsmjf39+fU1NTc3lJSclPvYKsdACtqaL8vDq307G54sFVe3v71dFolDoG3QBX3X5AlQFYBmQZMWLAlZpkPMACsAmlEZoKCzv6YWZUZxU6/TcwMJBTXV39OoCsn8hAlhc7rExWLOkc0lQ1GlfxeTU+Pr4F4OpDDFz1lZWVdQQBrIwjUSNGjATZvh6vbUfYACs7qMDtTg79hOHFO6vf94fxLrf7VO10nO6BMk50d3f/fmho6L9w3q07jV8Wx1SlZyaAK538VMlHt1mC1nkikXi0tbW13gJX2DqDAFeZ0PEwYsTI1GaA/OhjI5y+8stgFRQUpJ1VyOTwVdNUZbhQdG1wcDCnoqLi/OnTpxOTVavDYMnsslIBbtIFsILyCuxxWPDXAFefGR8fp2Fumunahfyb8AOsDGtlxIgRI3qS8UOEFsAKUgmGqRQySeHogCw34EUgCwr6zPLy8h9kZ2efmQrXDekEW6la2y3odQaZn6vbDx8+fCe7tRv51q3ynAxQGX9XRowYMXICAKxMk0xWNAGCrGxazLqmpuYbOTk5r9YBWX6AVqaCLb/D1X6AlQM4io6Ojt7Q3t7+ALulHeCqXxVcOV0z4MqIESNGjlOAlZ+fH7rSTbeySNWq9jpDeSKgRA5eIbNnzZr1P3l5edfhONsPyFLJx+NtlpXOUJvqSgTj4+OHh4eHP9rT07Ob/dUCcDWiCqLMuoJGjBgxYgCWJ5CRiYohXR6U/YIstmRRZU1NzeuLiopuw3mV271BAa2pDri8AisZAEokEn8DsLp+ZGSE2CpyKdIMcBUz4MqIESNGDMAKBWBNJSWbaqDlBWTZrwFkFZWWlq6qqKggkLVG5iMraKA1FcCWro8oTburRDwe/2ZbW9v32fqXtBLBYeRJQuV5p2sq50aMGDFixACsExJUpQJkkdAyRdnZ2Qtnzpx5dV5e3n/jvzwVcKaa/5m4rI3f/PYKrPjj8fHxAyMjI9d1d3dbQ4I92LoBriZ0AZWxtzJixIiRExRgQXGnTbFOhaFFvyDEqxG8dcwW3p5RWVm5pri4+MsAXCtUn1X9jkxd6kanjOj6KxMBIlqkOZFI3N3V1XVbLBYj/1b0B7FWI7pgKoghQQO8jBgxYsRZ4vH41AdYXpXtVFAQOnH0asfkF2SRAGgV5eTkLJwxY8Z7c3NzP4rrBV6AVlhgy08YYXj998Ba7YtEIp/u7u5+jv1FoKqNhgR1QZQBV0aMGDFiAFYWlPVxM5MsU5yO6oIrGSiyzoeHh2mdx5llZWWnlpSUfAqA6yIVkPX/s3c/r02DcQDGZ7q0aXWd7eov9CIqKOjBi4iIKHoUBEG9eBM8efe/UPDiSfDsydP0JoIgqCjIPDgPCiqKxWpjl6S26fy+7q0EKVvemNQ4nw+81CZdcW3Knr3JkiShlVZsjfM9Nrm+YOS+3+v1rjebzRthGA4/rR9U08prvJg0pLimIAAQWLn+gfqv/JafNLKSRJeElrpC99ZGo3GsVCpdlnU7/nRXYV7PBJ/kmKuY8aN2B952XfdKp9P5NHxpZXyUsApNgoq4AgACa9nAyvsMRt5/GGUdWdH7ElnqHFm1QqGwcWZm5myxWLwk9xsmcZWng9/TuPRN3NCRsHoQBMHVVqs1p1epoPogYeWZBhRxBQAElnFgIV+xNeq+53nqILpNtm3Xa7XaObm9uFxoZflXhn8rsA1OIvrI9/1rElaPIw9Vs1ftSqWymCSiTI6xIqgAgMBCjiIrTnQtLCyog963SGBVJbROy/t6QZZvM704dNYHwKex0ccNm8iuwHvdbveGhNWTyGp1keaWhFUY4zlWXEdcAQCBRWDlLLjizCrFnYXyPM+Rm82WZZXr9foJCa7zsu5Ano/LyuhUDL46xkpej5uu676JrP6qw6ofJ5qIKgAgsAis/yiyYobWRhnO9PT0LsdxzhQKhVOyfr3pc6YZU2lF1zKXu3kuH7pb7XZ7ttvtLkQe8nliaVdgrLBKGlvEFQAQWD/JD13epTFFVNbBNWqZ7/vqGK2ajPUS07bE1hG5PSnv+zFZVjZ5riyjK+m5odQyGa8Hg8Ed+V5nXdd9FVmtdv81ZXTK5fLANJaymK0ivAAgHWEYElhEVnaRZRBa6q8O18poTPw8v6xdrlarhyW2jss2cFRH2Ir/93HNYq0QMuqk6y8kqu4HQXC33W7P//Ywd2LpGKvvElaLaURUGrsBiSsAILCwSkNLx5aa1Vono642AXmMJbG1u1gsHpLt4aBlWfv1+lS/jySREdn191rGU/lAPex0Og/ke/jy20M9HVX+SrNVpsFEXAEAgUVgraLwMj343HR5EARqhToIT81sqRms4cWkrampqZ22be+bnJzcK/f3yNgpq6aSRpfBRq5mp97KmJfxUj5Ac57nPRsRVMq3iaXZqsBxnND0w5PWckIKAAgsAmuVRFaaoRUJLrUxFHVwVXV8/VKpVDaUSqXtss1ssyxrqzzfJhlql+OMjGn59zr9tc6Ip1cXT1ZHJHqyzbbk9qvcqtGU8W4wGLzv9/vvJaTe6Astj+LpqFLrexJVi0lCJ4uwIq4AgMAC4iroyFLn2KroMa4/O/V1UAUyvus4o2AAAKkisJAXa3R4DYetx6S+HUaZNeoXDh1J6ranR1+Pnl4+0IOYAgD8tcDiJFYY+7YYiSIAAFYli5cAAAAgXbFmsDj4FgAAID5msAAAAAgsAAAAAgsAAIDAAgAAAIEFAABAYAEAABBYAAAAILAAAAAILAAAAAILAAAABBYAAACBBQAAQGABAAAQWAAAACCwAAAAcuuHAAMA0t7HPmJW2vcAAAAASUVORK5CYII=" alt="Nathaniel School of Music" class="nsm-logo">
       <div class="badge"><span class="dot"></span> Workshop Study Guide</div>
+      <a href="photos.html" class="photos-pill"><span class="cam">📷</span> 36 photos</a>
     </div>
 
     <h1 class="title">A class<br>full of <span class="italic">voices</span>.<br>Now, the <span class="italic">work</span>.</h1>
@@ -1127,47 +1189,226 @@
       <span class="quote-attribution">Richmond Park · live</span>
     </div>
 
-    <h3 style="margin-top: 50px;">The Rhythm Grid — <em>? = 4</em></h3>
-    <p>This was our maths-class moment. Solve it: find all the ways to add up to <strong>4</strong>. Each row shows the same equation twice — the numbers (your maths brain) and the proper music notation (the musician's brain). <strong>Tap any row</strong> to hear the rhythm loop.</p>
+    <div class="rhythm-panel">
+      <h3 style="margin-top:50px;">The Rhythm Grid</h3>
+      <p>Solve it: find all the ways to add up to the number. <strong>Tap any row</strong> to hear it loop.</p>
 
-    <div class="puzzle-board">
-      <div class="equation"><span class="qmark">?</span> &nbsp;=&nbsp; <span style="color:var(--terracotta); font-style:italic;">4</span></div>
-
-      <div class="rhythm-row">
-        <div class="num-equation">2 <span class="plus">+</span> 2 <span class="eq">=</span> <span class="four">4</span></div>
-        <div class="notation-cell" data-rhythm="2-2"><div id="rhythm-2-2"></div><span class="note-flash"></span><span class="play-mini">tap to loop</span></div>
-        <div class="song-tag">walking pace</div>
+      <!-- Tab pills -->
+      <div class="rg-tabs" role="tablist">
+        <button class="rg-tab active" data-rgtab="four"  onclick="switchRGTab('four')" >? = 4</button>
+        <button class="rg-tab"        data-rgtab="three" onclick="switchRGTab('three')">? = 3</button>
+        <button class="rg-tab"        data-rgtab="rests" onclick="switchRGTab('rests')">Rests</button>
+        <button class="rg-tab"        data-rgtab="frac"  onclick="switchRGTab('frac')" >Fractions</button>
       </div>
 
-      <div class="rhythm-row">
-        <div class="num-equation">3 <span class="plus">+</span> 1 <span class="eq">=</span> <span class="four">4</span></div>
-        <div class="notation-cell" data-rhythm="3-1"><div id="rhythm-3-1"></div><span class="note-flash"></span><span class="play-mini">tap to loop</span></div>
-        <div class="song-tag">long, then short</div>
+      <!-- ── Pane: ? = 4 ──────────────────────────────── -->
+      <div class="rg-pane" id="rgpane-four">
+        <div class="puzzle-board">
+          <div class="equation"><span class="qmark">?</span> &nbsp;=&nbsp; <span style="color:var(--terracotta); font-style:italic;">4</span></div>
+
+          <div class="rhythm-row">
+            <div class="num-equation">2 <span class="plus">+</span> 2</div>
+            <div class="notation-cell" data-rhythm="2-2"><div id="rhythm-2-2"></div><span class="note-flash"></span><span class="play-mini">tap to loop</span></div>
+            <div class="song-tag">walking pace</div>
+          </div>
+
+          <div class="rhythm-row">
+            <div class="num-equation">3 <span class="plus">+</span> 1</div>
+            <div class="notation-cell" data-rhythm="3-1"><div id="rhythm-3-1"></div><span class="note-flash"></span><span class="play-mini">tap to loop</span></div>
+            <div class="song-tag">long, then short</div>
+          </div>
+
+          <div class="rhythm-row">
+            <div class="num-equation">1 <span class="plus">+</span> 3</div>
+            <div class="notation-cell" data-rhythm="1-3"><div id="rhythm-1-3"></div><span class="note-flash"></span><span class="play-mini">tap to loop</span></div>
+            <div class="song-tag">short, then long</div>
+          </div>
+
+          <div class="rhythm-row">
+            <div class="num-equation">1 <span class="plus">+</span> 1 <span class="plus">+</span> 1 <span class="plus">+</span> 1</div>
+            <div class="notation-cell" data-rhythm="1111"><div id="rhythm-1111"></div><span class="note-flash"></span><span class="play-mini">tap to loop</span></div>
+            <div class="song-tag">steady march</div>
+          </div>
+
+          <div class="rhythm-row">
+            <div class="num-equation">1 <span class="plus">+</span> 1 <span class="plus">+</span> 2</div>
+            <div class="notation-cell" data-rhythm="1-1-2"><div id="rhythm-1-1-2"></div><span class="note-flash"></span><span class="play-mini">tap to loop</span></div>
+            <div class="song-tag">We Will Rock You · Jingle Bells</div>
+          </div>
+
+          <div class="rhythm-row">
+            <div class="num-equation">2 <span class="plus">+</span> 1 <span class="plus">+</span> 1</div>
+            <div class="notation-cell" data-rhythm="2-1-1"><div id="rhythm-2-1-1"></div><span class="note-flash"></span><span class="play-mini">tap to loop</span></div>
+            <div class="song-tag">heavy down, light up</div>
+          </div>
+        </div>
       </div>
 
-      <div class="rhythm-row">
-        <div class="num-equation">1 <span class="plus">+</span> 3 <span class="eq">=</span> <span class="four">4</span></div>
-        <div class="notation-cell" data-rhythm="1-3"><div id="rhythm-1-3"></div><span class="note-flash"></span><span class="play-mini">tap to loop</span></div>
-        <div class="song-tag">short, then long</div>
+      <!-- ── Pane: ? = 3 ──────────────────────────────── -->
+      <div class="rg-pane" id="rgpane-three" style="display:none">
+        <p style="font-family:'Fraunces',serif; font-style:italic; font-size:16px; margin:12px 0 4px; color:var(--ink);">Three beats. All the ways to fill them.</p>
+        <p style="font-family:'DM Mono',monospace; font-size:12px; letter-spacing:.06em; color:var(--ink-soft); margin:0 0 16px; line-height:1.7;">"Beat by three, you're in folk, in waltz, in Carnatic. Beat by four, you're in pop, in blues, in march."</p>
+
+        <div class="puzzle-board">
+          <div class="equation"><span class="qmark">?</span> &nbsp;=&nbsp; <span style="color:var(--terracotta); font-style:italic;">3</span></div>
+
+          <div class="rhythm-row">
+            <div class="num-equation">3</div>
+            <div class="notation-cell" data-rhythm="3x3"><div id="rhythm-3x3"></div><span class="note-flash"></span><span class="play-mini">tap to loop</span></div>
+            <div class="song-tag">one long breath</div>
+          </div>
+
+          <div class="rhythm-row">
+            <div class="num-equation">2 <span class="plus">+</span> 1</div>
+            <div class="notation-cell" data-rhythm="2-1_3"><div id="rhythm-2-1_3"></div><span class="note-flash"></span><span class="play-mini">tap to loop</span></div>
+            <div class="song-tag">long then short</div>
+          </div>
+
+          <div class="rhythm-row">
+            <div class="num-equation">1 <span class="plus">+</span> 2</div>
+            <div class="notation-cell" data-rhythm="1-2_3"><div id="rhythm-1-2_3"></div><span class="note-flash"></span><span class="play-mini">tap to loop</span></div>
+            <div class="song-tag">short then long</div>
+          </div>
+
+          <div class="rhythm-row">
+            <div class="num-equation">1 <span class="plus">+</span> 1 <span class="plus">+</span> 1</div>
+            <div class="notation-cell" data-rhythm="111_3"><div id="rhythm-111_3"></div><span class="note-flash"></span><span class="play-mini">tap to loop</span></div>
+            <div class="song-tag">waltz · Punjabi folk</div>
+          </div>
+        </div>
       </div>
 
-      <div class="rhythm-row">
-        <div class="num-equation">1 <span class="plus">+</span> 1 <span class="plus">+</span> 1 <span class="plus">+</span> 1 <span class="eq">=</span> <span class="four">4</span></div>
-        <div class="notation-cell" data-rhythm="1111"><div id="rhythm-1111"></div><span class="note-flash"></span><span class="play-mini">tap to loop</span></div>
-        <div class="song-tag">steady march</div>
+      <!-- ── Pane: Rests ──────────────────────────────── -->
+      <div class="rg-pane" id="rgpane-rests" style="display:none">
+        <div class="rests-quote-bar">
+          <span class="rests-quote-text">"Music is the space between the notes."</span>
+          <span class="rests-quote-attr">— Claude Debussy</span>
+        </div>
+
+        <div class="puzzle-board">
+          <div class="equation" style="font-size:28px;">4/4 with rests</div>
+
+          <div class="rhythm-row">
+            <div class="num-equation" style="font-size:20px;">r 1 1 1</div>
+            <div class="notation-cell" data-rhythm="r111"><div id="rhythm-r111"></div><span class="note-flash"></span><span class="play-mini">tap to loop</span></div>
+            <div class="song-tag">late entry</div>
+          </div>
+
+          <div class="rhythm-row">
+            <div class="num-equation" style="font-size:20px;">1 r 1 1</div>
+            <div class="notation-cell" data-rhythm="1r11"><div id="rhythm-1r11"></div><span class="note-flash"></span><span class="play-mini">tap to loop</span></div>
+            <div class="song-tag">pocket</div>
+          </div>
+
+          <div class="rhythm-row">
+            <div class="num-equation" style="font-size:20px;">1 1 r 1</div>
+            <div class="notation-cell" data-rhythm="11r1"><div id="rhythm-11r1"></div><span class="note-flash"></span><span class="play-mini">tap to loop</span></div>
+            <div class="song-tag">breathe here</div>
+          </div>
+
+          <div class="rhythm-row">
+            <div class="num-equation" style="font-size:20px;">1 1 1 r</div>
+            <div class="notation-cell" data-rhythm="111r"><div id="rhythm-111r"></div><span class="note-flash"></span><span class="play-mini">tap to loop</span></div>
+            <div class="song-tag">anticipation</div>
+          </div>
+
+          <div class="rhythm-row">
+            <div class="num-equation" style="font-size:20px;">1 r 1 r</div>
+            <div class="notation-cell" data-rhythm="1r1r"><div id="rhythm-1r1r"></div><span class="note-flash"></span><span class="play-mini">tap to loop</span></div>
+            <div class="song-tag">every other beat</div>
+          </div>
+
+          <div class="rhythm-row">
+            <div class="num-equation" style="font-size:20px;">r 1 r 1</div>
+            <div class="notation-cell" data-rhythm="r1r1"><div id="rhythm-r1r1"></div><span class="note-flash"></span><span class="play-mini">tap to loop</span></div>
+            <div class="song-tag">off-beat groove</div>
+          </div>
+
+          <div class="rhythm-row">
+            <div class="num-equation" style="font-size:20px;">1 — r — 1</div>
+            <div class="notation-cell" data-rhythm="1hr1"><div id="rhythm-1hr1"></div><span class="note-flash"></span><span class="play-mini">tap to loop</span></div>
+            <div class="song-tag">big gap in the middle</div>
+          </div>
+        </div>
       </div>
 
-      <div class="rhythm-row">
-        <div class="num-equation">1 <span class="plus">+</span> 1 <span class="plus">+</span> 2 <span class="eq">=</span> <span class="four">4</span></div>
-        <div class="notation-cell" data-rhythm="1-1-2"><div id="rhythm-1-1-2"></div><span class="note-flash"></span><span class="play-mini">tap to loop</span></div>
-        <div class="song-tag">We Will Rock You · Jingle Bells</div>
+      <!-- ── Pane: Fractions ──────────────────────────── -->
+      <div class="rg-pane" id="rgpane-frac" style="display:none">
+        <p style="font-family:'Fraunces',serif; font-size:15px; line-height:1.7; margin:12px 0 16px; color:var(--ink);">The beat can be divided. An 8th note = half a beat. A 16th = a quarter of a beat. A dot adds half the note's value.</p>
+
+        <div class="puzzle-board">
+          <div class="equation" style="font-size:24px;">sub-beat patterns · 4/4</div>
+
+          <div class="rhythm-row">
+            <div class="num-equation" style="font-size:18px;">½ × 8</div>
+            <div class="notation-cell" data-rhythm="8th8"><div id="rhythm-8th8"></div><span class="note-flash"></span><span class="play-mini">tap to loop</span></div>
+            <div class="song-tag">eight equal slices</div>
+          </div>
+
+          <div class="rhythm-row">
+            <div class="num-equation" style="font-size:18px;">1 ½½ · 1 ½½</div>
+            <div class="notation-cell" data-rhythm="q88q88"><div id="rhythm-q88q88"></div><span class="note-flash"></span><span class="play-mini">tap to loop</span></div>
+            <div class="song-tag">ta-ki-ta feel</div>
+          </div>
+
+          <div class="rhythm-row">
+            <div class="num-equation" style="font-size:18px;">½½ 1 · ½½ 1</div>
+            <div class="notation-cell" data-rhythm="88q88q"><div id="rhythm-88q88q"></div><span class="note-flash"></span><span class="play-mini">tap to loop</span></div>
+            <div class="song-tag">off the beat</div>
+          </div>
+
+          <div class="rhythm-row">
+            <div class="num-equation" style="font-size:16px;">¼¼½ × 4</div>
+            <div class="notation-cell" data-rhythm="1618x4"><div id="rhythm-1618x4"></div><span class="note-flash"></span><span class="play-mini">tap to loop</span></div>
+            <div class="song-tag">ka-ta-da per beat</div>
+          </div>
+
+          <div class="rhythm-row">
+            <div class="num-equation" style="font-size:16px;">¼ × 16</div>
+            <div class="notation-cell" data-rhythm="16th4"><div id="rhythm-16th4"></div><span class="note-flash"></span><span class="play-mini">tap to loop</span></div>
+            <div class="song-tag">sixteen crumbs</div>
+          </div>
+
+          <div class="rhythm-row">
+            <div class="num-equation" style="font-size:18px;">1½ ½ · 1½ ½</div>
+            <div class="notation-cell" data-rhythm="dq8dq8"><div id="rhythm-dq8dq8"></div><span class="note-flash"></span><span class="play-mini">tap to loop</span></div>
+            <div class="song-tag">long-short feel</div>
+          </div>
+
+          <div class="rhythm-row">
+            <div class="num-equation" style="font-size:18px;">r ½ 1 · ×2</div>
+            <div class="notation-cell" data-rhythm="r8eq"><div id="rhythm-r8eq"></div><span class="note-flash"></span><span class="play-mini">tap to loop</span></div>
+            <div class="song-tag">8th rest entry</div>
+          </div>
+
+          <div class="rhythm-row">
+            <div class="num-equation" style="font-size:18px;">1½ ½ 2</div>
+            <div class="notation-cell" data-rhythm="dq8h"><div id="rhythm-dq8h"></div><span class="note-flash"></span><span class="play-mini">tap to loop</span></div>
+            <div class="song-tag">song-like</div>
+          </div>
+        </div>
+
+        <div class="tie-card">
+          <h4>Tied notes</h4>
+          <p>A <strong>tie</strong> is a curved line joining two notes of the same pitch. They play as <strong>one</strong> sustained note — the durations add together.</p>
+          <div class="tie-example-row">
+            <div id="tie-ex1" class="tie-mini"></div>
+            <span class="tie-eq">= 3 beats sustained</span>
+          </div>
+          <p>Half note (2) + quarter note (1) = <strong>3 beats sustained</strong>. The second note is never re-struck — the first note just keeps ringing.</p>
+        </div>
+
+        <div class="tie-card">
+          <h4>Dotted notes — another way to write the same thing</h4>
+          <p>A <strong>dot</strong> after a note adds half its value. So a dotted quarter = 1 + ½ = <strong>1½ beats</strong>. A dotted half = 2 + 1 = <strong>3 beats</strong>. Dotted notation is shorthand for a tie.</p>
+          <div class="tie-example-row">
+            <div id="dot-ex1" class="tie-mini"></div>
+            <span class="tie-eq">=</span>
+            <div id="dot-ex2" class="tie-mini"></div>
+          </div>
+        </div>
       </div>
 
-      <div class="rhythm-row">
-        <div class="num-equation">2 <span class="plus">+</span> 1 <span class="plus">+</span> 1 <span class="eq">=</span> <span class="four">4</span></div>
-        <div class="notation-cell" data-rhythm="2-1-1"><div id="rhythm-2-1-1"></div><span class="note-flash"></span><span class="play-mini">tap to loop</span></div>
-        <div class="song-tag">heavy down, light up</div>
-      </div>
     </div>
 
     <div class="quote">
@@ -1178,13 +1419,12 @@
     <div class="homework-block">
       <h4><span class="hw-tag">Compulsory · Rhythm</span></h4>
       <ul class="hw-list">
-        <li><strong>The 10-Song Pulse Hunt.</strong> Pick 10 songs you genuinely enjoy. For each: find the pulse, count whether the bar is in 3, 4, 5, or 7, and note how the beat is being subdivided (by 2 like Michael Jackson — <em>Billie Jean</em>, <em>Beat It</em>, or by 3 like most Indian / Punjabi folk). Submit a short voice memo or written list with your findings for <em>at least 5</em>.</li>
-        <li><strong>Clap the four ? = 4 combinations.</strong> Record yourself clapping 2+2, 3+1, 1+1+1+1, and 1+1+2 at a steady tempo. Say the Konnakol syllables — <em>Tha · Tha-Ka · Tha-Ki-Ta · Tha-Ka-Dhi-Mi</em> — out loud as you clap each grouping.</li>
+        <li><strong>The 10-Song Pulse Hunt.</strong> Take 10 songs you enjoy — you will be hearing them anyway. As you listen: find the pulse, move your head with it, and notice how the beats are dividing. Is it dividing by 2, like Michael Jackson (<em>Billie Jean</em>, <em>Beat It</em>)? Or by 3, like most Indian and Punjabi folk? Send your findings for at least 5 songs — voice note, video, or written, whatever works for you.</li>
+        <li><strong>Clap — or play — all four ? = 4 patterns.</strong> Go through 2+2, 3+1, 1+1+1+1, and 1+1+2. Say the Konnakol syllables out loud as you go — <em>Tha · Tha-Ka · Tha-Ki-Ta · Tha-Ka-Dhi-Mi</em>. You can clap, or hold your hands together to simulate the piano, the violin, the guitar — whatever you play. Send your homework to the group: by writing, by singing, by recording a video, by playing it on your instrument — by whatever you want.</li>
       </ul>
       <h4 style="margin-top: 22px;"><span class="hw-tag" style="background:var(--turmeric); color:var(--ink);">Extra Credit · Rhythm</span></h4>
       <ul class="hw-list">
-        <li class="starred"><strong>Compose your own 4-beat rhythm</strong> using a combination we did <em>not</em> write on the board (for example 1+2+1, or include a rest/gap). Notate it however you like.</li>
-        <li class="starred"><strong>Find one folk song</strong> from Kerala, Rajasthan, or any Indian state and identify whether it sits in 7 or in triplets. Voice note explaining how you figured it out.</li>
+        <li class="starred"><strong>Indian folk triplets hunt.</strong> Pick a Punjabi, Rajasthani, Gujarati, or any Indian folk song. Listen carefully and identify whether it divides by 3 (triplets) or by 2 (even). Send a short voice note — or play along on your instrument — explaining how you figured it out.</li>
       </ul>
     </div>
   </section>
@@ -1275,9 +1515,9 @@
         </g>
         <text x="20" y="438" fill="#8B2C4D" font-family="Fraunces, serif" font-style="italic" font-weight="800" font-size="16">– Y · PITCH</text>
 
-        <path d="M 80,240 Q 130,232 180,200 Q 240,180 300,160 Q 360,140 420,120 Q 480,100 540,80"
+        <path id="aroh-path" d="M 80,240 Q 130,232 180,200 Q 240,180 300,160 Q 360,140 420,120 Q 480,100 540,80"
               fill="none" stroke="#1F5F7A" stroke-width="3" stroke-linecap="round"/>
-        <path d="M 80,240 Q 130,250 180,280 Q 240,300 300,320 Q 360,340 420,360 Q 480,380 540,400"
+        <path id="avroh-path" d="M 80,240 Q 130,250 180,280 Q 240,300 300,320 Q 360,340 420,360 Q 480,380 540,400"
               fill="none" stroke="#8B2C4D" stroke-width="3" stroke-linecap="round" stroke-dasharray="6,4"/>
 
         <g class="floating-note">
@@ -1302,10 +1542,21 @@
         <circle cx="540" cy="400" r="8" fill="#F8F1DF" stroke="#8B2C4D" stroke-width="2"/>
         <text x="546" y="416" font-family="DM Mono, monospace" font-size="10" fill="#8B2C4D">Ma</text>
 
-        <text x="540" y="62" fill="#1F5F7A" font-family="Fraunces, serif" font-style="italic" font-size="13" text-anchor="middle">↑ aroh · hand goes up</text>
-        <text x="540" y="430" fill="#8B2C4D" font-family="Fraunces, serif" font-style="italic" font-size="13" text-anchor="middle">↓ avroh · hand goes down</text>
+        <text x="540" y="62" fill="#1F5F7A" font-family="Fraunces, serif" font-style="italic" font-size="13" text-anchor="middle">↑ aroh — Sa Re Ga Ma Pa</text>
+        <text x="540" y="430" fill="#8B2C4D" font-family="Fraunces, serif" font-style="italic" font-size="13" text-anchor="middle">↓ avroh — Sa Ni Dha Pa Ma</text>
 
-        <text x="92" y="248" font-family="serif" font-size="20" fill="#C0492A">✋</text>
+        <!-- animated dot moving up the aroh path -->
+        <circle r="5" fill="#1F5F7A" opacity="0.7">
+          <animateMotion dur="3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keySplines="0.4 0 0.6 1">
+            <mpath href="#aroh-path"/>
+          </animateMotion>
+        </circle>
+        <!-- animated dot moving down the avroh path -->
+        <circle r="5" fill="#8B2C4D" opacity="0.7">
+          <animateMotion dur="3s" repeatCount="indefinite" begin="1.5s" calcMode="spline" keyTimes="0;1" keySplines="0.4 0 0.6 1">
+            <mpath href="#avroh-path"/>
+          </animateMotion>
+        </circle>
       </svg>
 
       <!-- Key selector -->
@@ -1347,8 +1598,9 @@
       </div>
 
       <!-- Call-and-response exercise patterns from class -->
-      <h3 style="margin-top:36px;font-size:1rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);text-align:center;">Call-and-Response Exercises</h3>
-      <p style="text-align:center;color:var(--ink-soft);font-style:italic;font-size:.9rem;margin:6px 0 20px;">These are the patterns from class. Loop each until it&#8217;s effortless, then sing along.</p>
+      <h3 style="margin-top:36px;font-size:1rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);text-align:center;">Swara · Call-and-Response Exercises <button class="timesig-btn" id="timesig-btn" onclick="cycleTimeSig()" title="Click to change time signature">4/4</button></h3>
+      <div class="beat-indicator" id="beat-indicator" style="justify-content:center;"></div>
+      <p style="text-align:center;color:var(--ink-soft);font-style:italic;font-size:.9rem;margin:6px 0 20px;">Melody exercises — Sa Re Ga Ma Pa in C♯. Loop each until it&#8217;s effortless, then sing along.</p>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin:0 0 12px;">
 
         <div class="konnakol-card" id="ex-1" style="text-align:left;">
@@ -1413,17 +1665,82 @@
     <h3 style="margin-top: 50px;">Happy Birthday, in swaras</h3>
     <p>A song you already know, in our language. Notice — it doesn't start on <em>Sa</em>. Sneaky.</p>
 
-    <div style="background: var(--paper-deep); border: 1.5px solid var(--ink); border-radius: 4px; padding: 24px; margin: 20px 0; box-shadow: 4px 4px 0 var(--ink); font-family: 'Fraunces', serif;">
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-        <div>
-          <p style="font-style: italic; color: var(--ink-soft); margin-bottom: 6px;">"Happy Birthday to You"</p>
-          <p style="font-size: 22px; font-weight: 700; letter-spacing: 0.04em;">Sa &middot; Sa &middot; Re &middot; Sa &middot; Ma &middot; Ga</p>
-        </div>
-        <div>
-          <p style="font-style: italic; color: var(--ink-soft); margin-bottom: 6px;">"Happy Birthday to You"</p>
-          <p style="font-size: 22px; font-weight: 700; letter-spacing: 0.04em;">Sa &middot; Sa &middot; Re &middot; Sa &middot; Pa &middot; Ma</p>
-        </div>
+    <div style="background: var(--paper-deep); border: 1.5px solid var(--ink); border-radius: 4px; padding: 24px; margin: 20px 0; box-shadow: 4px 4px 0 var(--ink); font-family: 'Fraunces', serif; position:relative;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);">Starts on Pa · the 5th · sneaky ↘</span>
+        <button class="song-play-btn" id="song-hbd" onclick="toggleSong('hbd',this)" style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:6px 16px;border:1.5px solid var(--ink);border-radius:100px;background:var(--paper);color:var(--ink);cursor:pointer;transition:background .15s;">▶ Play</button>
       </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div><p style="font-style:italic;color:var(--ink-soft);font-size:13px;margin-bottom:4px;">"Happy Birthday to You"</p>
+        <p style="font-size:20px;font-weight:700;letter-spacing:.04em;">Pa &middot; Pa &middot; Dha &middot; Pa &middot; S&aacute; &middot; Ni</p></div>
+        <div><p style="font-style:italic;color:var(--ink-soft);font-size:13px;margin-bottom:4px;">"Happy Birthday to You"</p>
+        <p style="font-size:20px;font-weight:700;letter-spacing:.04em;">Pa &middot; Pa &middot; Dha &middot; Pa &middot; R&eacute; &middot; S&aacute;</p></div>
+        <div><p style="font-style:italic;color:var(--ink-soft);font-size:13px;margin-bottom:4px;">"Happy Birthday dear ___"</p>
+        <p style="font-size:20px;font-weight:700;letter-spacing:.04em;">Pa &middot; Pa &middot; P&aacute; &middot; G&aacute; &middot; S&aacute; &middot; Ni &middot; Dha</p></div>
+        <div><p style="font-style:italic;color:var(--ink-soft);font-size:13px;margin-bottom:4px;">"Happy Birthday to You"</p>
+        <p style="font-size:20px;font-weight:700;letter-spacing:.04em;">Ma &middot; Ma &middot; Ga &middot; Sa &middot; Re &middot; Sa</p></div>
+      </div>
+      <p style="font-size:12px;font-family:'DM Mono',monospace;color:var(--ink-soft);margin-top:10px;letter-spacing:.04em;">Á = upper octave (one Sa above)</p>
+    </div>
+
+    <!-- SONGS IN SWARAS -->
+    <h3 style="margin-top:44px;">More songs you already know — now in swaras</h3>
+    <p style="color:var(--ink-soft);font-style:italic;margin-bottom:20px;">Every song you've ever sung has a swara name. Tap ▶ to hear it in C♯, then hum along.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin:0 0 30px;">
+
+      <!-- Twinkle Twinkle -->
+      <div style="background:var(--paper-deep);border:1.5px solid var(--ink);border-radius:4px;padding:20px;box-shadow:3px 3px 0 var(--ink);">
+        <div style="display:flex;justify-content:space-between;align-items:start;gap:8px;margin-bottom:10px;">
+          <div>
+            <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:3px;">Starts on Sa · the root</div>
+            <div style="font-family:'Fraunces',serif;font-weight:700;font-size:17px;">Twinkle Twinkle</div>
+          </div>
+          <button class="song-play-btn" id="song-twinkle" onclick="toggleSong('twinkle',this)" style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 13px;border:1.5px solid var(--ink);border-radius:100px;background:var(--paper);color:var(--ink);cursor:pointer;white-space:nowrap;">▶ Play</button>
+        </div>
+        <p style="font-size:16px;font-weight:700;font-family:'Fraunces',serif;line-height:1.7;">Sa Sa Pa Pa Dha Dha Pa<br>Ma Ma Ga Ga Re Re Sa</p>
+        <p style="font-size:12px;font-family:'DM Mono',monospace;color:var(--ink-soft);margin-top:6px;">The whole scale, hiding in a nursery rhyme.</p>
+      </div>
+
+      <!-- Ode to Joy -->
+      <div style="background:var(--paper-deep);border:1.5px solid var(--ink);border-radius:4px;padding:20px;box-shadow:3px 3px 0 var(--ink);">
+        <div style="display:flex;justify-content:space-between;align-items:start;gap:8px;margin-bottom:10px;">
+          <div>
+            <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:3px;">Starts on Ga · the third</div>
+            <div style="font-family:'Fraunces',serif;font-weight:700;font-size:17px;">Ode to Joy</div>
+          </div>
+          <button class="song-play-btn" id="song-ode" onclick="toggleSong('ode',this)" style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 13px;border:1.5px solid var(--ink);border-radius:100px;background:var(--paper);color:var(--ink);cursor:pointer;white-space:nowrap;">▶ Play</button>
+        </div>
+        <p style="font-size:16px;font-weight:700;font-family:'Fraunces',serif;line-height:1.7;">Ga Ga Ma Pa Pa Ma Ga Re<br>Sa Sa Re Ga Ga Re Re</p>
+        <p style="font-size:12px;font-family:'DM Mono',monospace;color:var(--ink-soft);margin-top:6px;">Beethoven. Four notes. Two hundred years. Still works.</p>
+      </div>
+
+      <!-- Somewhere Over the Rainbow -->
+      <div style="background:var(--paper-deep);border:1.5px solid var(--ink);border-radius:4px;padding:20px;box-shadow:3px 3px 0 var(--ink);">
+        <div style="display:flex;justify-content:space-between;align-items:start;gap:8px;margin-bottom:10px;">
+          <div>
+            <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:3px;">The octave leap · Sa → Sá</div>
+            <div style="font-family:'Fraunces',serif;font-weight:700;font-size:17px;">Over the Rainbow</div>
+          </div>
+          <button class="song-play-btn" id="song-rainbow" onclick="toggleSong('rainbow',this)" style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 13px;border:1.5px solid var(--ink);border-radius:100px;background:var(--paper);color:var(--ink);cursor:pointer;white-space:nowrap;">▶ Play</button>
+        </div>
+        <p style="font-size:16px;font-weight:700;font-family:'Fraunces',serif;line-height:1.7;">Sa &nbsp;→&nbsp; S&aacute; &nbsp;<span style="font-size:12px;font-weight:400;font-style:italic;">(the leap)</span><br>Ni Pa Dha Pa Ma Ga</p>
+        <p style="font-size:12px;font-family:'DM Mono',monospace;color:var(--ink-soft);margin-top:6px;">The first two notes are a full octave. That's Judy Garland's secret.</p>
+      </div>
+
+      <!-- Joy to the World -->
+      <div style="background:var(--paper-deep);border:1.5px solid var(--ink);border-radius:4px;padding:20px;box-shadow:3px 3px 0 var(--ink);">
+        <div style="display:flex;justify-content:space-between;align-items:start;gap:8px;margin-bottom:10px;">
+          <div>
+            <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--terracotta);margin-bottom:3px;">⋆ Surprise · the full avroh</div>
+            <div style="font-family:'Fraunces',serif;font-weight:700;font-size:17px;">Joy to the World</div>
+          </div>
+          <button class="song-play-btn" id="song-joy" onclick="toggleSong('joy',this)" style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 13px;border:1.5px solid var(--ink);border-radius:100px;background:var(--paper);color:var(--ink);cursor:pointer;white-space:nowrap;">▶ Play</button>
+        </div>
+        <p style="font-size:16px;font-weight:700;font-family:'Fraunces',serif;line-height:1.7;">S&aacute; Ni Dha Pa Ma Ga Re Sa</p>
+        <p style="font-size:12px;font-family:'DM Mono',monospace;color:var(--ink-soft);margin-top:6px;">That opening line IS the descending swara scale. You've been singing it your whole life.</p>
+      </div>
+
     </div>
 
     <div class="quote">
@@ -1472,72 +1789,90 @@
 
     <div class="africa-board">
       <p class="eyebrow" style="margin-bottom: 4px;">"I bless the rains down in Africa"</p>
-      <p style="font-family: 'Fraunces', serif; font-style: italic; color: var(--ink-soft); margin-bottom: 24px;">Three voices, stacked. Each dot is a syllable. Higher dot = higher note.</p>
+      <p style="font-family: 'Fraunces', serif; font-style: italic; color: var(--ink-soft); margin-bottom: 24px;">Three voices, stacked. Each dot is a syllable; long bars = 2-beat held notes. Plotted on real pitch — A major, soprano on top.</p>
 
-      <svg class="africa-svg" viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg">
-        <g stroke="#1A1A2E" stroke-opacity="0.07">
-          <line x1="60" y1="60" x2="700" y2="60"/>
-          <line x1="60" y1="110" x2="700" y2="110"/>
-          <line x1="60" y1="160" x2="700" y2="160"/>
-          <line x1="60" y1="210" x2="700" y2="210"/>
+      <svg class="africa-svg" viewBox="0 0 720 250" xmlns="http://www.w3.org/2000/svg">
+        <!-- Horizontal pitch reference lines -->
+        <g stroke="#1A1A2E" stroke-opacity="0.06" stroke-dasharray="3,4">
+          <line x1="68" y1="50" x2="710" y2="50"/>
+          <line x1="68" y1="62" x2="710" y2="62"/>
+          <line x1="68" y1="86" x2="710" y2="86"/>
+          <line x1="68" y1="110" x2="710" y2="110"/>
+          <line x1="68" y1="134" x2="710" y2="134"/>
+          <line x1="68" y1="146" x2="710" y2="146"/>
+          <line x1="68" y1="170" x2="710" y2="170"/>
         </g>
-
-        <g font-family="Fraunces, serif" font-style="italic" font-size="15" fill="#3A3A52" text-anchor="middle">
-          <text x="100" y="290">I</text>
-          <text x="180" y="290">bless</text>
-          <text x="260" y="290">the</text>
-          <text x="340" y="290">rains</text>
-          <text x="430" y="290">down</text>
-          <text x="510" y="290">in</text>
-          <text x="610" y="290">A-fri-ca</text>
+        <!-- Pitch labels -->
+        <g font-family="DM Mono, monospace" font-size="9" fill="#3A3A52" text-anchor="end">
+          <text x="64" y="53">A</text>
+          <text x="64" y="65">G♯</text>
+          <text x="64" y="89">F♯</text>
+          <text x="64" y="113">E</text>
+          <text x="64" y="137">D</text>
+          <text x="64" y="149">C♯</text>
+          <text x="64" y="173">B</text>
         </g>
-
-        <g>
-          <path d="M 100,210 L 180,200 L 260,210 L 340,180 L 430,170 L 510,200 L 580,220 L 640,210" stroke="#1F5F7A" stroke-width="2.5" fill="none" stroke-linejoin="round" stroke-linecap="round" opacity="0.9"/>
-          <circle cx="100" cy="210" r="7" fill="#1F5F7A" stroke="#1A1A2E" stroke-width="1.5"/>
-          <circle cx="180" cy="200" r="7" fill="#1F5F7A" stroke="#1A1A2E" stroke-width="1.5"/>
-          <circle cx="260" cy="210" r="7" fill="#1F5F7A" stroke="#1A1A2E" stroke-width="1.5"/>
-          <circle cx="340" cy="180" r="7" fill="#1F5F7A" stroke="#1A1A2E" stroke-width="1.5"/>
-          <circle cx="430" cy="170" r="7" fill="#1F5F7A" stroke="#1A1A2E" stroke-width="1.5"/>
-          <circle cx="510" cy="200" r="7" fill="#1F5F7A" stroke="#1A1A2E" stroke-width="1.5"/>
-          <circle cx="580" cy="220" r="7" fill="#1F5F7A" stroke="#1A1A2E" stroke-width="1.5"/>
-          <circle cx="640" cy="210" r="7" fill="#1F5F7A" stroke="#1A1A2E" stroke-width="1.5"/>
+        <!-- SOPRANO curve (#8B2C4D) -->
+        <path d="M100,50 L159,50 L218,50 L306,50 L395,50 L454,50 L542,50 L631,62 L690,62"
+          stroke="#8B2C4D" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round" opacity="0.7"/>
+        <circle cx="100" cy="50" r="6" fill="#8B2C4D" stroke="#1A1A2E" stroke-width="1.2"/>
+        <circle cx="159" cy="50" r="6" fill="#8B2C4D" stroke="#1A1A2E" stroke-width="1.2"/>
+        <circle cx="218" cy="50" r="6" fill="#8B2C4D" stroke="#1A1A2E" stroke-width="1.2"/>
+        <rect x="252" y="44" width="108" height="12" rx="6" fill="#8B2C4D" stroke="#1A1A2E" stroke-width="1.2"/>
+        <circle cx="395" cy="50" r="6" fill="#8B2C4D" stroke="#1A1A2E" stroke-width="1.2"/>
+        <circle cx="454" cy="50" r="6" fill="#8B2C4D" stroke="#1A1A2E" stroke-width="1.2"/>
+        <rect x="488" y="44" width="108" height="12" rx="6" fill="#8B2C4D" stroke="#1A1A2E" stroke-width="1.2"/>
+        <circle cx="631" cy="62" r="6" fill="#8B2C4D" stroke="#1A1A2E" stroke-width="1.2"/>
+        <circle cx="690" cy="62" r="6" fill="#8B2C4D" stroke="#1A1A2E" stroke-width="1.2"/>
+        <!-- ALTO curve (#C0492A) — melisma: 2 circles on "rains" (beats 3 and 4) -->
+        <path d="M100,86 L159,86 L218,86 L277,86 L336,86 L395,86 L454,86 L542,110 L631,110 L690,110"
+          stroke="#C0492A" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round" opacity="0.7"/>
+        <circle cx="100" cy="86" r="6" fill="#C0492A" stroke="#1A1A2E" stroke-width="1.2"/>
+        <circle cx="159" cy="86" r="6" fill="#C0492A" stroke="#1A1A2E" stroke-width="1.2"/>
+        <circle cx="218" cy="86" r="6" fill="#C0492A" stroke="#1A1A2E" stroke-width="1.2"/>
+        <circle cx="277" cy="86" r="6" fill="#C0492A" stroke="#1A1A2E" stroke-width="1.2"/>
+        <circle cx="336" cy="86" r="6" fill="#C0492A" stroke="#1A1A2E" stroke-width="1.2"/>
+        <circle cx="395" cy="86" r="6" fill="#C0492A" stroke="#1A1A2E" stroke-width="1.2"/>
+        <circle cx="454" cy="86" r="6" fill="#C0492A" stroke="#1A1A2E" stroke-width="1.2"/>
+        <rect x="488" y="104" width="108" height="12" rx="6" fill="#C0492A" stroke="#1A1A2E" stroke-width="1.2"/>
+        <circle cx="631" cy="110" r="6" fill="#C0492A" stroke="#1A1A2E" stroke-width="1.2"/>
+        <circle cx="690" cy="110" r="6" fill="#C0492A" stroke="#1A1A2E" stroke-width="1.2"/>
+        <!-- melisma annotation -->
+        <text x="306" y="99" font-family="DM Mono, monospace" font-size="8" fill="#C0492A" opacity="0.7" text-anchor="middle">melisma</text>
+        <!-- TENOR curve (#1F5F7A) -->
+        <path d="M100,146 L159,146 L218,146 L306,134 L395,134 L454,134 L542,146 L631,170 L690,170"
+          stroke="#1F5F7A" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round" opacity="0.7"/>
+        <circle cx="100" cy="146" r="6" fill="#1F5F7A" stroke="#1A1A2E" stroke-width="1.2"/>
+        <circle cx="159" cy="146" r="6" fill="#1F5F7A" stroke="#1A1A2E" stroke-width="1.2"/>
+        <circle cx="218" cy="146" r="6" fill="#1F5F7A" stroke="#1A1A2E" stroke-width="1.2"/>
+        <rect x="252" y="128" width="108" height="12" rx="6" fill="#1F5F7A" stroke="#1A1A2E" stroke-width="1.2"/>
+        <circle cx="395" cy="134" r="6" fill="#1F5F7A" stroke="#1A1A2E" stroke-width="1.2"/>
+        <circle cx="454" cy="134" r="6" fill="#1F5F7A" stroke="#1A1A2E" stroke-width="1.2"/>
+        <rect x="488" y="140" width="108" height="12" rx="6" fill="#1F5F7A" stroke="#1A1A2E" stroke-width="1.2"/>
+        <circle cx="631" cy="170" r="6" fill="#1F5F7A" stroke="#1A1A2E" stroke-width="1.2"/>
+        <circle cx="690" cy="170" r="6" fill="#1F5F7A" stroke="#1A1A2E" stroke-width="1.2"/>
+        <!-- Voice labels -->
+        <g font-family="DM Mono, monospace" font-size="9" letter-spacing="1.2">
+          <text x="4" y="53" fill="#8B2C4D">S</text>
+          <text x="4" y="89" fill="#C0492A">A</text>
+          <text x="4" y="149" fill="#1F5F7A">T</text>
         </g>
-
-        <g>
-          <path d="M 100,160 L 180,150 L 260,160 L 340,130 L 430,120 L 510,150 L 580,170 L 640,160" stroke="#C0492A" stroke-width="2.5" fill="none" stroke-linejoin="round" stroke-linecap="round" opacity="0.9"/>
-          <circle cx="100" cy="160" r="7" fill="#C0492A" stroke="#1A1A2E" stroke-width="1.5"/>
-          <circle cx="180" cy="150" r="7" fill="#C0492A" stroke="#1A1A2E" stroke-width="1.5"/>
-          <circle cx="260" cy="160" r="7" fill="#C0492A" stroke="#1A1A2E" stroke-width="1.5"/>
-          <circle cx="340" cy="130" r="7" fill="#C0492A" stroke="#1A1A2E" stroke-width="1.5"/>
-          <circle cx="430" cy="120" r="7" fill="#C0492A" stroke="#1A1A2E" stroke-width="1.5"/>
-          <circle cx="510" cy="150" r="7" fill="#C0492A" stroke="#1A1A2E" stroke-width="1.5"/>
-          <circle cx="580" cy="170" r="7" fill="#C0492A" stroke="#1A1A2E" stroke-width="1.5"/>
-          <circle cx="640" cy="160" r="7" fill="#C0492A" stroke="#1A1A2E" stroke-width="1.5"/>
+        <!-- Syllable labels -->
+        <g font-family="Fraunces, serif" font-style="italic" font-size="13" fill="#3A3A52" text-anchor="middle">
+          <text x="100" y="215">I</text>
+          <text x="159" y="215">bless</text>
+          <text x="218" y="215">the</text>
+          <text x="306" y="215" font-weight="700">rains</text>
+          <text x="395" y="215">down</text>
+          <text x="454" y="215">in</text>
+          <text x="542" y="215" font-weight="700">Af</text>
+          <text x="631" y="215">ri</text>
+          <text x="690" y="215">ca</text>
         </g>
-
-        <g>
-          <path d="M 100,110 L 180,100 L 260,110 L 340,80 L 430,70 L 510,100 L 580,120 L 640,110" stroke="#8B2C4D" stroke-width="2.5" fill="none" stroke-linejoin="round" stroke-linecap="round" opacity="0.9"/>
-          <circle cx="100" cy="110" r="7" fill="#8B2C4D" stroke="#1A1A2E" stroke-width="1.5"/>
-          <circle cx="180" cy="100" r="7" fill="#8B2C4D" stroke="#1A1A2E" stroke-width="1.5"/>
-          <circle cx="260" cy="110" r="7" fill="#8B2C4D" stroke="#1A1A2E" stroke-width="1.5"/>
-          <circle cx="340" cy="80" r="7" fill="#8B2C4D" stroke="#1A1A2E" stroke-width="1.5"/>
-          <circle cx="430" cy="70" r="7" fill="#8B2C4D" stroke="#1A1A2E" stroke-width="1.5"/>
-          <circle cx="510" cy="100" r="7" fill="#8B2C4D" stroke="#1A1A2E" stroke-width="1.5"/>
-          <circle cx="580" cy="120" r="7" fill="#8B2C4D" stroke="#1A1A2E" stroke-width="1.5"/>
-          <circle cx="640" cy="110" r="7" fill="#8B2C4D" stroke="#1A1A2E" stroke-width="1.5"/>
-        </g>
-
-        <g font-family="DM Mono, monospace" font-size="10" letter-spacing="1.5">
-          <text x="20" y="115" fill="#8B2C4D">SOPRANO</text>
-          <text x="20" y="165" fill="#C0492A">ALTO</text>
-          <text x="20" y="215" fill="#1F5F7A">TENOR</text>
-        </g>
-
-        <g>
-          <rect x="660" y="50" width="50" height="180" fill="#DDA01E" fill-opacity="0.15" stroke="#DDA01E" stroke-width="1.5" stroke-dasharray="4,3" rx="3"/>
-          <text x="685" y="40" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-size="12" fill="#DDA01E">the gap</text>
-          <text x="685" y="245" text-anchor="middle" font-family="DM Mono, monospace" font-size="9" letter-spacing="1" fill="#1A1A2E">IMPROVISE</text>
+        <!-- Long-note underlines under syllable text -->
+        <g stroke="#3A3A52" stroke-opacity="0.35" stroke-width="1.5">
+          <line x1="252" y1="219" x2="360" y2="219"/>
+          <line x1="488" y1="219" x2="596" y2="219"/>
         </g>
       </svg>
 
@@ -1549,19 +1884,39 @@
 
       <!-- AFRICA NOTATION -->
       <div class="africa-notation">
-        <p class="eyebrow" style="margin-bottom:14px;">Proper notation — transposable to all keys</p>
+        <p class="eyebrow" style="margin-bottom:14px;">4/4 · "I bless the rains down in Africa" · transposable to all keys</p>
 
         <div class="africa-stave-row">
           <div class="africa-stave-label" style="color:#8B2C4D;">Soprano</div>
-          <div class="africa-stave-el" id="africa-stave-S"></div>
+          <div class="africa-stave-el africa-stave-4bar" id="africa-stave-S"></div>
         </div>
         <div class="africa-stave-row">
           <div class="africa-stave-label" style="color:#C0492A;">Alto</div>
-          <div class="africa-stave-el" id="africa-stave-A"></div>
+          <div class="africa-stave-el africa-stave-4bar" id="africa-stave-A"></div>
         </div>
         <div class="africa-stave-row">
           <div class="africa-stave-label" style="color:#1F5F7A;">Tenor</div>
-          <div class="africa-stave-el" id="africa-stave-T"></div>
+          <div class="africa-stave-el africa-stave-4bar" id="africa-stave-T"></div>
+        </div>
+
+        <!-- SAT Volume Controls -->
+        <div class="africa-vol-row">
+          <div class="africa-vol-item">
+            <span class="africa-vol-name" style="color:#8B2C4D;">Soprano</span>
+            <input type="range" class="africa-vol-slider" id="africa-vol-S" min="0" max="100" value="75"
+                   oninput="setAfricaVol('S', +this.value)" aria-label="Soprano volume">
+          </div>
+          <div class="africa-vol-item">
+            <span class="africa-vol-name" style="color:#C0492A;">Alto</span>
+            <input type="range" class="africa-vol-slider" id="africa-vol-A" min="0" max="100" value="75"
+                   oninput="setAfricaVol('A', +this.value)" aria-label="Alto volume">
+          </div>
+          <div class="africa-vol-item">
+            <span class="africa-vol-name" style="color:#1F5F7A;">Tenor</span>
+            <input type="range" class="africa-vol-slider" id="africa-vol-T" min="0" max="100" value="75"
+                   oninput="setAfricaVol('T', +this.value)" aria-label="Tenor volume">
+          </div>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-soft);align-self:center;margin-left:4px;">Volume per voice</span>
         </div>
 
         <div class="africa-chord-row">
@@ -1569,7 +1924,7 @@
           <span class="africa-chord-chip" id="achip-1">D</span>
           <span class="africa-chord-chip" id="achip-2">A</span>
           <span class="africa-chord-chip" id="achip-3">E</span>
-          <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-soft);align-self:center;margin-left:6px;">vi – IV – I – V</span>
+          <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-soft);align-self:center;margin-left:6px;">vi – IV – I – V · 4 beats each</span>
         </div>
 
         <div class="africa-controls">
@@ -1587,7 +1942,7 @@
             <option value="G">Key of G</option>
             <option value="Ab">Key of A♭</option>
           </select>
-          <button class="africa-play-btn" id="africa-play-btn" onclick="toggleAfricaPlay()">▶ Play with chords</button>
+          <button class="africa-play-btn" id="africa-play-btn" onclick="toggleAfricaPlay()">▶ Play</button>
         </div>
       </div>
     </div>
@@ -1664,6 +2019,19 @@
       <div class="bar12-section">
         <p class="eyebrow" style="margin-bottom:14px;">The 12-bar structure — animated, transposable</p>
 
+        <div class="blues-level-btns">
+          <button class="blues-lvl-btn active" id="blues-lvl-1" onclick="setBluesLevel(1)">Level 1 · BUM-BUM</button>
+          <button class="blues-lvl-btn" id="blues-lvl-2" onclick="setBluesLevel(2)">Level 2 · 1·3·5·6 Walk</button>
+        </div>
+        <div class="blues-level-explain" id="blues-level-explain">
+          Root on beat 1. Fifth on the &amp;-of-2. That two-note hop is the floor.
+        </div>
+        <div class="blues-bpm-row">
+          <button class="blues-bpm-btn" onclick="adjustBluesBPM(-5)">−</button>
+          <span id="blues-bpm-display">130</span> BPM
+          <button class="blues-bpm-btn" onclick="adjustBluesBPM(+5)">+</button>
+          <button class="blues-lvl-btn" id="blues-swing-btn" onclick="toggleBluesSwing()" style="margin-left:10px;" title="Swing feel — long-short eighth notes">♩♪ Swing</button>
+        </div>
         <div class="bar12-controls">
           <select class="bar12-key-select" id="bar12-key-select" onchange="changeBluesKey(this.value)">
             <option value="C" selected>Key of C</option>
@@ -2040,7 +2408,7 @@
 
       <h4 style="margin: 22px 0 16px;">Week Two — Stretching Out</h4>
       <ul class="hw-list">
-        <li>Clap all four ? = 4 patterns with the Konnakol syllables · record</li>
+        <li>Clap — or play on your instrument — all four ? = 4 patterns with the Konnakol syllables · record and send to group</li>
         <li>Submit the Sa Re Ga Ma Pa call-and-response with 1 min Sa-Re-Ga improv</li>
         <li>Add the alto and tenor of Africa · sing all three lines</li>
         <li>Sing Sweet Home Chicago bass line and the melody · both recorded</li>
@@ -2146,7 +2514,7 @@
 
 <script>
   // ============ VEXFLOW RENDERING via Factory + EasyScore ============
-  function drawRhythmFactory(elementId, easyScoreSpec, widthPx) {
+  function drawRhythmFactory(elementId, easyScoreSpec, widthPx, beatsPerBar, beamGroups) {
     const el = document.getElementById(elementId);
     if (!el) return;
     el.innerHTML = '';
@@ -2157,14 +2525,45 @@
       });
       const score = factory.EasyScore();
       const system = factory.System({ x: 0, y: 6, width: widthPx - 6, spaceBetweenStaves: 0 });
-      system.addStave({
-        voices: [ score.voice(score.notes(easyScoreSpec, { stem: 'up' })).setStrict(false) ]
-      });
+      const timeSig = (beatsPerBar || 4) + '/4';
+      const notes = score.notes(easyScoreSpec, { stem: 'up' });
+      if (beamGroups && beamGroups.length) {
+        beamGroups.forEach(function(group) {
+          var grp = group.map(function(i){ return notes[i]; }).filter(Boolean);
+          if (grp.length > 1) score.beam(grp);
+        });
+      }
+      const voice = score.voice(notes, { time: timeSig }).setStrict(false);
+      const stave = system.addStave({ voices: [voice] });
+      if (beatsPerBar) stave.addTimeSignature(timeSig);
       factory.draw();
     } catch (e) {
       console.error('VexFlow error in ' + elementId, e);
-      // Fallback: render as text
       el.innerHTML = '<span style="font-family:monospace;font-size:11px;color:#999;">' + easyScoreSpec + '</span>';
+    }
+  }
+
+  function drawTieNotation(elementId, spec, widthPx, beats, addTie) {
+    const el = document.getElementById(elementId);
+    if (!el) return;
+    el.innerHTML = '';
+    try {
+      const VF = Vex.Flow;
+      const factory = new VF.Factory({ renderer: { elementId: elementId, width: widthPx, height: 72 } });
+      const score = factory.EasyScore();
+      const system = factory.System({ x: 0, y: 4, width: widthPx - 4 });
+      const timeSig = beats + '/4';
+      const notes = score.notes(spec, { stem: 'up' });
+      const voice = score.voice(notes, { time: timeSig }).setStrict(false);
+      system.addStave({ voices: [voice] });
+      factory.draw();
+      if (addTie && notes.length >= 2) {
+        const ctx = factory.getContext();
+        new VF.StaveTie({ first_note: notes[0], last_note: notes[1], first_indices: [0], last_indices: [0] })
+          .setContext(ctx).draw();
+      }
+    } catch (e) {
+      el.innerHTML = '<span style="font-size:11px;color:#999;">notation unavailable</span>';
     }
   }
 
@@ -2267,6 +2666,41 @@
     drawRhythmFactory('rhythm-1-1-2', 'B4/q, B4/q, B4/h',            240);
     drawRhythmFactory('rhythm-2-1-1', 'B4/h, B4/q, B4/q',            240);
 
+    // ? = 3
+    drawRhythmFactory('rhythm-3x3',   'B4/h.',              200, 3);
+    drawRhythmFactory('rhythm-2-1_3', 'B4/h, B4/q',         220, 3);
+    drawRhythmFactory('rhythm-1-2_3', 'B4/q, B4/h',         220, 3);
+    drawRhythmFactory('rhythm-111_3', 'B4/q, B4/q, B4/q',   220, 3);
+
+    // Rests
+    drawRhythmFactory('rhythm-r111',  'B4/q/r, B4/q, B4/q, B4/q',          290, 4);
+    drawRhythmFactory('rhythm-1r11',  'B4/q, B4/q/r, B4/q, B4/q',          290, 4);
+    drawRhythmFactory('rhythm-11r1',  'B4/q, B4/q, B4/q/r, B4/q',          290, 4);
+    drawRhythmFactory('rhythm-111r',  'B4/q, B4/q, B4/q, B4/q/r',          290, 4);
+    drawRhythmFactory('rhythm-1r1r',  'B4/q, B4/q/r, B4/q, B4/q/r',        290, 4);
+    drawRhythmFactory('rhythm-r1r1',  'B4/q/r, B4/q, B4/q/r, B4/q',        290, 4);
+    drawRhythmFactory('rhythm-1hr1',  'B4/q, B4/h/r, B4/q',                 290, 4);
+
+    // Fractions — properly beamed
+    drawRhythmFactory('rhythm-8th8',   'B4/8, B4/8, B4/8, B4/8, B4/8, B4/8, B4/8, B4/8',
+      340, 4, [[0,1,2,3],[4,5,6,7]]);
+    drawRhythmFactory('rhythm-q88q88', 'B4/q, B4/8, B4/8, B4/q, B4/8, B4/8',
+      300, 4, [[1,2],[4,5]]);
+    drawRhythmFactory('rhythm-88q88q', 'B4/8, B4/8, B4/q, B4/8, B4/8, B4/q',
+      300, 4, [[0,1],[3,4]]);
+    drawRhythmFactory('rhythm-1618x4', 'B4/16, B4/16, B4/8, B4/16, B4/16, B4/8, B4/16, B4/16, B4/8, B4/16, B4/16, B4/8',
+      360, 4, [[0,1,2],[3,4,5],[6,7,8],[9,10,11]]);
+    drawRhythmFactory('rhythm-16th4',  'B4/16, B4/16, B4/16, B4/16, B4/16, B4/16, B4/16, B4/16, B4/16, B4/16, B4/16, B4/16, B4/16, B4/16, B4/16, B4/16',
+      400, 4, [[0,1,2,3],[4,5,6,7],[8,9,10,11],[12,13,14,15]]);
+    drawRhythmFactory('rhythm-dq8dq8', 'B4/q., B4/8, B4/q., B4/8',                          290, 4);
+    drawRhythmFactory('rhythm-r8eq',   'B4/8/r, B4/8, B4/q, B4/8/r, B4/8, B4/q',           300, 4);
+    drawRhythmFactory('rhythm-dq8h',   'B4/q., B4/8, B4/h',                                 285, 4);
+
+    // Tie / dot notation cards
+    drawTieNotation('tie-ex1',  'B4/h, B4/q',  155, 3, true);
+    drawTieNotation('dot-ex1',  'B4/h.',        110, 3, false);
+    drawTieNotation('dot-ex2',  'B4/h, B4/q',  155, 3, true);
+
     renderSwaraScores();
     renderAfricaScores();
   }
@@ -2275,10 +2709,11 @@
   if (document.readyState === 'complete') {
     renderAllVexFlow();
     buildBar12Grid();
+    buildBeatIndicator();
   } else {
-    window.addEventListener('load', () => { renderAllVexFlow(); buildBar12Grid(); });
+    window.addEventListener('load', () => { renderAllVexFlow(); buildBar12Grid(); buildBeatIndicator(); });
     document.addEventListener('DOMContentLoaded', () => {
-      setTimeout(() => { renderAllVexFlow(); buildBar12Grid(); }, 100);
+      setTimeout(() => { renderAllVexFlow(); buildBar12Grid(); buildBeatIndicator(); }, 100);
     });
   }
 
@@ -2492,12 +2927,35 @@
   // ============ RHYTHM ROW LOOPING ============
   // Each pattern: array of {beats: N} where N is the duration of each note in beats.
   const rhythmPatterns = {
-    '2-2':    [{b:2}, {b:2}],
-    '3-1':    [{b:3}, {b:1}],
-    '1-3':    [{b:1}, {b:3}],
-    '1111':   [{b:1}, {b:1}, {b:1}, {b:1}],
-    '1-1-2':  [{b:1}, {b:1}, {b:2}],
-    '2-1-1':  [{b:2}, {b:1}, {b:1}]
+    // ? = 4
+    '2-2':    { beats:4, notes:[{b:2},{b:2}] },
+    '3-1':    { beats:4, notes:[{b:3},{b:1}] },
+    '1-3':    { beats:4, notes:[{b:1},{b:3}] },
+    '1111':   { beats:4, notes:[{b:1},{b:1},{b:1},{b:1}] },
+    '1-1-2':  { beats:4, notes:[{b:1},{b:1},{b:2}] },
+    '2-1-1':  { beats:4, notes:[{b:2},{b:1},{b:1}] },
+    // ? = 3
+    '3x3':    { beats:3, notes:[{b:3}] },
+    '2-1_3':  { beats:3, notes:[{b:2},{b:1}] },
+    '1-2_3':  { beats:3, notes:[{b:1},{b:2}] },
+    '111_3':  { beats:3, notes:[{b:1},{b:1},{b:1}] },
+    // Rests 4/4
+    'r111':   { beats:4, notes:[{b:1,r:1},{b:1},{b:1},{b:1}] },
+    '1r11':   { beats:4, notes:[{b:1},{b:1,r:1},{b:1},{b:1}] },
+    '11r1':   { beats:4, notes:[{b:1},{b:1},{b:1,r:1},{b:1}] },
+    '111r':   { beats:4, notes:[{b:1},{b:1},{b:1},{b:1,r:1}] },
+    '1r1r':   { beats:4, notes:[{b:1},{b:1,r:1},{b:1},{b:1,r:1}] },
+    'r1r1':   { beats:4, notes:[{b:1,r:1},{b:1},{b:1,r:1},{b:1}] },
+    '1hr1':   { beats:4, notes:[{b:1},{b:2,r:1},{b:1}] },
+    // Fractions 4/4
+    '8th8':   { beats:4, notes:[{b:.5},{b:.5},{b:.5},{b:.5},{b:.5},{b:.5},{b:.5},{b:.5}] },
+    'q88q88': { beats:4, notes:[{b:1},{b:.5},{b:.5},{b:1},{b:.5},{b:.5}] },
+    '88q88q': { beats:4, notes:[{b:.5},{b:.5},{b:1},{b:.5},{b:.5},{b:1}] },
+    '1618x4': { beats:4, notes:[{b:.25},{b:.25},{b:.5},{b:.25},{b:.25},{b:.5},{b:.25},{b:.25},{b:.5},{b:.25},{b:.25},{b:.5}] },
+    '16th4':  { beats:4, notes:[{b:.25},{b:.25},{b:.25},{b:.25},{b:.25},{b:.25},{b:.25},{b:.25},{b:.25},{b:.25},{b:.25},{b:.25},{b:.25},{b:.25},{b:.25},{b:.25}] },
+    'dq8dq8': { beats:4, notes:[{b:1.5},{b:.5},{b:1.5},{b:.5}] },
+    'r8eq':   { beats:4, notes:[{b:.5,r:1},{b:.5},{b:1},{b:.5,r:1},{b:.5},{b:1}] },
+    'dq8h':   { beats:4, notes:[{b:1.5},{b:.5},{b:2}] },
   };
 
   let activeRhythmLoop = null;
@@ -2516,6 +2974,12 @@
     }
   }
 
+  function switchRGTab(tab) {
+    document.querySelectorAll('.rg-tab').forEach(b => b.classList.toggle('active', b.dataset.rgtab === tab));
+    document.querySelectorAll('.rg-pane').forEach(p => p.style.display = p.id === 'rgpane-' + tab ? '' : 'none');
+    stopRhythm();
+  }
+
   async function startRhythm(cell) {
     await initAudio();
     stopAllPlayback();
@@ -2523,37 +2987,36 @@
     cell.classList.add('playing');
 
     const key = cell.dataset.rhythm;
-    const pattern = rhythmPatterns[key];
-    const beatSec = 60 / currentBPM;
+    const patDef = rhythmPatterns[key];
+    if (!patDef) return;
 
-    // Pre-compute the beat positions where notes fire (in 16th-note steps for precision)
-    const tickStep = 0.25;             // 1/4 of a beat = 16th note
-    const totalBeats = 4;
-    const totalTicks = totalBeats / tickStep;  // 16 ticks per cycle
+    const notes     = patDef.notes;
+    const totalBeats = patDef.beats;
+    const beatSec   = 60 / currentBPM;
+    const tickStep  = 0.0625; // 64th-note resolution handles 16th notes exactly
+    const totalTicks = Math.round(totalBeats / tickStep);
 
-    const fireAtTick = new Map();      // tick → {pitch, accent}
+    const fireAtTick = new Map();
     let pos = 0;
-    pattern.forEach((p, idx) => {
-      const tick = Math.round(pos / tickStep);
-      // First note of the bar is the accent (downbeat)
-      fireAtTick.set(tick, { pitch: idx === 0 ? 'C4' : 'A3', accent: idx === 0 });
-      pos += p.b;
+    notes.forEach((n, idx) => {
+      if (!n.r) {
+        const tick = Math.round(pos / tickStep);
+        fireAtTick.set(tick, { pitch: idx === 0 ? 'C4' : 'A3', accent: idx === 0, dur: n.b });
+      }
+      pos += n.b;
     });
 
     let curTick = 0;
     activeRhythmLoop = new Tone.Loop((time) => {
       if (fireAtTick.has(curTick)) {
-        const evt = fireAtTick.get(curTick);
-        // Tabla hit on the note
-        tabla.triggerAttackRelease(evt.pitch, '16n', time, evt.accent ? 1.0 : 0.7);
-        // Soft piano underlay for warmth
-        if (pianoLoaded) {
-          piano.triggerAttackRelease(evt.pitch, '8n', time, evt.accent ? 0.5 : 0.35);
-        }
+        const ev = fireAtTick.get(curTick);
+        const noteDur = Math.max(0.07, beatSec * ev.dur * 0.72);
+        tabla.triggerAttackRelease(ev.pitch, noteDur, time, ev.accent ? 1.0 : 0.7);
+        if (pianoLoaded) piano.triggerAttackRelease(ev.pitch, noteDur * 1.2, time, ev.accent ? 0.5 : 0.35);
         Tone.Draw.schedule(() => {
           if (!activeRhythmCell) return;
           cell.classList.add('flash');
-          setTimeout(() => cell.classList.remove('flash'), 90);
+          setTimeout(() => cell.classList.remove('flash'), Math.max(50, ev.dur * 80));
         }, time);
       }
       curTick = (curTick + 1) % totalTicks;
@@ -2697,51 +3160,173 @@
   // ── Exercise loops (6 cards) ────────────────────────────────────────────────
   let exLoop = null;
   let exCard = null;
+  const TIME_SIGS = ['4/4', '3/4', '7/8'];
+  let currentTimeSig = '4/4';
+  let exBeatIdx = 0;
+  let exBeatLoop = null;
+
+  function cycleTimeSig() {
+    const idx = TIME_SIGS.indexOf(currentTimeSig);
+    currentTimeSig = TIME_SIGS[(idx + 1) % TIME_SIGS.length];
+    const btn = document.getElementById('timesig-btn');
+    if (btn) btn.textContent = currentTimeSig;
+    buildBeatIndicator();
+    if (exCard) {
+      const card = exCard;
+      const indices = card.querySelector('[data-ex-indices]').dataset.exIndices.split(',').map(Number);
+      startExercise(indices, card);
+    }
+  }
+
+  function buildBeatIndicator() {
+    const ind = document.getElementById('beat-indicator');
+    if (!ind) return;
+    const beats = {'4/4':4, '3/4':3, '7/8':7}[currentTimeSig] || 4;
+    // For 7/8, accent pattern is 2+2+3 (accents on 0, 2, 4)
+    const accents = {'4/4':[0], '3/4':[0], '7/8':[0,2,4]}[currentTimeSig] || [0];
+    ind.innerHTML = '';
+    for (let i = 0; i < beats; i++) {
+      const d = document.createElement('div');
+      d.className = 'beat-dot' + (accents.includes(i) ? ' accent' : '');
+      d.id = 'beat-dot-' + i;
+      ind.appendChild(d);
+    }
+  }
+
   function stopExercise() {
-    if (exLoop) { exLoop.stop(); exLoop.dispose(); exLoop = null; stopMetronome(); }
+    if (exLoop) { exLoop.stop(); exLoop.dispose(); exLoop = null; }
+    if (exBeatLoop) { exBeatLoop.stop(); exBeatLoop.dispose(); exBeatLoop = null; }
+    stopMetronome();
+    document.querySelectorAll('.beat-dot').forEach(d => d.classList.remove('active'));
     if (exCard) { exCard.querySelector('.play-hint').textContent = '▶ Loop'; exCard.classList.remove('playing'); exCard = null; }
   }
+
   async function startExercise(indices, card) {
     await initAudio();
     stopAllPlayback();
     exCard = card;
     card.classList.add('playing');
     card.querySelector('.play-hint').textContent = '■ Stop';
-    let step = 0;
     const freqs = exerciseFreqCache.length ? exerciseFreqCache : arohFreqs;
-    const noteDur = (60 / currentBPM);
+    // Time sig parameters
+    const is7_8 = currentTimeSig === '7/8';
+    const beatDur = is7_8 ? (60 / currentBPM) / 2 : (60 / currentBPM);
+    const beatsPerBar = {'4/4':4, '3/4':3, '7/8':7}[currentTimeSig] || 4;
+    let step = 0;
+    exBeatIdx = 0;
     exLoop = new Tone.Loop((time) => {
       const f = freqs[indices[step % indices.length]];
-      if (pianoLoaded) piano.triggerAttackRelease(f, 0.7, time);
+      if (pianoLoaded) piano.triggerAttackRelease(f, beatDur * 0.82, time);
       else tabla.triggerAttackRelease(f, '16n', time);
+      // Metronome: accent on beat 1 of bar, softer on others
+      const pos = exBeatIdx % beatsPerBar;
+      if (pos === 0) {
+        try { metroHi.triggerAttackRelease('32n', time); } catch(e){}
+      } else {
+        try { metroLo.triggerAttackRelease('64n', time); } catch(e){}
+      }
+      const capturedPos = pos;
+      Tone.Draw.schedule(() => {
+        document.querySelectorAll('.beat-dot').forEach((d,i) => d.classList.toggle('active', i === capturedPos));
+      }, time);
       step++;
-    }, noteDur * 0.6);
+      exBeatIdx++;
+    }, beatDur);
     exLoop.start(0);
-    startMetronome();
     Tone.Transport.start();
   }
 
   // ============ AFRICA 3-VOICE NOTATION ============
   let currentAfricaKey = 'A';
   let africaIsPlaying = false;
-  let africaPart = null, africaChordPart = null;
+  let africaChordPart = null;
+  let sopPart = null, altPart = null, tenPart = null;
+  let sopVol = null, altVol = null, tenVol = null;
+  let sopSynth = null, altSynth = null, tenSynth = null;
 
-  const AFRICA_PATS = {
-    S: [[0,1],[0,1],[0,1],[0,2],[0,1],[0,1],[0,2],[1,1],[1,1]],
-    A: [[2,1],[2,1],[2,1],[2,1],[2,1],[2,1],[2,1],[3,2],[3,1],[3,1]],
-    T: [[5,1],[5,1],[5,1],[4,2],[4,1],[4,1],[5,2],[6,1],[6,1]],
+  // Letters covered by each key signature (sharps/flats already implied)
+  const KEY_SIG_LETTERS = {
+    'C': [], 'G': ['F'], 'D': ['F','C'], 'A': ['F','C','G'],
+    'E': ['F','C','G','D'], 'B': ['F','C','G','D','A'],
+    'F#': ['F','C','G','D','A','E'], 'C#': ['F','C','G','D','A','E','B'],
+    'F': ['B'], 'Bb': ['B','E'], 'Eb': ['B','E','A'], 'Ab': ['B','E','A','D'],
   };
-
-  function buildAfricaScale(key) {
-    const raw = KEY_DATA[key].descNotes.split(',').map(n => n.replace('/q','').trim());
-    return raw.map(n => {
-      const m = n.match(/^([A-Gb#]+)(\d)$/);
-      return m ? (m[1] + (parseInt(m[2]) - 1)) : n;
-    });
+  function toVFNote(noteName, key) {
+    const m = noteName.match(/^([A-G])([#b]?)(\d+)$/);
+    if (!m) return noteName;
+    const [, letter, acc, oct] = m;
+    if (acc && (KEY_SIG_LETTERS[key] || []).includes(letter)) return letter + oct;
+    return noteName;
   }
 
-  function buildAfricaEasyScore(voice, scale) {
-    return AFRICA_PATS[voice].map(([i, d]) => scale[i] + '/' + (d === 2 ? 'h' : 'q')).join(', ');
+  function buildAfricaAscScale(key) {
+    return KEY_DATA[key].ascNotes.split(',').map(n => n.replace('/q','').trim());
+  }
+  function africaOctDown(n) {
+    return n.replace(/(\d+)$/, m => '' + (parseInt(m) - 1));
+  }
+
+  function buildAfrica4BarEasyScores(key) {
+    const asc = buildAfricaAscScale(key);
+    const vfn = n => toVFNote(n, key);
+    const deg  = i => vfn(asc[i]);
+    const degD = i => vfn(africaOctDown(asc[i]));
+    const qr = 'B4/qr';
+    return {
+      // Soprano: melody "I bless | the rains down | in A- | -fri-ca"
+      S: [
+        `${deg(2)}/q, ${deg(2)}/q, ${qr}, ${qr}`,
+        `${deg(3)}/q, ${deg(3)}/q, ${deg(2)}/q, ${qr}`,
+        `${deg(1)}/q, ${deg(1)}/q, ${qr}, ${qr}`,
+        `${deg(0)}/q, ${qr}, ${deg(0)}/q, ${deg(0)}/q`,
+      ],
+      // Alto: chord 3rd, whole note per bar
+      A: [
+        `${deg(0)}/w`,    // F#m → A (minor 3rd)
+        `${degD(5)}/w`,   // D   → F#4 (major 3rd)
+        `${deg(2)}/w`,    // A   → C#5 (major 3rd)
+        `${degD(6)}/w`,   // E   → G#4 (major 3rd)
+      ],
+      // Tenor: chord root, whole note per bar
+      T: [
+        `${degD(5)}/w`,   // F#m → F#4
+        `${degD(3)}/w`,   // D   → D4
+        `${deg(0)}/w`,    // A   → A4
+        `${degD(4)}/w`,   // E   → E4
+      ],
+    };
+  }
+
+  function drawAfrica4Bar(containerId, barSpecs, keySig, stemDir) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    container.innerHTML = '';
+    const barWidths = [190, 140, 130, 140];
+    barSpecs.forEach((spec, i) => {
+      const elId = containerId + '-b' + i;
+      const el = document.createElement('div');
+      el.id = elId;
+      el.style.flexShrink = '0';
+      container.appendChild(el);
+      const w = barWidths[i];
+      try {
+        const VF = Vex.Flow;
+        const factory = new VF.Factory({ renderer: { elementId: elId, width: w, height: 95 } });
+        const score = factory.EasyScore();
+        const system = factory.System({ x: 0, y: 8, width: w - 4 });
+        const voice = score.voice(score.notes(spec, { stem: stemDir }), { time: '4/4' }).setStrict(false);
+        const stave = system.addStave({ voices: [voice] });
+        if (i === 0) {
+          stave.addClef('treble');
+          if (keySig && keySig !== 'C') stave.addKeySignature(keySig);
+          stave.addTimeSignature('4/4');
+        }
+        factory.draw();
+      } catch(e) {
+        console.error('Africa 4bar', containerId, i, e);
+        el.innerHTML = '<span style="font:11px monospace;color:#999;">' + spec + '</span>';
+      }
+    });
   }
 
   const AFRICA_CHORD_NAMES = {
@@ -2753,34 +3338,13 @@
     'G':{'vi':'Em','IV':'C','I':'G','V':'D'},       'Ab':{'vi':'Fm','IV':'D♭','I':'A♭','V':'E♭'},
   };
 
-  function drawAfricaStave(elementId, easyScoreSpec, keySig, stemDir) {
-    const el = document.getElementById(elementId);
-    if (!el) return;
-    el.innerHTML = '';
-    const w = Math.max(Math.min(el.offsetWidth || 680, 700), 360);
-    try {
-      const VF = Vex.Flow;
-      const factory = new VF.Factory({ renderer: { elementId, width: w, height: 110 } });
-      const score = factory.EasyScore();
-      const system = factory.System({ x: 0, y: 6, width: w - 6 });
-      const notes = score.notes(easyScoreSpec, { stem: stemDir });
-      const voice = score.voice(notes, { time: '11/4' }).setStrict(false);
-      const stave = system.addStave({ voices: [voice] }).addClef('treble');
-      if (keySig && keySig !== 'C') stave.addKeySignature(keySig);
-      factory.draw();
-    } catch(e) {
-      console.error('Africa stave', elementId, e);
-      el.innerHTML = '<span style="font-family:monospace;font-size:11px;color:#999;">' + easyScoreSpec + '</span>';
-    }
-  }
-
   function renderAfricaScores() {
     if (typeof Vex === 'undefined' || !Vex.Flow || !Vex.Flow.Factory) return;
-    const scale = buildAfricaScale(currentAfricaKey);
     const sig = KEY_DATA[currentAfricaKey].sig;
-    drawAfricaStave('africa-stave-S', buildAfricaEasyScore('S', scale), sig, 'up');
-    drawAfricaStave('africa-stave-A', buildAfricaEasyScore('A', scale), sig, 'up');
-    drawAfricaStave('africa-stave-T', buildAfricaEasyScore('T', scale), sig, 'down');
+    const specs = buildAfrica4BarEasyScores(currentAfricaKey);
+    drawAfrica4Bar('africa-stave-S', specs.S, sig, 'up');
+    drawAfrica4Bar('africa-stave-A', specs.A, sig, 'up');
+    drawAfrica4Bar('africa-stave-T', specs.T, sig, 'up');
     const chords = AFRICA_CHORD_NAMES[currentAfricaKey] || {};
     ['vi','IV','I','V'].forEach((deg, i) => {
       const chip = document.getElementById('achip-' + i);
@@ -2794,12 +3358,20 @@
     if (africaIsPlaying) stopAfrica();
   }
 
+  function setAfricaVol(voice, val) {
+    const vol = voice === 'S' ? sopVol : voice === 'A' ? altVol : tenVol;
+    if (!vol) return;
+    vol.volume.value = val > 0 ? -30 * (1 - val / 100) : -Infinity;
+  }
+
   function stopAfrica() {
-    if (africaPart)      { try { africaPart.stop(); africaPart.dispose(); } catch(e){} africaPart = null; }
-    if (africaChordPart) { try { africaChordPart.stop(); africaChordPart.dispose(); } catch(e){} africaChordPart = null; }
+    [sopPart, altPart, tenPart, africaChordPart].forEach(p => {
+      if (p) { try { p.stop(); p.dispose(); } catch(e){} }
+    });
+    sopPart = altPart = tenPart = africaChordPart = null;
     africaIsPlaying = false;
     const btn = document.getElementById('africa-play-btn');
-    if (btn) { btn.textContent = '▶ Play with chords'; btn.classList.remove('playing'); }
+    if (btn) { btn.textContent = '▶ Play'; btn.classList.remove('playing'); }
     document.querySelectorAll('.africa-chord-chip').forEach(c => c.classList.remove('active'));
   }
 
@@ -2808,58 +3380,112 @@
     stopAllPlayback();
     await initAudio();
 
+    // Lazy-init SAT synths + volumes
+    if (!sopVol) {
+      sopVol = new Tone.Volume(-3).toDestination();
+      altVol = new Tone.Volume(-3).toDestination();
+      tenVol = new Tone.Volume(-3).toDestination();
+      sopSynth = new Tone.Synth({
+        oscillator: { type: 'triangle8' },
+        envelope: { attack: 0.05, decay: 0.08, sustain: 0.85, release: 0.35 },
+      }).connect(sopVol);
+      altSynth = new Tone.Synth({
+        oscillator: { type: 'sine' },
+        envelope: { attack: 0.08, decay: 0.08, sustain: 0.90, release: 0.45 },
+      }).connect(altVol);
+      tenSynth = new Tone.Synth({
+        oscillator: { type: 'triangle' },
+        envelope: { attack: 0.10, decay: 0.10, sustain: 0.88, release: 0.50 },
+      }).connect(tenVol);
+      ['S','A','T'].forEach(v => {
+        const el = document.getElementById('africa-vol-' + v);
+        if (el) setAfricaVol(v, +el.value);
+      });
+    }
+
+    const kd = KEY_DATA[currentAfricaKey];
+    const f  = kd.freq; // [Sa, Re, Ga, Ma, Pa, Dha, Ni, Sa2] ascending
     const bpm = currentBPM || 86;
     const spb = 60 / bpm;
-    const loopEnd = 11 * spb;
-    const scale = buildAfricaScale(currentAfricaKey);
-    const kd = KEY_DATA[currentAfricaKey];
+    const loopEnd = 16 * spb; // 4 bars × 4 beats
 
-    // Build melody events for all 3 voices
-    const noteEvents = [];
-    for (const [voice, pat] of Object.entries(AFRICA_PATS)) {
-      let t = 0;
-      for (const [idx, dur] of pat) {
-        noteEvents.push({ time: t * spb, note: scale[idx], dur: dur * spb * 0.82 });
-        t += dur;
+    // Soprano melody: "I bless the rains down in Africa"
+    // Solfege: Ga Ga | Ma Ma Ga | Re Re | Sa Sa Sa
+    const sopEvents = [
+      {b:0,  freq:f[2]}, // "I"
+      {b:1,  freq:f[2]}, // "bless"
+      {b:4,  freq:f[3]}, // "the"
+      {b:5,  freq:f[3]}, // "rains"
+      {b:6,  freq:f[2]}, // "down"
+      {b:8,  freq:f[1]}, // "in"
+      {b:9,  freq:f[1]}, // "A-"
+      {b:12, freq:f[0]}, // "-fri"
+      {b:14, freq:f[0]}, // "-ca"
+      {b:15, freq:f[0]}, // echo
+    ].map(e => ({ time: e.b * spb, freq: e.freq, dur: 0.78 * spb }));
+
+    // Alto: chord 3rd, held for whole bar (3.85 beats to not bleed into next bar)
+    const altEvents = [
+      {b:0,  freq: f[0]    }, // F#m → A (m3)
+      {b:4,  freq: f[5]/2  }, // D   → F#4 (M3)
+      {b:8,  freq: f[2]    }, // A   → C#5 (M3)
+      {b:12, freq: f[6]/2  }, // E   → G#4 (M3)
+    ].map(e => ({ time: e.b * spb, freq: e.freq, dur: 3.85 * spb }));
+
+    // Tenor: chord root, one octave below f[], held whole bar
+    const tenEvents = [
+      {b:0,  freq: f[5]/2  }, // F#m → F#4
+      {b:4,  freq: f[3]/2  }, // D   → D4
+      {b:8,  freq: f[0]/2  }, // A   → A3
+      {b:12, freq: f[4]/2  }, // E   → E4
+    ].map(e => ({ time: e.b * spb, freq: e.freq, dur: 3.85 * spb }));
+
+    // Piano chords: 4 hits per bar (stacked 3-note block chords)
+    const chordSets = [
+      [f[5]/2, f[0],   f[2]  ], // F#m: F#4 A4 C#5
+      [f[3]/2, f[5]/2, f[0]  ], // D:   D4  F#4 A4
+      [f[0]/2, f[2]/2, f[4]/2], // A:   A3  C#4 E4
+      [f[4]/2, f[6]/2, f[1]  ], // E:   E4  G#4 B4
+    ];
+    const chordEvents = [];
+    for (let bar = 0; bar < 4; bar++) {
+      for (let beat = 0; beat < 4; beat++) {
+        chordEvents.push({ time: (bar * 4 + beat) * spb, freqs: chordSets[bar], chipIdx: bar });
       }
     }
 
-    // Chord events: vi(0-3b), IV(3-6b), I(6-8b), V(8-11b)
-    const chordBeats = [0, 3, 6, 8];
-    const chordDurs  = [3, 3, 2, 3];
-    const freqIdxs   = [5, 3, 0, 4]; // vi=Dha, IV=Ma, I=Sa, V=Pa
-    const chordEvents = chordBeats.map((tb, i) => ({
-      time: tb * spb,
-      freq: kd.freq[freqIdxs[i]] / 2,
-      dur: chordDurs[i] * spb * 0.85,
-      chipIdx: i,
-    }));
-
     Tone.Transport.bpm.value = bpm;
 
-    africaPart = new Tone.Part((time, ev) => {
-      if (pianoLoaded)     piano.triggerAttackRelease(ev.note, ev.dur, time);
-      else if (tabla)      tabla.triggerAttackRelease(Tone.Frequency(ev.note).toFrequency(), ev.dur, time);
-    }, noteEvents);
-    africaPart.loop = true;
-    africaPart.loopEnd = loopEnd;
+    sopPart = new Tone.Part((time, ev) => {
+      sopSynth.triggerAttackRelease(ev.freq, ev.dur, time, 0.75);
+    }, sopEvents);
+    sopPart.loop = true; sopPart.loopEnd = loopEnd;
+
+    altPart = new Tone.Part((time, ev) => {
+      altSynth.triggerAttackRelease(ev.freq, ev.dur, time, 0.60);
+    }, altEvents);
+    altPart.loop = true; altPart.loopEnd = loopEnd;
+
+    tenPart = new Tone.Part((time, ev) => {
+      tenSynth.triggerAttackRelease(ev.freq, ev.dur, time, 0.65);
+    }, tenEvents);
+    tenPart.loop = true; tenPart.loopEnd = loopEnd;
 
     africaChordPart = new Tone.Part((time, ev) => {
-      if (pianoLoaded)     piano.triggerAttackRelease(ev.freq, ev.dur, time);
-      else if (tabla)      tabla.triggerAttackRelease(ev.freq, ev.dur, time);
+      if (pianoLoaded) ev.freqs.forEach(freq => piano.triggerAttackRelease(freq, spb * 0.28, time, 0.42));
+      else if (tabla)  tabla.triggerAttackRelease(ev.freqs[0], spb * 0.28, time, 0.42);
       Tone.Draw.schedule(() => {
         document.querySelectorAll('.africa-chord-chip').forEach((c, i) => c.classList.toggle('active', i === ev.chipIdx));
       }, time);
     }, chordEvents);
-    africaChordPart.loop = true;
-    africaChordPart.loopEnd = loopEnd;
+    africaChordPart.loop = true; africaChordPart.loopEnd = loopEnd;
+
+    sopPart.start(0); altPart.start(0); tenPart.start(0); africaChordPart.start(0);
+    Tone.Transport.stop(); Tone.Transport.position = 0; Tone.Transport.start();
 
     africaIsPlaying = true;
     const btn = document.getElementById('africa-play-btn');
     if (btn) { btn.textContent = '⏹ Stop'; btn.classList.add('playing'); }
-    africaPart.start(0);
-    africaChordPart.start(0);
-    Tone.Transport.start();
   }
 
   // ============ 12-BAR BLUES ============
@@ -2867,6 +3493,25 @@
   let bluesIsPlaying = false;
   let bluesPart = null, bluesBeatLoop = null;
   let bluesEighthIdx = 0;
+
+  let currentBluesLevel = 1;
+  let bluesBPM = 130;
+
+  function setBluesLevel(n) {
+    currentBluesLevel = n;
+    document.getElementById('blues-lvl-1').classList.toggle('active', n === 1);
+    document.getElementById('blues-lvl-2').classList.toggle('active', n === 2);
+    document.getElementById('blues-level-explain').innerHTML = n === 1
+      ? 'Root on beat 1. Fifth on the &amp;-of-2. That two-note hop is the floor.'
+      : 'Walking bass: each bar = 1 · 3 · 5 · 6. Root, major third, fifth, major sixth — going up.';
+    if (bluesIsPlaying) { stopBlues(); setTimeout(() => toggleBluesPlay(), 60); }
+  }
+
+  function adjustBluesBPM(delta) {
+    bluesBPM = Math.max(60, Math.min(200, bluesBPM + delta));
+    document.getElementById('blues-bpm-display').textContent = bluesBPM;
+    if (bluesIsPlaying) { stopBlues(); }
+  }
 
   const BLUES12 = ['I','IV','I','I', 'IV','IV','I','I', 'V','IV','I','I'];
   const BLUES_ROOT_IDX = { I:0, IV:3, V:4 }; // index into KEY_DATA freq[]
@@ -2929,23 +3574,30 @@
     stopAllPlayback();
     await initAudio();
 
-    const bpm = currentBPM || 86;
+    const bpm = bluesBPM;
     const spb = 60 / bpm;
-    const totalEighths = 12 * 4 * 2; // 12 bars × 4 beats × 2 eighths
+    const totalEighths = 12 * 4 * 2;
     const loopEnd = totalEighths * (spb / 2);
-
     const kd = KEY_DATA[currentBluesKey];
 
-    // BUM-BUM note events: beat 1 (root) and &-of-2 (fifth)
     const noteEvents = [];
     for (let bar = 0; bar < 12; bar++) {
       const deg = BLUES12[bar];
       const rootIdx = BLUES_ROOT_IDX[deg];
       const rootFreq = kd.freq[rootIdx] / 2;
-      const fifthFreq = rootFreq * Math.pow(2, 7/12); // ET perfect fifth
       const barStart = bar * 4 * spb;
-      noteEvents.push({ time: barStart,              freq: rootFreq, dur: spb * 0.55 });
-      noteEvents.push({ time: barStart + 1.5 * spb,  freq: fifthFreq, dur: spb * 0.45 });
+      if (currentBluesLevel === 1) {
+        // BUM-BUM: root on beat 1, fifth on &of2
+        const fifthFreq = rootFreq * Math.pow(2, 7/12);
+        noteEvents.push({ time: barStart,             freq: rootFreq,  dur: spb * 0.55 });
+        noteEvents.push({ time: barStart + 1.5 * spb, freq: fifthFreq, dur: spb * 0.45 });
+      } else {
+        // Level 2: walking bass 1-3-5-6 (one note per beat)
+        const walk = [0, 4/12, 7/12, 9/12].map(s => rootFreq * Math.pow(2, s));
+        for (let b = 0; b < 4; b++) {
+          noteEvents.push({ time: barStart + b * spb, freq: walk[b], dur: spb * 0.6 });
+        }
+      }
     }
 
     Tone.Transport.bpm.value = bpm;
@@ -2961,8 +3613,14 @@
     bluesBeatLoop = new Tone.Loop((time) => {
       const ei = bluesEighthIdx % totalEighths;
       const bar = Math.floor(ei / 8);
-      const eighthInBar = ei % 8; // 0=1, 1=&1, 2=2, 3=&2, 4=3, 5=&3, 6=4, 7=&4
+      const eighthInBar = ei % 8;
       bluesEighthIdx++;
+      // Backbeat metronome: click on beats 2 and 4 (eighthInBar 2 and 6)
+      if (eighthInBar === 2 || eighthInBar === 6) {
+        try { metroHi.triggerAttackRelease('32n', time); } catch(e){}
+      } else if (eighthInBar === 0 || eighthInBar === 4) {
+        try { metroLo.triggerAttackRelease('64n', time); } catch(e){}
+      }
       Tone.Draw.schedule(() => {
         document.querySelectorAll('.bar12-cell').forEach((c, i) => c.classList.toggle('active', i === bar));
         document.querySelectorAll('.bum-beat').forEach(b => b.classList.remove('bum-active'));
@@ -2977,7 +3635,126 @@
     if (btn) { btn.textContent = '⏹ Stop'; btn.classList.add('playing'); }
     bluesPart.start(0);
     bluesBeatLoop.start(0);
+    Tone.Transport.stop();
+    Tone.Transport.position = 0;
     Tone.Transport.start();
+  }
+
+  // ============ BLUES SWING TOGGLE ============
+  let bluesSwingOn = false;
+
+  function toggleBluesSwing() {
+    bluesSwingOn = !bluesSwingOn;
+    Tone.Transport.swing = bluesSwingOn ? 0.5 : 0;
+    Tone.Transport.swingSubdivision = '8n';
+    const btn = document.getElementById('blues-swing-btn');
+    if (btn) {
+      btn.style.background = bluesSwingOn ? 'var(--ink)' : '';
+      btn.style.color = bluesSwingOn ? 'var(--paper)' : '';
+    }
+  }
+
+  // ============ SONG PLAYBACK (5 songs) ============
+  const SONG_FREQS = {
+    'Sa':  277.18, 'Re':  311.13, 'Ga':  349.23, 'Ma':  369.99,
+    'Pa':  415.30, 'Dha': 466.16, 'Ni':  523.25,
+    'Sa2': 554.37, 'Re2': 622.26, 'Ga2': 698.46, 'Pa2': 830.61,
+    'R':   0       // rest
+  };
+
+  // Each entry: ['NoteName', durationInBeats]
+  // BPM is 80; 1 beat = 0.75s at 80 BPM
+  const SONG_MELODIES = {
+    hbd: [
+      ['Pa', .75], ['Pa', .25], ['Dha', 1], ['Pa', 1],  ['Sa2', 1.5], ['Ni', .5],
+      ['Pa', .75], ['Pa', .25], ['Dha', 1], ['Pa', 1],  ['Re2', 2.5],
+      ['Pa', .75], ['Pa', .25], ['Pa2', 1], ['Ga2', 1], ['Sa2', 1], ['Ni', .5], ['Dha', .5],
+      ['Ma', .75], ['Ma', .25], ['Ga', 1],  ['Sa', 1],  ['Re', 2]
+    ],
+    twinkle: [
+      ['Sa', 1], ['Sa', 1], ['Pa', 1], ['Pa', 1], ['Dha', 1], ['Dha', 1], ['Pa', 2],
+      ['Ma', 1], ['Ma', 1], ['Ga', 1], ['Ga', 1], ['Re', 1],  ['Re', 1],  ['Sa', 2],
+      ['Pa', 1], ['Pa', 1], ['Ma', 1], ['Ma', 1], ['Ga', 1],  ['Ga', 1],  ['Re', 2],
+      ['Pa', 1], ['Pa', 1], ['Ma', 1], ['Ma', 1], ['Ga', 1],  ['Ga', 1],  ['Re', 2]
+    ],
+    ode: [
+      ['Ga', 1], ['Ga', 1], ['Ma', 1], ['Pa', 1], ['Pa', 1], ['Ma', 1], ['Ga', 1], ['Re', 1],
+      ['Sa', 1], ['Sa', 1], ['Re', 1], ['Ga', 1.5], ['Re', .5], ['Re', 2],
+      ['Ga', 1], ['Ga', 1], ['Ma', 1], ['Pa', 1], ['Pa', 1], ['Ma', 1], ['Ga', 1], ['Re', 1],
+      ['Sa', 1], ['Sa', 1], ['Re', 1], ['Ga', 1.5], ['Re', .5], ['Re', 2]
+    ],
+    rainbow: [
+      ['Sa', 1.5], ['Sa2', 2.5],
+      ['Ni', 1], ['Pa', 1], ['Dha', .5], ['Pa', .5], ['Ma', 1.5], ['Ga', .5], ['Ma', 2],
+      ['Re', 1.5], ['Re', 2.5],
+      ['Ga', 1], ['Sa', 1], ['Re', .5], ['Sa', .5], ['Dha', 2]
+    ],
+    joy: [
+      ['Sa2', 1], ['Ni', 1],  ['Dha', 1], ['Pa', 1],
+      ['Ma',  1], ['Ga', .5], ['Ma', .5], ['Pa', 2],
+      ['Ma',  1], ['Ga', 1],  ['Re', 1],  ['Sa', 1],
+      ['Re',  1], ['Ma', .5], ['Ga', .5], ['Re', 2]
+    ]
+  };
+
+  let activeSongPart = null;
+  let activeSongBtn  = null;
+
+  function stopSong() {
+    if (activeSongPart) {
+      try { activeSongPart.stop(); activeSongPart.dispose(); } catch(e){}
+      activeSongPart = null;
+    }
+    if (activeSongBtn) {
+      activeSongBtn.textContent = '▶ Play';
+      activeSongBtn.style.background = '';
+      activeSongBtn.style.color = '';
+      activeSongBtn = null;
+    }
+  }
+
+  async function toggleSong(songId, btn) {
+    if (activeSongBtn === btn) { stopSong(); return; }
+    stopAllPlayback();
+    await initAudio();
+
+    const melody = SONG_MELODIES[songId];
+    if (!melody) return;
+
+    const songBPM = 76;
+    const beatSec = 60 / songBPM;
+    Tone.Transport.bpm.value = songBPM;
+
+    // Build timed events
+    const events = [];
+    let t = 0;
+    melody.forEach(([note, dur]) => {
+      const freq = SONG_FREQS[note];
+      if (freq > 0) {
+        events.push({ time: t, freq, dur: dur * beatSec * 0.88 });
+      }
+      t += dur * beatSec;
+    });
+
+    activeSongPart = new Tone.Part((time, ev) => {
+      if (pianoLoaded) piano.triggerAttackRelease(ev.freq, ev.dur, time, 0.75);
+      else if (tabla)  tabla.triggerAttackRelease(ev.freq, ev.dur, time, 0.75);
+    }, events);
+    activeSongPart.loop = false;
+
+    // Auto-stop when melody ends
+    const totalSec = t + 1;
+    activeSongPart.start(0);
+    Tone.Transport.start();
+
+    activeSongBtn = btn;
+    btn.textContent = '⏹ Stop';
+    btn.style.background = 'var(--ink)';
+    btn.style.color = 'var(--paper)';
+
+    setTimeout(() => {
+      if (activeSongBtn === btn) stopSong();
+    }, totalSec * 1000 + 200);
   }
 
   function stopAllPlayback() {
@@ -2988,6 +3765,7 @@
     stopExercise();
     stopAfrica();
     stopBlues();
+    stopSong();
   }
 
   document.querySelectorAll('[data-ex-indices]').forEach(btn => {
