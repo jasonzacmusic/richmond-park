@@ -951,8 +951,25 @@
   .role-card.bass { border-color: var(--peacock); }
   .role-card.lyrics { border-color: var(--berry); }
   .role-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 8px; }
-  .role-content { font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: 24px; letter-spacing: -0.01em; line-height: 1.3; }
+  .role-label-aside { font-style: italic; text-transform: none; letter-spacing: 0.04em; color: var(--ink-soft); opacity: 0.8; margin-left: 6px; }
+  .role-content { font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: 24px; letter-spacing: -0.01em; line-height: 1.3; transition: opacity 0.18s ease; }
   .role-content .bum { color: var(--peacock); }
+  /* ─ Group B song toggle (which blues to sing) ─ */
+  .blues-song-toggle { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 14px; }
+  .blues-song-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.05em;
+    padding: 5px 11px;
+    border: 1.5px solid var(--berry);
+    border-radius: 100px;
+    background: var(--paper);
+    color: var(--berry);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+  .blues-song-btn:hover { background: var(--berry); color: var(--paper); opacity: 0.9; }
+  .blues-song-btn.active { background: var(--berry); color: var(--paper); }
   .snap-track {
     display: flex;
     gap: 4px;
@@ -2444,7 +2461,7 @@
     <p>So much of the music we love — Hendrix, Coldplay, soul, rock, R&amp;B — carries the blues somewhere inside it. We split the room into bass and lyrics and did <em>Sweet Home Chicago</em>. Twelve bars. The secret is in the snap: <strong>two and four</strong>, not one and three. One and three is military. Two and four is dance.</p>
 
     <div class="blues-board">
-      <p class="eyebrow" style="margin-bottom: 16px;">Sweet Home Chicago — split the room</p>
+      <p class="eyebrow" style="margin-bottom: 16px;">Split the room — bass + lyrics</p>
 
       <div class="blues-grid">
         <div class="role-card bass">
@@ -2457,11 +2474,18 @@
         </div>
 
         <div class="role-card lyrics">
-          <div class="role-label">Group B · Lyrics</div>
-          <div class="role-content">
+          <div class="role-label">Group B · Lyrics <span class="role-label-aside">pick a song</span></div>
+          <div class="blues-song-toggle" id="blues-song-toggle">
+            <button class="blues-song-btn active" data-song="chicago">Sweet Home Chicago</button>
+            <button class="blues-song-btn" data-song="toredown">I'm Tore Down</button>
+            <button class="blues-song-btn" data-song="neworleans">Walking to New Orleans</button>
+            <button class="blues-song-btn" data-song="kansas">Kansas City</button>
+            <button class="blues-song-btn" data-song="stormy">Stormy Monday</button>
+          </div>
+          <div class="role-content" id="blues-lyric-content">
             Come on, baby, don't you want to go?<br>
             Back to that same old place,<br>
-            Sweet home Chicago.
+            sweet home Chicago.
           </div>
           <p class="quick-tip">Lazy, swung, talky. You are the story.</p>
         </div>
@@ -4470,6 +4494,40 @@
     document.querySelectorAll('.blues-place-btn').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.place === place);
     });
+  }
+
+  // ── Group B song toggle: switch the lyric Group B sings ──
+  const BLUES_GROUP_B_SONGS = {
+    chicago: 'Come on, baby, don\'t you want to go?<br>Back to that same old place,<br>sweet home Chicago.',
+    toredown: 'Well I\'m tore down,<br>almost level with the ground.<br>I feel like this when my baby can\'t be found.',
+    neworleans: 'I\'m walkin\' to New Orleans,<br>I\'m walkin\' to New Orleans.<br>I\'m gonna need two pair of shoes when I get through walkin\' these blues.',
+    kansas: 'I\'m going to Kansas City,<br>Kansas City here I come.<br>They got some crazy little women there and I\'m gonna get me one.',
+    stormy: 'They call it Stormy Monday,<br>but Tuesday\'s just as bad.<br>Wednesday\'s worse, and Thursday\'s also sad.'
+  };
+  function setBluesGroupBSong(songId) {
+    const content = document.getElementById('blues-lyric-content');
+    if (content && BLUES_GROUP_B_SONGS[songId]) {
+      // tiny fade so the swap feels intentional
+      content.style.opacity = '0';
+      setTimeout(() => {
+        content.innerHTML = BLUES_GROUP_B_SONGS[songId];
+        content.style.opacity = '1';
+      }, 140);
+    }
+    document.querySelectorAll('.blues-song-btn').forEach(b => b.classList.toggle('active', b.dataset.song === songId));
+  }
+  // Wire toggle buttons. Runs once on load; safe to re-call from init.
+  function wireBluesGroupBToggle() {
+    document.querySelectorAll('.blues-song-btn').forEach(btn => {
+      if (btn._wired) return;
+      btn._wired = true;
+      btn.addEventListener('click', () => setBluesGroupBSong(btn.dataset.song));
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', wireBluesGroupBToggle);
+  } else {
+    wireBluesGroupBToggle();
   }
 
   const BLUES12 = ['I','IV','I','I', 'IV','IV','I','I', 'V','IV','I','I'];
