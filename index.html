@@ -4177,6 +4177,9 @@
     exBeatIdx = 0;
     document.querySelectorAll('.beat-dot').forEach(d => d.classList.remove('active'));
     if (exCard) { exCard.querySelector('.play-hint').textContent = '▶ Loop'; exCard.classList.remove('playing'); exCard = null; }
+    setTimeout(() => {
+      if (!exCard) document.querySelectorAll('.beat-dot').forEach(d => d.classList.remove('active'));
+    }, 120);
   }
 
   async function startExercise(card) {
@@ -4214,6 +4217,7 @@
     exLoop.loopEnd = tickTime(barTicks);
     exBeatLoop = new Tone.Part((time, ev) => {
       Tone.Draw.schedule(() => {
+        if (token !== playbackToken || exCard !== card) return;
         document.querySelectorAll('.beat-dot').forEach((d,i) => d.classList.toggle('active', i === ev.beat));
       }, time);
     }, beatEvents);
