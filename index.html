@@ -3328,11 +3328,14 @@
     el.innerHTML = '';
     try {
       const VF = Vex.Flow;
+      // Percussion clef takes ~28px; widen the canvas so note spacing stays
+      // the same as before. CSS max-width:100% scales the SVG back to the cell.
+      const renderWidth = widthPx + 28;
       const factory = new VF.Factory({
-        renderer: { elementId: elementId, width: widthPx, height: 90 }
+        renderer: { elementId: elementId, width: renderWidth, height: 90 }
       });
       const score = factory.EasyScore();
-      const system = factory.System({ x: 0, y: 6, width: widthPx - 6, spaceBetweenStaves: 0 });
+      const system = factory.System({ x: 0, y: 6, width: renderWidth - 6, spaceBetweenStaves: 0 });
       const timeSig = (beatsPerBar || 4) + '/4';
       const notes = score.notes(easyScoreSpec, { stem: 'up' });
       if (beamGroups && beamGroups.length) {
@@ -3342,7 +3345,7 @@
         });
       }
       const voice = score.voice(notes, { time: timeSig }).setStrict(false);
-      const stave = system.addStave({ voices: [voice] });
+      const stave = system.addStave({ voices: [voice] }).addClef('percussion');
       if (beatsPerBar) stave.addTimeSignature(timeSig);
       factory.draw();
     } catch (e) {
