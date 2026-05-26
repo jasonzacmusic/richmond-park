@@ -2383,12 +2383,12 @@
           </div>
           <div class="africa-vol-item">
             <span class="africa-vol-name" style="color:#C0492A;">Alto</span>
-            <input type="range" class="africa-vol-slider" id="africa-vol-A" min="0" max="100" value="70"
+            <input type="range" class="africa-vol-slider" id="africa-vol-A" min="0" max="100" value="76"
                    oninput="setAfricaVol('A', +this.value)" aria-label="Alto volume">
           </div>
           <div class="africa-vol-item">
             <span class="africa-vol-name" style="color:#1F5F7A;">Tenor</span>
-            <input type="range" class="africa-vol-slider" id="africa-vol-T" min="0" max="100" value="46"
+            <input type="range" class="africa-vol-slider" id="africa-vol-T" min="0" max="100" value="70"
                    oninput="setAfricaVol('T', +this.value)" aria-label="Tenor volume">
           </div>
           <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-soft);align-self:center;margin-left:4px;">Volume per voice</span>
@@ -4311,7 +4311,7 @@
   function setAfricaVol(voice, val) {
     const vol = voice === 'S' ? sopVol : voice === 'A' ? altVol : tenVol;
     if (!vol) return;
-    const trim = voice === 'S' ? -3 : voice === 'A' ? -6 : -14;
+    const trim = voice === 'S' ? -3 : voice === 'A' ? -4 : -6;
     vol.volume.value = val > 0 ? trim - (28 * (1 - val / 100)) : -Infinity;
   }
 
@@ -4346,8 +4346,8 @@
     // Lazy-init SAT synths + volumes
     if (!sopVol) {
       sopVol = new Tone.Volume(-8).toDestination();
-      altVol = new Tone.Volume(-12).toDestination();
-      tenVol = new Tone.Volume(-22).toDestination();
+      altVol = new Tone.Volume(-10).toDestination();
+      tenVol = new Tone.Volume(-14).toDestination();
       sopSynth = new Tone.FMSynth({
         harmonicity: 1.75,
         modulationIndex: 6,
@@ -4356,18 +4356,17 @@
         modulation: { type: 'triangle' },
         modulationEnvelope: { attack: 0.004, decay: 0.14, sustain: 0.08, release: 0.18 },
       }).connect(sopVol);
-      altSynth = new Tone.AMSynth({
-        harmonicity: 1.35,
-        oscillator: { type: 'triangle' },
-        envelope: { attack: 0.035, decay: 0.12, sustain: 0.72, release: 0.38 },
-        modulation: { type: 'sine' },
-        modulationEnvelope: { attack: 0.02, decay: 0.12, sustain: 0.55, release: 0.30 },
+      altSynth = new Tone.Synth({
+        oscillator: { type: 'sine' },
+        envelope: { attack: 0.024, decay: 0.12, sustain: 0.68, release: 0.36 },
       }).connect(altVol);
-      tenSynth = new Tone.MonoSynth({
-        oscillator: { type: 'triangle' },
-        filter: { Q: 1.1, type: 'lowpass', rolloff: -24 },
-        envelope: { attack: 0.028, decay: 0.12, sustain: 0.44, release: 0.30 },
-        filterEnvelope: { attack: 0.025, decay: 0.16, sustain: 0.22, release: 0.28, baseFrequency: 140, octaves: 1.35 },
+      tenSynth = new Tone.FMSynth({
+        harmonicity: 3.01,
+        modulationIndex: 8,
+        oscillator: { type: 'sine' },
+        envelope: { attack: 0.006, decay: 0.22, sustain: 0.30, release: 0.42 },
+        modulation: { type: 'triangle' },
+        modulationEnvelope: { attack: 0.002, decay: 0.16, sustain: 0.10, release: 0.28 },
       }).connect(tenVol);
       ['S','A','T'].forEach(v => {
         const el = document.getElementById('africa-vol-' + v);
@@ -4405,7 +4404,7 @@
 
     // ── Piano chords: one block chord every 2 beats
     // F#m beat 0 | D beat 2 | A beat 4 | E beat 6
-    const chordDur = 0.58 * spb;
+    const chordDur = 1.72 * spb;
     const chordSets = [
       [f[5]/4, f[0]/2, f[2]/2, f[5]/2], // F#m: F#3 A3 C#4 F#4
       [f[3]/4, f[5]/4, f[0]/2, f[3]/2], // D:   D3  F#3 A3  D4
@@ -4425,18 +4424,19 @@
     sopPart.loop = true; sopPart.loopEnd = loopEnd;
 
     altPart = new Tone.Part((time, ev) => {
-      altSynth.triggerAttackRelease(ev.freq, ev.dur, time, 0.58);
+      altSynth.triggerAttackRelease(ev.freq, ev.dur, time, 0.64);
     }, altEvents);
     altPart.loop = true; altPart.loopEnd = loopEnd;
 
     tenPart = new Tone.Part((time, ev) => {
-      tenSynth.triggerAttackRelease(ev.freq, ev.dur, time, 0.36);
+      tenSynth.triggerAttackRelease(ev.freq, ev.dur, time, 0.46);
     }, tenEvents);
     tenPart.loop = true; tenPart.loopEnd = loopEnd;
 
     africaChordPart = new Tone.Part((time, ev) => {
-      if (pianoLoaded) ev.freqs.forEach(fr => piano.triggerAttackRelease(fr, chordDur, time, 0.46));
+      if (pianoLoaded) ev.freqs.forEach(fr => piano.triggerAttackRelease(fr, chordDur, time, 0.34));
       Tone.Draw.schedule(() => {
+        if (token !== playbackToken || (!africaIsPlaying && !africaIsStarting)) return;
         document.querySelectorAll('.africa-chord-chip').forEach((c, i) => c.classList.toggle('active', i === ev.chipIdx));
       }, time);
     }, chordEvents);
@@ -4444,6 +4444,7 @@
 
     africaLyricPart = new Tone.Part((time, ev) => {
       Tone.Draw.schedule(() => {
+        if (token !== playbackToken || (!africaIsPlaying && !africaIsStarting)) return;
         document.querySelectorAll('.africa-lyric-token').forEach(t => {
           t.classList.toggle('active', t.dataset.africaLyric === ev.lyric);
         });
