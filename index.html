@@ -693,21 +693,20 @@
     background: #1f1828;
     border-color: #5a4a6a;
   }
-  /* Invert VexFlow SVGs in minor mode so notation reads on dark bg */
-  .songs-section.minor-mode .song-score svg,
-  .songs-section.minor-mode .song-score svg * {
-    color: #f3dde8;
+  /* VexFlow draws black SVG ink by default; make it readable on harmonic minor's dark card. */
+  .songs-section.minor-mode .song-score svg { color: #f3dde8; filter: none; }
+  .songs-section.minor-mode .song-score svg path:not([fill="none"]),
+  .songs-section.minor-mode .song-score svg rect:not([fill="none"]),
+  .songs-section.minor-mode .song-score svg text,
+  .songs-section.minor-mode .song-score svg polygon:not([fill="none"]) {
+    fill: #f3dde8 !important;
   }
-  .songs-section.minor-mode .song-score svg path[fill="black"],
-  .songs-section.minor-mode .song-score svg path:not([fill]) { fill: #f3dde8 !important; }
-  .songs-section.minor-mode .song-score svg path[stroke="black"],
-  .songs-section.minor-mode .song-score svg path:not([stroke]) { stroke: #f3dde8 !important; }
-  .songs-section.minor-mode .song-score svg line { stroke: #f3dde8 !important; }
-  .songs-section.minor-mode .song-score svg text { fill: #f3dde8 !important; }
-  .songs-section.minor-mode .song-score svg rect[fill="black"] { fill: #f3dde8 !important; }
-  /* fallback: filter inverts any remaining black ink */
-  .songs-section.minor-mode .song-score { filter: none; }
-  .songs-section.minor-mode .song-score svg { filter: invert(0.92) hue-rotate(180deg); }
+  .songs-section.minor-mode .song-score svg path:not([stroke="none"]),
+  .songs-section.minor-mode .song-score svg line,
+  .songs-section.minor-mode .song-score svg rect:not([stroke="none"]),
+  .songs-section.minor-mode .song-score svg polygon:not([stroke="none"]) {
+    stroke: #f3dde8 !important;
+  }
 
   /* AFRICA */
   .africa-board { background: var(--paper-deep); border: 1.5px solid var(--ink); border-radius: 4px; padding: 30px; margin: 30px 0; box-shadow: 6px 6px 0 var(--ink); }
@@ -2115,7 +2114,7 @@
           <div><p>"Happy Birthday dear ___"</p>
           <p class="verse-swaras">Pa &middot; Pa &middot; P&aacute; &middot; G&aacute; &middot; S&aacute; &middot; Ni &middot; Dha</p></div>
           <div><p>"Happy Birthday to You"</p>
-          <p class="verse-swaras">Ma &middot; Ma &middot; Ga &middot; Sa &middot; Re &middot; Sa</p></div>
+          <p class="verse-swaras">M&aacute; &middot; M&aacute; &middot; G&aacute; &middot; S&aacute; &middot; R&eacute; &middot; S&aacute;</p></div>
         </div>
         <p class="hbd-footnote">3/4 time · 2-eighth pickup · Á = upper octave</p>
         <div class="song-score" id="score-hbd"></div>
@@ -2151,7 +2150,7 @@
             <button class="song-play-btn" id="song-ode" onclick="runPlaybackAction(() => toggleSong('ode',this))">▶ Play</button>
           </div>
           <p class="song-swaras">Ga Ga Ma Pa · Pa Ma Ga Re<br>Sa Sa Re Ga · Ga. Re Re~ &nbsp; <span class="song-swaras-aside">(repeat resolves to Sa)</span></p>
-          <p class="song-note">Beethoven. Four notes. Two hundred years. Still works.</p>
+          <p class="song-note">Beethoven. Five notes. Two hundred years. Still works.</p>
           <div class="song-score" id="score-ode"></div>
         </div>
 
@@ -2164,8 +2163,8 @@
             </div>
             <button class="song-play-btn" id="song-rainbow" onclick="runPlaybackAction(() => toggleSong('rainbow',this))">▶ Play</button>
           </div>
-          <p class="song-swaras">Sa &nbsp;→&nbsp; S&aacute; &nbsp;<span class="song-swaras-aside">(the leap)</span><br>Ni Dha Dha &middot; Ma S&aacute; Ma &middot; Ga Ma</p>
-          <p class="song-note">The first two notes are a full octave. That's Judy Garland's secret.</p>
+          <p class="song-swaras">Sa &nbsp;→&nbsp; S&aacute; &nbsp;<span class="song-swaras-aside">(the leap)</span><br>Ni Pa Dha Ni S&aacute; · S&aacute; Dha Pa<br>Dha Ma Ga · Sa Re Ga Ma · Re Ni Sa Re Ga Sa</p>
+          <p class="song-note">The first two notes are a full octave. The verse then keeps answering that leap.</p>
           <div class="song-score" id="score-rainbow"></div>
         </div>
 
@@ -2173,12 +2172,12 @@
         <div class="song-card">
           <div class="song-card-head">
             <div>
-              <div class="song-tag" style="color:var(--terracotta);">⋆ Surprise · the full avroh · 4/4</div>
+              <div class="song-tag" style="color:var(--terracotta);">⋆ Surprise · the full avroh · 2/4</div>
               <h4 class="song-title">Joy to the World</h4>
             </div>
             <button class="song-play-btn" id="song-joy" onclick="runPlaybackAction(() => toggleSong('joy',this))">▶ Play</button>
           </div>
-          <p class="song-swaras">S&aacute; Ni Dha &middot; Pa Ma Ga Re &middot; Sa~</p>
+          <p class="song-swaras">S&aacute; Ni. Dha &middot; Pa. Ma &middot; Ga Re &middot; Sa~</p>
           <p class="song-note">That opening line IS the descending swara scale. You've been singing it your whole life.</p>
           <div class="song-score" id="score-joy"></div>
         </div>
@@ -4747,29 +4746,16 @@
       timeSig: [3, 4],
       pickupBeats: 1,
       baseOct: 4,
-      // Simplified rhythm: every syllable a clean quarter inside the verse
-      // bar. The held "you" is a half so the next verse's two-eighth pickup
-      // can sit in the same bar (h + 8 + 8 = 3 beats in 3/4). Only the
-      // final "you" stays a dotted-half — the song's last resolution.
       notes: [
-        // Bar 0 pickup: Hap-py
         {d:5,b:.5}, {d:5,b:.5},
-        // Bar 1: birth(q) day(q) to(q)
         {d:6,b:1}, {d:5,b:1}, {d:8,b:1},
-        // Bar 2: you(h) + Hap-py pickup
         {d:7,b:2}, {d:5,b:.5}, {d:5,b:.5},
-        // Bar 3: birth(q) day(q) to(q)
         {d:6,b:1}, {d:5,b:1}, {d:9,b:1},
-        // Bar 4: you(h) + Hap-py pickup
         {d:8,b:2}, {d:5,b:.5}, {d:5,b:.5},
-        // Bar 5: birth(q, Pa-upper) day(q, Ga-upper) dear(q, Sa-upper)
         {d:12,b:1}, {d:10,b:1}, {d:8,b:1},
-        // Bar 6: NAME(h) + Hap-py pickup (low, Ma)
-        {d:7,b:2}, {d:4,b:.5}, {d:4,b:.5},
-        // Bar 7: birth(q, Ga) day(q, Sa) to(q, Re)
-        {d:3,b:1}, {d:1,b:1}, {d:2,b:1},
-        // Bar 8: you (final Sa, held the whole bar)
-        {d:1,b:3}
+        {d:7,b:1}, {d:6,b:1}, {d:11,b:.5}, {d:11,b:.5},
+        {d:10,b:1}, {d:8,b:1}, {d:9,b:1},
+        {d:8,b:3}
       ]
     },
     twinkle: {
@@ -4816,28 +4802,26 @@
       pickupBeats: 0,
       baseOct: 4,
       notes: [
-        // Some-where (the iconic octave leap)
         {d:1,b:2}, {d:8,b:2},
-        // o-ver the rain
-        {d:7,b:1}, {d:6,b:1}, {d:6,b:2},
-        // bow way up
-        {d:4,b:2}, {d:8,b:1}, {d:4,b:1},
-        // high (sustained)
-        {d:3,b:2}, {d:4,b:2}
+        {d:7,b:1}, {d:5,b:1}, {d:6,b:1}, {d:7,b:1},
+        {d:8,b:2}, {d:6,b:1}, {d:5,b:1},
+        {d:5,b:4},
+        {d:6,b:2}, {d:4,b:1}, {d:3,b:1},
+        {d:1,b:.5}, {d:2,b:.5}, {d:3,b:1}, {d:4,b:2},
+        {d:2,b:1}, {d:7,b:1}, {d:1,b:.5}, {d:2,b:.5}, {d:3,b:1},
+        {d:1,b:4}
       ]
     },
     joy: {
       name: 'Joy to the World',
-      timeSig: [4, 4],
+      timeSig: [2, 4],
       pickupBeats: 0,
       baseOct: 4,
       notes: [
-        // Joy! to the (full descending scale Sa2 → Sa)
-        {d:8,b:2}, {d:7,b:1}, {d:6,b:1},
-        // world! The Lord is
-        {d:5,b:1.5}, {d:4,b:.5}, {d:3,b:1}, {d:2,b:1},
-        // come (whole note resolution)
-        {d:1,b:4}
+        {d:8,b:1}, {d:7,b:.75}, {d:6,b:.25},
+        {d:5,b:1.5}, {d:4,b:.5},
+        {d:3,b:1}, {d:2,b:1},
+        {d:1,b:2}
       ]
     }
   };
