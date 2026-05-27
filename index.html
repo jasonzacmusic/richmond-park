@@ -545,6 +545,38 @@
   .cr-btn[disabled] { opacity: 0.45; cursor: not-allowed; }
   .cr-start-btn.running { background: var(--terracotta); color: var(--paper); border-color: var(--terracotta); animation: cr-pulse 1.2s ease-in-out infinite; }
   @keyframes cr-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(192,73,42,0.55); } 50% { box-shadow: 0 0 0 12px rgba(192,73,42,0); } }
+  .cr-recording-panel {
+    background: rgba(248, 241, 223, 0.72);
+    border: 1.5px dashed var(--ink-soft);
+    border-radius: 6px;
+    padding: 16px;
+    margin: 0 0 16px;
+  }
+  .cr-audio {
+    width: 100%;
+    display: block;
+    margin: 10px 0 0;
+    accent-color: var(--peacock);
+  }
+  .cr-transcript {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .cr-transcript strong { color: var(--ink); }
+  .cr-transcript-chip {
+    border: 1px solid rgba(26,26,46,0.24);
+    border-radius: 999px;
+    padding: 4px 8px;
+    background: var(--paper);
+    color: var(--ink);
+  }
   .cr-note { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.06em; color: var(--ink-soft); font-style: italic; margin-top: 18px; text-align: center; }
 
   /* ── SONGS SECTION (key/mode/tempo, VexFlow notation, minor-mode toggle) ── */
@@ -2199,35 +2231,49 @@
           <h3 class="cr-title">Sing it back.</h3>
         </div>
         <div class="cr-stats">
-          <span class="cr-stat-pill" id="cr-score">Score: 0 / 0</span>
+          <span class="cr-stat-pill" id="cr-score">Recorded take</span>
           <span class="cr-stat-pill cr-stat-key">Sa = D♭ · 80 BPM</span>
         </div>
       </div>
-      <p class="cr-intro">Tap <em>Start</em>. The piano sings a swara phrase, you sing it back. Every swara you hit on pitch lights up green and adds to your score. No timing — just match the notes. See how high you can score.</p>
+      <p class="cr-intro">Tap <em>Play recording</em>. You will hear four metronome beats, a piano drone for Sa, then the sung call-and-response practice. When the display says <em>Your turn</em>, sing the same swaras back into the gap.</p>
 
       <div class="cr-stage">
         <div class="cr-swara-display" id="cr-current">—</div>
         <div class="cr-status-line" id="cr-status">Tap Start to begin</div>
       </div>
 
+      <div class="cr-recording-panel">
+        <div class="cr-transcript">
+          <strong>Path from the recording:</strong>
+          <span class="cr-transcript-chip">Sa Re</span>
+          <span class="cr-transcript-chip">Sa Ga Re</span>
+          <span class="cr-transcript-chip">Ga Re Sa</span>
+          <span class="cr-transcript-chip">Sa Ni Pa</span>
+          <span class="cr-transcript-chip">Dha Pa</span>
+          <span class="cr-transcript-chip">Sa Ga Ma Ga Re Sa</span>
+          <span class="cr-transcript-chip">Pa Ma Ga Re Sa</span>
+        </div>
+        <audio class="cr-audio" id="cr-audio" src="/audio/swaras-call-response.mp3" preload="metadata" controls></audio>
+      </div>
+
       <div class="cr-tuner-row">
-        <span class="cr-tuner-label">You're singing</span>
+        <span class="cr-tuner-label">Recording map</span>
         <span class="cr-tuner-note" id="cr-tuner-note">—</span>
-        <span class="cr-tuner-cents" id="cr-tuner-cents"></span>
+        <span class="cr-tuner-cents" id="cr-tuner-cents">call / response</span>
       </div>
 
       <div class="cr-controls">
-        <button class="cr-btn cr-start-btn" id="cr-start-btn">▶ Start</button>
+        <button class="cr-btn cr-start-btn" id="cr-start-btn">▶ Play recording</button>
         <button class="cr-btn cr-stop-btn" id="cr-stop-btn" disabled>⏹ Stop</button>
       </div>
 
-      <p class="cr-note">Jason will record a continuous take soon — when it lands, the piano call swaps for his voice. The scoring logic stays the same.</p>
+      <p class="cr-note">Keep your voice ready during the gaps. Do not worry about perfection first — match Sa, Re and Ga cleanly, then try the longer turns.</p>
     </section>
 
     <div class="homework-block melody">
       <h4><span class="hw-tag" style="background:var(--peacock);">Compulsory · Melody</span></h4>
       <ul class="hw-list">
-        <li><strong>Sing back over my swara recording.</strong> I'll post the call-and-response audio (the one from the end of class) in the WhatsApp group. Sing back the swara patterns on time. Use C major here if you want the piano map to match, or move Sa to a key that suits your voice. Then add <em>one minute of your own free improvisation</em> using only Sa, Re, and Ga. Send the recording.</li>
+        <li><strong>Sing back over my swara recording.</strong> Use the player above: four metronome beats, a Sa drone, then my sung calls with gaps for your response. Sa is D♭ in this recording, but you may move Sa to a key that suits your voice. Then add <em>one minute of your own free improvisation</em> using only Sa, Re, and Ga. Send the recording.</li>
         <li><strong>Lock Sa-Re-Ga first.</strong> Just those three. Sing them up and down, slow, every day for one week. Record 30 seconds. Solid intervals first — everything else is built on this.</li>
       </ul>
       <h4 style="margin-top: 22px;"><span class="hw-tag" style="background:var(--turmeric); color:var(--ink);">Extra Credit · Melody</span></h4>
@@ -5091,11 +5137,9 @@
     stopAllPlayback();
   }
 
-  // ============ CALL & RESPONSE — single-display game (piano call → mic response) ============
-  // The piano sings each swara of a phrase, one beat each. Then a one-beat silent gap.
-  // Then a response window where the mic listens; each unique swara the user hits within
-  // ±35¢ for 150ms counts toward the score. Designed so Jason's eventual 2-min recording
-  // can swap in: just set CR_AUDIO_URL and the timeline of swaras-by-time.
+  // ============ CALL & RESPONSE — recorded swara take + optional mic response checker ============
+  // The recording starts with four 80 BPM metronome beats, gives Sa on piano, then leaves
+  // answer gaps after each sung swara call. The timeline below keeps the display in sync.
   const CR_BPM = 80;
   const CR_KEY = 'C#';
   const CR_SWARA_TO_DEGREE = { 'Sa':0, 'Re':1, 'Ga':2, 'Ma':3, 'Pa':4, 'Dha':5, 'Ni':6, 'Sá':7, 'Sa2':7 };
@@ -5113,10 +5157,39 @@
     ['Pa','Ma','Ga','Re','Sa'],
   ];
 
-  // Placeholder for Jason's continuous take — swap to a URL when he ships the file:
-  //   const CR_AUDIO_URL = '/audio/jason-call-response.mp3';
-  // (with timeline if needed). Until then the piano sings.
-  const CR_AUDIO_URL = null;
+  const CR_AUDIO_URL = '/audio/swaras-call-response.mp3';
+  const CR_RECORDED_CUES = [
+    {start: 0.00, end: 3.00, label: '1 · 2 · 3 · 4', status: 'Count-in · feel 80 BPM'},
+    {start: 3.00, end: 8.50, label: 'Sa', status: 'Piano drone · find the root'},
+    {start: 38.40, end: 39.80, label: 'Sa Re'},
+    {start: 45.04, end: 46.44, label: 'Sa Re'},
+    {start: 49.12, end: 51.82, label: 'Sa Re · Sa Re'},
+    {start: 58.40, end: 59.80, label: 'Sa Re'},
+    {start: 65.24, end: 66.64, label: 'Sa Ga Re'},
+    {start: 69.14, end: 70.54, label: 'Ga Re Sa'},
+    {start: 75.10, end: 77.92, label: 'Ga Re Sa · Pa'},
+    {start: 81.10, end: 83.32, label: 'Ga Re Sa · Sa Re'},
+    {start: 86.56, end: 87.96, label: 'Sa Ni'},
+    {start: 90.78, end: 91.50, label: 'Pa Ni'},
+    {start: 93.78, end: 95.18, label: 'Pa Ni'},
+    {start: 97.24, end: 98.64, label: 'Pa Ni'},
+    {start: 107.34, end: 110.66, label: 'Sa Ga Re · Ga Re Sa'},
+    {start: 115.82, end: 117.22, label: 'Ga Re Sa'},
+    {start: 120.58, end: 122.58, label: 'Sa Ni Pa'},
+    {start: 126.96, end: 129.32, label: 'Sa Ni Pa · Sa Ga'},
+    {start: 135.04, end: 137.84, label: 'Sa Ni Pa Dha'},
+    {start: 139.66, end: 141.06, label: 'Dha Pa'},
+    {start: 144.56, end: 147.06, label: 'Sa Re · Ga Re Sa'},
+    {start: 150.52, end: 153.74, label: 'Sa Re · Ga Re Sa · Dha Pa'},
+    {start: 162.56, end: 164.90, label: 'Sa Ni · Dha Pa'},
+    {start: 168.70, end: 171.50, label: 'Sa Re · Ni'},
+    {start: 175.52, end: 176.92, label: 'Sa Ga Re Sa'},
+    {start: 180.68, end: 186.92, label: 'Sa Ga Ma · Ga Re Sa'},
+    {start: 199.42, end: 200.82, label: 'Sa Re · Ga Re Sa'},
+    {start: 204.52, end: 208.80, label: 'Sa Re · Ga Re Sa · Dha Pa · Ga Re Sa'},
+    {start: 216.40, end: 224.36, label: 'Pa Ma · Ga Re Sa · Ga Re Sa'},
+    {start: 224.36, end: 231.04, label: 'Sa Re · Ga Re Sa'}
+  ];
 
   let crAudioCtx = null;
   let crAnalyser = null;
@@ -5125,6 +5198,7 @@
   let crScore = 0;
   let crTotal = 0;
   let crRunToken = 0;
+  let crCueFrame = null;
 
   function crSwaraFreq(swara) { return KEY_DATA[CR_KEY].freq[CR_SWARA_TO_DEGREE[swara]]; }
 
@@ -5140,7 +5214,7 @@
   }
   function crUpdateScore() {
     const el = document.getElementById('cr-score');
-    if (el) el.textContent = `Score: ${crScore} / ${crTotal}`;
+    if (el) el.textContent = CR_AUDIO_URL ? 'Recorded take' : `Score: ${crScore} / ${crTotal}`;
   }
   function crUpdateTunerDisplay(freq) {
     const noteEl = document.getElementById('cr-tuner-note');
@@ -5221,20 +5295,130 @@
 
   function crSleep(ms) { return new Promise(res => setTimeout(res, ms)); }
 
+  function crRecordedAudio() {
+    return document.getElementById('cr-audio');
+  }
+
+  function crCueAt(time) {
+    return CR_RECORDED_CUES.find(cue => time >= cue.start && time <= cue.end) || null;
+  }
+
+  function crPreviousCue(time) {
+    let previous = null;
+    for (const cue of CR_RECORDED_CUES) {
+      if (cue.end <= time) previous = cue;
+      else break;
+    }
+    return previous;
+  }
+
+  function crNextCue(time) {
+    return CR_RECORDED_CUES.find(cue => cue.start > time) || null;
+  }
+
+  function crSetMapText(text, cls = '') {
+    const noteEl = document.getElementById('cr-tuner-note');
+    const centsEl = document.getElementById('cr-tuner-cents');
+    if (noteEl) noteEl.textContent = text || '—';
+    if (centsEl) {
+      centsEl.textContent = cls === 'calling' ? 'listen' : cls === 'responding' ? 'your turn' : 'call / response';
+      centsEl.className = 'cr-tuner-cents ' + (cls === 'responding' ? 'sharp' : cls === 'calling' ? 'in-tune' : '');
+    }
+  }
+
+  function crUpdateRecordedCue(myToken) {
+    if (!crIsRunning || myToken !== crRunToken) return;
+    const audio = crRecordedAudio();
+    if (!audio || audio.paused || audio.ended) return;
+    const t = audio.currentTime || 0;
+    const cue = crCueAt(t);
+    if (cue) {
+      crSetDisplay(cue.label, 'calling');
+      crSetStatus(cue.status || 'Listen · then sing it back in the gap');
+      crSetMapText(cue.label, 'calling');
+    } else {
+      const previous = crPreviousCue(t);
+      const next = crNextCue(t);
+      if (previous && next && t < next.start) {
+        crSetDisplay(previous.label, 'responding');
+        crSetStatus('Your turn ↓ sing it back');
+        crSetMapText(previous.label, 'responding');
+      } else {
+        crSetDisplay('—', '');
+        crSetStatus(t < 8.5 ? 'Listen for Sa' : 'Follow the recording');
+        crSetMapText('—');
+      }
+    }
+    crCueFrame = requestAnimationFrame(() => crUpdateRecordedCue(myToken));
+  }
+
+  async function crStartRecorded(resetToStart = true) {
+    const audio = crRecordedAudio();
+    if (!audio) return crStartRun();
+    if (!crIsRunning) stopAllPlayback({ keepToken: false });
+    const startBtn = document.getElementById('cr-start-btn');
+    const stopBtn = document.getElementById('cr-stop-btn');
+    crIsRunning = true;
+    const myToken = ++crRunToken;
+    if (resetToStart) audio.currentTime = 0;
+    if (startBtn) { startBtn.classList.add('running'); startBtn.disabled = true; }
+    if (stopBtn) stopBtn.disabled = false;
+    crSetDisplay('1 · 2 · 3 · 4', 'calling');
+    crSetStatus('Count-in · feel 80 BPM');
+    crSetMapText('count');
+    try {
+      await audio.play();
+    } catch (e) {
+      crIsRunning = false;
+      if (startBtn) { startBtn.classList.remove('running'); startBtn.disabled = false; }
+      if (stopBtn) stopBtn.disabled = true;
+      crSetStatus('Tap Play recording to begin');
+      return;
+    }
+    if (crCueFrame) cancelAnimationFrame(crCueFrame);
+    crUpdateRecordedCue(myToken);
+  }
+
+  function crFinishRecorded() {
+    crIsRunning = false;
+    if (crCueFrame) cancelAnimationFrame(crCueFrame);
+    crCueFrame = null;
+    crSetDisplay('✓', 'hit');
+    crSetStatus('Done · now record your own sing-back');
+    crSetMapText('complete', 'calling');
+    const startBtn = document.getElementById('cr-start-btn');
+    const stopBtn = document.getElementById('cr-stop-btn');
+    if (startBtn) { startBtn.classList.remove('running'); startBtn.disabled = false; }
+    if (stopBtn) stopBtn.disabled = true;
+  }
+
   // Build the UI (called from renderAllVexFlow). The single-display version
   // mostly wires the Start/Stop buttons; the markup is already in the page.
   function crBuildUI() {
     const startBtn = document.getElementById('cr-start-btn');
     const stopBtn = document.getElementById('cr-stop-btn');
+    const audio = crRecordedAudio();
     if (startBtn && !startBtn._wired) {
-      startBtn.addEventListener('click', () => crStartRun());
+      startBtn.addEventListener('click', () => CR_AUDIO_URL ? crStartRecorded(true) : crStartRun());
       startBtn._wired = true;
     }
     if (stopBtn && !stopBtn._wired) {
       stopBtn.addEventListener('click', () => crStop());
       stopBtn._wired = true;
     }
+    if (audio && !audio._wired) {
+      audio.addEventListener('play', () => {
+        if (!crIsRunning) crStartRecorded(false);
+      });
+      audio.addEventListener('pause', () => {
+        if (crIsRunning && !audio.ended) crStop();
+      });
+      audio.addEventListener('ended', () => crFinishRecorded());
+      audio._wired = true;
+    }
     crUpdateScore();
+    crSetStatus('Tap Play recording to begin');
+    crSetMapText('—');
   }
 
   async function crStartRun() {
@@ -5377,9 +5561,13 @@
     if (!crIsRunning) return;
     crIsRunning = false;
     crRunToken++;
+    if (crCueFrame) cancelAnimationFrame(crCueFrame);
+    crCueFrame = null;
+    const audio = crRecordedAudio();
+    if (audio && !audio.paused) audio.pause();
     crSetDisplay('—');
     crSetStatus('Stopped');
-    crUpdateTunerDisplay(0);
+    crSetMapText('—');
     const startBtn = document.getElementById('cr-start-btn');
     const stopBtn = document.getElementById('cr-stop-btn');
     if (startBtn) { startBtn.classList.remove('running'); startBtn.disabled = false; }
